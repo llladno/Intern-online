@@ -1,10 +1,20 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { loadRouteLocation, RouterView, useRoute, useRouter } from 'vue-router'
 import HeaderBar from "@/components/layout/HeaderBar.vue";
+import { nextTick, onMounted, onUpdated, ref, watch } from 'vue'
+import router from '@/router'
+
+const route = useRoute()
+const isLogin = ref(false)
+
+watch(() => route.params, (newId, oldId) => {
+  if (route.name == 'login' || route.name == 'develop') isLogin.value = true
+  else isLogin.value = false
+})
 </script>
 
 <template>
-  <HeaderBar />
+  <HeaderBar v-if="!isLogin" />
   <RouterView />
 </template>
 
