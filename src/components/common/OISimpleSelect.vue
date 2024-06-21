@@ -8,16 +8,12 @@ let firsh = ref()
 
 const emit = defineEmits(['selectedValue'])
 
-
-onMounted(()=>{
-  nextTick(()=>{
-    document.querySelector('.selected').click()
+onMounted(() => {
+  nextTick(() => {
+    ;(document.querySelector('.selected') as HTMLSpanElement)?.click()
   })
-  setTimeout(()=>{
-
-  },1000)
+  setTimeout(() => {}, 1000)
 })
-
 
 function handleSelect(event: Event, id: number, slot: string) {
   if (slide.value) {
@@ -36,14 +32,17 @@ function handleSelect(event: Event, id: number, slot: string) {
   <div class="switch">
     <div class="slide-container" ref="slide"></div>
     <div class="slider-values">
-      <span v-for="(slot, index) in Object.keys(slots)" :class="[selected.id == index ? 'selected' : 'default']"
-            @click="(event) => handleSelect(event, index, slot)" :key="index" :ref="index == 0 ? firsh : null">
-      <slot :name="slot"></slot>
-    </span>
+      <span
+        v-for="(slot, index) in Object.keys(slots)"
+        :class="[selected.id == index ? 'selected' : 'default']"
+        @click="(event) => handleSelect(event, index, slot)"
+        :key="index"
+        :ref="index == 0 ? firsh : null"
+      >
+        <slot :name="slot"></slot>
+      </span>
     </div>
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

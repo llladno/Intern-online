@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import IconLogo from '@/components/icons/IconLogo.vue'
 import IconHeaderNotification from '@/components/icons/IconHeaderNotification.vue'
 </script>
@@ -22,30 +21,30 @@ import IconHeaderNotification from '@/components/icons/IconHeaderNotification.vu
 
 <style scoped lang="scss">
 @use '@/assets/base/variables';
-header{
-  height:  55px;
+header {
+  height: 55px;
   padding: 0 40px;
 
-  .header__nav{
+  .header__nav {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin-right: 40px;
 
-    a{
+    a {
       color: variables.$default-white;
       font-size: 16px;
       font-weight: 400;
     }
 
-    &-left{
+    &-left {
       margin-left: 52px;
       display: flex;
       align-items: center;
       gap: 35px;
     }
 
-    &-right{
+    &-right {
       display: flex;
       align-items: center;
       gap: 29px;

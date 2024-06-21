@@ -1,12 +1,11 @@
 <script setup lang="ts">
-
 import OIButton from '@/components/common/OIButton.vue'
 </script>
 
 <template>
   <div class="in-develop">
     <div>
-      <h1> Эта страница находится в разработке :(</h1>
+      <h1>Эта страница находится в разработке :(</h1>
       <p>Приносим извинения за доставленные неудобства</p>
       <RouterLink to="/">
         <OIButton>Вернуться на главную</OIButton>
@@ -16,14 +15,14 @@ import OIButton from '@/components/common/OIButton.vue'
 </template>
 
 <style scoped lang="scss">
-.in-develop{
+.in-develop {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  div{
+  div {
     margin-top: 300px;
     display: flex;
     flex-direction: column;
@@ -31,7 +30,7 @@ import OIButton from '@/components/common/OIButton.vue'
     width: 800px;
     text-align: center;
 
-    p{
+    p {
       opacity: 0.7;
     }
   }

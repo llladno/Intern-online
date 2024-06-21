@@ -1,12 +1,9 @@
 <script setup lang="ts">
-
 import InDevelop from '@/components/layout/InDevelop.vue'
 </script>
 
 <template>
-<InDevelop />
+  <InDevelop />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

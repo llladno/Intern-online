@@ -7,12 +7,12 @@ defineProps({
 <template>
   <div class="default-input">
     <label><slot></slot></label>
-    <input type="text" :props="{...props}" :placeholder="props?.placeholder">
+    <input type="text" :props="{ ...props }" :placeholder="props?.placeholder" />
   </div>
 </template>
 
 <style scoped>
-.default-input{
+.default-input {
   display: flex;
   flex-direction: column;
   gap: 8px;
