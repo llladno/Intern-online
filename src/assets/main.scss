@@ -1,4 +1,11 @@
-@import "base/reset";
-@import "base/variables";
+@import 'base/reset';
+@import 'base/variables';
 
-@import "components/header";
+@import 'shared';
+
+@import 'components/header';
+@import 'components/common/input';
+@import 'components/common/simpleSelect';
+@import 'components/common/button';
+@import 'components/common/link';
+@import 'components/common/optionsSelect';
