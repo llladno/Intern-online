@@ -19,7 +19,7 @@ watch(
 <template>
   <HeaderBar v-if="!isLogin" />
   <div class="main-router">
-    <SideBar />
+    <SideBar v-if="!isLogin" />
     <RouterView />
   </div>
 </template>

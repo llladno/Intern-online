@@ -18,6 +18,16 @@ const router = createRouter({
       path: '/develop',
       name: 'develop',
       component: () => import('../views/InDevelopView.vue')
+    },
+    {
+      path: '/organization-profile',
+      name: 'profile',
+      component: () => import('../views/organisation/MyProfileView.vue')
+    },
+    {
+      path: '/my-cases',
+      name: 'cases',
+      component: () => import('../views/organisation/CasesView.vue')
     }
   ]
 })

@@ -6,10 +6,10 @@ import IconNotification from '@/components/icons/IconNotification.vue'
 import IconSettings from '@/components/icons/IconSettings.vue'
 
 const selectValue = ref(0)
-const values = [{ text: 'Мой профиль', icon: IconProfile },
-  { text: 'Мои кейсы', icon: IconFolder },
-  { text: 'Уведомления', icon: IconNotification },
-  { text: 'Настройки', icon: IconSettings }]
+const values = [{ text: 'Мой профиль', icon: IconProfile, link: '/organization-profile' },
+  { text: 'Мои кейсы', icon: IconFolder, link: '/my-cases' },
+  { text: 'Уведомления', icon: IconNotification, link: '/notifications' },
+  { text: 'Настройки', icon: IconSettings, link: '/settings' }]
 
 function selectLink(number: number) {
   selectValue.value = number
@@ -19,10 +19,11 @@ function selectLink(number: number) {
 <template>
   <aside class="sidebar">
     <div class="sidebar__links">
-      <div v-for="(value, index) of values" @click="()=> selectLink(index)" :class="[selectValue == index ? 'selected' : 'default']" :key="index">
+      <RouterLink :to="value.link" v-for="(value, index) of values" @click="()=> selectLink(index)"
+                  :class="[selectValue == index ? 'selected' : 'default']" :key="index">
         <component :is="value.icon" :color="selectValue == index ? '#7862eb' : ''"></component>
-        <span>{{value.text}}</span>
-      </div>
+        <span>{{ value.text }}</span>
+      </RouterLink>
       <div class="sidebar__links-slider" :style="{top: 40*selectValue + 6 + 'px'}"></div>
     </div>
     <RouterLink to="/">Выйти</RouterLink>

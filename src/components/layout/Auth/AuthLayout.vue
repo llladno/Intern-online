@@ -32,7 +32,7 @@ const selected = ref('login')
 
 <style scoped lang="scss">
 .auth {
-  margin-top: 200px;
+  margin-top: 5%;
   width: 50%;
   display: flex;
   flex-direction: column;
