@@ -18,19 +18,19 @@ watch(
 
 <template>
   <HeaderBar v-if="!isLogin" />
-  <div class="main-router">
+  <div :class="!isLogin && 'main-router'">
     <SideBar v-if="!isLogin" />
     <RouterView />
   </div>
 </template>
 
 <style scoped lang="scss">
-@use '@/assets/base/variables';
+@import '@/assets/base/variables';
 
 .main-router{
   display: flex;
   gap: 15px;
-  background: variables.$background-color;
+  background: $background-color;
   height: 100%;
   min-height: 100vh;
   padding: 40px;

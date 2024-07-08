@@ -1,37 +1,34 @@
 <script setup lang="ts">
+import CasesHeader from '@/components/layout/Cases/CasesHeader.vue'
+import CaseCard from '@/components/layout/Cases/CaseCard.vue'
 
-import OISimpleSelect from '@/components/common/OISimpleSelect.vue'
-import { ref } from 'vue'
-import OIButton from '@/components/common/OIButton.vue'
-
-const simpleSelected = ref('active')
+const casesInfo = [{
+  id: 1,
+  title: 'Наименование кейса',
+  tags: {
+    category: 'Маркетинг',
+    tarif: 'Лайт',
+    date: new Date(2024, 5, 20)
+  },
+  status: 'Подаются решения',
+  solutions: 23,
+}]
 </script>
 
 <template>
-  <div class="organisation__cases main-container">
-    <div class="organisation__cases-header">
-<!--      TODO посмотреть как писать simple-selected или simple__selected -->
-      <h2>Мои кейсы</h2>
-      <RouterLink to="/cases/add">
-        <OIButton>+ Добавить новый кейс</OIButton>
-      </RouterLink>
+  <div class="organisation">
+    <div class="organisation__cases main-container">
+      <CasesHeader />
     </div>
-    <OISimpleSelect
-      @selectedValue="(slot) => (simpleSelected = slot)"
-      style="margin-top: 27px"
-      class="auth__simpleselect"
-    >
-      <template #active>Активные</template>
-      <template #draft>Черновики</template>
-      <template #archive>Архив</template>
-    </OISimpleSelect>
+    <CaseCard v-for="caseInfo in casesInfo" :key="caseInfo.id" :caseInfo="caseInfo"  class="main-container"/>
   </div>
+
 </template>
 
 <style scoped>
-.organisation__cases-header{
+.organisation{
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 </style>
