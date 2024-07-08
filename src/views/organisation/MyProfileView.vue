@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import OISimpleSelect from '@/components/common/OISimpleSelect.vue'
 import OIInput from '@/components/common/OIInput.vue'
 import OIOptionsSelect from '@/components/common/OIOptionsSelect.vue'
@@ -19,33 +18,23 @@ const selected = ref('personal')
     </OISimpleSelect>
     <div class="my-profile__info" v-if="selected == 'personal'">
       <div class="my-profile__form">
-        <OIOptionsSelect :options="['Обычный', 'Организация']"
-                         defaultSelect="Выберите вид пользователя">
+        <OIOptionsSelect
+          :options="['Обычный', 'Организация']"
+          defaultSelect="Выберите вид пользователя"
+        >
         </OIOptionsSelect>
-        <OIInput>
-          Название компании
-        </OIInput>
-        <OIInput>
-          Телефон компании
-        </OIInput>
-        <OIInput>
-          Электронная почта компании
-        </OIInput>
-        <OIInput>
-          Веб-сайт компании
-        </OIInput>
-        <OIInput>
-          Адрес компании
-        </OIInput>
-        <OIInput big>
-          Описание
-        </OIInput>
+        <OIInput> Название компании </OIInput>
+        <OIInput> Телефон компании </OIInput>
+        <OIInput> Электронная почта компании </OIInput>
+        <OIInput> Веб-сайт компании </OIInput>
+        <OIInput> Адрес компании </OIInput>
+        <OIInput big> Описание </OIInput>
       </div>
       <div class="my-profile__image">
         <div class="my-profile__image-place">
           <IconLoadComponents />
         </div>
-        <OIButton >Загрузить</OIButton>
+        <OIButton>Загрузить</OIButton>
       </div>
     </div>
     <div v-else class="my-profile__safty">
@@ -86,26 +75,26 @@ const selected = ref('personal')
       justify-content: center;
       width: 257px;
       height: 257px;
-      background: #F6F6F6;
-      border: 1.5px dashed #E4E4E7;
+      background: #f6f6f6;
+      border: 1.5px dashed #e4e4e7;
       border-radius: 6px;
     }
   }
 }
 
-.my-profile__form{
+.my-profile__form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.my-profile__safty{
+.my-profile__safty {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 15px;
 
-  h2{
+  h2 {
     font-size: 18px;
     font-weight: 500;
     line-height: 28px;
@@ -114,5 +103,4 @@ const selected = ref('personal')
     margin: 10px 0;
   }
 }
-
 </style>

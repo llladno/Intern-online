@@ -16,6 +16,11 @@ input {
   }
 }
 
+input[type='checkbox'] {
+  width: 15px;
+  height: 15px;
+}
+
 textarea {
   border: $default-border;
   background: $default-light-grey;

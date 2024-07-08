@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import OIButton from '@/components/common/OIButton.vue'
 import IconStar from '@/components/icons/IconStar.vue'
 
@@ -9,24 +8,24 @@ defineProps({
 </script>
 
 <template>
-<div class="tarif-card">
-  <div class="tarif-card__info">
-    <h3>{{ tarif.title }}</h3>
-    <div class="tarif-card__stars">
-      <IconStar v-for="star in tarif.stars" :key="star"/>
+  <div class="tarif-card">
+    <div class="tarif-card__info">
+      <h3>{{ tarif.title }}</h3>
+      <div class="tarif-card__stars">
+        <IconStar v-for="star in tarif.stars" :key="star" />
+      </div>
+      <h3>{{ tarif.cost }} руб</h3>
+      <ul>
+        <li v-for="adventage in tarif.advantages" :key="adventage">{{ adventage }}</li>
+      </ul>
     </div>
-    <h3>{{tarif.cost}} руб</h3>
-    <ul>
-      <li v-for="adventage in tarif.advantages" :key="adventage">{{adventage}}</li>
-    </ul>
+    <OIButton>Оплатить</OIButton>
   </div>
-  <OIButton>Оплатить</OIButton>
-</div>
 </template>
 
 <style scoped lang="scss">
 @import '@/assets/base/variables.scss';
-.tarif-card{
+.tarif-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -38,21 +37,21 @@ defineProps({
 
   gap: 31px;
 
-  &__info{
+  &__info {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 14px;
     height: 100%;
 
-    ul li{
+    ul li {
       font-weight: 500;
       font-size: 14px;
       margin-bottom: 7px;
     }
   }
 
-  &__stars{
+  &__stars {
     display: flex;
     gap: 5px;
   }
