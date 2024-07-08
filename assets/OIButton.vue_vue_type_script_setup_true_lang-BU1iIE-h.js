@@ -1,1 +1,0 @@
-import{d as l,a,c as s,h as o,f as n}from"./index-B_ISBcnJ.js";const u=l({__name:"OIButton",props:{fullWidth:{type:Boolean,default:!1}},setup(e){return(t,r)=>(a(),s("button",{class:n([e.fullWidth?"w-full":""]),style:{}},[o(t.$slots,"default")],2))}});export{u as _};
