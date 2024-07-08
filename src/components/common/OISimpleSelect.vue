@@ -10,7 +10,8 @@ const emit = defineEmits(['selectedValue'])
 
 onMounted(() => {
   nextTick(() => {
-    ;(document.querySelector('.selected') as HTMLSpanElement)?.click()
+    ;(document.querySelector('.simple__selected') as HTMLSpanElement)?.click() //TODO посмотреть как писать simple-selected или simple__selected
+    console.log(document.querySelector('.simple__selected'))
   })
   setTimeout(() => {}, 1000)
 })
@@ -34,7 +35,7 @@ function handleSelect(event: Event, id: number, slot: string) {
     <div class="slider-values">
       <span
         v-for="(slot, index) in Object.keys(slots)"
-        :class="[selected.id == index ? 'selected' : 'default']"
+        :class="[selected.id == index ? 'simple__selected' : 'default']"
         @click="(event) => handleSelect(event, index, slot)"
         :key="index"
         :ref="index == 0 ? firsh : null"
