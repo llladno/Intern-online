@@ -10,9 +10,20 @@
   background: $default-white;
   border-radius: 10px;
   box-shadow: $box-shadow-default;
+
+  &__logout {
+    padding-left: 15px;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
 }
 
 .sidebar__links {
+  width: 200px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -43,5 +54,3 @@
     color: $default-black;
   }
 }
-
-

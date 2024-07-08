@@ -8,10 +8,12 @@ defineProps({
   <svg width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M9.87484 12.4583H13.8332L12.7209 11.3461C12.4193 11.0445 12.2498 10.6354 12.2498 10.2088V7.70834C12.2498 5.64016 10.9281 3.88069 9.08317 3.22862V2.95833C9.08317 2.08388 8.37429 1.375 7.49984 1.375C6.62539 1.375 5.9165 2.08388 5.9165 2.95833V3.22862C4.07162 3.88069 2.74984 5.64016 2.74984 7.70834V10.2088C2.74984 10.6354 2.58038 11.0445 2.27874 11.3461L1.1665 12.4583H5.12484M9.87484 12.4583V13.25C9.87484 14.5617 8.81151 15.625 7.49984 15.625C6.18816 15.625 5.12484 14.5617 5.12484 13.25V12.4583M9.87484 12.4583H5.12484"
-      :stroke="color ? color : '#28282D'" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+      :stroke="color ? color : '#28282D'"
+      stroke-width="1.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
   </svg>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

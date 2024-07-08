@@ -3,15 +3,20 @@ defineProps({
   props: Object,
   big: Boolean,
   placeholder: String,
-  type: String,
+  type: String
 })
 </script>
 
 <template>
   <div class="default-input">
     <label><slot></slot></label>
-    <input :type="type ? type : 'text'" v-bind="{ ...props }" :placeholder="placeholder" v-if="!big"/>
-    <textarea v-else rows="4"/>
+    <input
+      :type="type ? type : 'text'"
+      v-bind="{ ...props }"
+      :placeholder="placeholder"
+      v-if="!big"
+    />
+    <textarea v-else rows="4" />
   </div>
 </template>
 

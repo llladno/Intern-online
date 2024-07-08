@@ -4,6 +4,10 @@ import { ref } from 'vue'
 import OIButton from '@/components/common/OIButton.vue'
 
 const simpleSelected = ref('active')
+const emits = defineEmits(['selectedEmit'])
+function onSelected(slot: string) {
+  emits('selectedEmit', slot)
+}
 </script>
 
 <template>
@@ -14,11 +18,7 @@ const simpleSelected = ref('active')
       <OIButton>+ Добавить новый кейс</OIButton>
     </RouterLink>
   </div>
-  <OISimpleSelect
-    @selectedValue="(slot) => (simpleSelected = slot)"
-    style="margin-top: 27px"
-    class="auth__simpleselect"
-  >
+  <OISimpleSelect @selectedValue="onSelected" style="margin-top: 27px" class="auth__simpleselect">
     <template #active>Активные</template>
     <template #draft>Черновики</template>
     <template #archive>Архив</template>

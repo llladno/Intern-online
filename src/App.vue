@@ -27,7 +27,7 @@ watch(
 <style scoped lang="scss">
 @import '@/assets/base/variables';
 
-.main-router{
+.main-router {
   display: flex;
   gap: 15px;
   background: $background-color;
