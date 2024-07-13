@@ -29,12 +29,12 @@
 
     span {
       position: relative;
-      width: 100%;
+      width: fit-content;
       left: auto;
       transition: 0.3s;
       cursor: pointer;
 
-      &.selected {
+      &.simple__selected {
         color: white;
       }
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import OIButton from '@/components/common/OIButton.vue'
+import IOButton from '@/components/common/IOButton.vue'
 import OIInput from '@/components/common/OIInput.vue'
 </script>
 
@@ -11,7 +11,7 @@ import OIInput from '@/components/common/OIInput.vue'
       <div><input type="checkbox" /> <label>Сохранить вход</label></div>
       <RouterLink to="/recovery">Забыли пароль?</RouterLink>
     </div>
-    <OIButton fullWidth>Войти</OIButton>
+    <IOButton fullWidth>Войти</IOButton>
   </div>
 </template>
 

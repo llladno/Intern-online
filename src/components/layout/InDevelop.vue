@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import OIButton from '@/components/common/OIButton.vue'
+import IOButton from '@/components/common/IOButton.vue'
 </script>
 
 <template>
@@ -8,8 +8,9 @@ import OIButton from '@/components/common/OIButton.vue'
       <h1>Эта страница находится в разработке :(</h1>
       <p>Приносим извинения за доставленные неудобства</p>
       <RouterLink to="/">
-        <OIButton>Вернуться на главную</OIButton>
+        <IOButton>Вернуться на главную</IOButton>
       </RouterLink>
+      <RouterLink to="/ui-kit"> Либо можно посмотреть на замечательный ui-kit </RouterLink>
     </div>
   </div>
 </template>

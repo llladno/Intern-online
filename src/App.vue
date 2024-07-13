@@ -2,6 +2,7 @@
 import { RouterView, useRoute } from 'vue-router'
 import HeaderBar from '@/components/layout/HeaderBar.vue'
 import { ref, watch } from 'vue'
+import SideBar from '@/components/layout/SideBar.vue'
 
 const route = useRoute()
 const isLogin = ref(false)
@@ -9,7 +10,8 @@ const isLogin = ref(false)
 watch(
   () => route.params,
   () => {
-    if (route.name == 'login' || route.name == 'develop') isLogin.value = true
+    if (route.name == 'login' || route.name == 'develop' || route.name == 'ui-kit')
+      isLogin.value = true
     else isLogin.value = false
   }
 )
@@ -17,69 +19,21 @@ watch(
 
 <template>
   <HeaderBar v-if="!isLogin" />
-  <RouterView />
+  <div :class="!isLogin && 'main-router'">
+    <SideBar v-if="!isLogin" />
+    <RouterView />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+<style scoped lang="scss">
+@import '@/assets/base/variables';
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.main-router {
+  display: flex;
+  gap: 15px;
+  background: $background-color;
+  height: 100%;
+  min-height: 100vh;
+  padding: 40px;
 }
 </style>

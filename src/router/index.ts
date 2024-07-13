@@ -18,6 +18,26 @@ const router = createRouter({
       path: '/develop',
       name: 'develop',
       component: () => import('../views/InDevelopView.vue')
+    },
+    {
+      path: '/organization-profile',
+      name: 'profile',
+      component: () => import('../views/organisation/MyProfileView.vue')
+    },
+    {
+      path: '/my-cases',
+      name: 'cases',
+      component: () => import('../views/organisation/CasesView.vue')
+    },
+    {
+      path: '/my-cases/add',
+      name: 'add-case',
+      component: () => import('../views/organisation/AddCaseView.vue')
+    },
+    {
+      path: '/ui-kit',
+      name: 'ui-kit',
+      component: () => import('../views/UiKitView.vue')
     }
   ]
 })
