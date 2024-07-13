@@ -1,1 +1,0 @@
-import{d as l,c as o,l as s,x as a,o as n}from"./index--jJEJ0-c.js";const c=l({__name:"OIButton",props:{fullWidth:{type:Boolean,default:!1}},setup(e){return(t,r)=>(n(),o("button",{class:a([e.fullWidth?"w-full":""]),style:{}},[s(t.$slots,"default")],2))}});export{c as _};
