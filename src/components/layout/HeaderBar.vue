@@ -20,7 +20,6 @@ import IconHeaderNotification from '@/components/icons/IconHeaderNotification.vu
 </template>
 
 <style scoped lang="scss">
-@use '@/assets/base/variables';
 header {
   height: 55px;
   padding: 0 40px;
@@ -32,7 +31,7 @@ header {
     margin-right: 40px;
 
     a {
-      color: variables.$default-white;
+      color:$default-white;
       font-size: 16px;
       font-weight: 400;
     }
