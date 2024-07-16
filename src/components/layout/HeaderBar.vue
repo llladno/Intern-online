@@ -31,7 +31,7 @@ header {
     margin-right: 40px;
 
     a {
-      color:$default-white;
+      color: $default-white;
       font-size: 16px;
       font-weight: 400;
     }

@@ -46,4 +46,52 @@ function handleSelect(event: Event, id: number, slot: string) {
   </div>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.slider-values,
+.switch {
+  position: relative;
+  display: flex;
+  gap: 35px;
+  width: fit-content;
+}
+
+.switch {
+  height: 42px;
+  border: $default-border;
+  padding: 5px 0;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 7px;
+
+  .slide-container {
+    position: absolute;
+    left: 0;
+    height: 32px;
+    background-color: $primary-color;
+    transition: 0.3s;
+    border-radius: 7px;
+  }
+
+  .slider-values {
+    width: 100%;
+    margin: 0 20px;
+
+    span {
+      position: relative;
+      width: fit-content;
+      left: auto;
+      transition: 0.3s;
+      cursor: pointer;
+
+      &.simple__selected {
+        color: white;
+      }
+
+      &.default {
+        color: $additional-color;
+        opacity: 0.7;
+      }
+    }
+  }
+}
+</style>
