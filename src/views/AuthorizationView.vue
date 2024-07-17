@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AuthLayout from '@/components/layout/Auth/AuthLayout.vue'
+import AuthLayout from '@/components/pages/authorization/AuthLayout.vue'
 import AuthPhoto from '@/assets/media/img/AuthPhoto.png'
 </script>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import OISimpleSelect from '@/components/common/OISimpleSelect.vue'
 import { ref } from 'vue'
-import CaseTarifCard from '@/components/layout/Cases/CaseTarifCard.vue'
+import CaseTarifCard from '@/components/pages/cases/CaseTarifCard.vue'
 import OIOptionsSelect from '@/components/common/OIOptionsSelect.vue'
 import OIInput from '@/components/common/OIInput.vue'
 import IOButton from '@/components/common/IOButton.vue'

@@ -3,7 +3,6 @@ import type { UserRegistrationI } from '@/types/userI'
 import UserService from '@/api/userService'
 
 export const useUserStore = defineStore('userStore', () => {
-
   async function signUp(data: UserRegistrationI) {
     try {
       return await UserService.registration(data)

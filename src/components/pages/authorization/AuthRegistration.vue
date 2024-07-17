@@ -6,7 +6,8 @@ import { useUserStore } from '@/stores/UserStore'
 import {
   Select,
   SelectContent,
-  SelectGroup, SelectItem,
+  SelectGroup,
+  SelectItem,
   SelectLabel,
   SelectTrigger,
   SelectValue
@@ -20,11 +21,13 @@ const userStore = useUserStore()
 
 function registration() {
   console.log(selected.value === 'organisation' && true)
-  console.log(userStore.signUp({
-    email: email.value,
-    password: password.value,
-    organisation: selected.value === 'organisation' ? true : false
-  }))
+  console.log(
+    userStore.signUp({
+      email: email.value,
+      password: password.value,
+      organisation: selected.value === 'organisation' ? true : false
+    })
+  )
 }
 </script>
 
@@ -43,9 +46,11 @@ function registration() {
         </SelectGroup>
       </SelectContent>
     </Select>
-    <OIInput v-model='email' :props="{ placeholder: 'Телефон' }">Почта</OIInput>
-    <OIInput v-model='password' :props="{ placeholder: 'Пароль' }">Пароль</OIInput>
-    <OIInput v-model='passwordRepeat' :props="{ placeholder: 'Повторите пароль' }">Повтор пароля</OIInput>
+    <OIInput v-model="email" :props="{ placeholder: 'Телефон' }">Почта</OIInput>
+    <OIInput v-model="password" :props="{ placeholder: 'Пароль' }">Пароль</OIInput>
+    <OIInput v-model="passwordRepeat" :props="{ placeholder: 'Повторите пароль' }"
+      >Повтор пароля</OIInput
+    >
     <IOButton @click="registration" fullWidth>Зарегистрироваться</IOButton>
   </div>
 </template>

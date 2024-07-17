@@ -3,7 +3,6 @@ import OISimpleSelect from '@/components/common/OISimpleSelect.vue'
 import { ref } from 'vue'
 import IOButton from '@/components/common/IOButton.vue'
 
-const simpleSelected = ref('active')
 const emits = defineEmits(['selectedEmit'])
 function onSelected(slot: string) {
   emits('selectedEmit', slot)

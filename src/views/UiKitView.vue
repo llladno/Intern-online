@@ -64,8 +64,8 @@ function testRequest() {
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete your account and remove your
-                  data from our servers.
+                  This action cannot be undone. This will permanently delete your account and remove
+                  your data from our servers.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
@@ -118,7 +118,7 @@ function testRequest() {
 </template>
 
 <style scoped lang="scss">
-@import "@/assets/base/variables";
+@import '@/assets/base/variables';
 
 .ui-kit {
   display: flex;
@@ -155,7 +155,6 @@ function testRequest() {
     border: 1px solid $default-grey;
     border-radius: 10px;
     padding: 20px;
-
   }
 
   &__variation {
@@ -163,7 +162,6 @@ function testRequest() {
     gap: 15px;
     align-items: center;
     grid-template-columns: 200px 350px;
-
   }
 }
 </style>

@@ -10,11 +10,11 @@ export default class UserService {
     return $api.post(`${this.accountBaseUrl}/register`, data)
   }
 
-  static async login(data: Omit<UserRegistrationI, 'organisation'>){
+  static async login(data: Omit<UserRegistrationI, 'organisation'>) {
     return $api.post(`${this.tokenBaseUrl}/`, data)
   }
 
-  static async getTestUserList(){
+  static async getTestUserList() {
     return $api.get(`${this.accountBaseUrl}/user`)
   }
 }

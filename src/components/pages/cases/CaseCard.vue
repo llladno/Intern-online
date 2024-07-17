@@ -8,7 +8,6 @@ import { CasesStatus } from '@/types/organisationCasesI'
 defineProps({
   caseInfo: Object
 })
-
 </script>
 
 <template>
@@ -61,7 +60,7 @@ defineProps({
 </template>
 
 <style scoped lang="scss">
-@import "@/assets/base/variables.scss";
+@import '@/assets/base/variables.scss';
 .case-card {
   position: relative;
   display: flex;
