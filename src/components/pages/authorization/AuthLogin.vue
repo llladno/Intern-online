@@ -18,7 +18,6 @@ function signin() {
 
 <template>
   <div class="auth__login">
-
     <IOInput v-model="email" :props="{ placeholder: 'Логин' }">Логин</IOInput>
     <IOInput v-model="password">Пароль</IOInput>
     <div class="auth__login__remember">

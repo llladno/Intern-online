@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import InputPropsI from '@/types/componentsProps/commonProps'
-
-defineProps<InputPropsI>()
+defineProps({
+  props: Object,
+  big: Boolean,
+  placeholder: String,
+  type: String
+})
 </script>
 
 <template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
-import { ref } from 'vue'
 import IOButton from '@/components/common/IOButton.vue'
 
 const emits = defineEmits(['selectedEmit'])
