@@ -5,6 +5,8 @@ defineProps({
   placeholder: String,
   type: String
 })
+
+const model = defineModel()
 </script>
 
 <template>
@@ -15,6 +17,7 @@ defineProps({
       v-bind="{ ...props }"
       :placeholder="placeholder"
       v-if="!big"
+      v-model="model"
     />
     <textarea v-else rows="4" />
   </div>

@@ -3,29 +3,25 @@ import IconStar from '@/components/icons/IconStar.vue'
 import IconBookMark from '@/components/icons/IconBookMark.vue'
 import IconClock from '@/components/icons/IconClock.vue'
 import IconDotesTemp from '@/components/icons/IconDotesTemp.vue'
+import { CasesStatus } from '@/types/organisationCasesI'
 
 defineProps({
   caseInfo: Object
 })
 
-enum Status {
-  'Подаются решения' = '218, 133, 44',
-  'Решений нет' = '120, 98, 235',
-  'Ожидает оценки' = '190, 74, 74'
-}
 </script>
 
 <template>
   <div class="case-card" v-if="caseInfo">
     <div
       class="case-card__line"
-      :style="{ background: `rgb(${Status[caseInfo.status as keyof typeof Status]}, 1)` }"
+      :style="{ background: `rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}, 1)` }"
     ></div>
-    <div class="case-card__flex">
+    <div class="case-card__container">
       <div>
         <div
           class="case-card__status"
-          :style="`color: rgb(${Status[caseInfo.status as keyof typeof Status]}); background-color: rgb(${Status[caseInfo.status as keyof typeof Status]}, 0.2)`"
+          :style="`color: rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}); background-color: rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}, 0.2)`"
         >
           •
           {{ caseInfo.status }}
@@ -56,7 +52,7 @@ enum Status {
         <div>
           <p class="case-card__count">Кол-во решений:</p>
           <p class="case-card__solutions">
-            <span class="case-card__solutions--number">{{ caseInfo.solutions }}</span> из 30
+            <span class="case-card__solutions-number">{{ caseInfo.solutions }}</span> из 30
           </p>
         </div>
       </div>
@@ -65,12 +61,14 @@ enum Status {
 </template>
 
 <style scoped lang="scss">
+@import "@/assets/base/variables.scss";
 .case-card {
   position: relative;
   display: flex;
   overflow: hidden;
+  cursor: pointer;
 
-  &__flex {
+  &__container {
     display: flex;
     justify-content: space-between;
     gap: 40px;
@@ -135,7 +133,7 @@ enum Status {
     text-align: left;
     color: #949496;
 
-    &--number {
+    &-number {
       font-size: 20px;
       font-weight: 500;
       line-height: 20px;
