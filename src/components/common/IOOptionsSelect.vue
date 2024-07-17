@@ -16,4 +16,17 @@ const model = defineModel()
   </select>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.options-select {
+  padding: 6px 14px;
+  border: $default-border;
+  background-color: $default-light-grey;
+  border-radius: 6px;
+  font-size: 13px;
+  height: 40px;
+
+  &__option {
+    padding: 20px;
+  }
+}
+</style>

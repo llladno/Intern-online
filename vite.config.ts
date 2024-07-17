@@ -11,6 +11,11 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [tailwind(), autoprefixer()]
+    },
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/assets/base/variables.scss";`
+      }
     }
   },
   base: '/Intern-online/',

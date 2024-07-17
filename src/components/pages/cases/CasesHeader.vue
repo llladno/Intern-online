@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import OISimpleSelect from '@/components/common/OISimpleSelect.vue'
-import { ref } from 'vue'
+import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import IOButton from '@/components/common/IOButton.vue'
 
 const emits = defineEmits(['selectedEmit'])
@@ -17,11 +16,11 @@ function onSelected(slot: string) {
       <IOButton>+ Добавить новый кейс</IOButton>
     </RouterLink>
   </div>
-  <OISimpleSelect @selectedValue="onSelected" style="margin-top: 27px" class="auth__simpleselect">
+  <IOSimpleSelect @selectedValue="onSelected" style="margin-top: 27px" class="auth__simpleselect">
     <template #active>Активные</template>
     <template #draft>Черновики</template>
     <template #archive>Архив</template>
-  </OISimpleSelect>
+  </IOSimpleSelect>
 </template>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import IOButton from '@/components/common/IOButton.vue'
-import OIInput from '@/components/common/OIInput.vue'
+import IOInput from '@/components/common/IOInput.vue'
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/UserStore'
 
@@ -18,8 +18,8 @@ function signin() {
 
 <template>
   <div class="auth__login">
-    <OIInput v-model="email" :props="{ placeholder: 'Логин' }">Логин</OIInput>
-    <OIInput v-model="password">Пароль</OIInput>
+    <IOInput v-model="email" :props="{ placeholder: 'Логин' }">Логин</IOInput>
+    <IOInput v-model="password">Пароль</IOInput>
     <div class="auth__login__remember">
       <div><input type="checkbox" /> <label>Сохранить вход</label></div>
       <RouterLink to="/recovery">Забыли пароль?</RouterLink>

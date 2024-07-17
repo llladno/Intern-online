@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import OISimpleSelect from '@/components/common/OISimpleSelect.vue'
+import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import { ref } from 'vue'
 import CaseTarifCard from '@/components/pages/cases/CaseTarifCard.vue'
-import OIOptionsSelect from '@/components/common/OIOptionsSelect.vue'
-import OIInput from '@/components/common/OIInput.vue'
+import IOOptionsSelect from '@/components/common/IOOptionsSelect.vue'
+import IOInput from '@/components/common/IOInput.vue'
 import IOButton from '@/components/common/IOButton.vue'
 
 const selected = ref('tarif')
@@ -50,33 +50,33 @@ const tarifs = [
 <template>
   <div class="main-container">
     <h2>Новый кейс</h2>
-    <OISimpleSelect
+    <IOSimpleSelect
       style="margin-top: 16px; margin-bottom: 20px"
       @selectedValue="(slot) => (selected = slot)"
     >
       <template #tarif>Тариф</template>
       <template #info>Общая информация</template>
-    </OISimpleSelect>
+    </IOSimpleSelect>
     <div v-if="selected == 'tarif'" class="new-case__tarifs">
       <CaseTarifCard v-for="tarif in tarifs" :key="tarif.title" :tarif="tarif" />
     </div>
     <div v-else class="new-case">
       <h4>Направление кейса*</h4>
-      <OIOptionsSelect
+      <IOOptionsSelect
         :options="['Обычный', 'Организация']"
         default-select="Выберите направление"
       />
-      <OIInput placeholder="Введите название">Название кейса</OIInput>
-      <OIInput big placeholder="Введите описание кейса.."> Описание кейса </OIInput>
+      <IOInput placeholder="Введите название">Название кейса</IOInput>
+      <IOInput big placeholder="Введите описание кейса.."> Описание кейса </IOInput>
       <h3>Требование для участников</h3>
       <div class="new-case__age">
-        <OIInput placeholder="От">Возраст</OIInput>
-        <OIInput placeholder="До"> </OIInput>
+        <IOInput placeholder="От">Возраст</IOInput>
+        <IOInput placeholder="До"> </IOInput>
       </div>
       <h4>Участие</h4>
-      <OIOptionsSelect :options="['Личное', 'Комагда']" default-select="Выберите участие" />
+      <IOOptionsSelect :options="['Личное', 'Комагда']" default-select="Выберите участие" />
       <div>
-        <OIInput placeholder="До">Кол-во решений*</OIInput>
+        <IOInput placeholder="До">Кол-во решений*</IOInput>
         <p>Введите число от 1 до 30</p>
       </div>
       <div class="new-case__buttons">
