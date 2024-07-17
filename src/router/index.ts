@@ -30,6 +30,11 @@ const router = createRouter({
       component: () => import('../views/organisation/CasesView.vue')
     },
     {
+      path: '/my-cases/:id',
+      name: 'case',
+      component: () => import('../views/organisation/CaseView.vue')
+    },
+    {
       path: '/my-cases/add',
       name: 'add-case',
       component: () => import('../views/organisation/AddCaseView.vue')

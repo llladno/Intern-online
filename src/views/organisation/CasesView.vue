@@ -1,43 +1,9 @@
 <script setup lang="ts">
-import CasesHeader from '@/components/layout/Cases/CasesHeader.vue'
-import CaseCard from '@/components/layout/Cases/CaseCard.vue'
+import CasesHeader from '@/components/pages/cases/CasesHeader.vue'
+import CaseCard from '@/components/pages/cases/CaseCard.vue'
 import { ref } from 'vue'
+import { casesInfo } from '@/stores/mock'
 
-const casesInfo = [
-  {
-    id: 1,
-    title: 'Наименование кейса',
-    tags: {
-      category: 'Маркетинг',
-      tarif: 'Лайт',
-      date: new Date(2024, 5, 20)
-    },
-    status: 'Подаются решения',
-    solutions: 23
-  },
-  {
-    id: 2,
-    title: 'Наименование кейса',
-    tags: {
-      category: 'Маркетинг',
-      tarif: 'Лайт',
-      date: new Date(2024, 5, 20)
-    },
-    status: 'Решений нет',
-    solutions: 0
-  },
-  {
-    id: 3,
-    title: 'Наименование кейса',
-    tags: {
-      category: 'Маркетинг',
-      tarif: 'Лайт',
-      date: new Date(2024, 5, 20)
-    },
-    status: 'Ожидает оценки',
-    solutions: 30
-  }
-]
 const selected = ref('active')
 function selectedEmit(slot: string) {
   selected.value = slot
@@ -54,6 +20,7 @@ function selectedEmit(slot: string) {
         v-for="caseInfo in casesInfo"
         :key="caseInfo.id"
         :caseInfo="caseInfo"
+        @click="$router.push(`/my-cases/${caseInfo.id}`)"
         class="main-container"
       />
     </div>

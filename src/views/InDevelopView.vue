@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import InDevelop from '@/components/layout/InDevelop.vue'
+import InDevelop from '@/components/pages/develop/InDevelop.vue'
 </script>
 
 <template>

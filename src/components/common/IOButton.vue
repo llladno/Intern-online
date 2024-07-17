@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <button :class="{ 'w-full': fullWidth, button: true, 'button--outlined': outlined }" style="">
+  <button :class="{ 'w-full': fullWidth, button: true, 'button--outlined': outlined }">
     <slot></slot>
   </button>
 </template>
@@ -30,7 +30,7 @@ defineProps({
   cursor: pointer;
 
   &--outlined {
-    background: transparent;
+    background: none;
     border: 1px solid $primary-color;
     color: $primary-color;
   }

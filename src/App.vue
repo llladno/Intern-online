@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { RouterView, useRoute } from 'vue-router'
-import HeaderBar from '@/components/layout/HeaderBar.vue'
+import HeaderBar from '@/components/pages/HeaderBar.vue'
 import { ref, watch } from 'vue'
-import SideBar from '@/components/layout/SideBar.vue'
+import SideBar from '@/components/pages/SideBar.vue'
 
 const route = useRoute()
 const isLogin = ref(false)

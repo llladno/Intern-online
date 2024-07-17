@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import { ref } from 'vue'
-import AuthLogin from '@/components/layout/Auth/AuthLogin.vue'
-import AuthRegistration from '@/components/layout/Auth/AuthRegistration.vue'
+import AuthLogin from '@/components/pages/authorization/AuthLogin.vue'
+import AuthRegistration from '@/components/pages/authorization/AuthRegistration.vue'
 
 const selected = ref('login')
 </script>

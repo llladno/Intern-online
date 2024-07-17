@@ -33,7 +33,6 @@ defineProps<InputPropsI>()
   outline: none;
   font-size: 13px;
   font-weight: 500;
-  width: 388px;
   line-height: 17px;
   transition: 0.2s;
 
