@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import OISimpleSelect from '@/components/common/OISimpleSelect.vue'
-import OIInput from '@/components/common/OIInput.vue'
-import OIOptionsSelect from '@/components/common/OIOptionsSelect.vue'
+import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
+import IOInput from '@/components/common/IOInput.vue'
+import IOOptionsSelect from '@/components/common/IOOptionsSelect.vue'
 import IOButton from '@/components/common/IOButton.vue'
 import IconLoadComponents from '@/components/icons/IconLoadComponents.vue'
 import { ref } from 'vue'
@@ -12,23 +12,23 @@ const selected = ref('personal')
 <template>
   <div class="main-container my-profile">
     <h2>Мой профиль</h2>
-    <OISimpleSelect @selectedValue="(slot) => (selected = slot)">
+    <IOSimpleSelect @selectedValue="(slot) => (selected = slot)">
       <template #personal>Личный данные</template>
       <template #safty>Безопасность и вход</template>
-    </OISimpleSelect>
+    </IOSimpleSelect>
     <div class="my-profile__info" v-if="selected == 'personal'">
       <div class="my-profile__form">
-        <OIOptionsSelect
+        <IOOptionsSelect
           :options="['Обычный', 'Организация']"
           defaultSelect="Выберите вид пользователя"
         >
-        </OIOptionsSelect>
-        <OIInput> Название компании </OIInput>
-        <OIInput> Телефон компании </OIInput>
-        <OIInput> Электронная почта компании </OIInput>
-        <OIInput> Веб-сайт компании </OIInput>
-        <OIInput> Адрес компании </OIInput>
-        <OIInput big> Описание </OIInput>
+        </IOOptionsSelect>
+        <OIOInput> Название компании </OIOInput>
+        <IOInput> Телефон компании </IOInput>
+        <IOInput> Электронная почта компании </IOInput>
+        <IOInput> Веб-сайт компании </IOInput>
+        <IOInput> Адрес компании </IOInput>
+        <IOInput big> Описание </IOInput>
       </div>
       <div class="my-profile__image">
         <div class="my-profile__image-place">
@@ -39,14 +39,14 @@ const selected = ref('personal')
     </div>
     <div v-else class="my-profile__safty">
       <h2>Изменение номера телефона</h2>
-      <OIInput>Номер телефона</OIInput>
+      <IOInput>Номер телефона</IOInput>
       <IOButton>Изменить</IOButton>
       <h2>Почта</h2>
-      <OIInput placeholder="Укажите вашу почту">E-mail</OIInput>
+      <IOInput placeholder="Укажите вашу почту">E-mail</IOInput>
       <IOButton>Сохранить</IOButton>
       <h2>Изменение пароля</h2>
-      <OIInput type="password">Введите актуальный пароль</OIInput>
-      <OIInput>Новый пароль</OIInput>
+      <IOInput type="password">Введите актуальный пароль</IOInput>
+      <IOInput>Новый пароль</IOInput>
       <IOButton>Изменить</IOButton>
     </div>
   </div>

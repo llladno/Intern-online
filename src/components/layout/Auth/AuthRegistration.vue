@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import IOButton from '@/components/common/IOButton.vue'
-import OIInput from '@/components/common/OIInput.vue'
-import OIOptionsSelect from '@/components/common/OIOptionsSelect.vue'
+import IOInput from '@/components/common/IOInput.vue'
+import IOOptionsSelect from '@/components/common/IOOptionsSelect.vue'
 </script>
 
 <template>
   <div class="auth__registration">
     <p>Зарегистрироваться как</p>
-    <OIOptionsSelect
+    <IOOptionsSelect
       :options="['Обычный', 'Организация']"
       defaultSelect="Выберите вид пользователя"
-    ></OIOptionsSelect>
-    <OIInput :props="{ placeholder: 'Телефон' }">Телефон</OIInput>
-    <OIInput :props="{ placeholder: 'Пароль' }">Пароль</OIInput>
-    <OIInput :props="{ placeholder: 'Повторите пароль' }">Повтор пароля</OIInput>
+    ></IOOptionsSelect>
+    <IOInput :props="{ placeholder: 'Телефон' }">Телефон</IOInput>
+    <IOInput :props="{ placeholder: 'Пароль' }">Пароль</IOInput>
+    <IOInput :props="{ placeholder: 'Повторите пароль' }">Повтор пароля</IOInput>
     <IOButton fullWidth>Зарегистрироваться</IOButton>
   </div>
 </template>

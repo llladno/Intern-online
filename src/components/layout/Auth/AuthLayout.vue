@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import OISimpleSelect from '@/components/common/OISimpleSelect.vue'
+import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import { ref } from 'vue'
 import AuthLogin from '@/components/layout/Auth/AuthLogin.vue'
 import AuthRegistration from '@/components/layout/Auth/AuthRegistration.vue'
@@ -16,14 +16,14 @@ const selected = ref('login')
           <p>Назад</p>
         </div>
       </RouterLink>
-      <OISimpleSelect
+      <IOSimpleSelect
         @selectedValue="(slot) => (selected = slot)"
         style="margin-top: 27px"
         class="auth__simpleselect"
       >
         <template #login>Вход</template>
         <template #registration>Регистрация</template>
-      </OISimpleSelect>
+      </IOSimpleSelect>
       <AuthLogin v-if="selected == 'login'" />
       <AuthRegistration v-else-if="selected == 'registration'" />
     </div>

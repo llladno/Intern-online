@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import OISimpleSelect from '@/components/common/OISimpleSelect.vue'
+import OISimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import { ref } from 'vue'
 import CaseTarifCard from '@/components/layout/Cases/CaseTarifCard.vue'
-import OIOptionsSelect from '@/components/common/OIOptionsSelect.vue'
-import OIInput from '@/components/common/OIInput.vue'
+import OIOptionsSelect from '@/components/common/IOOptionsSelect.vue'
+import OIInput from '@/components/common/IOInput.vue'
 import IOButton from '@/components/common/IOButton.vue'
 
 const selected = ref('tarif')

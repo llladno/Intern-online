@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import IOButton from '@/components/common/IOButton.vue'
-import OIInput from '@/components/common/OIInput.vue'
+import IOInput from '@/components/common/IOInput.vue'
 </script>
 
 <template>
   <div class="auth__login">
-    <OIInput :props="{ placeholder: 'Логин' }">Логин</OIInput>
-    <OIInput>Пароль</OIInput>
+    <IOInput :props="{ placeholder: 'Логин' }">Логин</IOInput>
+    <IOInput>Пароль</IOInput>
     <div class="auth__login__remember">
       <div><input type="checkbox" /> <label>Сохранить вход</label></div>
       <RouterLink to="/recovery">Забыли пароль?</RouterLink>

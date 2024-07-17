@@ -23,7 +23,7 @@ defineProps({
   font-size: 13px;
   height: 40px;
 
-  option {
+  &__option {
     padding: 20px;
   }
 }

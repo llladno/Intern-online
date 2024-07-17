@@ -26,8 +26,6 @@ watch(
 </template>
 
 <style scoped lang="scss">
-@import '@/assets/base/variables';
-
 .main-router {
   display: flex;
   gap: 15px;

@@ -1,32 +1,30 @@
 <script setup lang="ts">
-defineProps({
-  props: Object,
-  big: Boolean,
-  placeholder: String,
-  type: String
-})
+import InputPropsI from '@/types/componentsProps/commonProps'
+
+defineProps<InputPropsI>()
 </script>
 
 <template>
-  <div class="default-input">
-    <label><slot></slot></label>
+  <div class="input">
+    <label class="input__label"><slot></slot></label>
     <input
+      class="input__text"
       :type="type ? type : 'text'"
       v-bind="{ ...props }"
       :placeholder="placeholder"
       v-if="!big"
     />
-    <textarea v-else rows="4" />
+    <textarea class="input__textarea" v-else rows="4" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.default-input {
+.input {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-input {
+.input__text {
   border: $default-border;
   background: $default-light-grey;
   border-radius: 8px;
@@ -49,7 +47,7 @@ input[type='checkbox'] {
   height: 15px;
 }
 
-textarea {
+.input__textarea {
   border: $default-border;
   background: $default-light-grey;
   border-radius: 8px;
