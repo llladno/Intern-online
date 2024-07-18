@@ -5,6 +5,7 @@ import CaseTarifCard from '@/components/pages/cases/CaseTarifCard.vue'
 import OIOptionsSelect from '@/components/common/OIOptionsSelect.vue'
 import OIInput from '@/components/common/OIInput.vue'
 import IOButton from '@/components/common/IOButton.vue'
+import IOSelect from '@/components/common/IOSelect.vue'
 
 const selected = ref('tarif')
 
@@ -62,19 +63,19 @@ const tarifs = [
     </div>
     <div v-else class="new-case">
       <h4>Направление кейса*</h4>
-      <OIOptionsSelect
-        :options="['Обычный', 'Организация']"
-        default-select="Выберите направление"
-      />
+      <IOSelect :options="[{
+        value: 'default',
+        label: 'Обычный'
+      }, {
+        value: 'organisation',
+        label: 'Организация'
+      }]" placeholder="Выберите направление" label="Выберите направление" />
       <OIInput placeholder="Введите название">Название кейса</OIInput>
-      <OIInput big placeholder="Введите описание кейса.."> Описание кейса </OIInput>
+      <OIInput big placeholder="Введите описание кейса.."> Описание кейса</OIInput>
       <h3>Требование для участников</h3>
-      <div class="new-case__age">
-        <OIInput placeholder="От">Возраст</OIInput>
-        <OIInput placeholder="До"> </OIInput>
-      </div>
       <h4>Участие</h4>
-      <OIOptionsSelect :options="['Личное', 'Комагда']" default-select="Выберите участие" />
+      <IOSelect :options="[{
+        value: 'self', label: 'Личное'}, {value: 'command', label: 'Команда'},]"  placeholder="Выберите участие" label="Выберите участие" />
       <div>
         <OIInput placeholder="До">Кол-во решений*</OIInput>
         <p>Введите число от 1 до 30</p>
@@ -95,6 +96,7 @@ const tarifs = [
 .new-case {
   display: flex;
   flex-direction: column;
+  width: 400px;
   align-items: self-start;
   gap: 15px;
 }
