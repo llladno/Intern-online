@@ -1,8 +1,8 @@
 export interface InputPropsI {
-  props: any
-  big: boolean
-  placeholder: string
-  type: string
+  props?: any
+  big?: boolean
+  placeholder?: string
+  type?: string
 }
 
 export interface SelectPropsI {
@@ -14,4 +14,9 @@ export interface SelectPropsI {
 interface SelectPropsOptionI {
   value: string
   label: string
+}
+
+export interface ButtonPropsI {
+  fullWidth?: boolean
+  outlined?: boolean
 }

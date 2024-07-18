@@ -21,8 +21,8 @@ import {
   AlertDialogTrigger
 } from '@/components/shadcn/ui/alert-dialog'
 import IOButton from '@/components/common/IOButton.vue'
-import OIInput from '@/components/common/OIInput.vue'
-import OISimpleSelect from '@/components/common/OISimpleSelect.vue'
+import IOInput from '@/components/common/IOInput.vue'
+import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import { useUserStore } from '@/stores/UserStore'
 
 const userStore = useUserStore()
@@ -93,23 +93,23 @@ function testRequest() {
         <div class="ui-kit__variation">
           <p>Инпут c label</p>
           <div class="ui-kit__variation-element">
-            <OIInput>Email</OIInput>
+            <IOInput>Email</IOInput>
           </div>
         </div>
         <div class="ui-kit__variation">
           <p>Обычный инпут</p>
           <div class="ui-kit__variation-element">
-            <OIInput></OIInput>
+            <IOInput></IOInput>
           </div>
         </div>
         <div class="ui-kit__variation">
           <p>Tabs</p>
           <div class="ui-kit__variation-element">
-            <OISimpleSelect>
+            <IOSimpleSelect>
               <template #active>Активные</template>
               <template #draft>Черновики</template>
               <template #archive>Архив</template>
-            </OISimpleSelect>
+            </IOSimpleSelect>
           </div>
         </div>
       </div>

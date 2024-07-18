@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import OISimpleSelect from '@/components/common/OISimpleSelect.vue'
+import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import { ref } from 'vue'
 import CaseTarifCard from '@/components/pages/cases/CaseTarifCard.vue'
-import OIOptionsSelect from '@/components/common/OIOptionsSelect.vue'
-import OIInput from '@/components/common/OIInput.vue'
+import IOOptionsSelect from '@/components/common/IOOptionsSelect.vue'
+import IOInput from '@/components/common/IOInput.vue'
 import IOButton from '@/components/common/IOButton.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
 
@@ -50,19 +50,19 @@ const tarifs = [
 
 <template>
   <div class="main-container">
-    <h2>Новый кейс</h2>
-    <OISimpleSelect
+    <h2 class="header-1">Новый кейс</h2>
+    <IOSimpleSelect
       style="margin-top: 16px; margin-bottom: 20px"
       @selectedValue="(slot) => (selected = slot)"
     >
       <template #tarif>Тариф</template>
       <template #info>Общая информация</template>
-    </OISimpleSelect>
+    </IOSimpleSelect>
     <div v-if="selected == 'tarif'" class="new-case__tarifs">
       <CaseTarifCard v-for="tarif in tarifs" :key="tarif.title" :tarif="tarif" />
     </div>
     <div v-else class="new-case">
-      <h4>Направление кейса*</h4>
+      <h3 class="p-13-500">Направление кейса*</h3>
       <IOSelect :options="[{
         value: 'default',
         label: 'Обычный'
@@ -70,16 +70,16 @@ const tarifs = [
         value: 'organisation',
         label: 'Организация'
       }]" placeholder="Выберите направление" label="Выберите направление" />
-      <OIInput placeholder="Введите название">Название кейса</OIInput>
-      <OIInput big placeholder="Введите описание кейса.."> Описание кейса</OIInput>
-      <h3>Требование для участников</h3>
-      <h4>Участие</h4>
+      <IOInput placeholder="Введите название">Название кейса</IOInput>
+      <IOInput big placeholder="Введите описание кейса.."> Описание кейса</IOInput>
+      <h3 class="p-18-500">Требование для участников</h3>
+      <span class="p-13-500">Участие</span>
       <IOSelect :options="[{
         value: 'self', label: 'Личное'}, {value: 'command', label: 'Команда'},]" placeholder="Выберите участие"
                 label="Выберите участие" />
       <div>
-        <OIInput placeholder="До">Кол-во решений*</OIInput>
-        <p>Введите число от 1 до 30</p>
+        <IOInput placeholder="До">Кол-во решений*</IOInput>
+        <span class="p-10-500">Введите число от 1 до 30</span>
       </div>
       <div class="new-case__buttons">
         <IOButton>Опубликовать</IOButton>
@@ -102,30 +102,4 @@ const tarifs = [
   gap: 15px;
 }
 
-.new-case__age {
-  display: flex;
-  align-items: flex-end;
-  gap: 10px;
-}
-
-h3 {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 28px;
-  text-align: left;
-  margin: 20px 0 5px 0;
-}
-
-h4 {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 28px;
-  text-align: left;
-  margin-top: 10px;
-}
-
-p {
-  font-size: 10px;
-  color: #28282d;
-}
 </style>

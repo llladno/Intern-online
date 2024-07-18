@@ -9,3 +9,11 @@
   box-shadow: $box-shadow-default;
   width: 100%;
 }
+a {
+  text-decoration: none;
+  transition: 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

@@ -10,11 +10,11 @@ defineProps({
 <template>
   <div class="tarif-card">
     <div class="tarif-card__info">
-      <h3>{{ tarif.title }}</h3>
+      <h3 class="p-25-500">{{ tarif.title }}</h3>
       <div class="tarif-card__stars">
         <IconStar v-for="star in tarif.stars" :key="star" />
       </div>
-      <h3>{{ tarif.cost }} руб</h3>
+      <h3 class="p-24-600">{{ tarif.cost }} руб</h3>
       <ul>
         <li v-for="adventage in tarif.advantages" :key="adventage">{{ adventage }}</li>
       </ul>
@@ -32,7 +32,7 @@ defineProps({
   border: $default-border;
   border-radius: 10px;
 
-  width: 291px;
+  width: 300px;
   padding: 29px 36px 31px 36px;
 
   gap: 31px;
@@ -48,6 +48,11 @@ defineProps({
       font-weight: 500;
       font-size: 14px;
       margin-bottom: 7px;
+
+      &::marker{
+        content: '• ';
+        color: $default-black !important;
+      }
     }
   }
 
