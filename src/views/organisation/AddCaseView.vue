@@ -75,7 +75,8 @@ const tarifs = [
       <h3>Требование для участников</h3>
       <h4>Участие</h4>
       <IOSelect :options="[{
-        value: 'self', label: 'Личное'}, {value: 'command', label: 'Команда'},]"  placeholder="Выберите участие" label="Выберите участие" />
+        value: 'self', label: 'Личное'}, {value: 'command', label: 'Команда'},]" placeholder="Выберите участие"
+                label="Выберите участие" />
       <div>
         <OIInput placeholder="До">Кол-во решений*</OIInput>
         <p>Введите число от 1 до 30</p>
