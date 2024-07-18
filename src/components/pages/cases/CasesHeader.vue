@@ -11,12 +11,12 @@ function onSelected(slot: string) {
 <template>
   <div class="organisation__cases-header">
     <!--      TODO посмотреть как писать simple-selected или simple__selected -->
-    <h2>Мои кейсы</h2>
+    <h2 class="header-1">Мои кейсы</h2>
     <RouterLink to="/my-cases/add">
       <IOButton>+ Добавить новый кейс</IOButton>
     </RouterLink>
   </div>
-  <IOSimpleSelect @selectedValue="onSelected" style="margin-top: 27px" class="auth__simpleselect">
+  <IOSimpleSelect @selectedValue="onSelected" style="margin-top: 16px" class="auth__simpleselect">
     <template #active>Активные</template>
     <template #draft>Черновики</template>
     <template #archive>Архив</template>

@@ -1,15 +1,12 @@
 <script setup lang="ts">
-defineProps({
-  props: Object,
-  big: Boolean,
-  placeholder: String,
-  type: String
-})
+import type { InputPropsI } from '@/types/componentsProps/commonProps'
+
+defineProps<InputPropsI>()
 </script>
 
 <template>
   <div class="input">
-    <label class="input__label"><slot></slot></label>
+    <label class="input__label p-13-500"><slot></slot></label>
     <input
       class="input__text"
       :type="type ? type : 'text'"

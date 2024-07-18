@@ -1,14 +1,7 @@
 <script setup lang="ts">
-defineProps({
-  fullWidth: {
-    type: Boolean,
-    default: false
-  },
-  outlined: {
-    type: Boolean,
-    default: false
-  }
-})
+import type { ButtonPropsI } from '@/types/componentsProps/commonProps'
+
+defineProps<ButtonPropsI>()
 </script>
 
 <template>

@@ -4,27 +4,27 @@ import IconHeaderNotification from '@/components/icons/IconHeaderNotification.vu
 </script>
 
 <template>
-  <header>
+  <header class="header">
     <RouterLink to="/"><IconLogo /></RouterLink>
     <div class="header__nav">
       <div class="header__nav-left">
-        <RouterLink to="/develop">Блог</RouterLink>
-        <RouterLink to="/develop">Помощь</RouterLink>
+        <RouterLink to="/develop" class="p-16-400">Блог</RouterLink>
+        <RouterLink to="/develop" class="p-16-400">Помощь</RouterLink>
       </div>
       <div class="header__nav-right">
         <IconHeaderNotification />
-        <RouterLink to="/login">Вход</RouterLink>
+        <RouterLink to="/login" class="p-16-400">Вход</RouterLink>
       </div>
     </div>
   </header>
 </template>
 
 <style scoped lang="scss">
-header {
+.header {
   height: 55px;
   padding: 0 40px;
 
-  .header__nav {
+  &__nav {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -32,8 +32,6 @@ header {
 
     a {
       color: $default-white;
-      font-size: 16px;
-      font-weight: 400;
     }
 
     &-left {

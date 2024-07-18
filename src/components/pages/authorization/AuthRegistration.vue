@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import IOButton from '@/components/common/IOButton.vue'
-import OIInput from '@/components/common/OIInput.vue'
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/UserStore'
 import {
@@ -12,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/shadcn/ui/select'
+import IOInput from '@/components/common/IOInput.vue'
 
 const email = ref('')
 const password = ref('')
@@ -33,7 +33,7 @@ function registration() {
 
 <template>
   <div class="auth__registration">
-    <p>Зарегистрироваться как</p>
+    <p class="p-14-500">Зарегистрироваться как</p>
     <Select v-model="selected">
       <SelectTrigger>
         <SelectValue placeholder="Выберите вид пользователя" />
@@ -46,10 +46,10 @@ function registration() {
         </SelectGroup>
       </SelectContent>
     </Select>
-    <OIInput v-model="email" :props="{ placeholder: 'Телефон' }">Почта</OIInput>
-    <OIInput v-model="password" :props="{ placeholder: 'Пароль' }">Пароль</OIInput>
-    <OIInput v-model="passwordRepeat" :props="{ placeholder: 'Повторите пароль' }"
-      >Повтор пароля</OIInput
+    <IOInput v-model="email" :props="{ placeholder: 'Телефон' }">Почта</IOInput>
+    <IOInput v-model="password" :props="{ placeholder: 'Пароль' }">Пароль</IOInput>
+    <IOInput v-model="passwordRepeat" :props="{ placeholder: 'Повторите пароль' }"
+      >Повтор пароля</IOInput
     >
     <IOButton @click="registration" fullWidth>Зарегистрироваться</IOButton>
   </div>

@@ -5,6 +5,7 @@ import CaseTarifCard from '@/components/pages/cases/CaseTarifCard.vue'
 import IOOptionsSelect from '@/components/common/IOOptionsSelect.vue'
 import IOInput from '@/components/common/IOInput.vue'
 import IOButton from '@/components/common/IOButton.vue'
+import IOSelect from '@/components/common/IOSelect.vue'
 
 const selected = ref('tarif')
 
@@ -49,7 +50,7 @@ const tarifs = [
 
 <template>
   <div class="main-container">
-    <h2>Новый кейс</h2>
+    <h2 class="header-1">Новый кейс</h2>
     <IOSimpleSelect
       style="margin-top: 16px; margin-bottom: 20px"
       @selectedValue="(slot) => (selected = slot)"
@@ -61,23 +62,24 @@ const tarifs = [
       <CaseTarifCard v-for="tarif in tarifs" :key="tarif.title" :tarif="tarif" />
     </div>
     <div v-else class="new-case">
-      <h4>Направление кейса*</h4>
-      <IOOptionsSelect
-        :options="['Обычный', 'Организация']"
-        default-select="Выберите направление"
-      />
+      <h3 class="p-13-500">Направление кейса*</h3>
+      <IOSelect :options="[{
+        value: 'default',
+        label: 'Обычный'
+      }, {
+        value: 'organisation',
+        label: 'Организация'
+      }]" placeholder="Выберите направление" label="Выберите направление" />
       <IOInput placeholder="Введите название">Название кейса</IOInput>
-      <IOInput big placeholder="Введите описание кейса.."> Описание кейса </IOInput>
-      <h3>Требование для участников</h3>
-      <div class="new-case__age">
-        <IOInput placeholder="От">Возраст</IOInput>
-        <IOInput placeholder="До"> </IOInput>
-      </div>
-      <h4>Участие</h4>
-      <IOOptionsSelect :options="['Личное', 'Комагда']" default-select="Выберите участие" />
+      <IOInput big placeholder="Введите описание кейса.."> Описание кейса</IOInput>
+      <h3 class="p-18-500">Требование для участников</h3>
+      <span class="p-13-500">Участие</span>
+      <IOSelect :options="[{
+        value: 'self', label: 'Личное'}, {value: 'command', label: 'Команда'},]" placeholder="Выберите участие"
+                label="Выберите участие" />
       <div>
         <IOInput placeholder="До">Кол-во решений*</IOInput>
-        <p>Введите число от 1 до 30</p>
+        <span class="p-10-500">Введите число от 1 до 30</span>
       </div>
       <div class="new-case__buttons">
         <IOButton>Опубликовать</IOButton>
@@ -95,34 +97,9 @@ const tarifs = [
 .new-case {
   display: flex;
   flex-direction: column;
+  width: 400px;
   align-items: self-start;
   gap: 15px;
 }
 
-.new-case__age {
-  display: flex;
-  align-items: flex-end;
-  gap: 10px;
-}
-
-h3 {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 28px;
-  text-align: left;
-  margin: 20px 0 5px 0;
-}
-
-h4 {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 28px;
-  text-align: left;
-  margin-top: 10px;
-}
-
-p {
-  font-size: 10px;
-  color: #28282d;
-}
 </style>
