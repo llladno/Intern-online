@@ -14,7 +14,8 @@ defineProps({
   <div class="case-card" v-if="caseInfo">
     <div
       class="case-card__line"
-      :style="{ background: `rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}, 1)` }" />
+      :style="{ background: `rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}, 1)` }"
+    />
     <div class="case-card__container">
       <div>
         <div

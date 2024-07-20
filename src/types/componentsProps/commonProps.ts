@@ -3,10 +3,12 @@ export interface InputPropsI {
   big?: boolean
   placeholder?: string
   type?: string
+  background?: string
+  padding?: string
 }
 
 export interface SelectPropsI {
-  placeholder: string,
+  placeholder: string
   label: string
   options: SelectPropsOptionI[]
 }

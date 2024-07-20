@@ -9,6 +9,7 @@ defineProps<InputPropsI>()
     <label class="input__label p-13-500"><slot></slot></label>
     <input
       class="input__text"
+      :style="{ backgroundColor: background, paddingLeft: padding + 'px' }"
       :type="type ? type : 'text'"
       v-bind="{ ...props }"
       :placeholder="placeholder"
@@ -22,11 +23,10 @@ defineProps<InputPropsI>()
 .input {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  // gap: 8px;
 }
 .input__text {
   border: $default-border;
-  background: $default-light-grey;
   border-radius: 8px;
   padding: 6px 14px;
   height: 40px;
@@ -35,7 +35,13 @@ defineProps<InputPropsI>()
   font-weight: 500;
   line-height: 17px;
   transition: 0.2s;
+  background: $default-light-grey;
+  padding-left: 14px;
 
+  &::placeholder {
+    color: $additional-color;
+    opacity: 0.7;
+  }
   &:focus {
     border: 1px solid $primary-color;
   }
