@@ -3,11 +3,9 @@ import IconStar from '@/components/icons/IconStar.vue'
 import IconBookMark from '@/components/icons/IconBookMark.vue'
 import IconClock from '@/components/icons/IconClock.vue'
 import IconDotesTemp from '@/components/icons/IconDotesTemp.vue'
-import { CasesStatus } from '@/types/organisationCasesI'
+import { CasesStatus, type OrganisationCasesI } from '@/types/organisationCasesI'
 
-defineProps({
-  caseInfo: Object
-})
+defineProps<{caseInfo: OrganisationCasesI}>()
 </script>
 
 <template>
@@ -36,7 +34,7 @@ defineProps({
           </div>
           <div class="case-card__tag">
             <IconClock />
-            <span>{{ caseInfo.tags.date.toLocaleDateString() }}</span>
+            <span>{{ caseInfo.tags.date}}</span>
           </div>
         </div>
         <p class="p-13-400">
@@ -50,7 +48,7 @@ defineProps({
         <div>
           <p class="case-card__count p-13-400">Кол-во решений:</p>
           <p class="case-card__solutions">
-            <span class="case-card__solutions-number">{{ caseInfo.solutions }}</span> из 30
+            <span class="case-card__solutions-number">{{ caseInfo.solutions.amount }}</span> из 30
           </p>
         </div>
       </div>

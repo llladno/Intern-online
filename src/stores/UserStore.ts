@@ -14,9 +14,6 @@ export const useUserStore = defineStore('userStore', () => {
   async function signIn(data: Omit<UserRegistrationI, 'organisation'>) {
     try {
       await UserService.login(data).then((response) => {
-        console.log(response.data)
-        document.cookie = `refresh=${response.data.refresh}; path=/`
-        document.cookie = `access=${response.data.access}; path=/`
       })
     } catch (e) {
       console.log(e)
@@ -25,7 +22,6 @@ export const useUserStore = defineStore('userStore', () => {
 
   async function getTestUserList() {
     try {
-      console.log(document.cookie)
       return await UserService.getTestUserList()
     } catch (e) {
       console.log(e)
