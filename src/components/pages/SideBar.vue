@@ -26,7 +26,13 @@ function selectLink(number: number) {
         :key="index"
       >
         <component :is="value.icon" :color="selectValue == index ? '#7862eb' : ''"></component>
-        <span :class="{'sidebar__text p-14-500':true, 'sidebar__text--selected': selectValue == index}">{{ value.text }}</span>
+        <span
+          :class="{
+            'sidebar__text p-14-500': true,
+            'sidebar__text--selected': selectValue == index
+          }"
+          >{{ value.text }}</span
+        >
       </RouterLink>
       <div class="sidebar__links-slider" :style="{ top: 40 * selectValue + 6 + 'px' }"></div>
     </div>

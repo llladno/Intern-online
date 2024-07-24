@@ -49,7 +49,7 @@ defineProps({
       font-size: 14px;
       margin-bottom: 7px;
 
-      &::marker{
+      &::marker {
         content: '• ';
         color: $default-black !important;
       }

@@ -6,7 +6,7 @@ export interface InputPropsI {
 }
 
 export interface SelectPropsI {
-  placeholder: string,
+  placeholder: string
   label: string
   options: SelectPropsOptionI[]
 }

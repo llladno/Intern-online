@@ -2,7 +2,6 @@
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import { ref } from 'vue'
 import CaseTarifCard from '@/components/pages/cases/CaseTarifCard.vue'
-import IOOptionsSelect from '@/components/common/IOOptionsSelect.vue'
 import IOInput from '@/components/common/IOInput.vue'
 import IOButton from '@/components/common/IOButton.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
@@ -63,20 +62,35 @@ const tarifs = [
     </div>
     <div v-else class="new-case">
       <h3 class="p-13-500">Направление кейса*</h3>
-      <IOSelect :options="[{
-        value: 'default',
-        label: 'Обычный'
-      }, {
-        value: 'organisation',
-        label: 'Организация'
-      }]" placeholder="Выберите направление" label="Выберите направление" />
+      <IOSelect
+        :options="[
+          {
+            value: 'default',
+            label: 'Обычный'
+          },
+          {
+            value: 'organisation',
+            label: 'Организация'
+          }
+        ]"
+        placeholder="Выберите направление"
+        label="Выберите направление"
+      />
       <IOInput placeholder="Введите название">Название кейса</IOInput>
       <IOInput big placeholder="Введите описание кейса.."> Описание кейса</IOInput>
       <h3 class="p-18-500">Требование для участников</h3>
       <span class="p-13-500">Участие</span>
-      <IOSelect :options="[{
-        value: 'self', label: 'Личное'}, {value: 'command', label: 'Команда'},]" placeholder="Выберите участие"
-                label="Выберите участие" />
+      <IOSelect
+        :options="[
+          {
+            value: 'self',
+            label: 'Личное'
+          },
+          { value: 'command', label: 'Команда' }
+        ]"
+        placeholder="Выберите участие"
+        label="Выберите участие"
+      />
       <div>
         <IOInput placeholder="До">Кол-во решений*</IOInput>
         <span class="p-10-500">Введите число от 1 до 30</span>
@@ -101,5 +115,4 @@ const tarifs = [
   align-items: self-start;
   gap: 15px;
 }
-
 </style>

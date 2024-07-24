@@ -20,7 +20,9 @@ function selectedEmit(slot: string) {
         v-for="caseInfo in casesInfo"
         :key="caseInfo.id"
         :caseInfo="caseInfo"
-        @click="$router.push(`/my-cases/${caseInfo.id}`)"
+        @click.stop="
+          (e) => e.target.closest('.dropdown-button') ?? $router.push(`/my-cases/${caseInfo.id}`)
+        "
         class="main-container"
       />
     </div>
@@ -33,7 +35,7 @@ function selectedEmit(slot: string) {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .organisation {
   width: 100%;
   display: flex;
