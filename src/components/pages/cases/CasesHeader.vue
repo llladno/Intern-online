@@ -2,23 +2,41 @@
 import IOInput from '@/components/common/IOInput.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
 import IconSearch from '@/components/icons/IconSearch.vue'
-import IconFilter from '@/components/icons/IconFilter.vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import IOButton from '@/components/common/IOButton.vue'
+import CasesHeaderFilter from '@/components/pages/cases/CasesHeaderFilter.vue'
 
 const emits = defineEmits(['selectedEmit'])
 function onSelected(slot: string) {
   emits('selectedEmit', slot)
 }
-const selectOptions = [
+
+interface Option {
+  id: string
+  label: string
+  value: string
+}
+const selectOptions: Option[] = [
   {
+    id: '1',
     value: 'last',
     label: 'Последние'
   },
   {
+    id: '2',
     value: 'early',
     label: 'Предыдущие'
   }
+]
+
+const optionsFiltered: Option[] = [
+  { id: '1', label: 'Vue', value: 'Vue' },
+  { id: '2', label: 'React', value: 'React' },
+  { id: '3', label: 'Angular', value: 'Angular' },
+  { id: '4', label: 'PHP', value: 'PHP' },
+  { id: '5', label: 'Label', value: 'Label' },
+  { id: '6', label: 'Label1', value: 'Label1' },
+  { id: '7', label: 'Label2', value: 'Label2' }
 ]
 </script>
 
@@ -41,10 +59,7 @@ const selectOptions = [
         <IOInput type="text" placeholder="Поиск" background="#fff" padding="33" />
         <IconSearch />
       </div>
-      <div class="organisation-cases__footer-filter">
-        <IOInput type="text" placeholder="Фильтр" background="#fff" />
-        <IconFilter />
-      </div>
+      <CasesHeaderFilter :options="optionsFiltered" placeholder="Фильтр" />
       <div class="organisation-cases__footer-sort">
         <IOSelect class="p-13-500" placeholder="Новые" label="Новые" :options="selectOptions" />
       </div>
@@ -62,7 +77,7 @@ const selectOptions = [
   display: flex;
   align-items: center;
   justify-content: space-between;
-  column-gap: 103px;
+  column-gap: 40px;
   height: 40px;
   margin-top: 16px;
 
@@ -79,14 +94,8 @@ const selectOptions = [
     width: 319px;
     transition: $default-transition;
   }
-  &-filter {
-    position: relative;
-    width: 108px;
-    transition: $default-transition;
-
-    .input .input__text::placeholder {
-      color: $default-black !important;
-    }
+  &-sort {
+    width: 170px;
   }
 }
 </style>

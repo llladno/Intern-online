@@ -14,6 +14,7 @@ defineProps<InputPropsI>()
       v-bind="{ ...props }"
       :placeholder="placeholder"
       v-if="!big"
+      :value="value"
     />
     <textarea class="input__textarea" v-else rows="4" />
   </div>
@@ -21,6 +22,7 @@ defineProps<InputPropsI>()
 
 <style lang="scss" scoped>
 .input {
+  width: 100%;
   display: flex;
   flex-direction: column;
   // gap: 8px;
@@ -43,7 +45,7 @@ defineProps<InputPropsI>()
     opacity: 0.7;
   }
   &:focus {
-    border: 1px solid $primary-color;
+    border: 2px solid $primary-color;
   }
 }
 

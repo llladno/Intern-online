@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="filter"
+    class="svg-filter"
     width="20.000000"
     height="20.000000"
     viewBox="0 0 20 20"
@@ -49,7 +49,7 @@
 <script setup lang="ts"></script>
 
 <style scoped lang="scss">
-.filter {
+.svg-filter {
   position: absolute;
   top: 50%;
   right: 16px;
