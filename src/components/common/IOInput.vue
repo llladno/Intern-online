@@ -20,7 +20,6 @@ const model = defineModel('modelValue')
       :placeholder="placeholder"
       v-model="model"
       v-if="!big"
-      :value="value"
     />
     <textarea class="input__textarea" :style="fullWidth ? 'width: 100%' : ''" v-else rows="4" />
   </div>
