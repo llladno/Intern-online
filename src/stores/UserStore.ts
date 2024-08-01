@@ -13,8 +13,7 @@ export const useUserStore = defineStore('userStore', () => {
 
   async function signIn(data: Omit<UserRegistrationI, 'organisation'>) {
     try {
-      await UserService.login(data).then((response) => {
-      })
+      await UserService.login(data).then((response) => {})
     } catch (e) {
       console.log(e)
     }

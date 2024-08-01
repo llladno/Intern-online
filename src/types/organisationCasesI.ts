@@ -10,30 +10,28 @@ export enum SolutionsStatus {
 }
 
 export interface OrganisationCasesI {
-  id: number,
-  title: string,
-  tags: OrganisationCasesTagsI,
-  status: CasesStatus,
+  id: number
+  title: string
+  tags: OrganisationCasesTagsI
+  status: CasesStatus
   solutions: {
-    amount: number,
+    amount: number
     info: OrganisationCaseSolutionsI[] | []
-  },
-  published: string,
-  finished: string,
-  description: string,
-  documents: string[],
+  }
+  published: string
+  finished: string
+  description: string
+  documents: string[]
 }
 
-
-
 interface OrganisationCaseSolutionsI {
-  name: string,
+  name: string
   lastUpdated: string
   status: SolutionsStatus
 }
 
 interface OrganisationCasesTagsI {
-  category: string,
-  tarif: string,
+  category: string
+  tarif: string
   date: string
 }

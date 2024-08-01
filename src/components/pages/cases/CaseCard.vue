@@ -5,14 +5,15 @@ import IconClock from '@/components/icons/IconClock.vue'
 import IconDotesTemp from '@/components/icons/IconDotesTemp.vue'
 import { CasesStatus, type OrganisationCasesI } from '@/types/organisationCasesI'
 
-defineProps<{caseInfo: OrganisationCasesI}>()
+defineProps<{ caseInfo: OrganisationCasesI }>()
 </script>
 
 <template>
   <div class="case-card" v-if="caseInfo">
     <div
       class="case-card__line"
-      :style="{ background: `rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}, 1)` }" />
+      :style="{ background: `rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}, 1)` }"
+    />
     <div class="case-card__container">
       <div>
         <div
@@ -34,7 +35,7 @@ defineProps<{caseInfo: OrganisationCasesI}>()
           </div>
           <div class="case-card__tag">
             <IconClock />
-            <span>{{ caseInfo.tags.date}}</span>
+            <span>{{ caseInfo.tags.date }}</span>
           </div>
         </div>
         <p class="p-13-400">

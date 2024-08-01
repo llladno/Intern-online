@@ -18,17 +18,24 @@ const selected = ref('personal')
     </IOSimpleSelect>
     <div class="my-profile__info" v-if="selected == 'personal'">
       <div class="my-profile__form">
-        <IOSelect :options="[{
-          value: 'ooo',
-          label: 'ООО'
-        }, {
-          value: 'oao',
-          label: 'ОАО'
-        },
-        {
-          value: 'ip',
-          label: 'ИП'
-        }]" placeholder="Выберите форму компании" label="Выберите форму компании" />
+        <IOSelect
+          :options="[
+            {
+              value: 'ooo',
+              label: 'ООО'
+            },
+            {
+              value: 'oao',
+              label: 'ОАО'
+            },
+            {
+              value: 'ip',
+              label: 'ИП'
+            }
+          ]"
+          placeholder="Выберите форму компании"
+          label="Выберите форму компании"
+        />
         <IOInput> Название компании</IOInput>
         <IOInput> Телефон компании</IOInput>
         <IOInput> Электронная почта компании</IOInput>
@@ -129,6 +136,4 @@ const selected = ref('personal')
     gap: 10px;
   }
 }
-
-
 </style>

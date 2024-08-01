@@ -16,10 +16,11 @@ export default class UserService {
 
   static async getTestUserList() {
     return $api.get(`${this.accountBaseUrl}/user`, {
-        headers: {
-          'Authorization': 'Barer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNTkwMDY0LCJpYXQiOjE3MjE1ODY0NjQsImp0aSI6IjJmNjcyZDQ5ZmU4MjRiZmJhNTYxODhkMjk3ODc0NDBjIiwidXNlcl9pZCI6Mn0.IWIOIK6UX6wy_v833FcF1vp1JnkzzfBP1SpUf5qESuQ'
-        }
+      headers: {
+        Authorization:
+          'Barer ' +
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNTkwMDY0LCJpYXQiOjE3MjE1ODY0NjQsImp0aSI6IjJmNjcyZDQ5ZmU4MjRiZmJhNTYxODhkMjk3ODc0NDBjIiwidXNlcl9pZCI6Mn0.IWIOIK6UX6wy_v833FcF1vp1JnkzzfBP1SpUf5qESuQ'
       }
-    )
+    })
   }
 }

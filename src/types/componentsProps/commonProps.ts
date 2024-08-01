@@ -3,10 +3,11 @@ export interface InputPropsI {
   big?: boolean
   placeholder?: string
   type?: string
+  fullWidth?: boolean
 }
 
 export interface SelectPropsI {
-  placeholder: string,
+  placeholder: string
   label: string
   options: SelectPropsOptionI[]
 }
