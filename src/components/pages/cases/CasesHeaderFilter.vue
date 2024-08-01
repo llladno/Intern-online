@@ -6,8 +6,14 @@
       @click="toggleDropdown"
       :class="{ active: isDropdownOpen }"
     >
-      <template v-if="selectedValues.length > 2"> Выбрано {{ selectedValues.length }} </template>
-      <template v-else>{{ selectedValues.join(', ') || placeholder }}</template>
+      <template v-if="selectedValues.length > 2">
+        <span class="filter__text"> Выбрано {{ selectedValues.length }} </span>
+      </template>
+      <template v-else>
+        <span class="filter__text">
+          {{ selectedValues.join(', ') || placeholder }}
+        </span>
+      </template>
       <IconFilter v-if="!selectedValues.length" />
     </div>
     <transition name="slide-fade">
@@ -73,14 +79,17 @@ onUnmounted(() => {
 .slide-fade-enter-active {
   transition: all 0.5s ease-out;
 }
+
 .slide-fade-leave-active {
   transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
 }
+
 .slide-fade-enter-from,
 .slide-fade-leave-to {
   transform: translateY(-40px);
   opacity: 0;
 }
+
 .filter {
   position: relative;
   width: 148px;
@@ -101,6 +110,11 @@ onUnmounted(() => {
     &.active {
       border: 2px solid $primary-color;
     }
+  }
+
+  &__text {
+    font-weight: 500;
+    font-size: 13px;
   }
 
   &__dropdown {
@@ -127,6 +141,7 @@ onUnmounted(() => {
     }
   }
 }
+
 .filter__dropdown {
   &::-webkit-scrollbar {
     width: 6px;
