@@ -19,7 +19,7 @@ watch(test, () => console.log(test.value))
 
 <template>
   <Select v-model="test" class="select">
-    <SelectTrigger @change="console.log($event)" class="focus:ring-offset-0">
+    <SelectTrigger class="focus:ring-offset-0">
       <SelectValue :placeholder="placeholder" />
     </SelectTrigger>
     <SelectContent>

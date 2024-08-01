@@ -2,6 +2,7 @@
 import type { InputPropsI } from '@/types/componentsProps/commonProps'
 
 defineProps<InputPropsI>()
+const model = defineModel('modelValue')
 </script>
 
 <template>
@@ -9,14 +10,19 @@ defineProps<InputPropsI>()
     <label class="input__label p-13-500"><slot></slot></label>
     <input
       class="input__text"
-      :style="{ backgroundColor: background, paddingLeft: padding + 'px' }"
+      :style="{
+        backgroundColor: background,
+        paddingLeft: padding + 'px',
+        width: fullWidth && '100%'
+      }"
       :type="type ? type : 'text'"
       v-bind="{ ...props }"
       :placeholder="placeholder"
+      v-model="model"
       v-if="!big"
       :value="value"
     />
-    <textarea class="input__textarea" v-else rows="4" />
+    <textarea class="input__textarea" :style="fullWidth ? 'width: 100%' : ''" v-else rows="4" />
   </div>
 </template>
 

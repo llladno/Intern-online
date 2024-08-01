@@ -11,7 +11,6 @@ const emit = defineEmits(['selectedValue'])
 onMounted(() => {
   nextTick(() => {
     ;(document.querySelector('.simple__selected') as HTMLSpanElement)?.click() //TODO посмотреть как писать simple-selected или simple__selected
-    // console.log(document.querySelector('.simple__selected'))
   })
   setTimeout(() => {}, 1000)
 })
