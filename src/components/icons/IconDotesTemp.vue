@@ -1,7 +1,14 @@
 <script setup lang="ts"></script>
 
 <template>
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    class="dropdown-button"
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <g filter="url(#filter0_d_6189_553)">
       <rect x="2" y="1" width="36" height="36" rx="7" fill="white" />
       <rect x="2.5" y="1.5" width="35" height="35" rx="6.5" stroke="#E4E4E7" />

@@ -24,6 +24,7 @@ export interface ButtonPropsI {
   fullWidth?: boolean
   outlined?: boolean
 }
+
 export interface CheckboxPropsI {
   id: string
   label: string

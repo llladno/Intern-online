@@ -17,3 +17,7 @@ a {
     opacity: 0.8;
   }
 }
+body {
+  width: calc(100vw - 17px) !important;
+  padding: 0 !important;
+}

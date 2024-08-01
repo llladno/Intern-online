@@ -2,7 +2,7 @@
 import IconStar from '@/components/icons/IconStar.vue'
 import IconBookMark from '@/components/icons/IconBookMark.vue'
 import IconClock from '@/components/icons/IconClock.vue'
-import IconDotesTemp from '@/components/icons/IconDotesTemp.vue'
+import CasesDropdownMenu from './CasesDropdownMenu.vue'
 import { CasesStatus } from '@/types/organisationCasesI'
 
 defineProps({
@@ -47,7 +47,7 @@ defineProps({
         </p>
       </div>
       <div class="case-card__right-side">
-        <IconDotesTemp />
+        <CasesDropdownMenu />
         <div>
           <p class="case-card__count p-13-400">Кол-во решений:</p>
           <p class="case-card__solutions">
@@ -60,7 +60,6 @@ defineProps({
 </template>
 
 <style scoped lang="scss">
-@import '@/assets/base/variables.scss';
 .case-card {
   position: relative;
   display: flex;
