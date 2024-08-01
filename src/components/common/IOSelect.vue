@@ -19,13 +19,17 @@ watch(test, () => console.log(test.value))
 
 <template>
   <Select v-model="test" class="select">
-    <SelectTrigger>
+    <SelectTrigger class="focus:ring-offset-0">
       <SelectValue :placeholder="placeholder" />
     </SelectTrigger>
     <SelectContent>
       <SelectGroup>
         <SelectLabel>{{ label }}</SelectLabel>
-        <SelectItem v-for="(option, index) in options" :value="option.value" :key="index"
+        <SelectItem
+          v-for="(option, index) in options"
+          :value="option.value"
+          :key="index"
+          class="select__option"
           >{{ option.label }}
         </SelectItem>
       </SelectGroup>
@@ -33,4 +37,16 @@ watch(test, () => console.log(test.value))
   </Select>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.select {
+  &__option {
+    cursor: pointer;
+    transition: $default-transition;
+
+    &:hover,
+    &:focus {
+      background-color: $default-light-violet;
+    }
+  }
+}
+</style>

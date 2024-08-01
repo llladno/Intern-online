@@ -9,69 +9,81 @@ export const casesInfo: OrganisationCasesI[] = [
       tarif: 'Лайт',
       date: new Date(2024, 5, 20).toLocaleDateString()
     },
-    status: 'Подаются решения' as CasesStatus,
+    status: 'Подаются решения' as keyof CasesStatus,
     solutions: {
       amount: 20,
       info: [
         {
+          id: 0,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         },
         {
+          id: 1,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         },
         {
+          id: 1,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         },
         {
+          id: 1,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         },
         {
+          id: 1,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         },
         {
+          id: 1,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         },
         {
+          id: 1,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         },
         {
+          id: 1,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         },
         {
+          id: 1,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         },
         {
+          id: 1,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         },
         {
+          id: 1,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         },
         {
+          id: 1,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         }
       ]
     },
@@ -89,17 +101,19 @@ export const casesInfo: OrganisationCasesI[] = [
       tarif: 'Лайт',
       date: new Date(2024, 5, 20).toLocaleDateString()
     },
-    status: 'Ожидает оценки',
+    status: 'Ожидает оценки' as keyof CasesStatus,
     solutions: {
       amount: 20,
       info: [
         {
+          id: 0,
           name: 'Фамилия имя',
           lastUpdated: new Date(2024, 5, 20).toLocaleDateString(),
-          status: 'Взято в работу'
+          status: 'Взято в работу' as keyof SolutionsStatus
         }
       ]
     },
+    documents: ['Навзание документа', 'Навзание документа', 'Навзание документа'],
     published: new Date(2024, 5, 20).toLocaleDateString(),
     finished: new Date(2024, 6, 20).toLocaleDateString(),
     description:
@@ -113,11 +127,12 @@ export const casesInfo: OrganisationCasesI[] = [
       tarif: 'Лайт',
       date: new Date(2024, 5, 20).toLocaleDateString()
     },
-    status: 'Подаются решения',
+    status: 'Подаются решения' as keyof CasesStatus,
     solutions: {
       amount: 0,
       info: []
     },
+    documents: ['Навзание документа', 'Навзание документа', 'Навзание документа'],
     published: new Date(2024, 5, 20).toLocaleDateString(),
     finished: new Date(2024, 6, 20).toLocaleDateString(),
     description:

@@ -33,6 +33,7 @@ function handleSelect(event: Event, id: number, slot: string) {
     <div class="switch__slide-container" ref="slide"></div>
     <div class="switch__slider-values">
       <span
+        class="p-13-500"
         v-for="(slot, index) in Object.keys(slots)"
         :class="[selected.id == index ? 'simple__selected' : 'default']"
         @click="(event) => handleSelect(event, index, slot)"
@@ -55,9 +56,9 @@ function handleSelect(event: Event, id: number, slot: string) {
 }
 
 .switch {
-  height: 42px;
+  height: 40px;
   border: $default-border;
-  padding: 5px 0;
+  // padding: 5px 0;
   align-items: center;
   overflow: hidden;
   border-radius: 7px;

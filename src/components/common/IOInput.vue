@@ -10,12 +10,17 @@ const model = defineModel('modelValue')
     <label class="input__label p-13-500"><slot></slot></label>
     <input
       class="input__text"
+      :style="{
+        backgroundColor: background,
+        paddingLeft: padding + 'px',
+        width: fullWidth && '100%'
+      }"
       :type="type ? type : 'text'"
       v-bind="{ ...props }"
       :placeholder="placeholder"
       v-model="model"
       v-if="!big"
-      :style="fullWidth ? 'width: 100%' : ''"
+      :value="value"
     />
     <textarea class="input__textarea" :style="fullWidth ? 'width: 100%' : ''" v-else rows="4" />
   </div>
@@ -23,13 +28,13 @@ const model = defineModel('modelValue')
 
 <style lang="scss" scoped>
 .input {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  // gap: 8px;
 }
 .input__text {
   border: $default-border;
-  background: $default-light-grey;
   border-radius: 8px;
   padding: 6px 14px;
   height: 40px;
@@ -38,9 +43,15 @@ const model = defineModel('modelValue')
   font-weight: 500;
   line-height: 17px;
   transition: 0.2s;
+  background: $default-light-grey;
+  padding-left: 14px;
 
+  &::placeholder {
+    color: $additional-color;
+    opacity: 0.7;
+  }
   &:focus {
-    border: 1px solid $primary-color;
+    border: 2px solid $primary-color;
   }
 }
 

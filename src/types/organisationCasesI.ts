@@ -13,7 +13,7 @@ export interface OrganisationCasesI {
   id: number
   title: string
   tags: OrganisationCasesTagsI
-  status: CasesStatus
+  status: keyof CasesStatus
   solutions: {
     amount: number
     info: OrganisationCaseSolutionsI[] | []
@@ -25,9 +25,10 @@ export interface OrganisationCasesI {
 }
 
 interface OrganisationCaseSolutionsI {
+  id: number
   name: string
   lastUpdated: string
-  status: SolutionsStatus
+  status: keyof SolutionsStatus
 }
 
 interface OrganisationCasesTagsI {

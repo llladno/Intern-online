@@ -42,8 +42,8 @@ const showMore = ref(false)
       >
         <div
           class="organisation-case__solutions-item"
-          @click="router.push(`/my-cases/${caseInfo.id}/solution/${solution.id || 1}`)"
           v-for="(solution, index) in caseInfo.solutions.info"
+          @click="router.push(`/my-cases/${caseInfo.id}/solution/${solution.id || 1}`)"
           :key="index"
         >
           <div class="organisation-case__solutions-header">
