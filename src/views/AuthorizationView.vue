@@ -10,7 +10,7 @@ import AuthPhoto from '@/assets/media/img/AuthPhoto.png'
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 main {
   display: flex;
   width: 100vw;

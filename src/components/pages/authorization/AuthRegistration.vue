@@ -55,7 +55,7 @@ function registration() {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .auth__registration {
   display: flex;
   flex-direction: column;

@@ -118,8 +118,6 @@ function testRequest() {
 </template>
 
 <style scoped lang="scss">
-@import '@/assets/base/variables';
-
 .ui-kit {
   display: flex;
   flex-direction: column;
