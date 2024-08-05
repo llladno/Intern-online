@@ -49,7 +49,7 @@ const toggleDropdown = () => {
 
 const toggleOption = (value: string): void => {
   if (isSelected(value)) {
-    selectedValues.value = selectedValues.value.filter((v) => v !== value)
+    selectedValues.value = selectedValues.value.filter((v: string) => v !== value)
   } else {
     selectedValues.value.push(value)
   }
