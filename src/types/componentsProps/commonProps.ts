@@ -31,3 +31,8 @@ export interface CheckboxPropsI {
   value: string
   checked?: boolean
 }
+export interface ActionItem {
+  id: string
+  title: string
+  icon: any
+}
