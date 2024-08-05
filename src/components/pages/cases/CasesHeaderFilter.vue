@@ -4,7 +4,7 @@
       class="filter__options"
       :placeholder="placeholder"
       @click="toggleDropdown"
-      :class="{ active: isDropdownOpen }"
+      :class="{ 'filter__options--active': isDropdownOpen }"
     >
       <template v-if="selectedValues.length > 2">
         <span class="filter__text"> Выбрано {{ selectedValues.length }} </span>
@@ -106,7 +106,7 @@ onUnmounted(() => {
     height: 40px;
     outline: none;
 
-    &.active {
+    &--active {
       border: 2px solid $primary-color;
     }
   }
