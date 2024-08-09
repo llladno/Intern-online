@@ -89,7 +89,7 @@ function testRequest() {
         <div class="ui-kit__variation">
           <p>Кнопка обычная</p>
           <div class="ui-kit__variation-element">
-            <IOButton @click="testRequest">Кнопка</IOButton>
+            <IOButton @click="testRequest">Запрос</IOButton>
           </div>
         </div>
         <div class="ui-kit__variation">

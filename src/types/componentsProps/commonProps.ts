@@ -3,6 +3,7 @@ export interface InputPropsI {
   big?: boolean
   placeholder?: string
   type?: string
+  fullWidth?: boolean
   background?: string
   padding?: string
   value?: string
