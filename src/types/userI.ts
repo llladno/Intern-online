@@ -5,6 +5,6 @@ export interface UserRegistrationI {
 }
 
 export interface TokensI {
-  access: string,
+  access: string
   refresh: string
 }

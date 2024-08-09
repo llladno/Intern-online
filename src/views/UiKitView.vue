@@ -31,8 +31,10 @@ const userStore = useUserStore()
 const popupStore = usePopupStore()
 
 function testRequest() {
-  userStore.getTestUserList().then(()=>{
-    popupStore.$patch({isPopup: {status: true, text: 'Тестовые пользователи добавлены', type: 'success'}})
+  userStore.getTestUserList().then(() => {
+    popupStore.$patch({
+      isPopup: { status: true, text: 'Тестовые пользователи добавлены', type: 'success' }
+    })
   })
 }
 </script>

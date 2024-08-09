@@ -1,9 +1,14 @@
 <template>
-<div class="popup" v-if="popupShow.status">
-  <div :class="['popup__content', popupShow.type === 'error' ? 'popup__content--error' : 'popup__content--success']">
-    {{popupShow.text}}
+  <div class="popup" v-if="popupShow.status">
+    <div
+      :class="[
+        'popup__content',
+        popupShow.type === 'error' ? 'popup__content--error' : 'popup__content--success'
+      ]"
+    >
+      {{ popupShow.text }}
+    </div>
   </div>
-</div>
 </template>
 
 <script setup lang="ts">
@@ -13,7 +18,7 @@ import { usePopupStore } from '@/stores/popupStore'
 const popupShow = ref({ status: false, text: '', type: 'error' })
 const popupStore = usePopupStore()
 defineProps<{
-  type: 'error' | 'success',
+  type: 'error' | 'success'
   text: string
 }>()
 
@@ -23,7 +28,7 @@ popupStore.$subscribe((mutation, state) => {
 </script>
 
 <style scoped lang="scss">
-.popup{
+.popup {
   position: fixed;
   top: 10px;
   left: 0;
@@ -32,18 +37,18 @@ popupStore.$subscribe((mutation, state) => {
   align-items: center;
   justify-content: center;
   z-index: 100;
-  animation: showIn .3s ease-in-out;
+  animation: showIn 0.3s ease-in-out;
 
-  &__content{
+  &__content {
     border-radius: 10px;
     background: $default-light-grey;
     padding: 5px 15px;
 
-    &--error{
+    &--error {
       background: #f1afaf;
     }
 
-    &--success{
+    &--success {
       background: #a6f1af;
     }
   }

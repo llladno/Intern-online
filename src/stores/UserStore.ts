@@ -31,7 +31,7 @@ export const useUserStore = defineStore('userStore', () => {
     } catch (e) {
       console.log('err')
       popupStore.$patch({
-        isPopup: { status: true, text: 'Ошибка запроса', type: 'error' },
+        isPopup: { status: true, text: 'Ошибка запроса', type: 'error' }
       })
     }
   }

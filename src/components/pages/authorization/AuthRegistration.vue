@@ -46,10 +46,11 @@ function registration() {
     <IOInput v-model="email" :props="{ placeholder: 'Телефон' }">Почта</IOInput>
     <IOInput v-model="password" :props="{ placeholder: 'Пароль' }">Пароль</IOInput>
     <IOInput v-model="passwordRepeat" :props="{ placeholder: 'Повторите пароль' }"
-    >Повтор пароля
-    </IOInput
+      >Повтор пароля
+    </IOInput>
+    <IOButton class="auth__registration-button" @click="registration" fullWidth
+      >Зарегистрироваться</IOButton
     >
-    <IOButton class="auth__registration-button" @click="registration" fullWidth>Зарегистрироваться</IOButton>
   </div>
 </template>
 

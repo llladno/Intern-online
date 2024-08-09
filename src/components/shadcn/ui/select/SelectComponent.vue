@@ -10,15 +10,14 @@ const forwarded = useForwardPropsEmits(props, emits)
 
 <template>
   <div class="select">
-    <SelectRoot v-bind="forwarded" >
+    <SelectRoot v-bind="forwarded">
       <slot />
     </SelectRoot>
   </div>
-
 </template>
 
 <style scoped lang="scss">
-.select{
+.select {
   position: relative;
 }
 </style>

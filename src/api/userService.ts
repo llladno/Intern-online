@@ -10,7 +10,9 @@ export default class UserService {
     return $api.post(`${this.accountBaseUrl}/register`, data)
   }
 
-  static async login(data: Omit<UserRegistrationI, 'organisation'>):Promise<AxiosResponse<TokensI>> {
+  static async login(
+    data: Omit<UserRegistrationI, 'organisation'>
+  ): Promise<AxiosResponse<TokensI>> {
     return $api.post(`${this.tokenBaseUrl}/`, data)
   }
 
