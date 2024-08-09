@@ -24,16 +24,22 @@ import IOButton from '@/components/common/IOButton.vue'
 import IOInput from '@/components/common/IOInput.vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import { useUserStore } from '@/stores/UserStore'
+import IOPopup from '@/components/common/IOPopup.vue'
+import { usePopupStore } from '@/stores/popupStore'
 
 const userStore = useUserStore()
+const popupStore = usePopupStore()
 
 function testRequest() {
-  console.log(userStore.getTestUserList())
+  userStore.getTestUserList().then(()=>{
+    popupStore.$patch({isPopup: {status: true, text: 'Тестовые пользователи добавлены', type: 'success'}})
+  })
 }
 </script>
 
 <template>
   <div class="ui-kit">
+    <IOPopup type="error">Ошибка</IOPopup>
     <IOButton @click="$router.push('/')">Назад</IOButton>
     <h1>Ui Kit</h1>
     <div class="ui-kit__content">
@@ -41,18 +47,20 @@ function testRequest() {
         <h2>shadcn/ui</h2>
         <div class="ui-kit__variation">
           <p>Селект</p>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Выберите вид пользователя" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Выберите вид пользователя</SelectLabel>
-                <SelectItem value="default">Обычный</SelectItem>
-                <SelectItem value="organisation">Организация</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <div>
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="Выберите вид пользователя" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Выберите вид пользователя</SelectLabel>
+                  <SelectItem value="default">Обычный</SelectItem>
+                  <SelectItem value="organisation">Организация</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
         <div class="ui-kit__variation">
           <p>Диалоговое окно</p>

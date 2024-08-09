@@ -1,6 +1,6 @@
 import type { AxiosResponse } from 'axios'
 import { $api } from '@/api/index'
-import type { UserRegistrationI } from '@/types/userI'
+import type { TokensI, UserRegistrationI } from '@/types/userI'
 
 export default class UserService {
   private static readonly accountBaseUrl = '/account/v1'
@@ -10,7 +10,7 @@ export default class UserService {
     return $api.post(`${this.accountBaseUrl}/register`, data)
   }
 
-  static async login(data: Omit<UserRegistrationI, 'organisation'>) {
+  static async login(data: Omit<UserRegistrationI, 'organisation'>):Promise<AxiosResponse<TokensI>> {
     return $api.post(`${this.tokenBaseUrl}/`, data)
   }
 

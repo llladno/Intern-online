@@ -44,7 +44,7 @@ const optionsFiltered: Option[] = [
   <div class="organisation-cases__header">
     <!--      TODO посмотреть как писать simple-selected или simple__selected -->
     <h2 class="header-1">Мои кейсы</h2>
-    <RouterLink to="/my-cases/add">
+    <RouterLink to="/organisation/new-case">
       <IOButton>+ Добавить новый кейс</IOButton>
     </RouterLink>
   </div>

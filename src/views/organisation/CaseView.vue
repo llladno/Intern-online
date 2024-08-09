@@ -8,7 +8,7 @@ const caseInfo = casesInfo.find((caseInfo) => caseInfo.id == +route.params.id)
 <template>
   <div class="organisation-case">
     <div class="organisation-case__header main-container">
-      <RouterLink to="my-cases"> Назад</RouterLink>
+      <RouterLink to="/organisation/cases"> Назад</RouterLink>
       <div>
         <div>
           <h2>{{ caseInfo?.title }}</h2>

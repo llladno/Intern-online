@@ -20,14 +20,11 @@ const selected = ref('')
 const userStore = useUserStore()
 
 function registration() {
-  console.log(selected.value === 'organisation' && true)
-  console.log(
-    userStore.signUp({
-      email: email.value,
-      password: password.value,
-      organisation: selected.value === 'organisation' ? true : false
-    })
-  )
+  userStore.signUp({
+    email: email.value,
+    password: password.value,
+    organisation: selected.value === 'organisation' && true
+  })
 }
 </script>
 
@@ -49,9 +46,10 @@ function registration() {
     <IOInput v-model="email" :props="{ placeholder: 'Телефон' }">Почта</IOInput>
     <IOInput v-model="password" :props="{ placeholder: 'Пароль' }">Пароль</IOInput>
     <IOInput v-model="passwordRepeat" :props="{ placeholder: 'Повторите пароль' }"
-      >Повтор пароля</IOInput
+    >Повтор пароля
+    </IOInput
     >
-    <IOButton @click="registration" fullWidth>Зарегистрироваться</IOButton>
+    <IOButton class="auth__registration-button" @click="registration" fullWidth>Зарегистрироваться</IOButton>
   </div>
 </template>
 
@@ -62,7 +60,7 @@ function registration() {
   gap: 15px;
   width: 388px;
 
-  button {
+  &-button {
     margin-top: 25px;
   }
 }

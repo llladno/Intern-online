@@ -3,3 +3,8 @@ export interface UserRegistrationI {
   password: string
   organisation: boolean
 }
+
+export interface TokensI {
+  access: string,
+  refresh: string
+}

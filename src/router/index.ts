@@ -20,22 +20,22 @@ const router = createRouter({
       component: () => import('../views/InDevelopView.vue')
     },
     {
-      path: '/organization-profile',
+      path: '/organization/profile',
       name: 'profile',
       component: () => import('../views/organisation/MyProfileView.vue')
     },
     {
-      path: '/my-cases',
+      path: '/organisation/cases',
       name: 'cases',
       component: () => import('../views/organisation/CasesView.vue')
     },
     {
-      path: '/my-cases/:id',
+      path: '/organisation/cases/:id',
       name: 'case',
       component: () => import('../views/organisation/CaseView.vue')
     },
     {
-      path: '/my-cases/add',
+      path: '/organisation/new-case',
       name: 'add-case',
       component: () => import('../views/organisation/AddCaseView.vue')
     },

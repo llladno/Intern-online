@@ -2,6 +2,8 @@
 import type { InputPropsI } from '@/types/componentsProps/commonProps'
 
 defineProps<InputPropsI>()
+
+const model = defineModel()
 </script>
 
 <template>
@@ -14,7 +16,7 @@ defineProps<InputPropsI>()
       v-bind="{ ...props }"
       :placeholder="placeholder"
       v-if="!big"
-      :value="value"
+      v-model="model"
     />
     <textarea class="input__textarea" v-else rows="4" />
   </div>

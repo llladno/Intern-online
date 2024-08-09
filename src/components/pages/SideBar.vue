@@ -6,8 +6,8 @@ import IconLogout from '@/components/icons/IconLogout.vue'
 
 const selectValue = ref(1)
 const values = [
-  { text: 'Мой профиль', icon: IconProfile, link: '/organization-profile' },
-  { text: 'Мои кейсы', icon: IconFolder, link: '/my-cases' }
+  { text: 'Мой профиль', icon: IconProfile, link: '/organization/profile' },
+  { text: 'Мои кейсы', icon: IconFolder, link: '/organisation/cases' }
 ]
 
 function selectLink(number: number) {

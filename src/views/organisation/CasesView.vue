@@ -21,7 +21,7 @@ function selectedEmit(slot: string) {
         :key="caseInfo.id"
         :caseInfo="caseInfo"
         @click.stop="
-          (e) => e.target.closest('.dropdown-button') ?? $router.push(`/my-cases/${caseInfo.id}`)
+          (e) => e.target.closest('.dropdown-button') ?? $router.push(`/organisation/cases/${caseInfo.id}`)
         "
         class="main-container"
       />
