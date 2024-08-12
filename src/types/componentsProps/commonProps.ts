@@ -1,29 +1,36 @@
 export interface InputPropsI {
   props?: any
   big?: boolean
+  icon?: boolean
   placeholder?: string
   type?: string
   fullWidth?: boolean
+  width?: string
   background?: string
   padding?: string
   value?: string
 }
 
 export interface SelectPropsI {
-  placeholder: string
+  placeholder?: string
   label?: string
+  id?: string | number
+  modelValue?: number | string | null
   options: SelectPropsOptionI[]
 }
 
-interface SelectPropsOptionI {
-  value: string
+export interface SelectPropsOptionI {
+  value: string | number
   label: string
-  id?: string
+  id?: number | string
 }
 
 export interface ButtonPropsI {
   fullWidth?: boolean
   outlined?: boolean
+  icon?: boolean
+  background?: string
+  width?: string
 }
 
 export interface CheckboxPropsI {

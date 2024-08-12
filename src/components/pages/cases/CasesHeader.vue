@@ -5,38 +5,34 @@ import IconSearch from '@/components/icons/IconSearch.vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import IOButton from '@/components/common/IOButton.vue'
 import CasesHeaderFilter from '@/components/pages/cases/CasesHeaderFilter.vue'
+import type { SelectPropsOptionI } from '@/types/componentsProps/commonProps'
 
 const emits = defineEmits(['selectedEmit'])
 function onSelected(slot: string) {
   emits('selectedEmit', slot)
 }
 
-interface Option {
-  id: string
-  label: string
-  value: string
-}
-const selectOptions: Option[] = [
+const selectOptions: SelectPropsOptionI[] = [
   {
-    id: '1',
+    id: 1,
     value: 'last',
     label: 'Последние'
   },
   {
-    id: '2',
+    id: 2,
     value: 'early',
     label: 'Предыдущие'
   }
 ]
 
-const optionsFiltered: Option[] = [
-  { id: '1', label: 'Vue', value: 'Vue' },
-  { id: '2', label: 'React', value: 'React' },
-  { id: '3', label: 'Angular', value: 'Angular' },
-  { id: '4', label: 'PHP', value: 'PHP' },
-  { id: '5', label: 'Label', value: 'Label' },
-  { id: '6', label: 'Label1', value: 'Label1' },
-  { id: '7', label: 'Label2', value: 'Label2' }
+const optionsFiltered: SelectPropsOptionI[] = [
+  { id: 1, label: 'Vue', value: 'Vue' },
+  { id: 2, label: 'React', value: 'React' },
+  { id: 3, label: 'Angular', value: 'Angular' },
+  { id: 4, label: 'PHP', value: 'PHP' },
+  { id: 5, label: 'Label', value: 'Label' },
+  { id: 6, label: 'Label1', value: 'Label1' },
+  { id: 7, label: 'Label2', value: 'Label2' }
 ]
 </script>
 

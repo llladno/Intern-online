@@ -25,6 +25,11 @@ const router = createRouter({
       component: () => import('../views/organisation/MyProfileView.vue')
     },
     {
+      path: '/user-profile',
+      name: 'user-profile',
+      component: () => import('../views/user/UserProfileView.vue')
+    },
+    {
       path: '/my-cases',
       name: 'cases',
       component: () => import('../views/organisation/CasesView.vue')

@@ -13,7 +13,7 @@ const model = defineModel('modelValue')
       :style="{
         backgroundColor: background,
         paddingLeft: padding + 'px',
-        width: fullWidth && '100%'
+        width: fullWidth ? '100%' : width + 'px'
       }"
       :type="type ? type : 'text'"
       v-bind="{ ...props }"
@@ -30,7 +30,7 @@ const model = defineModel('modelValue')
   width: 100%;
   display: flex;
   flex-direction: column;
-  // gap: 8px;
+  gap: 8px;
 }
 .input__text {
   border: $default-border;

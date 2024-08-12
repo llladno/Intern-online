@@ -20,11 +20,11 @@
       <div v-show="isDropdownOpen" class="filter__dropdown">
         <div class="filter__dropdown-menu" v-for="option in options" :key="option.id">
           <IOCheckbox
-            :checked="isSelected(option.value)"
-            :id="option.id ?? 'default-id'"
-            :value="option.value"
+            :checked="isSelected(String(option.value))"
+            :id="String(option.id) ?? 'default-id'"
+            :value="String(option.value)"
             :label="option.label"
-            @change="toggleOption(option.value)"
+            @change="toggleOption(String(option.value))"
           />
         </div>
       </div>

@@ -6,7 +6,8 @@ import IconLogout from '@/components/icons/IconLogout.vue'
 
 const selectValue = ref(1)
 const values = [
-  { text: 'Мой профиль', icon: IconProfile, link: '/organization-profile' },
+  { text: 'Профиль организации', icon: IconProfile, link: '/organization-profile' },
+  { text: 'Профиль пользователя', icon: IconProfile, link: '/user-profile' },
   { text: 'Мои кейсы', icon: IconFolder, link: '/my-cases' }
 ]
 
@@ -34,7 +35,7 @@ function selectLink(number: number) {
           >{{ value.text }}</span
         >
       </RouterLink>
-      <div class="sidebar__links-slider" :style="{ top: 40 * selectValue + 6 + 'px' }"></div>
+      <div class="sidebar__links-slider" :style="{ top: 52 * selectValue + 6 + 'px' }"></div>
     </div>
     <div class="sidebar__logout">
       <RouterLink to="/">
@@ -47,14 +48,14 @@ function selectLink(number: number) {
 
 <style scoped lang="scss">
 .sidebar {
-  margin-left: 10px;
+  // margin-left: 10px;
   height: 476px;
   width: 176px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 15px 15px 15px 0;
-  position: relative;
+  // position: relative;
   background: $default-white;
   border-radius: 10px;
   box-shadow: $box-shadow-default;
@@ -66,6 +67,7 @@ function selectLink(number: number) {
       display: flex;
       align-items: center;
       gap: 8px;
+      // position: relative;
     }
   }
 
@@ -79,10 +81,11 @@ function selectLink(number: number) {
 }
 
 .sidebar__links {
-  width: 200px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  position: relative;
 
   &-slider {
     position: absolute;

@@ -13,7 +13,7 @@ export const useUserStore = defineStore('userStore', () => {
 
   async function signIn(data: Omit<UserRegistrationI, 'organisation'>) {
     try {
-      await UserService.login(data).then((response) => {})
+      await UserService.login(data).then((response) => console.log(response)) // {} Пустой массив убрал из-за warning
     } catch (e) {
       console.log(e)
     }
