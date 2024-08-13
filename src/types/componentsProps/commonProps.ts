@@ -15,7 +15,7 @@ export interface SelectPropsI {
   options: SelectPropsOptionI[]
 }
 
-interface SelectPropsOptionI {
+export interface SelectPropsOptionI {
   value: string
   label: string
   id?: string
