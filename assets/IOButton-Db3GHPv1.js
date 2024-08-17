@@ -1,0 +1,1 @@
+import{d as o,c as e,k as n,y as s,o as l,_ as a}from"./index-C4OjjIZe.js";const u=o({__name:"IOButton",props:{fullWidth:{type:Boolean},outlined:{type:Boolean}},setup(r){return(t,p)=>(l(),e("button",{class:s({"w-full":t.fullWidth,button:!0,"button--outlined":t.outlined})},[n(t.$slots,"default",{},void 0,!0)],2))}}),c=a(u,[["__scopeId","data-v-49f5e804"]]);export{c as I};
