@@ -3,12 +3,28 @@
 }
 
 .main-container {
-  padding: 28px 35px 40px 35px;
+  padding: 30px 30px 30px 30px;
   border-radius: 10px;
   background: $default-white;
   box-shadow: $box-shadow-default;
   width: 100%;
+
+  &--hover {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    will-change: transform;
+
+    &:hover {
+      scale: 1.01;
+      background: rgb($default-white, 0.9);
+    }
+
+    &:active {
+      background: rgb($default-white, 0.5);
+    }
+  }
 }
+
 a {
   text-decoration: none;
   transition: 0.2s;

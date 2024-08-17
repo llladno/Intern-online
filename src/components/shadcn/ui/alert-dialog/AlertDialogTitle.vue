@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
 import { AlertDialogTitle, type AlertDialogTitleProps } from 'radix-vue'
+import { type HTMLAttributes, computed } from 'vue'
 import { cn } from '@/components/shadcn/lib/utils'
 
 const props = defineProps<AlertDialogTitleProps & { class?: HTMLAttributes['class'] }>()
@@ -13,7 +13,7 @@ const delegatedProps = computed(() => {
 </script>
 
 <template>
-  <AlertDialogTitle v-bind="delegatedProps" :class="cn('text-lg font-semibold', props.class)">
+  <alert-dialog-title v-bind="delegatedProps" :class="cn('text-lg font-semibold', props.class)">
     <slot />
-  </AlertDialogTitle>
+  </alert-dialog-title>
 </template>

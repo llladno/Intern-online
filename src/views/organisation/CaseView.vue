@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { casesInfo } from '@/stores/mock'
-import { useRoute } from 'vue-router'
-import { CasesStatus, type OrganisationCasesI, SolutionsStatus } from '@/types/organisationCasesI'
-import IconSolutionPerson from '@/components/icons/IconSolutionPerson.vue'
-import IconDocument from '@/components/icons/IconDocument.vue'
-import IOActionButton from '@/components/common/IOActionButton.vue'
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+import IOActionButton from '@/components/common/IOActionButton.vue'
+import IconDocument from '@/components/icons/IconDocument.vue'
+import IconSolutionPerson from '@/components/icons/IconSolutionPerson.vue'
 import router from '@/router'
+import { casesInfo } from '@/stores/mock'
+import { CasesStatus, type OrganisationCasesI, SolutionsStatus } from '@/types/organisationCasesI'
+import IOTags from '@/components/common/IOTags.vue'
 
 const route = useRoute()
 const caseInfo = casesInfo.find((caseInfo: OrganisationCasesI) => caseInfo.id == +route.params.id)
@@ -14,12 +15,14 @@ const showMore = ref(false)
 </script>
 
 <template>
-  <div class="organisation-case w-full" v-if="caseInfo">
+  <div v-if="caseInfo" class="organisation-case w-full">
     <div class="organisation-case__header main-container">
-      <RouterLink to="/organisation/cases"> Назад</RouterLink>
+      <router-link to="/organisation/cases"> Назад </router-link>
       <div>
         <div class="organisation-case__header-title">
-          <h2 class="header-1">{{ caseInfo.title }}</h2>
+          <h2 class="header-1">
+            {{ caseInfo.title }}
+          </h2>
           <div
             class="organisation-case__header-status"
             :style="`color: rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}); background-color: rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}, 0.2)`"
@@ -28,12 +31,14 @@ const showMore = ref(false)
             {{ caseInfo.status }}
           </div>
         </div>
-        <p class="p-12-500">{{ caseInfo.tags.category }}</p>
+        <p class="p-12-500">
+          <i-o-tags :tags="caseInfo.tags" />
+        </p>
       </div>
     </div>
     <div
-      class="main-container organisation-case__solutions"
       v-if="caseInfo.solutions.info.length > 0"
+      class="main-container organisation-case__solutions"
     >
       <h3 class="header-2">Решения</h3>
       <div
@@ -41,10 +46,10 @@ const showMore = ref(false)
         :class="{ 'organisation-case__solutions-items--more': showMore }"
       >
         <div
-          class="organisation-case__solutions-item"
           v-for="(solution, index) in caseInfo.solutions.info"
-          @click="router.push(`/organisation/cases/${caseInfo.id}/solution/${solution.id || 1}`)"
           :key="index"
+          class="organisation-case__solutions-item"
+          @click="router.push(`/organisation/case-${caseInfo.id}/solution-${solution.id || 1}`)"
         >
           <div class="organisation-case__solutions-header">
             <div
@@ -57,14 +62,14 @@ const showMore = ref(false)
             <span class="p-10-500">{{ solution.lastUpdated.toLocaleString() }}</span>
           </div>
           <div class="organisation-case__solutions-body">
-            <IconSolutionPerson />
+            <icon-solution-person />
             <span class="p-13-500">{{ solution.name }}</span>
           </div>
         </div>
       </div>
-      <IOActionButton class="organisation-case__solutions-button" @click="showMore = !showMore">
+      <i-o-action-button class="organisation-case__solutions-button" @click="showMore = !showMore">
         Показать все
-      </IOActionButton>
+      </i-o-action-button>
     </div>
     <div class="main-container organisation-case__info">
       <h3 class="header-2">Общая информация</h3>
@@ -77,7 +82,7 @@ const showMore = ref(false)
         </div>
         <div class="organisation-case__info-item">
           <span class="p-13-400 organisation-case__info-item-title">Вид деятельности</span>
-          <span class="p-14-500">{{ caseInfo.tags.category }}</span>
+          <span class="p-14-500">{{ caseInfo.tags.category.join(', ') }}</span>
         </div>
         <div class="organisation-case__info-item">
           <span class="p-13-400 organisation-case__info-item-title">Опубликован</span>
@@ -100,11 +105,11 @@ const showMore = ref(false)
         <h3 class="header-2">Документы</h3>
         <div class="organisation-case__documents-items">
           <div
-            class="organisation-case__document"
             v-for="(document, index) in caseInfo.documents"
             :key="index"
+            class="organisation-case__document"
           >
-            <IconDocument />
+            <icon-document />
             <span>{{ document }}</span>
           </div>
         </div>
@@ -121,7 +126,9 @@ const showMore = ref(false)
           <li>Одно направление по кейсу</li>
           <li>30 решений</li>
         </ul>
-        <IOActionButton class="organisation-case__tarif-button">Продлить тариф</IOActionButton>
+        <i-o-action-button class="organisation-case__tarif-button">
+          Продлить тариф
+        </i-o-action-button>
       </div>
     </div>
   </div>

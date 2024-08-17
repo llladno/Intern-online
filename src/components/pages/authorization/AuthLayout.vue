@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import { ref } from 'vue'
+import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import AuthLogin from '@/components/pages/authorization/AuthLogin.vue'
 import AuthRegistration from '@/components/pages/authorization/AuthRegistration.vue'
 
@@ -10,22 +10,22 @@ const selected = ref('login')
 <template>
   <div class="auth">
     <div>
-      <RouterLink to="/">
+      <router-link to="/">
         <div class="auth__back">
           <span>⭠</span>
           <p>Назад</p>
         </div>
-      </RouterLink>
-      <IOSimpleSelect
-        @selectedValue="(slot) => (selected = slot)"
+      </router-link>
+      <i-o-simple-select
         style="margin-top: 27px"
         class="auth__simpleselect"
+        @selected-value="(slot) => (selected = slot)"
       >
-        <template #login>Вход</template>
-        <template #registration>Регистрация</template>
-      </IOSimpleSelect>
-      <AuthLogin v-if="selected == 'login'" />
-      <AuthRegistration v-else-if="selected == 'registration'" />
+        <template #login> Вход </template>
+        <template #registration> Регистрация </template>
+      </i-o-simple-select>
+      <auth-login v-if="selected == 'login'" />
+      <auth-registration v-else-if="selected == 'registration'" />
     </div>
   </div>
 </template>

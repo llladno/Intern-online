@@ -3,8 +3,8 @@ import { nextTick, onMounted, ref } from 'vue'
 
 const slots = defineSlots()
 const selected = ref({ width: 0, left: 4, id: 0 })
-let slide = ref(null)
-let firsh = ref()
+const slide = ref(null)
+const firsh = ref()
 
 const emit = defineEmits(['selectedValue'])
 
@@ -30,17 +30,17 @@ function handleSelect(event: Event, id: number, slot: string) {
 
 <template>
   <div class="switch">
-    <div class="switch__slide-container" ref="slide"></div>
+    <div ref="slide" class="switch__slide-container" />
     <div class="switch__slider-values">
       <span
-        class="p-13-500"
         v-for="(slot, index) in Object.keys(slots)"
-        :class="[selected.id == index ? 'simple__selected' : 'default']"
-        @click="(event) => handleSelect(event, index, slot)"
         :key="index"
         :ref="index == 0 ? firsh : null"
+        class="p-13-500"
+        :class="[selected.id == index ? 'simple__selected' : 'default']"
+        @click="(event) => handleSelect(event, index, slot)"
       >
-        <slot :name="slot"></slot>
+        <slot :name="slot" />
       </span>
     </div>
   </div>

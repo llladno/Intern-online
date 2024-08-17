@@ -1,5 +1,5 @@
 <template>
-  <div class="popup" v-if="popupShow.status">
+  <div v-if="popupShow.status" class="popup">
     <div
       :class="[
         'popup__content',

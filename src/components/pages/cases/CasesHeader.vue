@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import IOButton from '@/components/common/IOButton.vue'
 import IOInput from '@/components/common/IOInput.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
-import IconSearch from '@/components/icons/IconSearch.vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
-import IOButton from '@/components/common/IOButton.vue'
+import IconSearch from '@/components/icons/IconSearch.vue'
 import CasesHeaderFilter from '@/components/pages/cases/CasesHeaderFilter.vue'
 import type { SelectPropsOptionI } from '@/types/componentsProps/commonProps'
 
@@ -32,24 +32,24 @@ const optionsFiltered: SelectPropsOptionI[] = [
   <div class="organisation-cases__header">
     <!--      TODO посмотреть как писать simple-selected или simple__selected -->
     <h2 class="header-1">Мои кейсы</h2>
-    <RouterLink to="/organisation/new-case">
-      <IOButton>+ Добавить новый кейс</IOButton>
-    </RouterLink>
+    <router-link to="/organisation/new-case">
+      <i-o-button>+ Добавить новый кейс</i-o-button>
+    </router-link>
   </div>
   <div class="organisation-cases__footer">
-    <IOSimpleSelect @selectedValue="onSelected" class="auth__simpleselect">
-      <template #active>Активные</template>
-      <template #draft>Черновики</template>
-      <template #archive>Архив</template>
-    </IOSimpleSelect>
+    <i-o-simple-select class="auth__simpleselect" @selected-value="onSelected">
+      <template #active> Активные </template>
+      <template #draft> Черновики </template>
+      <template #archive> Архив </template>
+    </i-o-simple-select>
     <div class="organisation-cases__footer-right">
       <div class="organisation-cases__footer-search">
-        <IOInput type="text" placeholder="Поиск" background="#fff" padding="33" />
-        <IconSearch />
+        <i-o-input type="text" placeholder="Поиск" background="#fff" padding="33" />
+        <icon-search />
       </div>
-      <CasesHeaderFilter :options="optionsFiltered" placeholder="Фильтр" />
+      <cases-header-filter :options="optionsFiltered" placeholder="Фильтр" />
       <div class="organisation-cases__footer-sort">
-        <IOSelect class="p-13-500" placeholder="Новые" label="Новые" :options="selectOptions" />
+        <i-o-select class="p-13-500" placeholder="Новые" label="Новые" :options="selectOptions" />
       </div>
     </div>
   </div>

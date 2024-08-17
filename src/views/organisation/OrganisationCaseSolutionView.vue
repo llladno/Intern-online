@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import OrganisationCaseSolutionHeader from '@/components/pages/cases/organisationCase/OrganisationCaseSolutionHeader.vue'
 import { ref } from 'vue'
-import { AlertDialog, AlertDialogContent } from '@/components/shadcn/ui/alert-dialog'
-import IOInput from '@/components/common/IOInput.vue'
 import IOButton from '@/components/common/IOButton.vue'
+import IOInput from '@/components/common/IOInput.vue'
 import IconDocument from '@/components/icons/IconDocument.vue'
+import OrganisationCaseSolutionHeader from '@/components/pages/cases/organisationCase/OrganisationCaseSolutionHeader.vue'
+import { AlertDialog, AlertDialogContent } from '@/components/shadcn/ui/alert-dialog'
 
 const showEstimateDialog = ref(false)
 
@@ -13,24 +13,26 @@ const documents = ['Документ 1', 'Документ 2', 'Документ
 
 <template>
   <div class="organisation-case-solution">
-    <OrganisationCaseSolutionHeader @estimate="showEstimateDialog = true" />
-    <AlertDialog :open="showEstimateDialog">
-      <AlertDialogContent>
+    <organisation-case-solution-header @estimate="showEstimateDialog = true" />
+    <alert-dialog :open="showEstimateDialog">
+      <alert-dialog-content>
         <div class="organisation-case-solution-estimate">
           <h3 class="header-1">Решение от «Название»</h3>
           <div class="organisation-case-solution-estimate__info">
             <h4 class="p-13-500">Оценка *</h4>
             <p>Тут оценка</p>
             <h4 class="p-13-500">Отзыв</h4>
-            <IOInput full-width placeholder="Тут отзыв" big></IOInput>
+            <i-o-input full-width placeholder="Тут отзыв" big />
           </div>
           <div class="organisation-case-solution-estimate__buttons">
-            <IOButton full-width @click="showEstimateDialog = false" outlined>Отмена</IOButton>
-            <IOButton full-width>Оценить</IOButton>
+            <i-o-button full-width outlined @click="showEstimateDialog = false">
+              Отмена
+            </i-o-button>
+            <i-o-button full-width> Оценить </i-o-button>
           </div>
         </div>
-      </AlertDialogContent>
-    </AlertDialog>
+      </alert-dialog-content>
+    </alert-dialog>
     <div class="main-container organisation-case-solution-description">
       <h3 class="header-2">Описание</h3>
       <p class="p-13-400">
@@ -48,11 +50,11 @@ const documents = ['Документ 1', 'Документ 2', 'Документ
       <h3 class="header-2">Документы</h3>
       <div class="organisation-case-solution-documents__items">
         <div
-          class="organisation-case-solution-documents__item"
           v-for="(document, index) in documents"
           :key="index"
+          class="organisation-case-solution-documents__item"
         >
-          <IconDocument />
+          <icon-document />
           <span class="p-12-500">{{ document }}</span>
         </div>
       </div>

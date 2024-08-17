@@ -15,9 +15,9 @@ defineEmits(['estimate'])
           <h3 class="header-1">Название</h3>
           <span class="p-12-500">22.06.2022</span>
         </div>
-        <div class="organisation-case-solution-header__status"></div>
+        <div class="organisation-case-solution-header__status" />
       </div>
-      <IOButton @click="$emit('estimate')">Оценить</IOButton>
+      <i-o-button @click="$emit('estimate')"> Оценить </i-o-button>
     </div>
   </header>
 </template>

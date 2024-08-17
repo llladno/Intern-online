@@ -5,7 +5,7 @@ const props = defineProps<SelectValueProps>()
 </script>
 
 <template>
-  <SelectValue v-bind="props">
+  <select-value v-bind="props">
     <slot />
-  </SelectValue>
+  </select-value>
 </template>

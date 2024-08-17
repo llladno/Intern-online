@@ -31,8 +31,8 @@ interface OrganisationCaseSolutionsI {
   status: keyof SolutionsStatus
 }
 
-interface OrganisationCasesTagsI {
-  category: string
+export interface OrganisationCasesTagsI {
+  category: string[]
   tarif: string
   date: string
 }

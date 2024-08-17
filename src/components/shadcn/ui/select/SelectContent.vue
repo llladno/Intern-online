@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
 import {
   SelectContent,
   type SelectContentEmits,
@@ -8,6 +7,7 @@ import {
   SelectViewport,
   useForwardPropsEmits
 } from 'radix-vue'
+import { type HTMLAttributes, computed } from 'vue'
 import { SelectScrollDownButton, SelectScrollUpButton } from '.'
 import { cn } from '@/components/shadcn/lib/utils'
 
@@ -33,8 +33,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <SelectPortal>
-    <SelectContent
+  <select-portal>
+    <select-content
       v-bind="{ ...forwarded, ...$attrs }"
       :class="
         cn(
@@ -45,8 +45,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
         )
       "
     >
-      <SelectScrollUpButton />
-      <SelectViewport
+      <select-scroll-up-button />
+      <select-viewport
         :class="
           cn(
             'p-1',
@@ -56,8 +56,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
         "
       >
         <slot />
-      </SelectViewport>
-      <SelectScrollDownButton />
-    </SelectContent>
-  </SelectPortal>
+      </select-viewport>
+      <select-scroll-down-button />
+    </select-content>
+  </select-portal>
 </template>

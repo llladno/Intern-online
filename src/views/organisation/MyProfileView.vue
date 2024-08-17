@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
-import IOInput from '@/components/common/IOInput.vue'
-import IOButton from '@/components/common/IOButton.vue'
-import IconLoadComponents from '@/components/icons/IconLoadComponents.vue'
 import { ref } from 'vue'
+import IOButton from '@/components/common/IOButton.vue'
+import IOInput from '@/components/common/IOInput.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
+import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
+import IconLoadComponents from '@/components/icons/IconLoadComponents.vue'
 
 const selected = ref('personal')
 </script>
@@ -12,13 +12,13 @@ const selected = ref('personal')
 <template>
   <div class="main-container my-profile">
     <h2 class="my-profile__header header-1">Мой профиль</h2>
-    <IOSimpleSelect @selectedValue="(slot) => (selected = slot)">
-      <template #personal>Личный данные</template>
-      <template #safty>Безопасность и вход</template>
-    </IOSimpleSelect>
-    <div class="my-profile__info" v-if="selected == 'personal'">
+    <i-o-simple-select @selected-value="(slot) => (selected = slot)">
+      <template #personal> Личный данные </template>
+      <template #safty> Безопасность и вход </template>
+    </i-o-simple-select>
+    <div v-if="selected == 'personal'" class="my-profile__info">
       <div class="my-profile__form">
-        <IOSelect
+        <i-o-select
           :options="[
             {
               value: 'ooo',
@@ -36,40 +36,40 @@ const selected = ref('personal')
           placeholder="Выберите форму компании"
           label="Выберите форму компании"
         />
-        <IOInput> Название компании</IOInput>
-        <IOInput> Телефон компании</IOInput>
-        <IOInput> Электронная почта компании</IOInput>
-        <IOInput> Веб-сайт компании</IOInput>
-        <IOInput> Адрес компании</IOInput>
-        <IOInput big> Описание</IOInput>
+        <i-o-input> Название компании</i-o-input>
+        <i-o-input> Телефон компании</i-o-input>
+        <i-o-input> Электронная почта компании</i-o-input>
+        <i-o-input> Веб-сайт компании</i-o-input>
+        <i-o-input> Адрес компании</i-o-input>
+        <i-o-input big> Описание </i-o-input>
         <div class="my-profile__buttons">
-          <IOButton>Сохранить</IOButton>
-          <IOButton outlined>Отменить</IOButton>
+          <i-o-button>Сохранить</i-o-button>
+          <i-o-button outlined> Отменить </i-o-button>
         </div>
       </div>
       <div class="my-profile__image">
         <div class="my-profile__image-place">
-          <IconLoadComponents />
+          <icon-load-components />
         </div>
-        <IOButton>Загрузить</IOButton>
+        <i-o-button>Загрузить</i-o-button>
       </div>
     </div>
     <div v-else class="my-profile__safty">
       <div class="my-profile__safty-form">
         <h2 class="p-28-500">Изменение номера телефона</h2>
-        <IOInput>Номер телефона</IOInput>
-        <IOButton>Изменить</IOButton>
+        <i-o-input>Номер телефона</i-o-input>
+        <i-o-button>Изменить</i-o-button>
       </div>
       <div class="my-profile__safty-form">
         <h2 class="p-28-500">Почта</h2>
-        <IOInput placeholder="Укажите вашу почту">E-mail</IOInput>
-        <IOButton>Сохранить</IOButton>
+        <i-o-input placeholder="Укажите вашу почту"> E-mail </i-o-input>
+        <i-o-button>Сохранить</i-o-button>
       </div>
       <div class="my-profile__safty-form">
         <h2 class="p-28-500">Изменение пароля</h2>
-        <IOInput type="password">Введите актуальный пароль</IOInput>
-        <IOInput>Новый пароль</IOInput>
-        <IOButton>Изменить</IOButton>
+        <i-o-input type="password"> Введите актуальный пароль </i-o-input>
+        <i-o-input>Новый пароль</i-o-input>
+        <i-o-button>Изменить</i-o-button>
       </div>
     </div>
   </div>

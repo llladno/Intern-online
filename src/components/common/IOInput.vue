@@ -11,6 +11,8 @@ const model = defineModel()
     <label class="input__label p-13-500"><slot /></label>
     <input
       v-if="!big"
+      v-bind="{ ...props }"
+      v-model="model"
       class="input__text"
       :style="{
         backgroundColor: background,
@@ -18,11 +20,9 @@ const model = defineModel()
         width: fullWidth && '100%'
       }"
       :type="type ? type : 'text'"
-      v-bind="{ ...props }"
       :placeholder="placeholder"
-      v-model="model"
     />
-    <textarea class="input__textarea" :style="fullWidth ? 'width: 100%' : ''" v-else rows="4" />
+    <textarea v-else class="input__textarea" :style="fullWidth ? 'width: 100%' : ''" rows="4" />
   </div>
 </template>
 

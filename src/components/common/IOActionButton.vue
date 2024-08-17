@@ -2,7 +2,7 @@
 
 <template>
   <button class="button-active">
-    <slot></slot>
+    <slot />
   </button>
 </template>
 

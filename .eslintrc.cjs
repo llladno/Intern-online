@@ -1,5 +1,5 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
+require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   root: true,
@@ -9,6 +9,12 @@ module.exports = {
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting'
   ],
+	rules: {
+		'@typescript-eslint/no-unused-vars': ['warn', {
+			argsIgnorePattern: '^_',
+			varsIgnorePattern: '^_'
+		}],
+	},
   parserOptions: {
     ecmaVersion: 'latest'
   }

@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import IconStar from '@/components/icons/IconStar.vue'
-import IconBookMark from '@/components/icons/IconBookMark.vue'
-import IconClock from '@/components/icons/IconClock.vue'
 import CasesDropdownMenu from './CasesDropdownMenu.vue'
 import { CasesStatus, type OrganisationCasesI } from '@/types/organisationCasesI'
+import IOTags from '@/components/common/IOTags.vue'
 
 defineProps<{ caseInfo: OrganisationCasesI }>()
 </script>
 
 <template>
-  <div class="case-card" v-if="caseInfo">
+  <div v-if="caseInfo" class="case-card">
     <div
       class="case-card__line"
       :style="{ background: `rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}, 1)` }"
@@ -23,21 +21,10 @@ defineProps<{ caseInfo: OrganisationCasesI }>()
           •
           {{ caseInfo.status }}
         </div>
-        <h3 class="case-card__title header-3">{{ caseInfo.title }}</h3>
-        <div class="case-card__tags">
-          <div class="case-card__tag">
-            <IconBookMark />
-            <span>{{ caseInfo.tags.category }}</span>
-          </div>
-          <div class="case-card__tag">
-            <IconStar />
-            <span>{{ caseInfo.tags.tarif }}</span>
-          </div>
-          <div class="case-card__tag">
-            <IconClock />
-            <span>{{ caseInfo.tags.date }}</span>
-          </div>
-        </div>
+        <h3 class="case-card__title header-3">
+          {{ caseInfo.title }}
+        </h3>
+        <i-o-tags organistaion :tags="caseInfo.tags" />
         <p class="p-13-400">
           Кейс — это рассказ о реальном случае, связанном с продуктом компании. В нём показываются
           интересные идеи или решения определённой проблемы, которые предлагает организация. Этот
@@ -45,7 +32,7 @@ defineProps<{ caseInfo: OrganisationCasesI }>()
         </p>
       </div>
       <div class="case-card__right-side">
-        <CasesDropdownMenu />
+        <cases-dropdown-menu />
         <div>
           <p class="case-card__count p-13-400">Кол-во решений:</p>
           <p class="case-card__solutions">
@@ -79,26 +66,6 @@ defineProps<{ caseInfo: OrganisationCasesI }>()
   &__title {
     margin: 5px 0 8px 0;
     text-align: left;
-  }
-
-  &__tags {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    margin-bottom: 11px;
-  }
-
-  &__tag {
-    display: flex;
-    gap: 3px;
-
-    & span {
-      font-size: 12px;
-      font-weight: 500;
-      line-height: 16.8px;
-      text-align: left;
-      color: #535357;
-    }
   }
 
   &__right-side {

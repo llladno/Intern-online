@@ -5,7 +5,7 @@ export const casesInfo: OrganisationCasesI[] = [
     id: 1,
     title: 'Кейс №1',
     tags: {
-      category: 'Маркетинг',
+      category: ['Маркетинг', 'IT'],
       tarif: 'Лайт',
       date: new Date(2024, 5, 20).toLocaleDateString()
     },
@@ -97,7 +97,7 @@ export const casesInfo: OrganisationCasesI[] = [
     id: 1,
     title: 'Кейс №1',
     tags: {
-      category: 'Маркетинг',
+      category: ['Маркетинг'],
       tarif: 'Лайт',
       date: new Date(2024, 5, 20).toLocaleDateString()
     },
@@ -123,7 +123,7 @@ export const casesInfo: OrganisationCasesI[] = [
     id: 1,
     title: 'Кейс №1',
     tags: {
-      category: 'Маркетинг',
+      category: ['Маркетинг', 'IT'],
       tarif: 'Лайт',
       date: new Date(2024, 5, 20).toLocaleDateString()
     },

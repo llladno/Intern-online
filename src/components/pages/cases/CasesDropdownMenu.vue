@@ -1,27 +1,27 @@
 <template>
-  <DropdownMenu>
-    <DropdownMenuTrigger><IconDotesTemp /></DropdownMenuTrigger>
-    <DropdownMenuContent>
-      <DropdownMenuItem
+  <dropdown-menu>
+    <dropdown-menu-trigger><icon-dotes-temp /></dropdown-menu-trigger>
+    <dropdown-menu-content>
+      <dropdown-menu-item
         v-for="item in actionsDropdownMenu"
         :key="item.id"
         class="font-medium cursor-pointer"
       >
-        <span class="pr-4" v-html="item.icon"></span>
+        <span class="pr-4" v-html="item.icon" />
         {{ item.title }}
-      </DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu>
+      </dropdown-menu-item>
+    </dropdown-menu-content>
+  </dropdown-menu>
 </template>
 
 <script setup lang="ts">
-import IconDotesTemp from '@/components/icons/IconDotesTemp.vue'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '../../shadcn/ui/dropdown-menu'
+import IconDotesTemp from '@/components/icons/IconDotesTemp.vue'
 
 const actionsDropdownMenu: { id: string; title: string; icon: string }[] = [
   {

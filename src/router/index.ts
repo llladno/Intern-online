@@ -12,7 +12,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/AuthorizationView.vue')
+      component: () => import('../views/common/AuthorizationView.vue')
     },
     {
       path: '/develop',
@@ -26,16 +26,16 @@ const router = createRouter({
     },
     {
       path: '/organisation/cases',
-      name: 'cases',
+      name: 'organisation-cases',
       component: () => import('../views/organisation/CasesView.vue')
     },
     {
-      path: '/organisation/cases/:id',
+      path: '/organisation/case-:id',
       name: 'case',
       component: () => import('../views/organisation/CaseView.vue')
     },
     {
-      path: '/organisation/cases/:id/solution/:id',
+      path: '/organisation/case-:id/solution-:id',
       name: 'case-solution',
       component: () => import('../views/organisation/OrganisationCaseSolutionView.vue')
     },
@@ -48,6 +48,16 @@ const router = createRouter({
       path: '/ui-kit',
       name: 'ui-kit',
       component: () => import('../views/UiKitView.vue')
+    },
+    {
+      path: '/cases',
+      name: 'cases',
+      component: () => import('../views/common/cases/CasesView.vue')
+    },
+    {
+      path: '/case-:id',
+      name: 'case',
+      component: () => import('../views/common/cases/CommonCaseView.vue')
     }
   ]
 })

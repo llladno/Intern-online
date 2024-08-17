@@ -7,10 +7,10 @@ import IOButton from '@/components/common/IOButton.vue'
     <div>
       <h1>Эта страница находится в разработке :(</h1>
       <p>Приносим извинения за доставленные неудобства</p>
-      <RouterLink to="/">
-        <IOButton>Вернуться на главную</IOButton>
-      </RouterLink>
-      <RouterLink to="/ui-kit"> Либо можно посмотреть на замечательный ui-kit </RouterLink>
+      <router-link to="/">
+        <i-o-button>Вернуться на главную</i-o-button>
+      </router-link>
+      <router-link to="/ui-kit"> Либо можно посмотреть на замечательный ui-kit </router-link>
     </div>
   </div>
 </template>

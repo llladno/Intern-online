@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
 import {
   AlertDialogContent,
   type AlertDialogContentEmits,
@@ -8,6 +7,7 @@ import {
   AlertDialogPortal,
   useForwardPropsEmits
 } from 'radix-vue'
+import { type HTMLAttributes, computed } from 'vue'
 import { cn } from '@/components/shadcn/lib/utils'
 
 const props = defineProps<AlertDialogContentProps & { class?: HTMLAttributes['class'] }>()
@@ -23,11 +23,11 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <AlertDialogPortal>
-    <AlertDialogOverlay
+  <alert-dialog-portal>
+    <alert-dialog-overlay
       class="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
     />
-    <AlertDialogContent
+    <alert-dialog-content
       v-bind="forwarded"
       :class="
         cn(
@@ -37,6 +37,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
       "
     >
       <slot />
-    </AlertDialogContent>
-  </AlertDialogPortal>
+    </alert-dialog-content>
+  </alert-dialog-portal>
 </template>

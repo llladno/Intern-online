@@ -4,7 +4,7 @@
   <div class="main-container organisation-case-solution-description">
     <h3>Описание</h3>
     <p>
-      <slot> </slot>
+      <slot />
     </p>
   </div>
 </template>

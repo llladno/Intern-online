@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import {
-  Select,
+  SelectComponent,
   SelectContent,
   SelectGroup,
   SelectItem,
@@ -9,7 +10,6 @@ import {
   SelectValue
 } from '@/components/shadcn/ui/select'
 import type { SelectPropsI } from '@/types/componentsProps/commonProps'
-import { ref, watch } from 'vue'
 
 defineProps<SelectPropsI>()
 const test = ref()
@@ -18,23 +18,24 @@ watch(test, () => console.log(test.value))
 </script>
 
 <template>
-  <Select v-model="test" class="select">
-    <SelectTrigger class="focus:ring-offset-0">
-      <SelectValue :placeholder="placeholder" />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectGroup>
-        <SelectLabel>{{ label }}</SelectLabel>
-        <SelectItem
+  <select-component v-model="test" class="select">
+    <select-trigger class="focus:ring-offset-0">
+      <select-value :placeholder="placeholder" />
+    </select-trigger>
+    <select-content>
+      <select-group>
+        <select-label>{{ label }}</select-label>
+        <select-item
           v-for="(option, index) in options"
-          :value="option.value"
           :key="index"
+          :value="option.value"
           class="select__option"
-          >{{ option.label }}
-        </SelectItem>
-      </SelectGroup>
-    </SelectContent>
-  </Select>
+        >
+          {{ option.label }}
+        </select-item>
+      </select-group>
+    </select-content>
+  </select-component>
 </template>
 
 <style lang="scss" scoped>

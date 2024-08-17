@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import AuthLayout from '@/components/pages/authorization/AuthLayout.vue'
 import AuthPhoto from '@/assets/media/img/AuthPhoto.png'
+import AuthLayout from '@/components/pages/authorization/AuthLayout.vue'
 </script>
 
 <template>
   <main>
-    <AuthLayout />
+    <auth-layout />
     <img :src="AuthPhoto" alt="" />
   </main>
 </template>

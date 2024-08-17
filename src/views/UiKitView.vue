@@ -1,14 +1,8 @@
 <script setup lang="ts">
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue
-} from '@/components/shadcn/ui/select'
-
+import IOButton from '@/components/common/IOButton.vue'
+import IOInput from '@/components/common/IOInput.vue'
+import IOPopup from '@/components/common/IOPopup.vue'
+import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,11 +14,16 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@/components/shadcn/ui/alert-dialog'
-import IOButton from '@/components/common/IOButton.vue'
-import IOInput from '@/components/common/IOInput.vue'
-import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
+import {
+  SelectComponent,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue
+} from '@/components/shadcn/ui/select'
 import { useUserStore } from '@/stores/UserStore'
-import IOPopup from '@/components/common/IOPopup.vue'
 import { usePopupStore } from '@/stores/popupStore'
 
 const userStore = useUserStore()
@@ -41,8 +40,8 @@ function testRequest() {
 
 <template>
   <div class="ui-kit">
-    <IOPopup type="error">Ошибка</IOPopup>
-    <IOButton @click="$router.push('/')">Назад</IOButton>
+    <i-o-popup type="error"> Ошибка </i-o-popup>
+    <i-o-button @click="$router.push('/')"> Назад </i-o-button>
     <h1>Ui Kit</h1>
     <div class="ui-kit__content">
       <div class="ui-kit__section">
@@ -50,40 +49,40 @@ function testRequest() {
         <div class="ui-kit__variation">
           <p>Селект</p>
           <div>
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Выберите вид пользователя" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Выберите вид пользователя</SelectLabel>
-                  <SelectItem value="default">Обычный</SelectItem>
-                  <SelectItem value="organisation">Организация</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <select-component>
+              <select-trigger>
+                <select-value placeholder="Выберите вид пользователя" />
+              </select-trigger>
+              <select-content>
+                <select-group>
+                  <select-label>Выберите вид пользователя</select-label>
+                  <select-item value="default"> Обычный </select-item>
+                  <select-item value="organisation"> Организация </select-item>
+                </select-group>
+              </select-content>
+            </select-component>
           </div>
         </div>
         <div class="ui-kit__variation">
           <p>Диалоговое окно</p>
-          <AlertDialog>
-            <AlertDialogTrigger>
-              <IOButton>Open</IOButton>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
+          <alert-dialog>
+            <alert-dialog-trigger>
+              <i-o-button>Open</i-o-button>
+            </alert-dialog-trigger>
+            <alert-dialog-content>
+              <alert-dialog-header>
+                <alert-dialog-title>Are you absolutely sure?</alert-dialog-title>
+                <alert-dialog-description>
                   This action cannot be undone. This will permanently delete your account and remove
                   your data from our servers.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction>Continue</AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+                </alert-dialog-description>
+              </alert-dialog-header>
+              <alert-dialog-footer>
+                <alert-dialog-cancel>Cancel</alert-dialog-cancel>
+                <alert-dialog-action>Continue</alert-dialog-action>
+              </alert-dialog-footer>
+            </alert-dialog-content>
+          </alert-dialog>
         </div>
       </div>
       <div class="ui-kit__section ui-kit__section--right">
@@ -91,35 +90,35 @@ function testRequest() {
         <div class="ui-kit__variation">
           <p>Кнопка обычная</p>
           <div class="ui-kit__variation-element">
-            <IOButton @click="testRequest">Запрос</IOButton>
+            <i-o-button @click="testRequest"> Запрос </i-o-button>
           </div>
         </div>
         <div class="ui-kit__variation">
           <p>Кнопка outline</p>
           <div class="ui-kit__variation-element">
-            <IOButton outlined>Кнопка</IOButton>
+            <i-o-button outlined> Кнопка </i-o-button>
           </div>
         </div>
         <div class="ui-kit__variation">
           <p>Инпут c label</p>
           <div class="ui-kit__variation-element">
-            <IOInput>Email</IOInput>
+            <i-o-input>Email</i-o-input>
           </div>
         </div>
         <div class="ui-kit__variation">
           <p>Обычный инпут</p>
           <div class="ui-kit__variation-element">
-            <IOInput></IOInput>
+            <i-o-input />
           </div>
         </div>
         <div class="ui-kit__variation">
           <p>Tabs</p>
           <div class="ui-kit__variation-element">
-            <IOSimpleSelect>
-              <template #active>Активные</template>
-              <template #draft>Черновики</template>
-              <template #archive>Архив</template>
-            </IOSimpleSelect>
+            <i-o-simple-select>
+              <template #active> Активные </template>
+              <template #draft> Черновики </template>
+              <template #archive> Архив </template>
+            </i-o-simple-select>
           </div>
         </div>
       </div>

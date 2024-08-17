@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import IOButton from '@/components/common/IOButton.vue'
 import IOInput from '@/components/common/IOInput.vue'
-import { ref } from 'vue'
 import { useUserStore } from '@/stores/UserStore'
 
 const email = ref('')
@@ -18,13 +18,13 @@ function signin() {
 
 <template>
   <div class="auth__login">
-    <IOInput v-model="email" :props="{ placeholder: 'Логин' }">Логин</IOInput>
-    <IOInput v-model="password">Пароль</IOInput>
+    <i-o-input v-model="email" :props="{ placeholder: 'Логин' }"> Логин </i-o-input>
+    <i-o-input v-model="password"> Пароль </i-o-input>
     <div class="auth__login__remember">
       <div><input type="checkbox" /> <label>Сохранить вход</label></div>
-      <RouterLink to="/recovery">Забыли пароль?</RouterLink>
+      <router-link to="/recovery"> Забыли пароль? </router-link>
     </div>
-    <IOButton @click="signin" fullWidth>Войти</IOButton>
+    <i-o-button full-width @click="signin"> Войти </i-o-button>
   </div>
 </template>
 
