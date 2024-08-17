@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
 import { AlertDialogAction, type AlertDialogActionProps } from 'radix-vue'
+import { type HTMLAttributes, computed } from 'vue'
 import { cn } from '@/components/shadcn/lib/utils'
 import { buttonVariants } from '@/components/shadcn/ui/button'
 
@@ -14,7 +14,7 @@ const delegatedProps = computed(() => {
 </script>
 
 <template>
-  <AlertDialogAction v-bind="delegatedProps" :class="cn(buttonVariants(), props.class)">
+  <alert-dialog-action v-bind="delegatedProps" :class="cn(buttonVariants(), props.class)">
     <slot />
-  </AlertDialogAction>
+  </alert-dialog-action>
 </template>

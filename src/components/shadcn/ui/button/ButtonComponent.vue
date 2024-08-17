@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
 import { Primitive, type PrimitiveProps } from 'radix-vue'
+import type { HTMLAttributes } from 'vue'
 import { type ButtonVariants, buttonVariants } from '.'
 import { cn } from '@/components/shadcn/lib/utils'
 
@@ -16,11 +16,11 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <Primitive
+  <primitive
     :as="as"
     :as-child="asChild"
     :class="cn(buttonVariants({ variant, size }), props.class)"
   >
     <slot />
-  </Primitive>
+  </primitive>
 </template>

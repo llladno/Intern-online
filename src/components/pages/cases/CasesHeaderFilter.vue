@@ -1,10 +1,10 @@
 <template>
-  <div class="filter" ref="multiselectFilterRef">
+  <div ref="multiselectFilterRef" class="filter">
     <div
       class="filter__options"
       :placeholder="placeholder"
-      @click="toggleDropdown"
       :class="{ 'filter__options--active': isDropdownOpen }"
+      @click="toggleDropdown"
     >
       <template v-if="selectedValues.length > 2">
         <span class="filter__text"> Выбрано {{ selectedValues.length }} </span>
@@ -14,14 +14,14 @@
           {{ selectedValues.join(', ') || placeholder }}
         </span>
       </template>
-      <IconFilter v-if="!selectedValues.length" />
+      <icon-filter v-if="!selectedValues.length" />
     </div>
     <transition name="slide-fade">
       <div v-show="isDropdownOpen" class="filter__dropdown">
-        <div class="filter__dropdown-menu" v-for="option in options" :key="option.id">
-          <IOCheckbox
-            :checked="isSelected(option.value)"
+        <div v-for="option in options" :key="option.id" class="filter__dropdown-menu">
+          <i-o-checkbox
             :id="option.id ?? 'default-id'"
+            :checked="isSelected(option.value)"
             :value="option.value"
             :label="option.label"
             @change="toggleOption(option.value)"
@@ -34,8 +34,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import IconFilter from '@/components/icons/IconFilter.vue'
 import IOCheckbox from '@/components/common/IOCheckbox.vue'
+import IconFilter from '@/components/icons/IconFilter.vue'
 import type { SelectPropsI } from '@/types/componentsProps/commonProps'
 
 defineProps<SelectPropsI>()

@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
-import type { UserRegistrationI } from '@/types/userI'
-import UserService from '@/api/userService'
 import { $api } from '@/api'
+import UserService from '@/api/userService'
 import { usePopupStore } from '@/stores/popupStore'
+import type { UserRegistrationI } from '@/types/userI'
 
 export const useUserStore = defineStore('userStore', () => {
   const popupStore = usePopupStore()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
 import { SelectSeparator, type SelectSeparatorProps } from 'radix-vue'
+import { type HTMLAttributes, computed } from 'vue'
 import { cn } from '@/components/shadcn/lib/utils'
 
 const props = defineProps<SelectSeparatorProps & { class?: HTMLAttributes['class'] }>()
@@ -13,5 +13,5 @@ const delegatedProps = computed(() => {
 </script>
 
 <template>
-  <SelectSeparator v-bind="delegatedProps" :class="cn('-mx-1 my-1 h-px bg-muted', props.class)" />
+  <select-separator v-bind="delegatedProps" :class="cn('-mx-1 my-1 h-px bg-muted', props.class)" />
 </template>

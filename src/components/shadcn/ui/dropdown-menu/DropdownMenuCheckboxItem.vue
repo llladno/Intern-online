@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
+import { Check } from 'lucide-vue-next'
 import {
   DropdownMenuCheckboxItem,
   type DropdownMenuCheckboxItemEmits,
@@ -7,7 +7,7 @@ import {
   DropdownMenuItemIndicator,
   useForwardPropsEmits
 } from 'radix-vue'
-import { Check } from 'lucide-vue-next'
+import { type HTMLAttributes, computed } from 'vue'
 import { cn } from '@/components/shadcn/lib/utils'
 
 const props = defineProps<DropdownMenuCheckboxItemProps & { class?: HTMLAttributes['class'] }>()
@@ -23,7 +23,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <DropdownMenuCheckboxItem
+  <dropdown-menu-checkbox-item
     v-bind="forwarded"
     :class="
       cn(
@@ -33,10 +33,10 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     "
   >
     <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-      <DropdownMenuItemIndicator>
-        <Check class="w-4 h-4" />
-      </DropdownMenuItemIndicator>
+      <dropdown-menu-item-indicator>
+        <check class="w-4 h-4" />
+      </dropdown-menu-item-indicator>
     </span>
     <slot />
-  </DropdownMenuCheckboxItem>
+  </dropdown-menu-checkbox-item>
 </template>

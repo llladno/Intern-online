@@ -1,12 +1,12 @@
 <template>
-  <div class="popup" v-if="popupShow.status">
+  <div v-if="popupShow.status" class="popup">
     <div
       :class="[
         'popup__content',
         popupShow.type === 'error' ? 'popup__content--error' : 'popup__content--success'
       ]"
     >
-      {{ popupShow.text }}
+     <slot></slot>
     </div>
   </div>
 </template>
@@ -19,7 +19,6 @@ const popupShow = ref({ status: false, text: '', type: 'error' })
 const popupStore = usePopupStore()
 defineProps<{
   type: 'error' | 'success'
-  text: string
 }>()
 
 popupStore.$subscribe((mutation, state) => {

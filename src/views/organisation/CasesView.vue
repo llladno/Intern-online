@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import CasesHeader from '@/components/pages/cases/CasesHeader.vue'
-import CaseCard from '@/components/pages/cases/CaseCard.vue'
 import { ref } from 'vue'
+import CaseCard from '@/components/pages/cases/CaseCard.vue'
+import CasesHeader from '@/components/pages/cases/CasesHeader.vue'
 import { casesInfo } from '@/stores/mock'
 
 const selected = ref('active')
@@ -13,19 +13,19 @@ function selectedEmit(slot: string) {
 <template>
   <div class="organisation">
     <div class="organisation__cases main-container">
-      <CasesHeader @selectedEmit="selectedEmit" />
+      <cases-header @selected-emit="selectedEmit" />
     </div>
     <div v-if="selected == 'active'" class="organisation__cases-content">
-      <CaseCard
+      <case-card
         v-for="caseInfo in casesInfo"
         :key="caseInfo.id"
-        :caseInfo="caseInfo"
+        :case-info="caseInfo"
+        class="main-container"
         @click.stop="
           (e) =>
             e.target.closest('.dropdown-button') ??
-            $router.push(`/organisation/cases/${caseInfo.id}`)
+            $router.push(`/organisation/case-${caseInfo.id}`)
         "
-        class="main-container"
       />
     </div>
     <div v-else-if="selected == 'draft'" class="main-container">

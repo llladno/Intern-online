@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
+import { ChevronRight } from 'lucide-vue-next'
 import {
   DropdownMenuSubTrigger,
   type DropdownMenuSubTriggerProps,
   useForwardProps
 } from 'radix-vue'
-import { ChevronRight } from 'lucide-vue-next'
+import { type HTMLAttributes, computed } from 'vue'
 import { cn } from '@/components/shadcn/lib/utils'
 
 const props = defineProps<DropdownMenuSubTriggerProps & { class?: HTMLAttributes['class'] }>()
@@ -20,7 +20,7 @@ const forwardedProps = useForwardProps(delegatedProps)
 </script>
 
 <template>
-  <DropdownMenuSubTrigger
+  <dropdown-menu-sub-trigger
     v-bind="forwardedProps"
     :class="
       cn(
@@ -30,6 +30,6 @@ const forwardedProps = useForwardProps(delegatedProps)
     "
   >
     <slot />
-    <ChevronRight class="ml-auto h-4 w-4" />
-  </DropdownMenuSubTrigger>
+    <chevron-right class="ml-auto h-4 w-4" />
+  </dropdown-menu-sub-trigger>
 </template>

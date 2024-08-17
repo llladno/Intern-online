@@ -10,16 +10,20 @@ defineProps({
 <template>
   <div class="tarif-card">
     <div class="tarif-card__info">
-      <h3 class="p-25-500">{{ tarif.title }}</h3>
+      <h3 class="p-25-500">
+        {{ tarif.title }}
+      </h3>
       <div class="tarif-card__stars">
-        <IconStar v-for="star in tarif.stars" :key="star" />
+        <icon-star v-for="star in tarif.stars" :key="star" />
       </div>
       <h3 class="p-24-600">{{ tarif.cost }} руб</h3>
       <ul>
-        <li v-for="adventage in tarif.advantages" :key="adventage">{{ adventage }}</li>
+        <li v-for="adventage in tarif.advantages" :key="adventage">
+          {{ adventage }}
+        </li>
       </ul>
     </div>
-    <IOButton>Оплатить</IOButton>
+    <i-o-button>Оплатить</i-o-button>
   </div>
 </template>
 

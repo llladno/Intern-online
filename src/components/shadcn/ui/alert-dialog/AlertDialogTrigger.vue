@@ -5,7 +5,7 @@ const props = defineProps<AlertDialogTriggerProps>()
 </script>
 
 <template>
-  <AlertDialogTrigger v-bind="props">
+  <alert-dialog-trigger v-bind="props">
     <slot />
-  </AlertDialogTrigger>
+  </alert-dialog-trigger>
 </template>

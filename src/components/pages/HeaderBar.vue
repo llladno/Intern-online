@@ -1,19 +1,22 @@
 <script setup lang="ts">
-import IconLogo from '@/components/icons/IconLogo.vue'
 import IconHeaderNotification from '@/components/icons/IconHeaderNotification.vue'
+import IconLogo from '@/components/icons/IconLogo.vue'
 </script>
 
 <template>
   <header class="header">
-    <RouterLink to="/"><IconLogo /></RouterLink>
+    <router-link to="/">
+      <icon-logo />
+    </router-link>
     <div class="header__nav">
       <div class="header__nav-left">
-        <RouterLink to="/develop" class="p-16-400">Блог</RouterLink>
-        <RouterLink to="/develop" class="p-16-400">Помощь</RouterLink>
+        <router-link to="/cases" class="p-16-400"> Кейсы </router-link>
+        <router-link to="/develop" class="p-16-400"> Блог </router-link>
+        <router-link to="/develop" class="p-16-400"> Помощь </router-link>
       </div>
       <div class="header__nav-right">
-        <IconHeaderNotification />
-        <RouterLink to="/login" class="p-16-400">Вход</RouterLink>
+        <icon-header-notification />
+        <router-link to="/login" class="p-16-400"> Вход </router-link>
       </div>
     </div>
   </header>

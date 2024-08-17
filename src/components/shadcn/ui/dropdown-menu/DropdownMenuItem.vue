@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
 import { DropdownMenuItem, type DropdownMenuItemProps, useForwardProps } from 'radix-vue'
+import { type HTMLAttributes, computed } from 'vue'
 import { cn } from '@/components/shadcn/lib/utils'
 
 const props = defineProps<
@@ -17,7 +17,7 @@ const forwardedProps = useForwardProps(delegatedProps)
 </script>
 
 <template>
-  <DropdownMenuItem
+  <dropdown-menu-item
     v-bind="forwardedProps"
     :class="
       cn(
@@ -28,5 +28,5 @@ const forwardedProps = useForwardProps(delegatedProps)
     "
   >
     <slot />
-  </DropdownMenuItem>
+  </dropdown-menu-item>
 </template>

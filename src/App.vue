@@ -1,27 +1,28 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import HeaderBar from '@/components/pages/HeaderBar.vue'
-import { ref, watch } from 'vue'
 import SideBar from '@/components/pages/SideBar.vue'
 
 const route = useRoute()
 const isLogin = ref(false)
 
+const disabledHeader = ['/login', '/develop', '/ui-kit']
+
 watch(
   () => route.params,
   () => {
-    if (route.name == 'login' || route.name == 'develop' || route.name == 'ui-kit')
-      isLogin.value = true
+    if (disabledHeader.includes(route.path as string)) isLogin.value = true
     else isLogin.value = false
   }
 )
 </script>
 
 <template>
-  <HeaderBar v-if="!isLogin" />
+  <header-bar v-if="!isLogin" />
   <div :class="!isLogin && 'main-router'">
-    <SideBar v-if="!isLogin" />
-    <RouterView />
+    <side-bar v-if="!isLogin && route.path != '/cases'" />
+    <router-view />
   </div>
 </template>
 

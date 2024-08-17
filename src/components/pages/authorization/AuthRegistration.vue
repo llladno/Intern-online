@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import IOButton from '@/components/common/IOButton.vue'
 import { ref } from 'vue'
-import { useUserStore } from '@/stores/UserStore'
+import IOButton from '@/components/common/IOButton.vue'
+import IOInput from '@/components/common/IOInput.vue'
 import {
-  Select,
+  SelectComponent,
   SelectContent,
   SelectGroup,
   SelectItem,
@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/shadcn/ui/select'
-import IOInput from '@/components/common/IOInput.vue'
+import { useUserStore } from '@/stores/UserStore'
 
 const email = ref('')
 const password = ref('')
@@ -31,26 +31,26 @@ function registration() {
 <template>
   <div class="auth__registration">
     <p class="p-14-500">Зарегистрироваться как</p>
-    <Select v-model="selected">
-      <SelectTrigger>
-        <SelectValue placeholder="Выберите вид пользователя" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Выберите вид пользователя</SelectLabel>
-          <SelectItem value="default">Обычный</SelectItem>
-          <SelectItem value="organisation">Организация</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-    <IOInput v-model="email" :props="{ placeholder: 'Телефон' }">Почта</IOInput>
-    <IOInput v-model="password" :props="{ placeholder: 'Пароль' }">Пароль</IOInput>
-    <IOInput v-model="passwordRepeat" :props="{ placeholder: 'Повторите пароль' }"
-      >Повтор пароля
-    </IOInput>
-    <IOButton class="auth__registration-button" @click="registration" fullWidth
-      >Зарегистрироваться</IOButton
-    >
+    <select-component v-model="selected">
+      <select-trigger>
+        <select-value placeholder="Выберите вид пользователя" />
+      </select-trigger>
+      <select-content>
+        <select-group>
+          <select-label>Выберите вид пользователя</select-label>
+          <select-item value="default"> Обычный </select-item>
+          <select-item value="organisation"> Организация </select-item>
+        </select-group>
+      </select-content>
+    </select-component>
+    <i-o-input v-model="email" :props="{ placeholder: 'Телефон' }"> Почта </i-o-input>
+    <i-o-input v-model="password" :props="{ placeholder: 'Пароль' }"> Пароль </i-o-input>
+    <i-o-input v-model="passwordRepeat" :props="{ placeholder: 'Повторите пароль' }">
+      Повтор пароля
+    </i-o-input>
+    <i-o-button class="auth__registration-button" full-width @click="registration">
+      Зарегистрироваться
+    </i-o-button>
   </div>
 </template>
 

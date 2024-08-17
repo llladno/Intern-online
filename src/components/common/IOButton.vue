@@ -6,7 +6,7 @@ defineProps<ButtonPropsI>()
 
 <template>
   <button :class="{ 'w-full': fullWidth, button: true, 'button--outlined': outlined }">
-    <slot></slot>
+    <slot />
   </button>
 </template>
 
