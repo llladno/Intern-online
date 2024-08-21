@@ -21,7 +21,13 @@ const model = defineModel('modelValue')
       v-model="model"
       v-if="!big"
     />
-    <textarea class="input__textarea" :style="fullWidth ? 'width: 100%' : ''" v-else rows="4" />
+    <textarea
+      :placeholder="placeholder"
+      class="input__textarea"
+      :style="fullWidth ? 'width: 100%' : ''"
+      v-else
+      rows="4"
+    />
   </div>
 </template>
 
@@ -49,7 +55,7 @@ const model = defineModel('modelValue')
     color: $additional-color;
     opacity: 0.7;
   }
-  &:focus {
+  &:focus-visible {
     border: 2px solid $primary-color;
   }
 }
@@ -63,16 +69,16 @@ input[type='checkbox'] {
   border: $default-border;
   background: $default-light-grey;
   border-radius: 8px;
-  padding: 6px 14px;
+  padding: 6px 13px;
   outline: none;
   font-size: 13px;
   font-weight: 500;
-  width: 388px;
+  // width: 388px;
   line-height: 17px;
   transition: 0.2s;
 
-  &:focus {
-    border: 1px solid $primary-color;
+  &:focus-visible {
+    border: 2px solid $primary-color;
   }
 }
 </style>

@@ -19,3 +19,8 @@
     />
   </svg>
 </template>
+<style lang="scss" scoped>
+#iconPlus {
+  margin-right: 5px;
+}
+</style>

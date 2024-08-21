@@ -1,6 +1,6 @@
 <template>
   <div class="modal">
-    <IOButton icon background="white" @click="openModal" width="211">Добавить место учебы</IOButton>
+    <IOButton icon background="white" @click="openModal" width="211">{{ label }}</IOButton>
 
     <transition name="modal">
       <div class="modal__overlay" v-if="isVisible" @click.self="closeModal">
@@ -10,8 +10,8 @@
           </button>
           <slot></slot>
           <div class="modal__footer">
-            <IOButton outlined>Отмена</IOButton>
-            <IOButton>Сохранить</IOButton>
+            <IOButton outlined width="183">Отмена</IOButton>
+            <IOButton width="183">Сохранить</IOButton>
           </div>
         </div>
       </div>
@@ -23,6 +23,10 @@
 import { ref } from 'vue'
 import IOButton from '@/components/common/IOButton.vue'
 import IconClose from '@/components/icons/IconClose.vue'
+
+defineProps<{
+  label: string
+}>()
 
 const isVisible = ref<boolean>(false)
 
@@ -52,6 +56,7 @@ const closeModal = () => {
     justify-content: center;
     align-items: flex-start;
     padding-top: 75px;
+    z-index: 100;
   }
 
   &__content {

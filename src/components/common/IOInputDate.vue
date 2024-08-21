@@ -1,16 +1,37 @@
 <template>
-  <div class="birthday">
+  <div class="date">
     <IOSelect
       :options="days"
       v-model="day"
-      @change="validateDate"
+      @click="validateDate"
       placeholder="День"
-      v-if="isDays"
+      v-if="!isDays"
+      id="day"
+      :isLabel="false"
     />
-    <IOSelect :options="months" v-model="month" @change="validateDate" placeholder="Месяц" />
-    <IOSelect :options="years" v-model="year" @change="validateDate" placeholder="Год" />
+    <IOSelect
+      id="month"
+      :options="months"
+      v-model="month"
+      @click="validateDate"
+      placeholder="Месяц"
+      :isLabel="false"
+    />
+    <IOSelect
+      id="year"
+      :options="years"
+      v-model="year"
+      @click="validateDate"
+      placeholder="Год"
+      :isLabel="false"
+    />
 
-    <p v-show="errorMessage" class="birthday__error">{{ errorMessage }}</p>
+    <p v-show="errorMessage" class="date__error">{{ errorMessage }}</p>
+    <!-- <div>
+      <span>Day:{{ day }}</span>
+      <span>Month:{{ month }}</span>
+      <span>Year:{{ year }}</span>
+    </div> -->
   </div>
 </template>
 
@@ -19,12 +40,9 @@ import { ref } from 'vue'
 import IOSelect from '@/components/common/IOSelect.vue'
 import type { SelectPropsOptionI } from '@/types/componentsProps/commonProps'
 
-withDefaults(
-  defineProps<{
-    isDays?: boolean
-  }>(),
-  { isDays: true }
-)
+defineProps<{
+  isDays?: boolean
+}>()
 
 const day = ref<number | string | null>(null)
 const month = ref<number | string | null>(null)
@@ -37,7 +55,6 @@ const days: SelectPropsOptionI[] = Array.from({ length: 31 }, (_, i) => ({
   value: i + 1,
   label: (i + 1).toString()
 }))
-console.log(days)
 
 const months: SelectPropsOptionI[] = Array.from({ length: 12 }, (_, i) => ({
   id: `month-${i + 1}`,
@@ -51,32 +68,15 @@ const years: SelectPropsOptionI[] = Array.from({ length: currentYear - 1900 + 1 
   label: (currentYear - i).toString()
 }))
 
-// const validateDate = () => {
-//       const dayNum = day.value ?? 0;
-//       const monthNum = month.value ?? 0;
-
-//      if (monthNum === 2 && dayNum > '29') {
-//         errorMessage.value = 'Февраль может иметь максимум 29 дней.';
-//       } else if (
-//         (monthNum === 4 || monthNum === 6 || monthNum === 9 || monthNum === 11) &&
-//         dayNum > '30'
-//       ) {
-//         errorMessage.value = 'Эти месяцы могут иметь максимум 30 дней.';
-//       } else {
-//         errorMessage.value = '';
-//       }
-// }
 const validateDate = () => {
   const dayNum = Number(day.value) ?? 0
   const monthNum = Number(month.value) ?? 0
   const yearNum = Number(year.value) ?? 0
 
-  console.log(dayNum, monthNum, yearNum)
-
-  if (dayNum < 1 || dayNum > 31) {
-    errorMessage.value = 'Введите корректный день.'
-    return
-  }
+  // if (dayNum < 1 || dayNum > 31) {
+  //   errorMessage.value = 'Введите корректный день.'
+  //   return
+  // }
 
   // if (monthNum < 1 || monthNum > 12) {
   //   errorMessage.value = 'Введите корректный месяц.';
@@ -91,6 +91,8 @@ const validateDate = () => {
   const isLeapYear = (yearNum: number): boolean => {
     return (yearNum % 4 === 0 && yearNum % 100 !== 0) || yearNum % 400 === 0
   }
+
+  console.log(isLeapYear)
 
   if (monthNum === 2) {
     if (dayNum > (isLeapYear(yearNum) ? 29 : 28)) {
@@ -107,12 +109,12 @@ const validateDate = () => {
 </script>
 
 <style scoped lang="scss">
-.birthday {
+.date {
   position: relative;
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 8px;
+  column-gap: 10px;
   height: 100%;
 
   &__error {

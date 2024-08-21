@@ -16,6 +16,7 @@ export interface SelectPropsI {
   label?: string
   id?: string | number
   modelValue?: number | string | null
+  isLabel?: boolean
   options: SelectPropsOptionI[]
 }
 
@@ -35,7 +36,7 @@ export interface ButtonPropsI {
 
 export interface CheckboxPropsI {
   id: string
-  label: string
+  label?: string
   value: string
   checked?: boolean
 }

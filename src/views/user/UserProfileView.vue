@@ -13,7 +13,9 @@
         <IOInput>Отчество</IOInput>
         <IOInputDate />
         <IOInput>Ваш веб-сайт </IOInput>
-        <IOInput big>О себе </IOInput>
+        <IOInput placeholder="Опишите наиболее подробно свои навыки/достижения" big
+          >О себе
+        </IOInput>
       </div>
       <div class="user-profile__info-education">
         <h3 class="p-18-500">Образование</h3>
@@ -24,7 +26,65 @@
           v-model="education"
           >Уровень образования</IOSelect
         >
-        <IOModal>
+        <p>value: {{ education }}</p>
+        <IOModal label="Добавить место учебы">
+          <h2 class="header-1">Знание программ</h2>
+          <p class="p-13-400 text-center">
+            Выберите программы и оцените от 1 до 10 <br />
+            уровень владения ими
+          </p>
+          <IOSelect
+            id="skill"
+            placeholder="Программа, например, «DevOps инженер»"
+            v-model="skill"
+            :options="skills"
+          ></IOSelect>
+        </IOModal>
+        <UserExperience />
+        <h3 class="p-18-500">Ключевые навыки</h3>
+        <IOModal label="Добавить навыки">
+          <h2 class="header-1">Знание программ</h2>
+          <p class="p-13-400 text-center">
+            Выберите программы и оцените от 1 до 10 <br />
+            уровень владения ими
+          </p>
+          <IOSelect
+            id="skill"
+            placeholder="Программа, например, «DevOps инженер»"
+            v-model="skill"
+            :options="skills"
+          ></IOSelect>
+        </IOModal>
+        <h3 class="p-18-500">Знание программ</h3>
+        <IOModal label="Добавить программы">
+          <h2 class="header-1">Знание программ</h2>
+          <p class="p-13-400 text-center">
+            Выберите программы и оцените от 1 до 10 <br />
+            уровень владения ими
+          </p>
+          <IOSelect
+            id="skill"
+            placeholder="Программа, например, «DevOps инженер»"
+            v-model="skill"
+            :options="skills"
+          ></IOSelect>
+        </IOModal>
+        <h3 class="p-18-500">Дипломы</h3>
+        <IOModal label="Добавить фотографии">
+          <h2 class="header-1">Знание программ</h2>
+          <p class="p-13-400 text-center">
+            Выберите программы и оцените от 1 до 10 <br />
+            уровень владения ими
+          </p>
+          <IOSelect
+            id="skill"
+            placeholder="Программа, например, «DevOps инженер»"
+            v-model="skill"
+            :options="skills"
+          ></IOSelect>
+        </IOModal>
+        <h3 class="p-18-500">Портфолио</h3>
+        <IOModal label="Добавить файл">
           <h2 class="header-1">Знание программ</h2>
           <p class="p-13-400 text-center">
             Выберите программы и оцените от 1 до 10 <br />
@@ -51,6 +111,7 @@ import IOInputDate from '@/components/common/IOInputDate.vue'
 import VerificationAccount from '@/components/pages/VerificationAccount.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
 import IOModal from '@/components/common/IOModal.vue'
+import UserExperience from '@/views/user/UserExperience.vue'
 import type { SelectPropsOptionI } from '@/types/componentsProps/commonProps'
 
 const selected = ref('personal')

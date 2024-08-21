@@ -36,7 +36,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import IconFilter from '@/components/icons/IconFilter.vue'
 import IOCheckbox from '@/components/common/IOCheckbox.vue'
-import type { SelectPropsI } from '../../../types/componentsProps/commonProps'
+import type { SelectPropsI } from '@/types/componentsProps/commonProps'
 
 defineProps<SelectPropsI>()
 

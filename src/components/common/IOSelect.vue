@@ -9,23 +9,31 @@ import {
   SelectValue
 } from '@/components/shadcn/ui/select'
 import type { SelectPropsI } from '@/types/componentsProps/commonProps'
-import { ref } from 'vue'
+import { ref, watch, toRefs } from 'vue'
 
-const props = defineProps<SelectPropsI>()
+const props = withDefaults(defineProps<SelectPropsI>(), {
+  isLabel: true
+})
 
-const selectedValue = ref(props.modelValue)
+const emit = defineEmits(['update:modelValue', 'click'])
 
-console.log(selectedValue.value)
+const { modelValue } = toRefs(props)
+const internalValue = ref(modelValue.value)
 
-const emit = defineEmits(['update:modelValue'])
+watch(modelValue, (newValue) => {
+  internalValue.value = newValue
+})
 
-const updateValue: () => void = () => {
-  emit('update:modelValue', selectedValue.value)
+const handleChange = (value: string | number): void => {
+  internalValue.value = value
+  emit('update:modelValue', value)
 }
 
-// watch(() => props.modelValue, (newValue) => {
-//     selectedValue.value = newValue;
-//   });
+const handleClick = (event: MouseEvent, value: string) => {
+  internalValue.value = value
+  emit('click', event) // Эмитируем событие click
+}
+
 // const test = ref()
 
 // watch(test, () => console.log(test.value))
@@ -33,11 +41,11 @@ const updateValue: () => void = () => {
 
 <template>
   <Select class="select overflow-auto">
-    <label :for="String(id)" class="p-13-500">
+    <label :for="String(id)" class="p-13-500" v-if="isLabel">
       <slot></slot>
     </label>
-    <SelectTrigger class="focus:ring-offset-0">
-      <SelectValue :placeholder="placeholder" />
+    <SelectTrigger class="focus:ring-offset-0" @click="handleClick">
+      <SelectValue :placeholder="placeholder" :value="internalValue" />
     </SelectTrigger>
     <SelectContent>
       <SelectGroup>
@@ -46,8 +54,7 @@ const updateValue: () => void = () => {
           v-for="option in options"
           :value="String(option.value)"
           :key="option.id"
-          v-model="selectedValue"
-          @change="updateValue"
+          @change="handleChange(String(option.value))"
           class="select__option"
           >{{ option.label }}
         </SelectItem>
@@ -70,6 +77,7 @@ button[role='combobox'] {
   overflow: auto;
 
   &__option {
+    display: flex;
     cursor: pointer;
     transition: $default-transition;
 

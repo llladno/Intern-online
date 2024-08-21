@@ -26,16 +26,16 @@ defineProps<ButtonPropsI>()
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 183px;
   background: $primary-color;
   border-radius: 8px;
   border: none;
   color: $default-white;
   font-size: 14px;
   font-weight: 500;
-  padding: 10px 14.5px;
+  padding: 10px;
   cursor: pointer;
   transition: $default-transition;
+
   &:hover {
     opacity: 0.8;
   }
@@ -47,7 +47,7 @@ defineProps<ButtonPropsI>()
   }
   &--white {
     flex-direction: row-reverse;
-    justify-content: space-between;
+    justify-content: center;
     background-color: $default-white;
     color: $additional-color;
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
