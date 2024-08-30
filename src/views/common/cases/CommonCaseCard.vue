@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="common-case-card__side common-case-card__side--right">
-      <icon-save-mark :width="16" :height="21" class="common-case-card__save" />
+      <icon-save-mark @click.stop :width="16" :height="21" class="common-case-card__save" />
       <div class="common-case-card__solutions">
         <span class="common-case-card__solutions-title">Кол-во решений:</span>
         <p class="p-13-400 common-case-card__solutions-amount">
