@@ -26,70 +26,60 @@
           v-model="education"
           >Уровень образования</IOSelect
         >
-        <p>value: {{ education }}</p>
+        <!-- <p>value: {{ education }}</p> -->
         <IOModal label="Добавить место учебы">
-          <h2 class="header-1">Знание программ</h2>
-          <p class="p-13-400 text-center">
-            Выберите программы и оцените от 1 до 10 <br />
-            уровень владения ими
-          </p>
+          <template #header>
+            <h2 class="header-1">Место учебы</h2>
+            <p class="p-13-400 text-center">Выберите учебное заведение</p>
+          </template>
           <IOSelect
             id="skill"
-            placeholder="Программа, например, «DevOps инженер»"
+            placeholder="например, «University of Cambridge»"
             v-model="skill"
-            :options="skills"
+            :options="universities"
           ></IOSelect>
         </IOModal>
-        <UserExperience />
+        <UserExperience @update:experiences="handleExperienceUpdate" />
+
         <h3 class="p-18-500">Ключевые навыки</h3>
         <IOModal label="Добавить навыки">
-          <h2 class="header-1">Знание программ</h2>
-          <p class="p-13-400 text-center">
-            Выберите программы и оцените от 1 до 10 <br />
-            уровень владения ими
-          </p>
+          <template #header>
+            <h2 class="header-1">Ключевые навыки</h2>
+            <p class="p-13-400 text-center">Выберите свои навыки</p>
+          </template>
           <IOSelect
             id="skill"
-            placeholder="Программа, например, «DevOps инженер»"
+            placeholder="Навык, например, «Java»"
             v-model="skill"
             :options="skills"
           ></IOSelect>
         </IOModal>
+
         <h3 class="p-18-500">Знание программ</h3>
         <IOModal label="Добавить программы">
-          <h2 class="header-1">Знание программ</h2>
-          <p class="p-13-400 text-center">
-            Выберите программы и оцените от 1 до 10 <br />
-            уровень владения ими
-          </p>
+          <template #header>
+            <h2 class="header-1">Знание программ</h2>
+            <p class="p-13-400 text-center">Выберите программы</p>
+          </template>
           <IOSelect
             id="skill"
-            placeholder="Программа, например, «DevOps инженер»"
+            placeholder="Программа, например, «Docker»"
             v-model="skill"
-            :options="skills"
+            :options="programs"
           ></IOSelect>
         </IOModal>
-        <h3 class="p-18-500">Дипломы</h3>
-        <IOModal label="Добавить фотографии">
-          <h2 class="header-1">Знание программ</h2>
-          <p class="p-13-400 text-center">
-            Выберите программы и оцените от 1 до 10 <br />
-            уровень владения ими
-          </p>
-          <IOSelect
-            id="skill"
-            placeholder="Программа, например, «DevOps инженер»"
-            v-model="skill"
-            :options="skills"
-          ></IOSelect>
-        </IOModal>
+
+        <UserProfileAddFile label="Дипломы" />
+
         <h3 class="p-18-500">Портфолио</h3>
         <IOModal label="Добавить файл">
-          <h2 class="header-1">Знание программ</h2>
-          <p class="p-13-400 text-center">
-            Выберите программы и оцените от 1 до 10 <br />
-            уровень владения ими
-          </p>
+          <template #header>
+            <h2 class="header-1">Знание программ</h2>
+            <p class="p-13-400 text-center">
+              Выберите программы и оцените от 1 до 10 <br />
+              уровень владения ими
+            </p>
+          </template>
           <IOSelect
             id="skill"
             placeholder="Программа, например, «DevOps инженер»"
@@ -97,6 +87,10 @@
             :options="skills"
           ></IOSelect>
         </IOModal>
+      </div>
+      <div class="user-profile__info-btn">
+        <IOButton width="183" @click="saveExperiences">Сохранить</IOButton>
+        <IOButton width="183" outlined @click="cancelChanges">Отменить изменения</IOButton>
       </div>
     </div>
   </div>
@@ -107,17 +101,27 @@ import { ref } from 'vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import IOInput from '@/components/common/IOInput.vue'
 import IOInputDate from '@/components/common/IOInputDate.vue'
-// import IOButton from '@/components/common/IOButton.vue'
 import VerificationAccount from '@/components/pages/VerificationAccount.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
 import IOModal from '@/components/common/IOModal.vue'
+import IOButton from '@/components/common/IOButton.vue'
 import UserExperience from '@/views/user/UserExperience.vue'
+import UserProfileAddFile from '@/views/user/UserProfileAddFile.vue'
 import type { SelectPropsOptionI } from '@/types/componentsProps/commonProps'
+import type { UserExperienceI } from '@/types/userProfile'
 
 const selected = ref('personal')
 
 const education = ref<number | string | null>(null)
 const skill = ref<number | string | null>(null)
+
+const universities = [
+  { id: 1, value: 'harvard', label: 'Harvard University' },
+  { id: 2, value: 'stanford', label: 'Stanford University' },
+  { id: 3, value: 'mit', label: 'Massachusetts Institute of Technology (MIT)' },
+  { id: 4, value: 'oxford', label: 'University of Oxford' },
+  { id: 5, value: 'cambridge', label: 'University of Cambridge' }
+]
 
 const educationLevels: SelectPropsOptionI[] = [
   { id: 1, value: 'none', label: 'Без образования' },
@@ -130,18 +134,42 @@ const educationLevels: SelectPropsOptionI[] = [
   { id: 8, value: 'doctoral', label: 'Доктор наук' }
 ]
 const skills: SelectPropsOptionI[] = [
-  { id: 1, value: 'none', label: 'Нет навыков' },
-  { id: 2, value: 'beginner', label: 'Начальный уровень' },
-  { id: 3, value: 'intermediate', label: 'Средний уровень' },
-  { id: 4, value: 'advanced', label: 'Продвинутый уровень' },
-  { id: 5, value: 'expert', label: 'Экспертный уровень' },
-  { id: 6, value: 'fullstack', label: 'Full Stack разработчик' },
-  { id: 7, value: 'frontend', label: 'Frontend разработчик' },
-  { id: 8, value: 'backend', label: 'Backend разработчик' },
-  { id: 9, value: 'devops', label: 'DevOps инженер' },
-  { id: 10, value: 'data_scientist', label: 'Data Scientist' },
-  { id: 11, value: 'machine_learning', label: 'Специалист по машинному обучению' }
+  { id: 1, value: 'javascript', label: 'JavaScript' },
+  { id: 2, value: 'python', label: 'Python' },
+  { id: 3, value: 'java', label: 'Java' },
+  { id: 4, value: 'html', label: 'HTML' },
+  { id: 5, value: 'css', label: 'CSS' }
 ]
+const programs = [
+  { id: 1, value: 'visual_studio_code', label: 'Visual Studio Code' },
+  { id: 2, value: 'intellij_idea', label: 'IntelliJ IDEA' },
+  { id: 3, value: 'postman', label: 'Postman' },
+  { id: 4, value: 'docker', label: 'Docker' },
+  { id: 5, value: 'git', label: 'Git' }
+]
+
+const experiences = ref<UserExperienceI[]>([])
+
+const handleExperienceUpdate = (updatedExperiences: UserExperienceI[]) => {
+  experiences.value = updatedExperiences
+  console.log('Обновленные данные об опыте работы:', updatedExperiences)
+}
+
+const saveExperiences = () => {
+  console.log('Сохраненные данные об опыте работы:', experiences.value)
+}
+
+const cancelChanges = () => {
+  experiences.value.forEach((experience) => {
+    experience.company = ''
+    experience.position = ''
+    experience.startDate = null
+    experience.endDate = null
+    experience.isCurrent = false
+  })
+  experiences.value = []
+  console.log('Изменения отменены')
+}
 </script>
 
 <style lang="scss" scoped>
@@ -164,6 +192,13 @@ const skills: SelectPropsOptionI[] = [
       display: flex;
       flex-direction: column;
       gap: 18px;
+      margin-top: 50px;
+    }
+
+    &-btn {
+      display: flex;
+      align-items: center;
+      column-gap: 21px;
       margin-top: 50px;
     }
   }

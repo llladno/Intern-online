@@ -1,17 +1,17 @@
 <template>
   <div class="modal">
     <IOButton icon background="white" @click="openModal" width="211">{{ label }}</IOButton>
-
     <transition name="modal">
       <div class="modal__overlay" v-if="isVisible" @click.self="closeModal">
         <div class="modal__content" @click.stop>
           <button class="modal__close" @click="closeModal">
             <IconClose />
           </button>
+          <slot name="header"></slot>
           <slot></slot>
           <div class="modal__footer">
-            <IOButton outlined width="183">Отмена</IOButton>
-            <IOButton width="183">Сохранить</IOButton>
+            <IOButton outlined width="183" @click="closeModal">Отмена</IOButton>
+            <IOButton width="183" @click="handleSave">Сохранить</IOButton>
           </div>
         </div>
       </div>
@@ -28,6 +28,10 @@ defineProps<{
   label: string
 }>()
 
+const emit = defineEmits<{
+  (e: 'save'): void
+}>()
+
 const isVisible = ref<boolean>(false)
 
 const openModal = () => {
@@ -38,6 +42,11 @@ const openModal = () => {
 const closeModal = () => {
   isVisible.value = false
   document.body.classList.remove('no-scroll')
+}
+
+const handleSave = () => {
+  closeModal()
+  emit('save')
 }
 </script>
 
@@ -56,7 +65,7 @@ const closeModal = () => {
     justify-content: center;
     align-items: flex-start;
     padding-top: 75px;
-    z-index: 100;
+    z-index: 10;
   }
 
   &__content {

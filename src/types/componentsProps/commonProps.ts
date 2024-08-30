@@ -38,5 +38,5 @@ export interface CheckboxPropsI {
   id: string
   label?: string
   value: string
-  checked?: boolean
+  checked: boolean
 }
