@@ -69,23 +69,18 @@
           ></IOSelect>
         </IOModal>
 
-        <UserProfileAddFile label="Дипломы" />
+        <UserProfileAddFile
+          :label="'Добавить дипломы'"
+          :images="images"
+          @update:images="updateImages"
+        />
 
         <h3 class="p-18-500">Портфолио</h3>
         <IOModal label="Добавить файл">
           <template #header>
-            <h2 class="header-1">Знание программ</h2>
-            <p class="p-13-400 text-center">
-              Выберите программы и оцените от 1 до 10 <br />
-              уровень владения ими
-            </p>
+            <h2 class="header-1">Добавьте своё портфолио</h2>
           </template>
-          <IOSelect
-            id="skill"
-            placeholder="Программа, например, «DevOps инженер»"
-            v-model="skill"
-            :options="skills"
-          ></IOSelect>
+          <IOInputFile fileType="doc" />
         </IOModal>
       </div>
       <div class="user-profile__info-btn">
@@ -101,6 +96,7 @@ import { ref } from 'vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import IOInput from '@/components/common/IOInput.vue'
 import IOInputDate from '@/components/common/IOInputDate.vue'
+import IOInputFile from '@/components/common/IOInputFile.vue'
 import VerificationAccount from '@/components/pages/VerificationAccount.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
 import IOModal from '@/components/common/IOModal.vue'
@@ -114,6 +110,13 @@ const selected = ref('personal')
 
 const education = ref<number | string | null>(null)
 const skill = ref<number | string | null>(null)
+const images = ref<File[]>([])
+
+const updateImages = (newImages: File[]) => {
+  images.value = newImages
+
+  console.log(newImages)
+}
 
 const universities = [
   { id: 1, value: 'harvard', label: 'Harvard University' },

@@ -10,7 +10,7 @@
           <slot name="header"></slot>
           <slot></slot>
           <div class="modal__footer">
-            <IOButton outlined width="183" @click="closeModal">Отмена</IOButton>
+            <IOButton outlined width="183" @click="handleCansel">Отмена</IOButton>
             <IOButton width="183" @click="handleSave">Сохранить</IOButton>
           </div>
         </div>
@@ -28,8 +28,9 @@ defineProps<{
   label: string
 }>()
 
-const emit = defineEmits<{
+const emits = defineEmits<{
   (e: 'save'): void
+  (e: 'cansel'): void
 }>()
 
 const isVisible = ref<boolean>(false)
@@ -46,7 +47,11 @@ const closeModal = () => {
 
 const handleSave = () => {
   closeModal()
-  emit('save')
+  emits('save')
+}
+const handleCansel = () => {
+  closeModal()
+  emits('cansel')
 }
 </script>
 

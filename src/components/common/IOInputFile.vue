@@ -4,16 +4,38 @@
       class="input-file__text"
       type="file"
       id="file"
-      accept="image/jpeg, image/jpg, image/png, image/gif, image/webp"
+      :accept="
+        props.fileType === 'img'
+          ? 'image/jpeg, image/jpg, image/png, image/gif, image/webp'
+          : 'application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      "
       @change="handleFileChange"
     />
     <label class="input-file__label" for="file">Выберите файл</label>
-    <span class="input-file__name p-14-500" v-if="model">{{ fileInfo }}</span>
+    <span class="input-file__name p-14-500" v-if="fileInfo">{{ fileInfo }}</span>
+    <TransitionGroup name="error">
+      <div class="input-file__error" v-for="element in props.error" :key="element.$uid">
+        <div class="input-file__error-message p-13-400">{{ element.$message }}</div>
+      </div>
+    </TransitionGroup>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import type { Ref } from 'vue'
+
+interface ErrorI {
+  error?: {
+    $uid: string
+    $message: string | Ref<string>
+  }[]
+}
+const props = defineProps<
+  ErrorI & {
+    fileType: 'img' | 'doc' // Добавлен проп для типа файла
+  }
+>()
 
 const model = ref<File | null>(null)
 
@@ -35,23 +57,6 @@ const handleFileChange = (event: Event) => {
 
   if (target.files && target.files.length > 0) {
     const file = target.files[0]
-
-    const validFormats = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp']
-    if (!validFormats.includes(file.type)) {
-      alert(
-        'Недопустимый формат файла. Пожалуйста, выберите изображение (JPEG, JPG, PNG, GIF, WEBP).'
-      )
-      target.value = ''
-      return
-    }
-
-    const maxSizeInBytes = 5 * 1024 * 1024
-    if (file.size > maxSizeInBytes) {
-      alert('Размер файла превышает 5 МБ. Пожалуйста, выберите изображение меньшего размера.')
-      target.value = ''
-      return
-    }
-
     model.value = file
     emit('update:modelValue', model.value)
   } else {
@@ -63,6 +68,7 @@ const handleFileChange = (event: Event) => {
 
 <style scoped lang="scss">
 .input-file {
+  position: relative;
   width: 100%;
   display: flex;
   align-items: center;
@@ -86,6 +92,33 @@ const handleFileChange = (event: Event) => {
     &:hover {
       background: $default-white;
       border: 2px solid $primary-color;
+    }
+  }
+  &__error {
+    position: absolute;
+    bottom: -33px;
+    left: 0;
+    &-message {
+      color: $error-color;
+    }
+  }
+
+  .error {
+    &-enter-active {
+      transition: $default-transition;
+    }
+
+    &-leave-active {
+      transition: $default-transition;
+    }
+
+    &-enter-from {
+      transform: translateX(-30px);
+      opacity: 0;
+    }
+    &-leave-to {
+      transform: translateX(100px);
+      opacity: 0;
     }
   }
 }

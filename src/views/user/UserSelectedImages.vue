@@ -55,6 +55,7 @@ const selectedItemNames = (item: File) => {
     &-name {
       max-width: 100%;
       margin-top: 10px;
+      padding: 0 5px;
     }
   }
 }
