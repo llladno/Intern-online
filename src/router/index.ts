@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import('../views/common/AuthorizationView.vue')
     },
     {
+      path: '/registration',
+      name: 'registration',
+      component: () => import('@/views/RegistrationView.vue')
+    },
+    {
       path: '/develop',
       name: 'develop',
       component: () => import('../views/InDevelopView.vue')

@@ -7,7 +7,7 @@ import SideBar from '@/components/pages/SideBar.vue'
 const route = useRoute()
 const isLogin = ref(false)
 
-const disabledHeader = ['/login', '/develop', '/ui-kit']
+const disabledHeader = ['/login', '/develop', '/ui-kit', '/registration']
 
 watch(
   () => route.params,
