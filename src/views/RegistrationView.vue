@@ -15,6 +15,7 @@
 import { onMounted, ref, shallowRef } from 'vue'
 import Stage1 from '@/components/pages/registration/Stage1.vue'
 import Stage2 from '@/components/pages/registration/Stage2.vue'
+import Stage4 from '@/components/pages/registration/Stage4.vue'
 
 const stage = ref(0)
 const activeComponent = shallowRef()
@@ -27,8 +28,11 @@ onMounted(() => {
   activeComponent.value = Stage1
 })
 
-function nextStage() {
-  activeComponent.value = Stage2
+function nextStage(data) {
+  console.log(data)
+  if (activeComponent.value === Stage2)activeComponent.value = Stage4
+  else activeComponent.value = Stage2
+
   stage.value++
 }
 
