@@ -1,70 +1,250 @@
 <template>
-  <div class="registration">
-    <div class="registration-header">
-      <div class="registration-header__progress-bar">
-        <div class="registration-header__progress-bar__step" :style="{width: (stage/4) * 100 + '%'}" />
+  <transition mode="out-in">
+    <div class="registration" v-if="!finalStage">
+      <div class="registration-header">
+        <div class="registration__back" @click="stage--">Назад</div>
+
+        <div class="registration-header__progress-bar">
+          <div
+            class="registration-header__progress-bar__step"
+            :style="{ width: (stage / 4) * 100 + '%' }"
+          />
+        </div>
       </div>
+      <transition mode="out-in">
+        <component :is="activeComponent" :key="stage" :stage="stage" @next-stage="nextStage" />
+      </transition>
     </div>
-    <transition mode="out-in">
-      <component :is="activeComponent" :key="stage" :stage="stage" @next-stage="nextStage" />
-    </transition>
-  </div>
+    <div v-else class="registration-finaly" ref="finalyRef">
+      <h1 class="skeleton-box">Стажер.Онлайн</h1>
+      <h2>Персонализируем аккаунт . . . . .</h2>
+    </div>
+  </transition>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, shallowRef } from 'vue'
+import { reactive, ref, shallowRef, watch } from 'vue'
 import Stage1 from '@/components/pages/registration/Stage1.vue'
 import Stage2 from '@/components/pages/registration/Stage2.vue'
+import Stage5 from '@/components/pages/registration/Stage5.vue'
+import Stage3 from '@/components/pages/registration/Stage3.vue'
 import Stage4 from '@/components/pages/registration/Stage4.vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/UserStore'
 
 const stage = ref(0)
 const activeComponent = shallowRef()
+const finalStage = ref(false)
+const router = useRouter()
+const userStore = useUserStore()
+const finalyRef = ref(null)
 
-setTimeout(()=> {
+setTimeout(() => {
   stage.value++
-},500)
-
-onMounted(() => {
   activeComponent.value = Stage1
+}, 500)
+
+const allStagesData = reactive({
+  accountType: '',
+  data: {}
 })
 
-function nextStage(data) {
-  console.log(data)
-  if (activeComponent.value === Stage2)activeComponent.value = Stage4
-  else activeComponent.value = Stage2
-
-  stage.value++
+function nextStage(data: { from: string; data: string | object }) {
+  switch (data.from) {
+    case 'stage1': {
+      if (data.data === 'trainee') {
+        stage.value = 2
+        activeComponent.value = Stage2
+        allStagesData.accountType = 'trainee'
+      } else {
+        allStagesData.accountType = 'manager'
+        activeComponent.value = Stage3
+        stage.value = 2
+      }
+      break
+    }
+    case 'stage2': {
+      activeComponent.value = Stage5
+      allStagesData.data = {
+        name: data.data.name,
+        surname: data.data.surname,
+        patronymic: data.data.patronymic
+      }
+      stage.value = 4
+      break
+    }
+    case 'stage3': {
+      allStagesData.data = data.data
+      activeComponent.value = Stage4
+      stage.value = 3
+      break
+    }
+    case 'stage4': {
+      console.log(data.data)
+      activeComponent.value = Stage5
+      allStagesData.data.activity = data.data
+      stage.value = 4
+      break
+    }
+    case 'stage5': {
+      allStagesData.data.email = data.data
+      finalStage.value = true
+      // userStore.signUp({email: allStagesData.data.email, organisation: allStagesData.accountType === 'manager'})
+      setTimeout(() => {
+        finalyRef.value.classList.add('register-finaly__animation')
+      }, 2000)
+      setTimeout(() => {
+        router.push('/')
+      }, 3000)
+      break
+    }
+  }
 }
 
+watch(stage, (newStage, oldValue) => {
+  if (newStage < oldValue) {
+    stage.value = newStage
+    switch (newStage) {
+      case 0:
+        router.push('/login')
+        break
+      case 1:
+        activeComponent.value = Stage1
+        break
+      case 2:
+        if (allStagesData.accountType === 'manager') {
+          stage.value = 1
+          activeComponent.value = Stage1
+        } else {
+          activeComponent.value = Stage2
+          stage.value = 2
+        }
+        break
+      case 3:
+        if (allStagesData.accountType === 'trainee') {
+          stage.value = 2
+          console.log(stage.value)
+          activeComponent.value = Stage2
+        } else {
+          activeComponent.value = Stage4
+        }
+        break
+      case 4:
+        activeComponent.value = Stage4
+        break
+      default:
+        activeComponent.value = Stage1
+        break
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">
-.registration{
+.registration {
   width: 100vw;
+  height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 38px;
 
-  &-header{
+  &__back {
+    cursor: pointer;
+    transition: 0.3s ease;
+
+    &:hover {
+      color: #727272;
+    }
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     margin-top: 42px;
     width: 70%;
 
-    &__progress-bar{
-      background: #E4E4E7;
+    &__progress-bar {
+      background: #e4e4e7;
       height: 17px;
       border-radius: 24px;
       width: 100%;
 
-      &__step{
+      &__step {
         height: 100%;
         border-radius: 24px;
-        background: #7862EB;
+        background: #7862eb;
         transition: all 1s ease;
       }
     }
   }
-  &-body{
+}
+
+.registration-finaly {
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    font-size: 40px;
+    font-weight: 600;
+    color: $primary-color;
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+
+.register-finaly__animation {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fade-in-animation 1s ease forwards;
+}
+
+@keyframes fade-in-animation {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}
+
+.skeleton-box {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(#fff, 0) 0,
+      rgba(#fff, 0.2) 20%,
+      rgba(#fff, 0.5) 60%,
+      rgba(#fff, 0)
+    );
+    animation: shimmer 2s infinite;
+    content: '';
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
   }
 }
 

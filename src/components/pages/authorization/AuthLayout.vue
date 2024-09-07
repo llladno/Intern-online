@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import AuthLogin from '@/components/pages/authorization/AuthLogin.vue'
 import AuthRegistration from '@/components/pages/authorization/AuthRegistration.vue'
+import { useRouter } from 'vue-router'
 
 const selected = ref('login')
+const router = useRouter()
+
+watch(selected, (value) => {
+  if (value === 'registration') {
+    router.push('/registration')
+  }
+})
 </script>
 
 <template>

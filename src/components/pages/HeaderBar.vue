@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import IconHeaderNotification from '@/components/icons/IconHeaderNotification.vue'
 import IconLogo from '@/components/icons/IconLogo.vue'
+import IOButton from '@/components/common/IOButton.vue'
+import IconSearch from '@/components/icons/IconSearch.vue'
+import IOInput from '@/components/common/IOInput.vue'
 </script>
 
 <template>
@@ -15,6 +18,11 @@ import IconLogo from '@/components/icons/IconLogo.vue'
         <router-link to="/develop" class="p-16-400"> Помощь </router-link>
       </div>
       <div class="header__nav-right">
+        <i-o-button>+ Добавить</i-o-button>
+        <div class="cases-header__search">
+          <i-o-input type="text" placeholder="Поиск" background="#fff" padding="33" />
+          <icon-search />
+        </div>
         <icon-header-notification />
         <router-link to="/login" class="p-16-400"> Вход </router-link>
       </div>
@@ -24,8 +32,8 @@ import IconLogo from '@/components/icons/IconLogo.vue'
 
 <style scoped lang="scss">
 .header {
-  height: 55px;
-  padding: 0 40px;
+  height: 80px;
+  padding: 20px 40px;
 
   &__nav {
     display: flex;

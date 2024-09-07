@@ -1,12 +1,13 @@
 <template>
   <div class="registration-body">
-    <img :src="Stage4" />
+    <img :src="Stage5" />
     <div class="registration-body__form">
-      <h2 class="registration-body__header">Чем занимается ваша компания?</h2>
-      <i-o-input v-model="activity">Сфера деятельности </i-o-input>
+      <h2 class="registration-body__header">Введите почту</h2>
+      <span>Пароль будет отправлен на указанную вами почту</span>
+      <i-o-input v-model="mail">Почта</i-o-input>
       <i-o-button
         class="registration-body__button"
-        @click="$emit('nextStage', { from: 'stage4', data: activity })"
+        @click="$emit('nextStage', { from: 'stage5', data: mail })"
         >Готово</i-o-button
       >
     </div>
@@ -16,12 +17,12 @@
 <script setup lang="ts">
 import IOInput from '@/components/common/IOInput.vue'
 import IOButton from '@/components/common/IOButton.vue'
+import Stage5 from '@/assets/media/img/registration/Stage5.png'
 import { ref } from 'vue'
-import Stage4 from '@/assets/media/img/registration/Stage4.png'
-
-const activity = ref('')
 
 defineEmits(['nextStage'])
+
+const mail = ref('')
 </script>
 
 <style scoped lang="scss">

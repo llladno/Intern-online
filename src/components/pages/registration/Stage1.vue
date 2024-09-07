@@ -1,17 +1,32 @@
 <template>
-  <div class="registration-body" v-if="stage == 1">
-    <img class="registration-body__img" />
+  <div class="registration-body">
+    <img class="registration-body__img" :src="Stage1" />
     <div class="registration-body__form">
       <h2 class="registration-body__header">Выберите вашу роль</h2>
-      <div class="registration-body__select-button" @click="selected = 'trainee'">
+      <div
+        :class="[
+          'registration-body__select-button',
+          selected === 'trainee' && 'registration-body__select-button--active'
+        ]"
+        @click="selected = 'trainee'"
+      >
         <!--          <img src="src/assets/media/img/registration/Ellipse%201.png"/>-->
         <span>Стажер</span>
       </div>
-      <div class="registration-body__select-button" @click="selected = 'manager'">
+      <div
+        :class="[
+          'registration-body__select-button',
+          selected === 'manager' && 'registration-body__select-button--active'
+        ]"
+        @click="selected = 'manager'"
+      >
         <!--          <img src="src/assets/media/img/registration/Ellipse%201.png"/>-->
         <span>Менеджер или Владелиц бизнеса</span>
       </div>
-      <button-component @click="$emit('nextStage', selected)" class="registration-body__button">
+      <button-component
+        @click="$emit('nextStage', { from: 'stage1', data: selected })"
+        class="registration-body__button"
+      >
         Готово
       </button-component>
     </div>
@@ -21,59 +36,14 @@
 <script setup lang="ts">
 import ButtonComponent from '@/components/shadcn/ui/button/ButtonComponent.vue'
 import { ref } from 'vue'
+import Stage1 from '@/assets/media/img/registration/Stage1.png'
 
-const props = defineProps<{ stage: number, nextStage: () => void }>()
+defineProps<{ stage: number; nextStage: () => void }>()
 defineEmits(['nextStage'])
 
 const selected = ref('')
 </script>
 
-
 <style scoped lang="scss">
-@import "@/assets/components/layout/registrationStages";
-.registration-body {
-  &__form {
-    padding: 16px 32px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 16px;
-    border: #E4E4E7 1px solid;
-    border-radius: 30px;
-  }
-
-  &__header {
-    font-size: 28px;
-    font-weight: 500;
-  }
-
-  &__select-button {
-    padding: 8px 16px;
-    display: flex;
-    align-items: center;
-    gap: 23px;
-    height: 60px;
-    width: 100%;
-    border: #E4E4E7 1px solid;
-    border-radius: 8px;
-    transition: .5s ease ;
-
-    &:hover {
-      background-color: #F3F3F5;
-    }
-
-    &:active {
-      background-color: #F3F3F5;
-    }
-
-    &--active {
-      background-color: #F3F3F5;
-    }
-  }
-
-  &__button {
-    margin-top: 8px;
-    width: 190px;
-  }
-}
+@import '@/assets/components/layout/registrationStages';
 </style>
