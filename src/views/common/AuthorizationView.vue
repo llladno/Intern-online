@@ -6,7 +6,7 @@ import AuthLayout from '@/components/pages/authorization/AuthLayout.vue'
 <template>
   <main>
     <auth-layout />
-    <img :src="AuthPhoto" alt="" />
+    <img :src="AuthPhoto" alt="" class="auth-img" />
   </main>
 </template>
 
@@ -21,6 +21,11 @@ main {
     width: 50%;
     height: 100vh;
     object-fit: cover;
+  }
+
+  .auth-img {
+    opacity: 1;
+    transition: opacity 0.6s ease;
   }
 }
 </style>

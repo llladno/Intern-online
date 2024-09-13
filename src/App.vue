@@ -21,7 +21,6 @@ watch(
 <template>
   <header-bar v-if="!isLogin" />
   <div :class="!isLogin && 'main-router'">
-    <side-bar v-if="!isLogin && route.path != '/cases'" />
     <router-view />
   </div>
 </template>

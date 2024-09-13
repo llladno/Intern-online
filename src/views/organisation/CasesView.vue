@@ -1,15 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-import CaseCard from '@/components/pages/cases/CaseCard.vue'
-import CasesHeader from '@/components/pages/cases/CasesHeader.vue'
-import { casesInfo } from '@/stores/mock'
-
-const selected = ref('active')
-function selectedEmit(slot: string) {
-  selected.value = slot
-}
-</script>
-
 <template>
   <div class="organisation">
     <div class="organisation__cases main-container">
@@ -36,6 +24,18 @@ function selectedEmit(slot: string) {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import CaseCard from '@/components/pages/cases/CaseCard.vue'
+import CasesHeader from '@/components/pages/cases/CasesHeader.vue'
+import { casesInfo } from '@/stores/mock'
+
+const selected = ref('active')
+function selectedEmit(slot: string) {
+  selected.value = slot
+}
+</script>
 
 <style scoped lang="scss">
 .organisation {

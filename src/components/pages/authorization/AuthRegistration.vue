@@ -30,27 +30,27 @@ function registration() {
 
 <template>
   <div class="auth__registration">
-    <p class="p-14-500">Зарегистрироваться как</p>
-    <select-component v-model="selected">
-      <select-trigger>
-        <select-value placeholder="Выберите вид пользователя" />
-      </select-trigger>
-      <select-content>
-        <select-group>
-          <select-label>Выберите вид пользователя</select-label>
-          <select-item value="default"> Обычный </select-item>
-          <select-item value="organisation"> Организация </select-item>
-        </select-group>
-      </select-content>
-    </select-component>
-    <i-o-input v-model="email" :props="{ placeholder: 'Телефон' }"> Почта </i-o-input>
-    <i-o-input v-model="password" :props="{ placeholder: 'Пароль' }"> Пароль </i-o-input>
-    <i-o-input v-model="passwordRepeat" :props="{ placeholder: 'Повторите пароль' }">
-      Повтор пароля
-    </i-o-input>
-    <i-o-button class="auth__registration-button" full-width @click="registration">
-      Зарегистрироваться
-    </i-o-button>
+    <!--    <p class="p-14-500">Зарегистрироваться как</p>-->
+    <!--    <select-component v-model="selected">-->
+    <!--      <select-trigger>-->
+    <!--        <select-value placeholder="Выберите вид пользователя" />-->
+    <!--      </select-trigger>-->
+    <!--      <select-content>-->
+    <!--        <select-group>-->
+    <!--          <select-label>Выберите вид пользователя</select-label>-->
+    <!--          <select-item value="default"> Обычный </select-item>-->
+    <!--          <select-item value="organisation"> Организация </select-item>-->
+    <!--        </select-group>-->
+    <!--      </select-content>-->
+    <!--    </select-component>-->
+    <!--    <i-o-input v-model="email" :props="{ placeholder: 'Телефон' }"> Почта </i-o-input>-->
+    <!--    <i-o-input v-model="password" :props="{ placeholder: 'Пароль' }"> Пароль </i-o-input>-->
+    <!--    <i-o-input v-model="passwordRepeat" :props="{ placeholder: 'Повторите пароль' }">-->
+    <!--      Повтор пароля-->
+    <!--    </i-o-input>-->
+    <!--    <i-o-button class="auth__registration-button" full-width @click="registration">-->
+    <!--      Зарегистрироваться-->
+    <!--    </i-o-button>-->
   </div>
 </template>
 

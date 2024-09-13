@@ -1,3 +1,5 @@
+import type { DefineComponent } from 'vue'
+
 export interface InputPropsI {
   props?: any
   big?: boolean
