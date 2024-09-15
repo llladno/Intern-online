@@ -79,7 +79,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/shadcn/ui/dropdown-menu'
 import IconProfile from '@/components/icons/IconProfile.vue'
-import { type Component, computed, ref, watch } from 'vue'
+import { type Component, ref, watch } from 'vue'
 import IconSettings from '@/components/icons/IconSettings.vue'
 import ProfileImg from '@/assets/media/img/profile.png'
 import IconDropDown from '@/components/icons/IconDropDown.vue'
@@ -95,7 +95,7 @@ watch(router.currentRoute, () => {
   activeRouteName.value = router.currentRoute.value.name
 })
 
-const actionsDropdownMenu: { id: string; title: string; icon: Component }[] = [
+const actionsDropdownMenu: { id: string; title: string; icon: Component; action: () => void }[] = [
   {
     id: '1',
     title: 'Профиль компании',
@@ -106,13 +106,13 @@ const actionsDropdownMenu: { id: string; title: string; icon: Component }[] = [
     id: '2',
     title: 'Уведомления',
     icon: IconNotification,
-    action: router.push('/')
+    action: () => router.push('/')
   },
   {
     id: '3',
     title: 'Настройки',
     icon: IconSettings,
-    action: () => router.push('/registration')
+    action: () => router.push('/login')
   }
 ]
 

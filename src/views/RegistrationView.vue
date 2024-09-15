@@ -89,7 +89,10 @@ function nextStage(data: { from: string; data: string | object }) {
     case 'stage5': {
       allStagesData.data.email = data.data
       finalStage.value = true
-      // userStore.signUp({email: allStagesData.data.email, organisation: allStagesData.accountType === 'manager'})
+      userStore.signUp({
+        email: allStagesData.data.email,
+        organisation: allStagesData.accountType === 'manager'
+      })
       setTimeout(() => {
         finalyRef.value.classList.add('register-finaly__animation')
       }, 2000)
