@@ -1,7 +1,7 @@
 <template>
   <div class="experience">
     <h3 class="experience__title p-18-500">Опыт работы</h3>
-    <transition-group name="experience" tag="div" appear>
+    <transition-group name="experience" appear>
       <div
         class="experience__item"
         v-for="(item, index) in experiences"
@@ -41,19 +41,29 @@ import IOInput from '@/components/common/IOInput.vue'
 import IOInputDate from '@/components/common/IOInputDate.vue'
 import IconDelete from '@/components/icons/IconDelete.vue'
 import type { UserExperienceI } from '@/types/userProfile'
+const props = defineProps<{
+  experiences: UserExperienceI[]
+}>()
 
-const experiences = ref<UserExperienceI[]>([
-  {
-    id: Date.now(),
-    company: '',
-    position: '',
-    startDate: null,
-    endDate: null,
-    isCurrent: false,
-    isNew: false
-  }
-])
+const emit = defineEmits<{
+  (e: 'update:experiences', experiences: UserExperienceI[]): void
+}>()
 
+const experiences = ref<UserExperienceI[]>(
+  props.experiences.length > 0
+    ? props.experiences
+    : [
+        {
+          id: Date.now(),
+          company: '',
+          position: '',
+          startDate: null,
+          endDate: null,
+          isCurrent: false,
+          isNew: true
+        }
+      ]
+)
 const addExperience = () => {
   const newExperience = {
     id: Date.now(),
@@ -74,10 +84,6 @@ const removeExperience = (index: number) => {
     emit('update:experiences', experiences.value)
   }
 }
-
-const emit = defineEmits<{
-  (e: 'update:experiences', experiences: UserExperienceI[]): void
-}>()
 
 watch(
   experiences,

@@ -1,3 +1,4 @@
+import type { Ref } from 'vue'
 export interface InputPropsI {
   props?: any
   big?: boolean
@@ -39,4 +40,10 @@ export interface CheckboxPropsI {
   label?: string
   value: string
   checked: boolean
+}
+export interface ErrorI {
+  error?: {
+    $uid: string
+    $message: string | Ref<string>
+  }[]
 }

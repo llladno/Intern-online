@@ -2,18 +2,23 @@
   <div class="add-file">
     <h3 class="p-18-500">{{ label }}</h3>
     <UserSelectedImages
-      v-if="showImages"
+      v-if="isShowFiles"
       :selectedItems="selectedItems"
       :imageUrls="imageUrls"
       @edit-items="editItems"
     />
-    <IOModal label="Добавить фотографии" @save="saveItem" @cansel="removeLastItem">
+    <IOModal
+      :label="modalLabel"
+      @save="saveItem"
+      @cansel="removeLastItem"
+      :disabled="isButtonDisabled"
+    >
       <template #header>
-        <h2 class="header-1">Дипломы</h2>
+        <h2 class="header-1">{{ modalTitle }}</h2>
         <p class="p-13-400 text-center">Выберите файл диплома</p>
       </template>
       <IOInputFile
-        fileType="img"
+        :fileType="fileType"
         v-model="fileValue"
         @update:modelValue="handleFileChange"
         :error="v.fileValue.$errors"
@@ -26,58 +31,47 @@
 import { computed, ref } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers } from '@vuelidate/validators'
-import { maxFileSize } from '@/ts/validators'
+import { maxFileSize, uniqueFileValidator } from '@/ts/validators'
 import IOModal from '@/components/common/IOModal.vue'
 import IOInputFile from '@/components/common/IOInputFile.vue'
 import UserSelectedImages from '@/views/user/UserSelectedImages.vue'
+import type { UserFileUploadI } from '@/types/userProfile'
 
-const props = defineProps<{
-  label: string
-  images: File[]
-}>()
+defineProps<UserFileUploadI>()
 
 const emit = defineEmits<{
-  (e: 'update:images', images: File[]): void
+  (e: 'update:files', files: File[]): void
 }>()
 
+const emitUpdatedFiles = () => {
+  emit('update:files', selectedItems.value)
+}
 const fileValue = ref<File | null>(null)
-const selectedItems = ref<File[]>(props.images)
+const selectedItems = ref<File[]>([])
 const imageUrls = ref<string[]>([])
-const showImages = ref<boolean>(false)
+const isShowFiles = ref<boolean>(false)
 
 const rules = computed(() => ({
   fileValue: {
-    required: helpers.withMessage('Выберите изображение', required),
-    maxFileSize: maxFileSize(5 * 1024 * 1024)
+    required: helpers.withMessage('Выберите изображение или файл', required),
+    maxFileSize: maxFileSize(5 * 1024 * 1024),
+    isUnique: uniqueFileValidator(selectedItems.value)
   }
 }))
 
-const emitUpdatedImages = () => {
-  emit('update:images', selectedItems.value)
-}
 const v = useVuelidate(rules, { fileValue })
-
-const handleFileChange = (file: File | null) => {
-  v.value.$validate()
-
-  if (v.value.fileValue.$pending || v.value.fileValue.$invalid) {
-    return
-  }
-
-  if (file) {
-    selectedItems.value.push(file)
-    updateImageUrls()
-    emitUpdatedImages()
-  }
-}
+const isButtonDisabled = computed(() => v.value.fileValue.$error)
 
 const updateImageUrls = () => {
+  if (selectedItems.value.length === 0) {
+    imageUrls.value = []
+  }
+
   imageUrls.value = selectedItems.value
     .map((item) => {
       if (item instanceof File) {
         return URL.createObjectURL(item)
       } else {
-        console.warn('Invalid item for URL creation:', item)
         return null
       }
     })
@@ -87,7 +81,7 @@ const updateImageUrls = () => {
 const editItems = () => {
   selectedItems.value = []
   imageUrls.value = []
-  emitUpdatedImages()
+  emitUpdatedFiles()
 }
 
 const removeLastItem = () => {
@@ -95,19 +89,63 @@ const removeLastItem = () => {
     selectedItems.value.pop()
     fileValue.value = null
     updateImageUrls()
-    emitUpdatedImages()
+    emitUpdatedFiles()
   }
 }
+
+// const saveItem = () => {
+//     isShowFiles.value = true
+//     console.log('Файл успешно сохранен.')
+//     emitUpdatedFiles()
+// }
+
 const saveItem = () => {
   v.value.$validate()
-
   if (v.value.fileValue.$pending || v.value.fileValue.$invalid) {
     console.log('Валидация не пройдена, окно не закроется.')
     return
   } else {
-    showImages.value = true
+    isShowFiles.value = true
     console.log('Файл успешно сохранен.')
-    emitUpdatedImages()
+    emitUpdatedFiles()
+  }
+}
+
+// const handleFileChange = (file: File | null) => {
+//   v.value.$touch()
+//   if (v.value.fileValue.$pending || v.value.fileValue.$invalid ) return
+
+//   if (file) {
+//     const isUnique = !selectedItems.value.some(item => item.name === file.name && item.size === file.size);
+
+//     if (isUnique) {
+//       selectedItems.value.push(file)
+//       updateImageUrls()
+//       emitUpdatedFiles()
+//     } else {
+//       console.warn('Файл уже добавлен:', file.name)
+//     }
+//   }
+// }
+const handleFileChange = (file: File | null) => {
+  v.value.$touch()
+  if (v.value.fileValue.$pending || v.value.fileValue.$invalid) return
+
+  if (file) {
+    const isUnique = !selectedItems.value.some(
+      (item) => item.name === file.name && item.size === file.size
+    )
+
+    if (isUnique) {
+      selectedItems.value.push(file)
+      updateImageUrls()
+      emitUpdatedFiles()
+      v.value.fileValue.$reset()
+    } else {
+      // console.warn('Файл уже добавлен:', file.name)
+
+      alert(`Файл "${file.name}" уже добавлен.`)
+    }
   }
 }
 </script>

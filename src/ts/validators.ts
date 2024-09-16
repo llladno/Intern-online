@@ -8,3 +8,16 @@ export const maxFileSize = (maxSizeInBytes: number) => {
     }
   )
 }
+
+export const urlValidator = (value: string): boolean => {
+  const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/
+  return urlPattern.test(value)
+}
+
+export const uniqueFileValidator = (items: File[]) => {
+  return helpers.withMessage('Этот файл уже добавлен.', (value: File) => {
+    if (!value) return true
+    if (items.length === 0) return true
+    return !items.some((item) => item.name === value.name && item.size === value.size)
+  })
+}

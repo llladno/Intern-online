@@ -3,7 +3,7 @@
     <input
       class="input-file__text"
       type="file"
-      id="file"
+      :id="inputId"
       :accept="
         props.fileType === 'img'
           ? 'image/jpeg, image/jpg, image/png, image/gif, image/webp'
@@ -11,7 +11,7 @@
       "
       @change="handleFileChange"
     />
-    <label class="input-file__label" for="file">Выберите файл</label>
+    <label class="input-file__label" :for="inputId">Выберите файл</label>
     <span class="input-file__name p-14-500" v-if="fileInfo">{{ fileInfo }}</span>
     <TransitionGroup name="error">
       <div class="input-file__error" v-for="element in props.error" :key="element.$uid">
@@ -23,20 +23,14 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import type { Ref } from 'vue'
+import type { ErrorI } from '@/types/componentsProps/commonProps'
 
-interface ErrorI {
-  error?: {
-    $uid: string
-    $message: string | Ref<string>
-  }[]
-}
 const props = defineProps<
   ErrorI & {
-    fileType: 'img' | 'doc' // Добавлен проп для типа файла
+    fileType: 'img' | 'doc'
   }
 >()
-
+const inputId = `input-${Math.random().toString(36).substr(2, 9)}`
 const model = ref<File | null>(null)
 
 const emit = defineEmits<{

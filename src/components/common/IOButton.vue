@@ -36,7 +36,12 @@ defineProps<ButtonPropsI>()
   cursor: pointer;
   transition: $default-transition;
 
-  &:hover {
+  &:disabled {
+    background-color: $disabled-color;
+    cursor: default;
+  }
+
+  &:hover:not(:disabled) {
     opacity: 0.8;
   }
 

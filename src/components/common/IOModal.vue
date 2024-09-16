@@ -11,7 +11,7 @@
           <slot></slot>
           <div class="modal__footer">
             <IOButton outlined width="183" @click="handleCansel">Отмена</IOButton>
-            <IOButton width="183" @click="handleSave">Сохранить</IOButton>
+            <IOButton width="183" @click="handleSave" :disabled="disabled">Сохранить</IOButton>
           </div>
         </div>
       </div>
@@ -26,6 +26,7 @@ import IconClose from '@/components/icons/IconClose.vue'
 
 defineProps<{
   label: string
+  disabled?: boolean
 }>()
 
 const emits = defineEmits<{
