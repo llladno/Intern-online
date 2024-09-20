@@ -6,7 +6,7 @@
         popupShow.type === 'error' ? 'popup__content--error' : 'popup__content--success'
       ]"
     >
-     <slot></slot>
+      <slot></slot>
     </div>
   </div>
 </template>
