@@ -1,37 +1,3 @@
-<script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
-import IOButton from '@/components/common/IOButton.vue'
-import IOInput from '@/components/common/IOInput.vue'
-import IOSelect from '@/components/common/IOSelect.vue'
-import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
-import IconLoadComponents from '@/components/icons/IconLoadComponents.vue'
-import type { OrganisationProfileUpdateI } from '@/types/account/organisation'
-import { useUserStore } from '@/stores/account/UserStore'
-import { useOrganisationStore } from '@/stores/organisation/OrganistaionStore'
-
-const selected = ref('personal')
-const organisationStore = useOrganisationStore()
-
-const profileData = reactive<OrganisationProfileUpdateI>({
-  organisation_form: 1,
-  name: '',
-  phone_number: '',
-  email: '',
-  address: '',
-  website: '',
-  describe: ''
-})
-
-onMounted(async () => {
-  const data = await organisationStore.getOrganisationProfile()
-  console.log(data)
-})
-
-function handleSave() {
-  organisationStore.updateOrganisationProfile(profileData)
-}
-</script>
-
 <template>
   <div class="main-container my-profile">
     <h2 class="my-profile__header header-1">Мой профиль</h2>
@@ -59,9 +25,9 @@ function handleSave() {
           placeholder="Выберите форму компании"
           label="Выберите форму компании"
         />
-        <i-o-input v-model="profileData.name"> Название компании</i-o-input>
+        <i-o-input v-model="v.profileData.name.$model" :error="v.profileData.name.$errors"> Название компании</i-o-input>
         <i-o-input v-model="profileData.phone_number"> Телефон компании</i-o-input>
-        <i-o-input v-model="profileData.email"> Электронная почта компании</i-o-input>
+        <i-o-input v-model="v.profileData.email.$model" :error="v.profileData.email.$errors"> Электронная почта компании</i-o-input>
         <i-o-input v-model="profileData.website"> Веб-сайт компании</i-o-input>
         <i-o-input v-model="profileData.address"> Адрес компании</i-o-input>
         <i-o-input v-model="profileData.describe" big> Описание </i-o-input>
@@ -97,6 +63,51 @@ function handleSave() {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { computed, onMounted, reactive, ref } from 'vue'
+import IOButton from '@/components/common/IOButton.vue'
+import IOInput from '@/components/common/IOInput.vue'
+import IOSelect from '@/components/common/IOSelect.vue'
+import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
+import IconLoadComponents from '@/components/icons/IconLoadComponents.vue'
+import type { OrganisationProfileUpdateI } from '@/types/account/organisation'
+import { useVuelidate } from '@vuelidate/core'
+import { useOrganisationStore } from '@/stores/organisation/OrganistaionStore'
+import { defaultErrorMessage } from '@/helpers/vuelidateHelper'
+
+const selected = ref('personal')
+const organisationStore = useOrganisationStore()
+
+const profileData = reactive<OrganisationProfileUpdateI>({
+  organisation_form: 1,
+  name: '',
+  phone_number: '',
+  email: '',
+  address: '',
+  website: '',
+  describe: ''
+})
+
+const rules = computed(() => ({
+  profileData: {
+    name: defaultErrorMessage,
+    email: defaultErrorMessage,
+  }
+}))
+
+const v = useVuelidate(rules, { profileData })
+
+onMounted(async () => {
+  const data = await organisationStore.getOrganisationProfile()
+  console.log(data)
+})
+
+function handleSave() {
+  organisationStore.updateOrganisationProfile(profileData)
+}
+</script>
+
 
 <style scoped lang="scss">
 .my-profile {
