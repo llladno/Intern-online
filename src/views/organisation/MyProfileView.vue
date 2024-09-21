@@ -6,8 +6,8 @@ import IOSelect from '@/components/common/IOSelect.vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import IconLoadComponents from '@/components/icons/IconLoadComponents.vue'
 import type { OrganisationProfileUpdateI } from '@/types/account/organisation'
-import { useUserStore } from '@/stores/UserStore'
-import { useOrganisationStore } from '@/stores/OrganistaionStore'
+import { useUserStore } from '@/stores/account/UserStore'
+import { useOrganisationStore } from '@/stores/organisation/OrganistaionStore'
 
 const selected = ref('personal')
 const organisationStore = useOrganisationStore()

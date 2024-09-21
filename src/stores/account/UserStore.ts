@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { $api } from '@/api'
 import UserService from '@/api/userService'
-import { usePopupStore } from '@/stores/popupStore'
+import { usePopupStore } from '@/stores/PopupStore'
 import type { UserRegistrationI } from '@/types/userI'
 import OrganisationService from '@/api/organisationService'
 import type { OrganisationProfileUpdateI } from '@/types/account/organisation'

@@ -30,7 +30,7 @@ import Stage5 from '@/components/pages/registration/Stage5.vue'
 import Stage3 from '@/components/pages/registration/Stage3.vue'
 import Stage4 from '@/components/pages/registration/Stage4.vue'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/UserStore'
+import { useUserStore } from '@/stores/account/UserStore'
 import { AccountTypeEnum } from '@/types/account/auth'
 import type { OrganisationProfileUpdateI } from '@/types/account/organisation'
 
