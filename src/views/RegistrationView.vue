@@ -31,6 +31,8 @@ import Stage3 from '@/components/pages/registration/Stage3.vue'
 import Stage4 from '@/components/pages/registration/Stage4.vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/UserStore'
+import { AccountTypeEnum } from '@/types/account/auth'
+import type { OrganisationProfileUpdateI } from '@/types/account/organisation'
 
 const stage = ref(0)
 const activeComponent = shallowRef()
@@ -52,10 +54,10 @@ const allStagesData = reactive({
 function nextStage(data: { from: string; data: string | object }) {
   switch (data.from) {
     case 'stage1': {
-      if (data.data === 'trainee') {
+      if (data.data === 'account') {
         stage.value = 2
         activeComponent.value = Stage2
-        allStagesData.accountType = 'trainee'
+        allStagesData.accountType = 'account'
       } else {
         allStagesData.accountType = 'manager'
         activeComponent.value = Stage3
@@ -88,17 +90,30 @@ function nextStage(data: { from: string; data: string | object }) {
     }
     case 'stage5': {
       allStagesData.data.email = data.data
-      finalStage.value = true
-      userStore.signUp({
-        email: allStagesData.data.email,
-        organisation: allStagesData.accountType === 'manager'
-      })
-      setTimeout(() => {
-        finalyRef.value.classList.add('register-finaly__animation')
-      }, 2000)
-      setTimeout(() => {
-        router.push('/')
-      }, 3000)
+      console.log(allStagesData)
+      if (allStagesData.accountType == 'manager') {
+        const registrationData = {
+          email: allStagesData.data.email,
+          account_type: AccountTypeEnum.manager
+        }
+        const patchData: OrganisationProfileUpdateI = {
+          inn: allStagesData.data.inn,
+          name: allStagesData.data.name,
+          organisation_form: allStagesData.data.companyForm
+        }
+        userStore.signUpOrganisation(registrationData, patchData)
+      }
+      // finalStage.value = true
+      // userStore.signUp({
+      //   email: allStagesData.data.email,
+      //   organisation: allStagesData.accountType === 'manager'
+      // })
+      // setTimeout(() => {
+      //   finalyRef.value.classList.add('register-finaly__animation')
+      // }, 2000)
+      // setTimeout(() => {
+      //   router.push('/')
+      // }, 3000)
       break
     }
   }
@@ -124,7 +139,7 @@ watch(stage, (newStage, oldValue) => {
         }
         break
       case 3:
-        if (allStagesData.accountType === 'trainee') {
+        if (allStagesData.accountType === 'account') {
           stage.value = 2
           console.log(stage.value)
           activeComponent.value = Stage2

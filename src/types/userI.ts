@@ -1,7 +1,8 @@
+import type { AccountTypeEnum } from '@/types/account/auth'
+
 export interface UserRegistrationI {
   email: string
-  password: string
-  organisation: boolean
+  account_type: AccountTypeEnum
 }
 
 export interface TokensI {

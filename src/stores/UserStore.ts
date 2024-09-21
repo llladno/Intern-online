@@ -3,12 +3,27 @@ import { $api } from '@/api'
 import UserService from '@/api/userService'
 import { usePopupStore } from '@/stores/popupStore'
 import type { UserRegistrationI } from '@/types/userI'
+import OrganisationService from '@/api/organisationService'
+import type { OrganisationProfileUpdateI } from '@/types/account/organisation'
 
 export const useUserStore = defineStore('userStore', () => {
   const popupStore = usePopupStore()
   async function signUp(data: UserRegistrationI) {
     try {
       return await UserService.registration(data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  async function signUpOrganisation(
+    registrationData: UserRegistrationI,
+    patchData: OrganisationProfileUpdateI
+  ) {
+    try {
+      const registration = OrganisationService.registrationOrganisation(registrationData)
+      const updateOrganisation = OrganisationService.patchOrganisation(patchData)
+      return { registration, updateOrganisation }
     } catch (e) {
       console.log(e)
     }
@@ -36,5 +51,5 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  return { signUp, signIn, getTestUserList }
+  return { signUp, signIn, getTestUserList, signUpOrganisation }
 })

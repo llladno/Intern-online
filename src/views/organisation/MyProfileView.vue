@@ -1,12 +1,35 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import IOButton from '@/components/common/IOButton.vue'
 import IOInput from '@/components/common/IOInput.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import IconLoadComponents from '@/components/icons/IconLoadComponents.vue'
+import type { OrganisationProfileUpdateI } from '@/types/account/organisation'
+import { useUserStore } from '@/stores/UserStore'
+import { useOrganisationStore } from '@/stores/OrganistaionStore'
 
 const selected = ref('personal')
+const organisationStore = useOrganisationStore()
+
+const profileData = reactive<OrganisationProfileUpdateI>({
+  organisation_form: 1,
+  name: '',
+  phone_number: '',
+  email: '',
+  address: '',
+  website: '',
+  describe: ''
+})
+
+onMounted(async () => {
+  const data = await organisationStore.getOrganisationProfile()
+  console.log(data)
+})
+
+function handleSave() {
+  organisationStore.updateOrganisationProfile(profileData)
+}
 </script>
 
 <template>
@@ -36,14 +59,14 @@ const selected = ref('personal')
           placeholder="Выберите форму компании"
           label="Выберите форму компании"
         />
-        <i-o-input> Название компании</i-o-input>
-        <i-o-input> Телефон компании</i-o-input>
-        <i-o-input> Электронная почта компании</i-o-input>
-        <i-o-input> Веб-сайт компании</i-o-input>
-        <i-o-input> Адрес компании</i-o-input>
-        <i-o-input big> Описание </i-o-input>
+        <i-o-input v-model="profileData.name"> Название компании</i-o-input>
+        <i-o-input v-model="profileData.phone_number"> Телефон компании</i-o-input>
+        <i-o-input v-model="profileData.email"> Электронная почта компании</i-o-input>
+        <i-o-input v-model="profileData.website"> Веб-сайт компании</i-o-input>
+        <i-o-input v-model="profileData.address"> Адрес компании</i-o-input>
+        <i-o-input v-model="profileData.describe" big> Описание </i-o-input>
         <div class="my-profile__buttons">
-          <i-o-button>Сохранить</i-o-button>
+          <i-o-button @click="handleSave">Сохранить</i-o-button>
           <i-o-button outlined> Отменить </i-o-button>
         </div>
       </div>

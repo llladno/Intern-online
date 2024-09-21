@@ -6,9 +6,9 @@
       <div
         :class="[
           'registration-body__select-button',
-          selected === 'trainee' && 'registration-body__select-button--active'
+          selected === 'account' && 'registration-body__select-button--active'
         ]"
-        @click="selected = 'trainee'"
+        @click="selected = 'account'"
       >
         <!--          <img src="src/assets/media/img/registration/Ellipse%201.png"/>-->
         <span>Стажер</span>
