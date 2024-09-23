@@ -13,6 +13,7 @@ export interface OrganisationProfileI {
   updated_at: string
   logo: number
   organisation_form: number
+  field_of_activity: number
 }
 
 /**

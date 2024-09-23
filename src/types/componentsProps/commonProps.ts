@@ -33,6 +33,7 @@ export interface ButtonPropsI {
   icon?: boolean
   background?: string
   width?: string
+  disable?: boolean
 }
 
 export interface CheckboxPropsI {

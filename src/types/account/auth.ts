@@ -11,3 +11,11 @@ export interface RegistrationI {
 }
 
 export interface RegistrationUpdateI extends Partial<RegistrationI> {}
+
+export interface RegistrationOrganisationI {
+  email: string
+  name: string
+  organization_form: number | string
+  inn: string
+  field_of_activity: number | string
+}

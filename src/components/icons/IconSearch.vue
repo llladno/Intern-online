@@ -29,6 +29,6 @@
   position: absolute;
   top: 50%;
   left: 13px;
-  transform: translateY(-50%);
+  transform: translateY(-25%);
 }
 </style>

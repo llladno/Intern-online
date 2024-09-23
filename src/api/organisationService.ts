@@ -1,14 +1,13 @@
 import type { AxiosResponse } from 'axios'
 import { $api } from '@/api/index'
-import type { UserRegistrationI } from '@/types/userI'
 import type { OrganisationProfileI, OrganisationProfileUpdateI } from '@/types/account/organisation'
+import type { RegistrationOrganisationI } from '@/types/account/auth'
 
 export default class OrganisationService {
   private static readonly accountBaseUrl = '/account/v1'
-  private static readonly tokenBaseUrl = '/token'
 
-  static async registrationOrganisation(data: UserRegistrationI): Promise<AxiosResponse> {
-    return $api.post(`${this.accountBaseUrl}/register`, data)
+  static async registrationOrganisation(data: RegistrationOrganisationI): Promise<AxiosResponse> {
+    return $api.post(`${this.accountBaseUrl}/register/org`, data)
   }
 
   static async patchOrganisation(

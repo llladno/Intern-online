@@ -94,14 +94,12 @@ function nextStage(data: { from: string; data: string | object }) {
       if (allStagesData.accountType == 'manager') {
         const registrationData = {
           email: allStagesData.data.email,
-          account_type: AccountTypeEnum.manager
-        }
-        const patchData: OrganisationProfileUpdateI = {
           inn: allStagesData.data.inn,
           name: allStagesData.data.name,
-          organisation_form: allStagesData.data.companyForm
+          organization_form: allStagesData.data.companyForm,
+          field_of_activity: allStagesData.data.activity
         }
-        userStore.signUpOrganisation(registrationData, patchData)
+        userStore.signUpOrganisation(registrationData)
       }
       // finalStage.value = true
       // userStore.signUp({

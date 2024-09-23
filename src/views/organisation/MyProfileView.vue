@@ -25,9 +25,13 @@
           placeholder="Выберите форму компании"
           label="Выберите форму компании"
         />
-        <i-o-input v-model="v.profileData.name.$model" :error="v.profileData.name.$errors"> Название компании</i-o-input>
+        <i-o-input v-model="v.profileData.name.$model" :error="v.profileData.name.$errors">
+          Название компании *</i-o-input
+        >
         <i-o-input v-model="profileData.phone_number"> Телефон компании</i-o-input>
-        <i-o-input v-model="v.profileData.email.$model" :error="v.profileData.email.$errors"> Электронная почта компании</i-o-input>
+        <i-o-input v-model="v.profileData.email.$model" :error="v.profileData.email.$errors">
+          Электронная почта для связи с компанией *</i-o-input
+        >
         <i-o-input v-model="profileData.website"> Веб-сайт компании</i-o-input>
         <i-o-input v-model="profileData.address"> Адрес компании</i-o-input>
         <i-o-input v-model="profileData.describe" big> Описание </i-o-input>
@@ -92,7 +96,7 @@ const profileData = reactive<OrganisationProfileUpdateI>({
 const rules = computed(() => ({
   profileData: {
     name: defaultErrorMessage,
-    email: defaultErrorMessage,
+    email: defaultErrorMessage
   }
 }))
 
@@ -107,7 +111,6 @@ function handleSave() {
   organisationStore.updateOrganisationProfile(profileData)
 }
 </script>
-
 
 <style scoped lang="scss">
 .my-profile {

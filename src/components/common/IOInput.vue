@@ -69,7 +69,7 @@ const model = defineModel<string | number | readonly string[] | null | undefined
       border: 2px solid $primary-color;
     }
 
-    &--error{
+    &--error {
       border: 2px solid $error-color;
     }
   }

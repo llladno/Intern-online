@@ -12,9 +12,16 @@ import {
 import type { SelectPropsI } from '@/types/componentsProps/commonProps'
 
 defineProps<SelectPropsI>()
+const emit = defineEmits(['update:modelValue'])
+
 const test = ref()
 
-watch(test, () => console.log(test.value))
+watch(
+  () => test.value,
+  (newVal, oldVal) => {
+    emit('update:modelValue', newVal)
+  }
+)
 </script>
 
 <template>

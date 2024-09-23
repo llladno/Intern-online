@@ -5,7 +5,14 @@ defineProps<ButtonPropsI>()
 </script>
 
 <template>
-  <button :class="{ 'w-full': fullWidth, button: true, 'button--outlined': outlined }">
+  <button
+    :class="{
+      'w-full': fullWidth,
+      button: true,
+      'button--outlined': outlined,
+      'button--disabled': disable
+    }"
+  >
     <slot />
   </button>
 </template>
@@ -26,6 +33,11 @@ defineProps<ButtonPropsI>()
     background: none;
     border: 1px solid $primary-color;
     color: $primary-color;
+  }
+
+  &--disabled {
+    background: $default-grey;
+    color: $default-black;
   }
 }
 </style>
