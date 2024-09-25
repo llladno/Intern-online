@@ -175,6 +175,22 @@ const educationLevels: UserTempalateI[] = [
   { id: 5, value: 'secondary_professional', label: 'Среднее профессиональное образование' },
   { id: 6, value: 'higher', label: 'Высшее образование' },
   { id: 7, value: 'postgraduate', label: 'Послевузовское образование' },
+  { id: 8, value: 'doctoral', label: 'Доктор наук' },
+  { id: 1, value: 'none', label: 'Без образования' },
+  { id: 2, value: 'primary', label: 'Начальное образование' },
+  { id: 3, value: 'basic_secondary', label: 'Основное общее образование' },
+  { id: 4, value: 'secondary', label: 'Среднее общее образование' },
+  { id: 5, value: 'secondary_professional', label: 'Среднее профессиональное образование' },
+  { id: 6, value: 'higher', label: 'Высшее образование' },
+  { id: 7, value: 'postgraduate', label: 'Послевузовское образование' },
+  { id: 8, value: 'doctoral', label: 'Доктор наук' },
+  { id: 1, value: 'none', label: 'Без образования' },
+  { id: 2, value: 'primary', label: 'Начальное образование' },
+  { id: 3, value: 'basic_secondary', label: 'Основное общее образование' },
+  { id: 4, value: 'secondary', label: 'Среднее общее образование' },
+  { id: 5, value: 'secondary_professional', label: 'Среднее профессиональное образование' },
+  { id: 6, value: 'higher', label: 'Высшее образование' },
+  { id: 7, value: 'postgraduate', label: 'Послевузовское образование' },
   { id: 8, value: 'doctoral', label: 'Доктор наук' }
 ]
 const skills: UserTempalateI[] = [
