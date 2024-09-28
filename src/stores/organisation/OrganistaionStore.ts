@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
-import { $api } from '@/api'
-import UserService from '@/api/userService'
-import { usePopupStore } from '@/stores/PopupStore'
-import type { UserRegistrationI } from '@/types/userI'
 import OrganisationService from '@/api/organisationService'
-import type { OrganisationProfileUpdateI } from '@/types/account/organisation'
+import type { OrganisationProfileI, OrganisationProfileUpdateI } from '@/types/account/organisation'
+import { useDataStore } from '@/stores/data/DataStore'
+import { ref } from 'vue'
 
 export const useOrganisationStore = defineStore('organisationStore', () => {
+  const organisationProfile = ref<OrganisationProfileI>()
+  const organisationForm = ref()
+
   function updateOrganisationProfile(updatedData: OrganisationProfileUpdateI) {
     try {
       return OrganisationService.patchOrganisation(updatedData)
@@ -15,13 +16,30 @@ export const useOrganisationStore = defineStore('organisationStore', () => {
     }
   }
 
-  function getOrganisationProfile() {
+  async function getOrganisationProfile() {
     try {
-      return OrganisationService.getOrganisation()
+      organisationProfile.value = (await OrganisationService.getOrganisation()).data
+      organisationForm.value = await useDataStore().organisationForm()
     } catch (e) {
       console.log(e)
     }
   }
 
-  return { updateOrganisationProfile, getOrganisationProfile }
+  async function getOrganisationForm() {
+    try {
+      const response = await useDataStore().organisationForm()
+      organisationForm.value = response.data
+      return response.data
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  return {
+    organisationProfile,
+    organisationForm,
+    updateOrganisationProfile,
+    getOrganisationProfile,
+    getOrganisationForm
+  }
 })

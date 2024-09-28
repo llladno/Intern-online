@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import HeaderBar from '@/components/pages/HeaderBar.vue'
-import SideBar from '@/components/pages/SideBar.vue'
+import { useUserStore } from '@/stores/account/UserStore'
 
 const route = useRoute()
 const isLogin = ref(false)
+const userStore = useUserStore()
 
 const disabledHeader = ['/login', '/develop', '/ui-kit', '/registration']
+
+userStore.session()
 
 watch(
   () => route.params,

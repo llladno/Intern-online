@@ -11,8 +11,8 @@ export interface OrganisationProfileI {
   address: string
   describe: string
   updated_at: string
-  logo: number
-  organisation_form: number
+  logo: OrganisationLogoI
+  organization_form: number
   field_of_activity: number
 }
 
@@ -27,3 +27,8 @@ export interface OrganisationProfileUpdateI extends Partial<OrganisationProfileI
  * Omits the `updated_at` field from `OrganisationProfileI` as it's typically managed by the system.
  */
 export interface OrganisationProfileRequestI extends Omit<OrganisationProfileI, 'updated_at'> {}
+
+export interface OrganisationLogoI {
+  file: string
+  account: string
+}

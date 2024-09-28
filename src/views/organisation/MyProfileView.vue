@@ -6,27 +6,18 @@
       <template #safty> Безопасность и вход </template>
     </i-o-simple-select>
     <div v-if="selected == 'personal'" class="my-profile__info">
-      <div class="my-profile__form">
+      <div class="my-profile__form" v-if="profileData">
         <i-o-select
-          :options="[
-            {
-              value: 'ooo',
-              label: 'ООО'
-            },
-            {
-              value: 'oao',
-              label: 'ОАО'
-            },
-            {
-              value: 'ip',
-              label: 'ИП'
-            }
-          ]"
-          placeholder="Выберите форму компании"
+          :options="organisationForms"
+          :model-value="profileData.organization_form"
+          :placeholder="organisationForm.label"
           label="Выберите форму компании"
         />
         <i-o-input v-model="v.profileData.name.$model" :error="v.profileData.name.$errors">
           Название компании *</i-o-input
+        >
+        <i-o-input v-model="v.profileData.inn.$model" :error="v.profileData.inn.$errors"
+          >ИНН компании *</i-o-input
         >
         <i-o-input v-model="profileData.phone_number"> Телефон компании</i-o-input>
         <i-o-input v-model="v.profileData.email.$model" :error="v.profileData.email.$errors">
@@ -79,36 +70,37 @@ import type { OrganisationProfileUpdateI } from '@/types/account/organisation'
 import { useVuelidate } from '@vuelidate/core'
 import { useOrganisationStore } from '@/stores/organisation/OrganistaionStore'
 import { defaultErrorMessage } from '@/helpers/vuelidateHelper'
+import { useDataStore } from '@/stores/data/DataStore'
 
 const selected = ref('personal')
 const organisationStore = useOrganisationStore()
 
-const profileData = reactive<OrganisationProfileUpdateI>({
-  organisation_form: 1,
-  name: '',
-  phone_number: '',
-  email: '',
-  address: '',
-  website: '',
-  describe: ''
-})
+const profileData = ref<OrganisationProfileUpdateI>()
+
+const organisationForms = ref([])
+const organisationForm = ref()
 
 const rules = computed(() => ({
   profileData: {
     name: defaultErrorMessage,
-    email: defaultErrorMessage
+    email: defaultErrorMessage,
+    inn: defaultErrorMessage
   }
 }))
 
 const v = useVuelidate(rules, { profileData })
 
 onMounted(async () => {
-  const data = await organisationStore.getOrganisationProfile()
-  console.log(data)
+  await organisationStore.getOrganisationProfile()
+  profileData.value = organisationStore.organisationProfile
+  organisationForms.value = await useDataStore().organisationForm()
+  organisationForm.value = organisationForms.value.find(
+    (form) => form.value == profileData.value.organization_form
+  )
 })
 
 function handleSave() {
-  organisationStore.updateOrganisationProfile(profileData)
+  if (profileData.value) organisationStore.updateOrganisationProfile(profileData.value)
 }
 </script>
 

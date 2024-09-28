@@ -6,9 +6,12 @@ import type { UserRegistrationI } from '@/types/userI'
 import OrganisationService from '@/api/organisationService'
 import type { OrganisationProfileUpdateI } from '@/types/account/organisation'
 import type { RegistrationOrganisationI } from '@/types/account/auth'
+import { useRouter } from 'vue-router'
 
 export const useUserStore = defineStore('userStore', () => {
   const popupStore = usePopupStore()
+  const router = useRouter()
+
   async function signUp(data: UserRegistrationI) {
     try {
       return await UserService.registration(data)
@@ -30,10 +33,17 @@ export const useUserStore = defineStore('userStore', () => {
       await UserService.login(data).then((response) => {
         $api.defaults.headers.common.Authorization = `Bearer ${response.data.access}`
         document.cookie = `refresh=${response.data.refresh}; path=/; secure; samesite=strict`
+        localStorage.setItem('access', response.data.access) //TODO: изменить
+        router.push('/')
       })
     } catch (e) {
       console.log(e)
     }
+  }
+
+  async function session() {
+    const access = localStorage.getItem('access')
+    $api.defaults.headers.common.Authorization = `Bearer ${access}`
   }
 
   async function getTestUserList() {
@@ -47,5 +57,5 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  return { signUp, signIn, getTestUserList, signUpOrganisation }
+  return { signUp, signIn, getTestUserList, signUpOrganisation, session }
 })

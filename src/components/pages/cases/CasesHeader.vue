@@ -1,9 +1,23 @@
+<template>
+  <div class="organisation-cases__header">
+    <h2 class="header-1">Мои кейсы</h2>
+    <div class="organisation-cases__footer-right">
+      <i-o-simple-select class="auth__simpleselect" @selected-value="onSelected">
+        <template #active> Активные </template>
+        <template #draft> Черновики </template>
+        <template #archive> Архив </template>
+      </i-o-simple-select>
+      <cases-header-filter :options="optionsFiltered" placeholder="Фильтр" />
+      <div class="organisation-cases__footer-sort">
+        <i-o-select class="p-13-500" placeholder="Новые" label="Новые" :options="selectOptions" />
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
-import IOButton from '@/components/common/IOButton.vue'
-import IOInput from '@/components/common/IOInput.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
-import IconSearch from '@/components/icons/IconSearch.vue'
 import CasesHeaderFilter from '@/components/pages/cases/CasesHeaderFilter.vue'
 import type { SelectPropsOptionI } from '@/types/componentsProps/commonProps'
 
@@ -27,23 +41,6 @@ const optionsFiltered: SelectPropsOptionI[] = [
   { id: '7', label: 'Label2', value: 'Label2' }
 ]
 </script>
-
-<template>
-  <div class="organisation-cases__header">
-    <h2 class="header-1">Мои кейсы</h2>
-    <div class="organisation-cases__footer-right">
-      <i-o-simple-select class="auth__simpleselect" @selected-value="onSelected">
-        <template #active> Активные </template>
-        <template #draft> Черновики </template>
-        <template #archive> Архив </template>
-      </i-o-simple-select>
-      <cases-header-filter :options="optionsFiltered" placeholder="Фильтр" />
-      <div class="organisation-cases__footer-sort">
-        <i-o-select class="p-13-500" placeholder="Новые" label="Новые" :options="selectOptions" />
-      </div>
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .organisation-cases__header {

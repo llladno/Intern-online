@@ -36,11 +36,11 @@
           <icon-search />
         </div>
         <icon-notification />
-        <dropdown-menu>
+        <dropdown-menu v-if="organisationData">
           <dropdown-menu-trigger @click="handleClick">
             <div class="header__profile">
               <img :src="ProfileImg" />
-              <span> Название компании </span>
+              <span> {{ organisationData.name }} </span>
               <icon-drop-down
                 :class="[
                   'header__profile-dropdown',
@@ -61,6 +61,7 @@
             </dropdown-menu-item>
           </dropdown-menu-content>
         </dropdown-menu>
+        <button-component v-else @click="router.push('/login')"> Войти </button-component>
       </div>
     </div>
   </header>
@@ -79,20 +80,29 @@ import {
   DropdownMenuTrigger
 } from '@/components/shadcn/ui/dropdown-menu'
 import IconProfile from '@/components/icons/IconProfile.vue'
-import { type Component, ref, watch } from 'vue'
+import { type Component, onMounted, ref, watch } from 'vue'
 import IconSettings from '@/components/icons/IconSettings.vue'
 import ProfileImg from '@/assets/media/img/profile.png'
 import IconDropDown from '@/components/icons/IconDropDown.vue'
 import IconAllCase from '@/components/icons/IconAllCase.vue'
 import IconMyCase from '@/components/icons/IconMyCase.vue'
 import { useRouter } from 'vue-router'
+import { useOrganisationStore } from '@/stores/organisation/OrganistaionStore'
+import ButtonComponent from '@/components/shadcn/ui/button/ButtonComponent.vue'
 
 const actionDropDown = ref(false)
 const router = useRouter()
 const activeRouteName = ref()
+const organisationStore = useOrganisationStore()
+const organisationData = ref(null)
 
 watch(router.currentRoute, () => {
   activeRouteName.value = router.currentRoute.value.name
+})
+
+onMounted(async ()=>{
+  await organisationStore.getOrganisationProfile()t
+  organisationData.value = organisationStore.organisationProfile
 })
 
 const actionsDropdownMenu: { id: string; title: string; icon: Component; action: () => void }[] = [

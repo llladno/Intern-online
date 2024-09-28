@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import IOButton from '@/components/common/IOButton.vue'
 import IOInput from '@/components/common/IOInput.vue'
 import { useUserStore } from '@/stores/account/UserStore'
+import { useRouter } from 'vue-router'
 
 const email = ref('')
 const password = ref('')
