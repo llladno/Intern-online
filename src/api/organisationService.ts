@@ -1,7 +1,7 @@
 import type { AxiosResponse } from 'axios'
 import { $api } from '@/api/index'
-import type { OrganisationProfileI, OrganisationProfileUpdateI } from '@/types/account/organisation'
-import type { RegistrationOrganisationI } from '@/types/account/auth'
+import type { OrganisationProfileI, OrganisationProfileUpdateI } from '@/types/organisation'
+import type { RegistrationOrganisationI, ResetPasswordI } from '@/types/auth'
 
 export default class OrganisationService {
   private static readonly accountBaseUrl = '/account/v1'
@@ -18,5 +18,9 @@ export default class OrganisationService {
 
   static async getOrganisation(): Promise<AxiosResponse<OrganisationProfileI>> {
     return $api.get(`${this.accountBaseUrl}/profile/organization`)
+  }
+
+  static async changePassword(data: ResetPasswordI, id: number) {
+    return $api.put(`${this.accountBaseUrl}/change_password/${id}`, data)
   }
 }

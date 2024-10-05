@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/shadcn/ui/select'
-import type { SelectPropsI } from '@/types/componentsProps/commonProps'
+import type { SelectPropsI } from '@/types/commonProps'
 
 defineProps<SelectPropsI>()
 const emit = defineEmits(['update:modelValue'])

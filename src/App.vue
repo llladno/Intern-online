@@ -1,22 +1,30 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onBeforeMount, onUpdated, ref, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import HeaderBar from '@/components/pages/HeaderBar.vue'
-import { useUserStore } from '@/stores/account/UserStore'
+import { useUserStore } from '@/stores/UserStore'
+import { useOrganisationStore } from '@/stores/OrganistaionStore'
 
 const route = useRoute()
 const isLogin = ref(false)
 const userStore = useUserStore()
+const organisationStore = useOrganisationStore()
 
 const disabledHeader = ['/login', '/develop', '/ui-kit', '/registration']
 
-userStore.session()
+onBeforeMount(async () => {
+  await userStore.session()
+  if (!organisationStore.organisationProfile) await organisationStore.getOrganisationProfile()
+})
+
+onUpdated(async () => {
+  await organisationStore.getOrganisationProfile()
+})
 
 watch(
   () => route.params,
   () => {
-    if (disabledHeader.includes(route.path as string)) isLogin.value = true
-    else isLogin.value = false
+    isLogin.value = disabledHeader.includes(route.path as string)
   }
 )
 </script>

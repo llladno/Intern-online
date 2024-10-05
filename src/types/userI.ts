@@ -1,4 +1,4 @@
-import type { AccountTypeEnum } from '@/types/account/auth'
+import type { AccountTypeEnum } from '@/types/auth'
 
 export interface UserRegistrationI {
   email: string
@@ -8,4 +8,9 @@ export interface UserRegistrationI {
 export interface TokensI {
   access: string
   refresh: string
+}
+
+export interface LoginI {
+  email: string
+  password: string
 }

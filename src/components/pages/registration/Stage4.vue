@@ -23,7 +23,7 @@
 import IOButton from '@/components/common/IOButton.vue'
 import { onMounted, ref } from 'vue'
 import Stage4 from '@/assets/media/img/registration/Stage4.png'
-import { useDataStore } from '@/stores/data/DataStore'
+import { useDataStore } from '@/stores/DataStore'
 import IOSelect from '@/components/common/IOSelect.vue'
 
 const activity = ref('')

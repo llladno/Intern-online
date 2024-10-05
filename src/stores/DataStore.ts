@@ -20,5 +20,13 @@ export const useDataStore = defineStore('useDataStore', () => {
     }
   }
 
-  return { organisationForm, organisationActivity }
+  async function getFile() {
+    try {
+      return await DataService.getFile()
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  return { organisationForm, organisationActivity, getFile }
 })

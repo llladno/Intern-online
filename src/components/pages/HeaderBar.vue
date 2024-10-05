@@ -80,14 +80,14 @@ import {
   DropdownMenuTrigger
 } from '@/components/shadcn/ui/dropdown-menu'
 import IconProfile from '@/components/icons/IconProfile.vue'
-import { type Component, onMounted, ref, watch } from 'vue'
+import { type Component, nextTick, onMounted, ref, watch } from 'vue'
 import IconSettings from '@/components/icons/IconSettings.vue'
 import ProfileImg from '@/assets/media/img/profile.png'
 import IconDropDown from '@/components/icons/IconDropDown.vue'
 import IconAllCase from '@/components/icons/IconAllCase.vue'
 import IconMyCase from '@/components/icons/IconMyCase.vue'
 import { useRouter } from 'vue-router'
-import { useOrganisationStore } from '@/stores/organisation/OrganistaionStore'
+import { useOrganisationStore } from '@/stores/OrganistaionStore'
 import ButtonComponent from '@/components/shadcn/ui/button/ButtonComponent.vue'
 
 const actionDropDown = ref(false)
@@ -100,11 +100,17 @@ watch(router.currentRoute, () => {
   activeRouteName.value = router.currentRoute.value.name
 })
 
-onMounted(async ()=>{
-  await organisationStore.getOrganisationProfile()t
+watch(
+  () => organisationStore.organisationProfile,
+  () => {
+    console.log('header bar Changed')
+    organisationData.value = organisationStore.organisationProfile
+  }
+)
+
+onMounted(() => {
   organisationData.value = organisationStore.organisationProfile
 })
-
 const actionsDropdownMenu: { id: string; title: string; icon: Component; action: () => void }[] = [
   {
     id: '1',

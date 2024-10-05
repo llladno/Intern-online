@@ -33,7 +33,7 @@ import { onMounted, ref } from 'vue'
 import CaseCard from '@/components/pages/cases/CaseCard.vue'
 import CasesHeader from '@/components/pages/cases/CasesHeader.vue'
 import { casesInfo } from '@/stores/mock'
-import { useOrganisationStore } from '@/stores/organisation/OrganistaionStore'
+import { useOrganisationStore } from '@/stores/OrganistaionStore'
 
 const selected = ref('active')
 function selectedEmit(slot: string) {

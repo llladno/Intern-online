@@ -31,7 +31,7 @@ import { computed, onMounted, reactive, ref } from 'vue'
 import Stage3 from '@/assets/media/img/registration/Stage2-3.png'
 import { defaultErrorMessage } from '@/helpers/vuelidateHelper'
 import { useVuelidate } from '@vuelidate/core'
-import { useDataStore } from '@/stores/data/DataStore'
+import { useDataStore } from '@/stores/DataStore'
 
 const emit = defineEmits(['nextStage'])
 

@@ -6,7 +6,7 @@
       <template #safty> Безопасность и вход </template>
     </i-o-simple-select>
     <div v-if="selected == 'personal'" class="my-profile__info">
-      <div class="my-profile__form" v-if="profileData">
+      <div class="my-profile__form" v-if="profileData && organisationForm">
         <i-o-select
           :options="organisationForms"
           :model-value="profileData.organization_form"
@@ -33,9 +33,12 @@
       </div>
       <div class="my-profile__image">
         <div class="my-profile__image-place">
-          <icon-load-components />
+          <icon-load-components v-if="!file" />
+          <img ref="profileImageRef" />
+          <img :src="tempPath" />
         </div>
-        <i-o-button>Загрузить</i-o-button>
+        <i-o-input type="file" @change="setFile"></i-o-input>
+        <i-o-button @click="saveFile">Загрузить</i-o-button>
       </div>
     </div>
     <div v-else class="my-profile__safty">
@@ -51,9 +54,11 @@
       </div>
       <div class="my-profile__safty-form">
         <h2 class="p-28-500">Изменение пароля</h2>
-        <i-o-input type="password"> Введите актуальный пароль </i-o-input>
-        <i-o-input>Новый пароль</i-o-input>
-        <i-o-button>Изменить</i-o-button>
+        <i-o-input type="password" v-model="changePassword.old_password">
+          Введите актуальный пароль
+        </i-o-input>
+        <i-o-input v-model="changePassword.password">Новый пароль</i-o-input>
+        <i-o-button @click="handleChangePassword">Изменить</i-o-button>
       </div>
     </div>
   </div>
@@ -66,24 +71,39 @@ import IOInput from '@/components/common/IOInput.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import IconLoadComponents from '@/components/icons/IconLoadComponents.vue'
-import type { OrganisationProfileUpdateI } from '@/types/account/organisation'
+import type { OrganisationProfileUpdateI } from '@/types/organisation'
 import { useVuelidate } from '@vuelidate/core'
-import { useOrganisationStore } from '@/stores/organisation/OrganistaionStore'
-import { defaultErrorMessage } from '@/helpers/vuelidateHelper'
-import { useDataStore } from '@/stores/data/DataStore'
+import { useOrganisationStore } from '@/stores/OrganistaionStore'
+import { defaultErrorMessage, emailCheckMessage } from '@/helpers/vuelidateHelper'
+import { useDataStore } from '@/stores/DataStore'
+import type { OrganisationFormI } from '@/types/data'
+import type { ResetPasswordI } from '@/types/auth'
+import OrganisationService from '@/api/organisationService'
+import { getTokenId } from '@/helpers/token'
 
 const selected = ref('personal')
 const organisationStore = useOrganisationStore()
 
 const profileData = ref<OrganisationProfileUpdateI>()
 
-const organisationForms = ref([])
-const organisationForm = ref()
+const organisationForms = ref<OrganisationFormI[]>([])
+const organisationForm = ref<OrganisationFormI>()
+const file = ref()
+const changePassword = ref<Omit<ResetPasswordI, 'password2'>>({
+  old_password: '',
+  password: ''
+})
+
+const tempPath = ref('')
+
+const profileImageRef = ref('')
+
+const userId = getTokenId()
 
 const rules = computed(() => ({
   profileData: {
     name: defaultErrorMessage,
-    email: defaultErrorMessage,
+    email: emailCheckMessage,
     inn: defaultErrorMessage
   }
 }))
@@ -91,16 +111,46 @@ const rules = computed(() => ({
 const v = useVuelidate(rules, { profileData })
 
 onMounted(async () => {
-  await organisationStore.getOrganisationProfile()
-  profileData.value = organisationStore.organisationProfile
   organisationForms.value = await useDataStore().organisationForm()
+  if (!organisationStore.organisationProfile) await organisationStore.getOrganisationProfile()
+  profileData.value = organisationStore.organisationProfile
   organisationForm.value = organisationForms.value.find(
-    (form) => form.value == profileData.value.organization_form
+    (form) => form.value == profileData.value?.organization_form
   )
+  console.log(organisationForm.value)
+  console.log(profileData.value)
+  tempPath.value = (await useDataStore().getFile()).data[0].label
 })
 
+const setFile = async (event) => {
+  file.value = event.target.files[0]
+  const reader = new FileReader()
+  profileImageRef.value.src = await reader.readAsDataURL(file.value)
+}
+
 function handleSave() {
-  if (profileData.value) organisationStore.updateOrganisationProfile(profileData.value)
+  //   //TODO: исправить
+  // if (profileData.value && profileData.value.id) organisationStore.updateOrganisationProfile({ ...profileData.value, logo: null })
+}
+
+const saveFile = () => {
+  console.log(file.value)
+  // if (profileData.value?.id)
+  // organisationStore.loadProfileFile({file: file.value, account: userId})
+}
+
+const handleChangePassword = () => {
+  if (profileData.value?.id) {
+    const result = organisationStore.changePassword(
+      {
+        old_password: changePassword.value.old_password,
+        password: changePassword.value.password,
+        password2: changePassword.value.password
+      },
+      profileData.value?.id
+    )
+    console.log(result)
+  }
 }
 </script>
 

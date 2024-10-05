@@ -2,10 +2,10 @@ import { defineStore } from 'pinia'
 import { $api } from '@/api'
 import UserService from '@/api/userService'
 import { usePopupStore } from '@/stores/PopupStore'
-import type { UserRegistrationI } from '@/types/userI'
+import type { LoginI, UserRegistrationI } from '@/types/userI'
 import OrganisationService from '@/api/organisationService'
-import type { OrganisationProfileUpdateI } from '@/types/account/organisation'
-import type { RegistrationOrganisationI } from '@/types/account/auth'
+import type { OrganisationProfileUpdateI } from '@/types/organisation'
+import type { RegistrationOrganisationI } from '@/types/auth'
 import { useRouter } from 'vue-router'
 
 export const useUserStore = defineStore('userStore', () => {
@@ -28,14 +28,14 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  async function signIn(data: Omit<UserRegistrationI, 'organisation'>) {
+  async function signIn(data: LoginI) {
     try {
       await UserService.login(data).then((response) => {
         $api.defaults.headers.common.Authorization = `Bearer ${response.data.access}`
         document.cookie = `refresh=${response.data.refresh}; path=/; secure; samesite=strict`
         localStorage.setItem('access', response.data.access) //TODO: изменить
-        router.push('/')
       })
+      await router.push('/')
     } catch (e) {
       console.log(e)
     }

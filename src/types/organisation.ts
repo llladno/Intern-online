@@ -11,7 +11,7 @@ export interface OrganisationProfileI {
   address: string
   describe: string
   updated_at: string
-  logo: OrganisationLogoI
+  logo?: OrganisationLogoI
   organization_form: number
   field_of_activity: number
 }
@@ -30,5 +30,5 @@ export interface OrganisationProfileRequestI extends Omit<OrganisationProfileI, 
 
 export interface OrganisationLogoI {
   file: string
-  account: string
+  account: number
 }

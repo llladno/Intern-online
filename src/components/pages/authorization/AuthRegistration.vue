@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/shadcn/ui/select'
-import { useUserStore } from '@/stores/account/UserStore'
+import { useUserStore } from '@/stores/UserStore'
 
 const email = ref('')
 const password = ref('')

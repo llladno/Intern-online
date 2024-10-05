@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { InputPropsI } from '@/types/componentsProps/commonProps'
-import type { ErrorI } from '@/types/componentsProps/commonProps'
+import type { InputPropsI } from '@/types/commonProps'
+import type { ErrorI } from '@/types/commonProps'
 
 defineProps<ErrorI & InputPropsI>()
 

@@ -19,7 +19,7 @@
 import IOSelect from '@/components/common/IOSelect.vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import CasesHeaderFilter from '@/components/pages/cases/CasesHeaderFilter.vue'
-import type { SelectPropsOptionI } from '@/types/componentsProps/commonProps'
+import type { SelectPropsOptionI } from '@/types/commonProps'
 
 const emits = defineEmits(['selectedEmit'])
 function onSelected(slot: string) {

@@ -34,6 +34,7 @@ export interface ButtonPropsI {
   background?: string
   width?: string
   disable?: boolean
+  loading?: boolean
 }
 
 export interface CheckboxPropsI {

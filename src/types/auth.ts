@@ -19,3 +19,9 @@ export interface RegistrationOrganisationI {
   inn: string
   field_of_activity: number | string
 }
+
+export interface ResetPasswordI {
+  old_password: string
+  password: string
+  password2: string
+}
