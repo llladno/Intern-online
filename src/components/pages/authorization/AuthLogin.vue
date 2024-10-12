@@ -17,7 +17,7 @@
     </i-o-input>
     <div class="auth__login__remember">
       <div><input type="checkbox" /> <label>Сохранить вход</label></div>
-      <router-link to="/recovery"> Забыли пароль? </router-link>
+      <span @click="$emit('changePassword')"> Забыли пароль? </span>
     </div>
     <i-o-button full-width @click="signIn" :loading="isLoading"> Войти </i-o-button>
   </div>
@@ -31,7 +31,7 @@ import { useUserStore } from '@/stores/UserStore'
 import { defaultErrorMessage, emailCheckMessage } from '@/helpers/vuelidateHelper'
 import { useVuelidate } from '@vuelidate/core'
 import type { LoginI } from '@/types/userI'
-import { email, required } from '@vuelidate/validators'
+import { useNoticeStore } from '@/stores/NotificationStore'
 
 const userStore = useUserStore()
 const isLoading = ref<boolean>(false)
@@ -49,14 +49,24 @@ const rules = computed(() => ({
 }))
 
 const v = useVuelidate(rules, { loginData })
+const notification = useNoticeStore()
+
+defineEmits(['changePassword'])
 
 const signIn = async (): Promise<void> => {
   isLoading.value = true
-  await userStore.signIn({
-    email: loginData.value.email,
-    password: loginData.value.password
-  })
-  isLoading.value = false
+  await userStore
+    .signIn({
+      email: loginData.value.email,
+      password: loginData.value.password
+    })
+    .then(() => {
+      isLoading.value = false
+    })
+    .catch(() => {
+      console.log('catch work')
+      notification.noticeShow('Неверный логин или пароль', 'error')
+    })
 }
 </script>
 

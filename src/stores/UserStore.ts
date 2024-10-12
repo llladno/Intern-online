@@ -4,7 +4,6 @@ import UserService from '@/api/userService'
 import { usePopupStore } from '@/stores/PopupStore'
 import type { LoginI, UserRegistrationI } from '@/types/userI'
 import OrganisationService from '@/api/organisationService'
-import type { OrganisationProfileUpdateI } from '@/types/organisation'
 import type { RegistrationOrganisationI } from '@/types/auth'
 import { useRouter } from 'vue-router'
 
@@ -37,7 +36,7 @@ export const useUserStore = defineStore('userStore', () => {
       })
       await router.push('/')
     } catch (e) {
-      console.log(e)
+      throw new Error('error')
     }
   }
 
@@ -57,5 +56,13 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  return { signUp, signIn, getTestUserList, signUpOrganisation, session }
+  const changePassword = async (email: string) => {
+    try {
+      return await UserService.resetPassword(email)
+    } catch (e) {
+      throw new Error('error')
+    }
+  }
+
+  return { signUp, signIn, getTestUserList, signUpOrganisation, session, changePassword }
 })

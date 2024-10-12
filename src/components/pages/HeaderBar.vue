@@ -80,7 +80,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/shadcn/ui/dropdown-menu'
 import IconProfile from '@/components/icons/IconProfile.vue'
-import { type Component, nextTick, onMounted, ref, watch } from 'vue'
+import { type Component, onMounted, ref, watch } from 'vue'
 import IconSettings from '@/components/icons/IconSettings.vue'
 import ProfileImg from '@/assets/media/img/profile.png'
 import IconDropDown from '@/components/icons/IconDropDown.vue'

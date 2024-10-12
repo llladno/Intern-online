@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import CaseCard from '@/components/pages/cases/CaseCard.vue'
 import CasesHeader from '@/components/pages/cases/CasesHeader.vue'
 import { casesInfo } from '@/stores/mock'

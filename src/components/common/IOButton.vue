@@ -28,6 +28,11 @@ defineProps<ButtonPropsI>()
   font-weight: 500;
   padding: 10px 20px;
   cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 
   &--outlined {
     background: none;

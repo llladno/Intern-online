@@ -8,6 +8,15 @@ export interface ProfileFileI {
   account: number
 }
 
+export interface FileUploadI extends ProfileFileI {
+  id: number
+}
+
+export interface OrganisationFieldOfActivityI {
+  id: number
+  value: number
+}
+
 export interface jwtTokenI {
   token_type: string
   exp: number

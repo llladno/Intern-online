@@ -1,17 +1,8 @@
-<script setup lang="ts">
-import type { InputPropsI } from '@/types/commonProps'
-import type { ErrorI } from '@/types/commonProps'
-
-defineProps<ErrorI & InputPropsI>()
-
-const model = defineModel<string | number | readonly string[] | null | undefined>('modelValue')
-</script>
-
 <template>
   <div class="input">
-    <label class="input__label p-13-500"><slot></slot></label>
+    <label class="input__label p-13-500" v-if="$slots._"><slot></slot></label>
     <input
-      :class="['input__text', error?.length && 'input__text--error']"
+      :class="['input__text', error?.length && 'input__text--error', height && 'input__f-height']"
       :style="{
         backgroundColor: background,
         paddingLeft: padding + 'px',
@@ -39,6 +30,15 @@ const model = defineModel<string | number | readonly string[] | null | undefined
     </TransitionGroup>
   </div>
 </template>
+
+<script setup lang="ts">
+import type { InputPropsI } from '@/types/commonProps'
+import type { ErrorI } from '@/types/commonProps'
+
+defineProps<ErrorI & InputPropsI>()
+
+const model = defineModel<string | number | readonly string[] | null | undefined>('modelValue')
+</script>
 
 <style lang="scss" scoped>
 .input {
@@ -102,6 +102,11 @@ const model = defineModel<string | number | readonly string[] | null | undefined
     &-message {
       color: $error-color;
     }
+  }
+
+  &__f-height {
+    height: 100%;
+    opacity: 0;
   }
 }
 .error {

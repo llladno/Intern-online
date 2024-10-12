@@ -17,4 +17,8 @@ export default class UserService {
   static async getTestUserList() {
     return $api.get(`${this.accountBaseUrl}/user`)
   }
+
+  static async resetPassword(email: string) {
+    return $api.get(`${this.accountBaseUrl}/reset_password/${email}`)
+  }
 }

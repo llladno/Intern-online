@@ -34,10 +34,11 @@
       <div class="my-profile__image">
         <div class="my-profile__image-place">
           <icon-load-components v-if="!file" />
-          <img ref="profileImageRef" />
-          <img :src="tempPath" />
+          <img v-if="!filePath" ref="profileImageRef" />
+          <img :src="filePath" />
+          <i-o-input class="my-profile__set-file" type="file" @change="setFile" height></i-o-input>
+          <div class="my-profile__set-button" />
         </div>
-        <i-o-input type="file" @change="setFile"></i-o-input>
         <i-o-button @click="saveFile">Загрузить</i-o-button>
       </div>
     </div>
@@ -65,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import IOButton from '@/components/common/IOButton.vue'
 import IOInput from '@/components/common/IOInput.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
@@ -78,27 +79,24 @@ import { defaultErrorMessage, emailCheckMessage } from '@/helpers/vuelidateHelpe
 import { useDataStore } from '@/stores/DataStore'
 import type { OrganisationFormI } from '@/types/data'
 import type { ResetPasswordI } from '@/types/auth'
-import OrganisationService from '@/api/organisationService'
 import { getTokenId } from '@/helpers/token'
+import { useNoticeStore } from '@/stores/NotificationStore'
 
-const selected = ref('personal')
 const organisationStore = useOrganisationStore()
+const noticeStore = useNoticeStore()
 
+const selected = ref<string>('personal')
 const profileData = ref<OrganisationProfileUpdateI>()
-
 const organisationForms = ref<OrganisationFormI[]>([])
 const organisationForm = ref<OrganisationFormI>()
-const file = ref()
+const file = ref<File | null>()
+const filePath = ref<string>('')
+const profileImageRef = ref<string>('')
+const userId: number | undefined = getTokenId()
 const changePassword = ref<Omit<ResetPasswordI, 'password2'>>({
   old_password: '',
   password: ''
 })
-
-const tempPath = ref('')
-
-const profileImageRef = ref('')
-
-const userId = getTokenId()
 
 const rules = computed(() => ({
   profileData: {
@@ -113,43 +111,52 @@ const v = useVuelidate(rules, { profileData })
 onMounted(async () => {
   organisationForms.value = await useDataStore().organisationForm()
   if (!organisationStore.organisationProfile) await organisationStore.getOrganisationProfile()
+
   profileData.value = organisationStore.organisationProfile
   organisationForm.value = organisationForms.value.find(
     (form) => form.value == profileData.value?.organization_form
   )
-  console.log(organisationForm.value)
-  console.log(profileData.value)
-  tempPath.value = (await useDataStore().getFile()).data[0].label
+  const tempPath = await useDataStore().getFile()
+  filePath.value = tempPath[tempPath.length - 1].label
 })
 
-const setFile = async (event) => {
-  file.value = event.target.files[0]
+const setFile = async (event): Promise<void> => {
+  file.value = event.target?.files[0]
   const reader = new FileReader()
   profileImageRef.value.src = await reader.readAsDataURL(file.value)
 }
 
-function handleSave() {
+const handleSave = (): void => {
   //   //TODO: исправить
   // if (profileData.value && profileData.value.id) organisationStore.updateOrganisationProfile({ ...profileData.value, logo: null })
 }
 
-const saveFile = () => {
-  console.log(file.value)
-  // if (profileData.value?.id)
-  // organisationStore.loadProfileFile({file: file.value, account: userId})
+const saveFile = async (): Promise<void> => {
+  if (userId && file.value)
+    organisationStore.loadProfileFile({ file: file.value, account: userId }).then(async () => {
+      noticeStore.noticeShow('Фото загружено', 'success')
+      const tempPath = await useDataStore().getFile()
+      filePath.value = tempPath[tempPath.length - 1].label
+    })
 }
 
-const handleChangePassword = () => {
-  if (profileData.value?.id) {
-    const result = organisationStore.changePassword(
-      {
-        old_password: changePassword.value.old_password,
-        password: changePassword.value.password,
-        password2: changePassword.value.password
-      },
-      profileData.value?.id
-    )
-    console.log(result)
+const handleChangePassword = (): void => {
+  if (userId) {
+    organisationStore
+      .changePassword(
+        {
+          old_password: changePassword.value.old_password,
+          password: changePassword.value.password,
+          password2: changePassword.value.password
+        },
+        userId
+      )
+      .then(() => {
+        noticeStore.noticeShow('Ваш пароль был изменен', 'success')
+      })
+      .catch(() => {
+        noticeStore.noticeShow('Неверный пароль', 'error')
+      })
   }
 }
 </script>
@@ -165,11 +172,30 @@ const handleChangePassword = () => {
     gap: 116px;
   }
 
+  &__set-file {
+    position: absolute;
+    height: 100%;
+  }
+
+  &__set-button {
+    position: absolute;
+    transform: translateY(20%);
+    width: 50px;
+    height: 50px;
+    background: #69696c;
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0;
+    transition: 0.3s ease;
+  }
+
   &__image {
+    position: relative;
     width: 257px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    height: 255px;
 
     &-place {
       display: flex;
@@ -180,6 +206,14 @@ const handleChangePassword = () => {
       background: #f6f6f6;
       border: 1.5px dashed #e4e4e7;
       border-radius: 6px;
+      transition: 0.3s ease;
+
+      &:hover {
+        filter: blur(1px) grayscale(30%);
+        .my-profile__set-button {
+          opacity: 1;
+        }
+      }
     }
   }
 

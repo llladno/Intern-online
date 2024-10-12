@@ -1,7 +1,7 @@
 import { jwtDecode } from 'jwt-decode'
 import type { jwtTokenI } from '@/types/data'
 
-export const getTokenId = (token?: string) => {
+export const getTokenId = () => {
   return getToken()?.user_id
 }
 

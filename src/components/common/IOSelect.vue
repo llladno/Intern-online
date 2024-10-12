@@ -18,7 +18,7 @@ const test = ref()
 
 watch(
   () => test.value,
-  (newVal, oldVal) => {
+  (newVal) => {
     emit('update:modelValue', newVal)
   }
 )

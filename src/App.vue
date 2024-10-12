@@ -4,6 +4,7 @@ import { RouterView, useRoute } from 'vue-router'
 import HeaderBar from '@/components/pages/HeaderBar.vue'
 import { useUserStore } from '@/stores/UserStore'
 import { useOrganisationStore } from '@/stores/OrganistaionStore'
+import NoticeComponent from '@/components/common/NoticeComponent.vue'
 
 const route = useRoute()
 const isLogin = ref(false)
@@ -34,6 +35,7 @@ watch(
   <div :class="!isLogin && 'main-router'">
     <router-view />
   </div>
+  <notice-component />
 </template>
 
 <style scoped lang="scss">

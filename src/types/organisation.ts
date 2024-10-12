@@ -32,3 +32,8 @@ export interface OrganisationLogoI {
   file: string
   account: number
 }
+
+export interface AccountOrganisationRegistrationI {
+  id: number
+  email: string
+}

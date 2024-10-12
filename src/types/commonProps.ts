@@ -10,6 +10,7 @@ export interface InputPropsI {
   background?: string
   padding?: string
   value?: string
+  height?: boolean
 }
 
 export interface SelectPropsI {

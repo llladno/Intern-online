@@ -5,7 +5,7 @@ import { useDataStore } from '@/stores/DataStore'
 import { ref } from 'vue'
 import type { ResetPasswordI } from '@/types/auth'
 import DataService from '@/api/dataService'
-import type { ProfileFileI } from '@/types/data'
+import type { OrganisationFormI, ProfileFileI } from '@/types/data'
 
 export const useOrganisationStore = defineStore('organisationStore', () => {
   const organisationProfile = ref<OrganisationProfileI>()
@@ -21,18 +21,19 @@ export const useOrganisationStore = defineStore('organisationStore', () => {
 
   async function getOrganisationProfile() {
     try {
-      organisationProfile.value = (await OrganisationService.getOrganisation()).data
+      const getOrganisation = await OrganisationService.getOrganisation()
+      organisationProfile.value = getOrganisation.data
       organisationForm.value = await useDataStore().organisationForm()
     } catch (e) {
       console.log(e)
     }
   }
 
-  async function getOrganisationForm() {
+  async function getOrganisationForm(): Promise<OrganisationFormI | undefined> {
     try {
-      const response = await useDataStore().organisationForm()
-      organisationForm.value = response.data
-      return response.data
+      const response: OrganisationFormI | undefined = await useDataStore().organisationForm()
+      organisationForm.value = response
+      return response
     } catch (e) {
       console.log(e)
     }
@@ -40,16 +41,17 @@ export const useOrganisationStore = defineStore('organisationStore', () => {
 
   async function changePassword(data: ResetPasswordI, id: number) {
     try {
-      return await OrganisationService.changePassword(data, id)
+      const response = await OrganisationService.changePassword(data, id)
+      return response.data
     } catch (e) {
-      console.log(e)
+      throw new Error('error')
     }
   }
 
   async function loadProfileFile(data: ProfileFileI) {
     try {
-      console.log(data)
-      return await DataService.loadProfileFile(data)
+      const response = await DataService.loadProfileFile(data)
+      return response.data
     } catch (e) {
       console.log(e)
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="auth">
     <div>
-      <router-link to="/">
+      <router-link v-if="selected !== 'changePassword'" to="/">
         <div class="auth__back">
           <span>⭠</span>
           <p>Назад</p>
@@ -11,13 +11,18 @@
         style="margin-top: 27px"
         class="auth__simpleselect"
         @selected-value="(slot) => (selected = slot)"
+        v-if="selected !== 'changePassword'"
       >
         <template #login> Вход </template>
         <template #registration> Регистрация </template>
       </i-o-simple-select>
-      <auth-login v-if="selected == 'login'" />
+      <auth-login v-if="selected == 'login'" @change-password="selected = 'changePassword'" />
       <!--      <auth-registration v-else-if="selected == 'registration'" />-->
       <auth-login v-else-if="selected == 'registration'" />
+      <auth-reset-password
+        v-else-if="selected == 'changePassword'"
+        @set-back="selected = 'login'"
+      />
     </div>
   </div>
 </template>
@@ -26,8 +31,8 @@
 import { ref, watch } from 'vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import AuthLogin from '@/components/pages/authorization/AuthLogin.vue'
-import AuthRegistration from '@/components/pages/authorization/AuthRegistration.vue'
 import { useRouter } from 'vue-router'
+import AuthResetPassword from '@/components/pages/authorization/AuthResetPassword.vue'
 
 const selected = ref('login')
 const router = useRouter()
