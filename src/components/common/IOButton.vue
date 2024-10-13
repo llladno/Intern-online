@@ -10,7 +10,8 @@ defineProps<ButtonPropsI>()
       'w-full': fullWidth,
       button: true,
       'button--outlined': outlined,
-      'button--disabled': disable
+      'button--disabled': disable,
+      'button--thin': thin
     }"
   >
     <slot />
@@ -43,6 +44,10 @@ defineProps<ButtonPropsI>()
   &--disabled {
     background: $default-grey;
     color: $default-black;
+  }
+
+  &--thin {
+    padding: 7px 14px;
   }
 }
 </style>

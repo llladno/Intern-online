@@ -86,7 +86,7 @@ const organisationStore = useOrganisationStore()
 const noticeStore = useNoticeStore()
 
 const selected = ref<string>('personal')
-const profileData = ref<OrganisationProfileUpdateI>()
+const profileData = ref<OrganisationProfileUpdateI>({})
 const organisationForms = ref<OrganisationFormI[]>([])
 const organisationForm = ref<OrganisationFormI>()
 const file = ref<File | null>()
@@ -106,10 +106,10 @@ const rules = computed(() => ({
   }
 }))
 
-const v = useVuelidate(rules, { profileData })
+const v = useVuelidate<Record<string, OrganisationProfileUpdateI>>(rules, { profileData })
 
 onMounted(async () => {
-  organisationForms.value = await useDataStore().organisationForm()
+  organisationForms.value = (await useDataStore().organisationForm()) ?? []
   if (!organisationStore.organisationProfile) await organisationStore.getOrganisationProfile()
 
   profileData.value = organisationStore.organisationProfile

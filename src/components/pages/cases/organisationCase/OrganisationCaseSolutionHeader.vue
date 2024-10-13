@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import IOButton from '@/components/common/IOButton.vue'
 import router from '@/router'
+import InternBack from '@/components/common/InternBack.vue'
 
 defineEmits(['estimate'])
 </script>
 
 <template>
   <header class="main-container organisation-case-solution-header">
-    <a @click="router.go(-1)">Назад</a>
+    <intern-back class="organisation-case-solution-header__back" />
     <div class="organisation-case-solution-header__container">
       <div class="organisation-case-solution-header__info">
         <img src="@/assets/media/img/img.png" />
@@ -29,6 +30,10 @@ defineEmits(['estimate'])
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
+
+  &__back {
+    margin-bottom: 9px;
+  }
 
   &__info {
     display: flex;

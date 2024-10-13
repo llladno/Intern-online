@@ -26,7 +26,7 @@ export default class DataService {
     })
   }
 
-  static async organisationForm(): Promise<AxiosResponse<OrganisationFormI>> {
+  static async organisationForm(): Promise<AxiosResponse<OrganisationFormI[]>> {
     return $api.get(`${this.dataBaseUrl}/org-form/`)
   }
 }

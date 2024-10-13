@@ -25,3 +25,19 @@ export interface ResetPasswordI {
   password: string
   password2: string
 }
+
+export interface StagesDataI {
+  name?: string
+  surname?: string
+  patronymic?: string
+  activity?: string
+  email?: string
+  inn?: string
+  organization_form?: string
+  field_of_activity?: string
+}
+
+export interface AllStagesDataI {
+  accountType: 'manager' | 'account' | ''
+  data: StagesDataI
+}

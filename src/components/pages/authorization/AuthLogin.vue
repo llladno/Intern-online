@@ -1,5 +1,5 @@
 <template>
-  <div class="auth__login">
+  <div class="auth-login">
     <i-o-input
       v-model="v.loginData.email.$model"
       :error="v.loginData.email.$errors"
@@ -15,9 +15,9 @@
     >
       Пароль
     </i-o-input>
-    <div class="auth__login__remember">
+    <div class="auth-login__remember">
       <div><input type="checkbox" /> <label>Сохранить вход</label></div>
-      <span @click="$emit('changePassword')"> Забыли пароль? </span>
+      <a class="auth-login__forgot" @click="$emit('changePassword')"> Забыли пароль? </a>
     </div>
     <i-o-button full-width @click="signIn" :loading="isLoading"> Войти </i-o-button>
   </div>
@@ -64,20 +64,24 @@ const signIn = async (): Promise<void> => {
       isLoading.value = false
     })
     .catch(() => {
-      console.log('catch work')
       notification.noticeShow('Неверный логин или пароль', 'error')
     })
 }
 </script>
 
 <style scoped lang="scss">
-.auth__login {
+.auth-login {
   display: flex;
   flex-direction: column;
   gap: 15px;
   width: 388px;
 
-  .auth__login__remember {
+  &__forgot {
+    color: $additional-color;
+    cursor: pointer;
+  }
+
+  .auth-login__remember {
     display: flex;
     justify-content: space-between;
     align-items: center;

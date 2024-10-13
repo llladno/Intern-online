@@ -8,6 +8,7 @@ import router from '@/router'
 import { casesInfo } from '@/stores/mock'
 import { CasesStatus, type OrganisationCasesI, SolutionsStatus } from '@/types/organisationCasesI'
 import IOTags from '@/components/common/IOTags.vue'
+import InternBack from '@/components/common/InternBack.vue'
 
 const route = useRoute()
 const caseInfo = casesInfo.find((caseInfo: OrganisationCasesI) => caseInfo.id == +route.params.id)
@@ -17,7 +18,7 @@ const showMore = ref(false)
 <template>
   <div v-if="caseInfo" class="organisation-case w-full">
     <div class="organisation-case__header main-container">
-      <router-link to="/organisation/cases"> Назад </router-link>
+      <intern-back />
       <div>
         <div class="organisation-case__header-title">
           <h2 class="header-1">

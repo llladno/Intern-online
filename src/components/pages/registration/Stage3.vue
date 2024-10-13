@@ -10,7 +10,7 @@
           :options="companyForm"
           placeholder="Выберите форму компании"
           label="Выберите форму компании"
-          v-model="data.companyForm"
+          v-model="data.organization_form"
         />
       </div>
       <i-o-input v-model="v.data.inn.$model" :error="v.data.inn.$errors"
@@ -38,7 +38,7 @@ const emit = defineEmits(['nextStage'])
 const data = reactive({
   name: '',
   inn: '',
-  companyForm: 0
+  organization_form: 0
 })
 
 const companyForm = ref([])
@@ -47,7 +47,7 @@ const dataStore = useDataStore()
 const isError = ref(false)
 
 onMounted(async () => {
-  companyForm.value = await dataStore.organisationForm()
+  organization_form.value = await dataStore.organisationForm()
 })
 
 const rules = computed(() => ({

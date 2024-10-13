@@ -1,20 +1,15 @@
 <template>
   <div class="auth">
     <div>
-      <router-link v-if="selected !== 'changePassword'" to="/">
-        <div class="auth__back">
-          <span>⭠</span>
-          <p>Назад</p>
-        </div>
-      </router-link>
+      <intern-back v-if="selected !== 'changePassword'" />
       <i-o-simple-select
         style="margin-top: 27px"
         class="auth__simpleselect"
         @selected-value="(slot) => (selected = slot)"
         v-if="selected !== 'changePassword'"
       >
-        <template #login> Вход </template>
-        <template #registration> Регистрация </template>
+        <template #login> Вход</template>
+        <template #registration> Регистрация</template>
       </i-o-simple-select>
       <auth-login v-if="selected == 'login'" @change-password="selected = 'changePassword'" />
       <!--      <auth-registration v-else-if="selected == 'registration'" />-->
@@ -33,16 +28,19 @@ import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import AuthLogin from '@/components/pages/authorization/AuthLogin.vue'
 import { useRouter } from 'vue-router'
 import AuthResetPassword from '@/components/pages/authorization/AuthResetPassword.vue'
+import InternBack from '@/components/common/InternBack.vue'
 
 const selected = ref('login')
 const router = useRouter()
 
 watch(selected, (value) => {
   if (value === 'registration') {
-    const page = document.querySelector('.auth')
-    const img = document.querySelector('.auth-img')
-    page.style.opacity = '0'
-    img.style.opacity = '0'
+    const page = document.querySelector('.auth') as HTMLDivElement
+    const img = document.querySelector('.auth-img') as HTMLImageElement
+    if (page && img) {
+      page.style.opacity = '0'
+      img.style.opacity = '0'
+    }
     setTimeout(() => {
       router.push('/registration')
     }, 600)

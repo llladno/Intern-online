@@ -36,7 +36,7 @@ const router = createRouter({
     },
     {
       path: '/organisation/case-:id',
-      name: 'case',
+      name: 'organisation-case',
       component: () => import('../views/organisation/CaseView.vue')
     },
     {

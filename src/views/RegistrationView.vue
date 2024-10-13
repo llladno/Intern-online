@@ -31,6 +31,7 @@ import Stage3 from '@/components/pages/registration/Stage3.vue'
 import Stage4 from '@/components/pages/registration/Stage4.vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/UserStore'
+import type { AllStagesDataI, StagesDataI } from '@/types/auth'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -45,12 +46,12 @@ setTimeout(() => {
   activeComponent.value = Stage1
 }, 500)
 
-const allStagesData = reactive({
+const allStagesData = reactive<AllStagesDataI>({
   accountType: '',
   data: {}
 })
 
-function nextStage(data: { from: string; data: string | object }) {
+function nextStage(data: { from: string; data: StagesDataI | 'account' }) {
   switch (data.from) {
     case 'stage1': {
       if (data.data === 'account') {
@@ -65,26 +66,33 @@ function nextStage(data: { from: string; data: string | object }) {
       break
     }
     case 'stage2': {
-      activeComponent.value = Stage5
-      allStagesData.data = {
-        name: data.data.name,
-        surname: data.data.surname,
-        patronymic: data.data.patronymic
+      if (data.data !== 'account') {
+        activeComponent.value = Stage5
+        allStagesData.data = {
+          name: data.data.name,
+          surname: data.data.surname,
+          patronymic: data.data.patronymic
+        }
+        stage.value = 4
       }
-      stage.value = 4
       break
     }
     case 'stage3': {
-      allStagesData.data = data.data
-      activeComponent.value = Stage4
-      stage.value = 3
+      if (data.data !== 'account') {
+        allStagesData.data = data.data
+        activeComponent.value = Stage4
+        stage.value = 3
+      }
+
       break
     }
     case 'stage4': {
-      console.log(data.data)
-      activeComponent.value = Stage5
-      allStagesData.data.activity = data.data
-      stage.value = 4
+      if (data.data !== 'account') {
+        console.log(data.data)
+        activeComponent.value = Stage5
+        allStagesData.data.activity = data.data
+        stage.value = 4
+      }
       break
     }
     case 'stage5': {
@@ -92,11 +100,11 @@ function nextStage(data: { from: string; data: string | object }) {
       console.log(allStagesData)
       if (allStagesData.accountType == 'manager') {
         const registrationData = {
-          email: allStagesData.data.email,
-          inn: allStagesData.data.inn,
-          name: allStagesData.data.name,
-          organization_form: allStagesData.data.companyForm,
-          field_of_activity: allStagesData.data.activity
+          email: allStagesData.data.email ?? '',
+          inn: allStagesData.data.inn ?? '',
+          name: allStagesData.data.name ?? '',
+          organization_form: allStagesData.data.organization_form ?? '',
+          field_of_activity: allStagesData.data.activity ?? ''
         }
         userStore.signUpOrganisation(registrationData)
       }
@@ -209,6 +217,7 @@ watch(stage, (newStage, oldValue) => {
     font-weight: 600;
     color: $primary-color;
   }
+
   h2 {
     font-size: 20px;
     font-weight: 600;

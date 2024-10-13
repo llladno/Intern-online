@@ -36,6 +36,7 @@ export interface ButtonPropsI {
   width?: string
   disable?: boolean
   loading?: boolean
+  thin?: boolean
 }
 
 export interface CheckboxPropsI {
@@ -49,4 +50,8 @@ export interface ErrorI {
     $uid: string
     $message: string | Ref<string>
   }[]
+}
+
+export interface EstimateI {
+  estimateCounts: number
 }
