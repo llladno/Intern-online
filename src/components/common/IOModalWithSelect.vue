@@ -1,10 +1,23 @@
 <template>
   <div class="modal">
-    <IOButton icon background="white" @click="openModal" width="211">{{ label }}</IOButton>
+    <IOButton
+      :icon="buttonIcon"
+      :background="buttonBackground"
+      @click="emitOpenModal"
+      width="211"
+      >{{ label }}</IOButton
+    >
+    <!-- <button
+      :style="{ background: buttonProperties.background }"
+      @click="toggleModal"
+    >
+      <i v-if="buttonProperties.icon" class="icon-class"></i>
+      {{ buttonProperties.label }}
+    </button> -->
     <transition name="modal">
-      <div class="modal__overlay" v-if="isVisible" @click.self="closeModal">
+      <div class="modal__overlay" v-if="isVisible" @click.self="emitCloseModal">
         <div class="modal__content" @click.stop>
-          <button class="modal__close" @click="closeModal">
+          <button class="modal__close" @click="emitCloseModal">
             <IconClose />
           </button>
           <slot name="header"></slot>
@@ -20,38 +33,42 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import IOButton from '@/components/common/IOButton.vue'
 import IconClose from '@/components/icons/IconClose.vue'
 
 defineProps<{
   label: string
+  isVisible: boolean
   disabled?: boolean
+  buttonBackground?: string
+  buttonIcon?: boolean
 }>()
 
 const emits = defineEmits<{
+  (e: 'update:isVisible', value: boolean): void
   (e: 'save'): void
   (e: 'cansel'): void
+  (e: 'opened'): void
 }>()
 
-const isVisible = ref<boolean>(false)
-
-const openModal = () => {
-  isVisible.value = true
+const emitOpenModal = () => {
+  emits('update:isVisible', true)
   document.body.classList.add('no-scroll')
+  emits('opened')
 }
 
-const closeModal = () => {
-  isVisible.value = false
+const emitCloseModal = () => {
+  emits('update:isVisible', false)
   document.body.classList.remove('no-scroll')
 }
 
 const handleSave = () => {
-  closeModal()
+  emitCloseModal()
   emits('save')
 }
+
 const handleCansel = () => {
-  closeModal()
+  emitCloseModal()
   emits('cansel')
 }
 </script>

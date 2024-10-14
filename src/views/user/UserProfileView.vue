@@ -26,13 +26,6 @@
       </div>
       <div class="user-profile__info-education">
         <h3 class="p-18-500">Образование</h3>
-        <!-- <IOSelect
-          id="education"
-          placeholder="Выберите уровень образования"
-          :options="educationLevels"
-          v-model="user.education"
-          >Уровень образования</IOSelect
-        > -->
         <IOCustomSelect
           id="education"
           placeholder="Выберите уровень образования"
@@ -41,51 +34,102 @@
           isLabel
           label="Уровень образования"
         ></IOCustomSelect>
-        <!-- <p>value: {{ education }}</p> -->
-        <IOModal label="Добавить место учебы">
-          <template #header>
-            <h2 class="header-1">Место учебы</h2>
-            <p class="p-13-400 text-center">Выберите учебное заведение</p>
-          </template>
-          <IOSelect
-            id="skill"
-            placeholder="например, «University of Cambridge»"
-            v-model="user.university"
-            :options="universities"
-          ></IOSelect>
-        </IOModal>
+        <div>
+          <IOModalWithSelect
+            :label="buttonProperties.university.label"
+            :buttonBackground="buttonProperties.university.background"
+            :buttonIcon="buttonProperties.university.icon"
+            :isVisible="isModalVisibleUnversity"
+            @update:isVisible="isModalVisibleUnversity = $event"
+            @save="isModalVisibleUnversity = false"
+            @cansel="handleCanselUniversity"
+            @opened="markModalAsOpened('university')"
+          >
+            <template #header>
+              <h2 class="header-1">Место учебы</h2>
+              <p class="p-13-400 text-center">Выберите учебное заведение</p>
+            </template>
+            <IOCustomSelect
+              id="university"
+              placeholder="например, «University of Cambridge»"
+              v-model="user.university"
+              :options="universities"
+              @update:modelValue="updateUniversity"
+            />
+          </IOModalWithSelect>
+          <div v-if="user.university" class="flex flex-col gap-y-2 mt-3">
+            <span class="p-14-500"
+              >Выбранное учебное заведение:
+              {{ selectedOptionLabel(universities, user.university) }}</span
+            >
+          </div>
+        </div>
+
         <UserExperience
           :experiences="user.experiences"
           @update:experiences="handleExperienceUpdate"
         />
+        <div>
+          <h3 class="p-18-500">Ключевые навыки</h3>
+          <IOModalWithSelect
+            :label="buttonProperties.skill.label"
+            :buttonBackground="buttonProperties.skill.background"
+            :buttonIcon="buttonProperties.skill.icon"
+            :isVisible="isModalVisibleSkill"
+            @update:isVisible="isModalVisibleSkill = $event"
+            @save="isModalVisibleSkill = false"
+            @cansel="handleCanselSkill"
+            @opened="markModalAsOpened('skill')"
+          >
+            <template #header>
+              <h2 class="header-1">Ключевые навыки</h2>
+              <p class="p-13-400 text-center">Выберите свои навыки</p>
+            </template>
+            <IOCustomSelect
+              id="skill"
+              placeholder="Навык, например, «Java»"
+              v-model="user.skill"
+              :options="skills"
+              @update:modelValue="updateSkill"
+            ></IOCustomSelect>
+          </IOModalWithSelect>
+          <div v-if="user.skill" class="flex flex-col gap-y-2 mt-3">
+            <span class="p-14-500"
+              >Выбран навык: {{ selectedOptionLabel(skills, user.skill) }}</span
+            >
+          </div>
+        </div>
 
-        <h3 class="p-18-500">Ключевые навыки</h3>
-        <IOModal label="Добавить навыки">
-          <template #header>
-            <h2 class="header-1">Ключевые навыки</h2>
-            <p class="p-13-400 text-center">Выберите свои навыки</p>
-          </template>
-          <IOSelect
-            id="skill"
-            placeholder="Навык, например, «Java»"
-            v-model="user.skill"
-            :options="skills"
-          ></IOSelect>
-        </IOModal>
-
-        <h3 class="p-18-500">Знание программ</h3>
-        <IOModal label="Добавить программы">
-          <template #header>
-            <h2 class="header-1">Знание программ</h2>
-            <p class="p-13-400 text-center">Выберите программы</p>
-          </template>
-          <IOSelect
-            id="skill"
-            placeholder="Программа, например, «Docker»"
-            v-model="user.program"
-            :options="programs"
-          ></IOSelect>
-        </IOModal>
+        <div>
+          <h3 class="p-18-500">Знание программ</h3>
+          <IOModalWithSelect
+            :label="buttonProperties.program.label"
+            :buttonBackground="buttonProperties.program.background"
+            :buttonIcon="buttonProperties.program.icon"
+            :isVisible="isModalVisiblePropgram"
+            @update:isVisible="isModalVisiblePropgram = $event"
+            @save="isModalVisiblePropgram = false"
+            @cansel="handleCanselProgram"
+            @opened="markModalAsOpened('program')"
+          >
+            <template #header>
+              <h2 class="header-1">Знание программ</h2>
+              <p class="p-13-400 text-center">Выберите программы</p>
+            </template>
+            <IOCustomSelect
+              id="program"
+              placeholder="Программа, например, «Docker»"
+              v-model="user.program"
+              :options="programs"
+              @update:modelValue="updateProgram"
+            ></IOCustomSelect>
+          </IOModalWithSelect>
+          <div v-if="user.program" class="flex flex-col gap-y-2 mt-3">
+            <span class="p-14-500"
+              >Выбрана программа: {{ selectedOptionLabel(programs, user.program) }}</span
+            >
+          </div>
+        </div>
 
         <UserProfileAddFile
           label="Дипломы"
@@ -115,15 +159,14 @@
 
 <script setup lang="ts">
 // import axios from 'axios'
-import { reactive, ref, computed } from 'vue'
+import { reactive, ref, computed, type Ref } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers, minLength, maxLength } from '@vuelidate/validators'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import IOInput from '@/components/common/IOInput.vue'
 import IOInputDate from '@/components/common/IOInputDate.vue'
 import VerificationAccount from '@/components/pages/VerificationAccount.vue'
-import IOSelect from '@/components/common/IOSelect.vue'
-import IOModal from '@/components/common/IOModal.vue'
+import IOModalWithSelect from '@/components/common/IOModalWithSelect.vue'
 import IOButton from '@/components/common/IOButton.vue'
 import UserExperience from '@/views/user/UserExperience.vue'
 import UserProfileAddFile from '@/views/user/UserProfileAddFile.vue'
@@ -133,11 +176,28 @@ import type { UserExperienceI } from '@/types/userProfile'
 import type { UserI } from '@/types/userProfile'
 import { urlValidator } from '@/ts/validators'
 
+interface ModalState {
+  university: Ref<boolean>
+  skill: Ref<boolean>
+  program: Ref<boolean>
+}
+
 const selected = ref('personal')
 const images = ref<File[]>([])
 const documents = ref<File[]>([])
 const experiences = ref<UserExperienceI[]>([])
+const isModalVisibleUnversity = ref<boolean>(false)
+const isModalVisibleSkill = ref<boolean>(false)
+const isModalVisiblePropgram = ref<boolean>(false)
 
+const hasModalBeenOpened: ModalState = {
+  university: ref(false),
+  skill: ref(false),
+  program: ref(false)
+}
+const markModalAsOpened = (modal: keyof ModalState): void => {
+  hasModalBeenOpened[modal].value = true
+}
 const user = reactive<UserI>({
   lastName: '',
   firstName: '',
@@ -153,7 +213,6 @@ const user = reactive<UserI>({
   images: [],
   documents: []
 })
-
 const updateImages = (newImages: File[]) => (images.value = newImages)
 const updateDocuments = (newDocs: File[]) => (documents.value = newDocs)
 const handleExperienceUpdate = (updatedExperiences: UserExperienceI[]) =>
@@ -176,19 +235,6 @@ const educationLevels: UserTempalateI[] = [
   { id: 6, value: 'higher', label: 'Высшее образование' },
   { id: 7, value: 'postgraduate', label: 'Послевузовское образование' },
   { id: 8, value: 'doctoral', label: 'Доктор наук' },
-  { id: 1, value: 'none', label: 'Без образования' },
-  { id: 2, value: 'primary', label: 'Начальное образование' },
-  { id: 3, value: 'basic_secondary', label: 'Основное общее образование' },
-  { id: 4, value: 'secondary', label: 'Среднее общее образование' },
-  { id: 5, value: 'secondary_professional', label: 'Среднее профессиональное образование' },
-  { id: 6, value: 'higher', label: 'Высшее образование' },
-  { id: 7, value: 'postgraduate', label: 'Послевузовское образование' },
-  { id: 8, value: 'doctoral', label: 'Доктор наук' },
-  { id: 1, value: 'none', label: 'Без образования' },
-  { id: 2, value: 'primary', label: 'Начальное образование' },
-  { id: 3, value: 'basic_secondary', label: 'Основное общее образование' },
-  { id: 4, value: 'secondary', label: 'Среднее общее образование' },
-  { id: 5, value: 'secondary_professional', label: 'Среднее профессиональное образование' },
   { id: 6, value: 'higher', label: 'Высшее образование' },
   { id: 7, value: 'postgraduate', label: 'Послевузовское образование' },
   { id: 8, value: 'doctoral', label: 'Доктор наук' }
@@ -207,6 +253,59 @@ const programs: UserTempalateI[] = [
   { id: 4, value: 'docker', label: 'Docker' },
   { id: 5, value: 'git', label: 'Git' }
 ]
+const setUserProperty = (key: keyof UserI, value: any) => {
+  if (key === 'experiences' || key === 'images' || key === 'documents') {
+    if (Array.isArray(value)) {
+      user[key] = value
+    }
+    return
+  }
+  if (typeof value === 'string' || typeof value === 'number') {
+    user[key] = value.toString()
+    return
+  }
+}
+const updateUniversity = (value: string | number) => setUserProperty('university', value)
+const updateSkill = (value: string | number) => setUserProperty('skill', value)
+const updateProgram = (value: string | number) => setUserProperty('program', value)
+
+const selectedOptionLabel = (options: UserTempalateI[], value: string | number) => {
+  return computed(() => {
+    const selected = options.find((option) => option.value === value)
+    return selected ? selected.label : 'Не выбрано'
+  })
+}
+
+const handleCanselSkill = () => {
+  user.skill = ''
+  isModalVisibleSkill.value = false
+}
+const handleCanselUniversity = () => {
+  user.university = ''
+  isModalVisibleUnversity.value = false
+}
+const handleCanselProgram = () => {
+  user.program = ''
+  isModalVisiblePropgram.value = false
+}
+
+const getButtonProperties = (
+  modal: keyof ModalState,
+  defaultLabel: string
+): { label: string; background: string; icon: boolean } => {
+  return {
+    label: hasModalBeenOpened[modal].value ? 'Изменить' : defaultLabel,
+    background: hasModalBeenOpened[modal].value ? '' : 'white',
+    icon: !hasModalBeenOpened[modal].value
+  }
+}
+const buttonProperties = computed(() => {
+  return {
+    university: getButtonProperties('university', 'Добавить место учебы'),
+    skill: getButtonProperties('skill', 'Добавить навыки'),
+    program: getButtonProperties('program', 'Добавить программы')
+  }
+})
 
 // const saveExperiences = () => {
 //   console.log('Сохраненные данные об опыте работы:', experiences.value)

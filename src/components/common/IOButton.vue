@@ -9,7 +9,6 @@ defineProps<ButtonPropsI>()
   <button
     :style="{ width: width + 'px' }"
     :class="[
-      'button',
       { 'w-full': fullWidth },
       { button: true },
       { 'button--outlined': outlined },

@@ -11,6 +11,7 @@
       @click="handleDropdownToggle"
     >
       {{ selectedOption || placeholder }}
+      <!-- {{ displayLabel }} -->
       <IconArrowDown :class="{ 'arrow-down--rotate': dropdownOpen }" />
     </button>
     <transition-group name="fade" appear>
@@ -44,10 +45,20 @@
             :key="i"
             @click.stop="selectOption(option)"
             class="custom-select__option p-13-400"
+            :value="option.value"
           >
+            <!-- <IOCheckbox
+              v-if="props.checkbox"
+              :id="String(option.value)"
+              :value="String(option.value)"
+              :checked="selectedValues.includes(option.value)"
+              @update:checked="(checked) => toggleOptionSelection(option, checked)"
+              :label="option.label"
+            /> -->
             {{ option.label }}
           </li>
         </ul>
+
         <div
           v-if="canScrollDown"
           :class="[
@@ -69,8 +80,11 @@
 import { ref, watch, toRefs, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import type { SelectPropsI, SelectPropsOptionI } from '@/types/componentsProps/commonProps'
 import IconArrowDown from '@/components/icons/IconArrowDown.vue'
+// import IOCheckbox from '@/components/common/IOCheckbox.vue'
 
-const props = defineProps<SelectPropsI>()
+const props = withDefaults(defineProps<SelectPropsI & { checkbox?: boolean }>(), {
+  checkbox: false
+})
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string | number): void
 }>()
@@ -85,13 +99,17 @@ const dropdownList = ref<HTMLElement | null>(null)
 const scrollInterval = ref<number | null>(null)
 const canScrollUp = ref<boolean>(false)
 const canScrollDown = ref<boolean>(false)
+// const selectedValues = ref<Array<string | number>>(Array.isArray(modelValue.value) ? modelValue.value : [])
 
 const updateScrollArrows = (): void => {
-  if (dropdownList.value) {
+  if (dropdownList.value && props.options.length >= 10) {
     canScrollUp.value = dropdownList.value.scrollTop > 0
     canScrollDown.value =
       dropdownList.value.scrollTop + dropdownList.value.clientHeight <
       dropdownList.value.scrollHeight - 1
+  } else {
+    canScrollUp.value = false
+    canScrollDown.value = false
   }
 }
 
@@ -126,11 +144,52 @@ const selectOption = (option: SelectPropsOptionI) => {
     canScrollDown.value = false
     canScrollUp.value = false
     emit('update:modelValue', option.value)
-    if (selectButton.value) {
-      selectButton.value.focus()
-    }
   }
 }
+// const selectOption = (option: SelectPropsOptionI, checked?: boolean) => {
+//   if (props.checkbox) {
+//     // Логика для множественного выбора через checkbox
+//     const index = selectedValues.value.indexOf(option.value);
+//     if (checked) {
+//       if (index === -1) {
+//         selectedValues.value.push(option.value); // Добавить значение, если оно еще не выбрано
+//       }
+//     } else {
+//       if (index > -1) {
+//         selectedValues.value.splice(index, 1); // Удалить значение, если оно уже выбрано
+//       }
+//     }
+//     emit('update:modelValue', selectedValues.value);
+//   } else {
+//     // Логика для одиночного выбора
+//     selectedValues.value = [option.value];
+//     selectedOption.value = option.label;
+//     emit('update:modelValue', option.value);
+//     dropdownOpen.value = false; // Закрываем дропдаун в режиме одиночного выбора
+//   }
+// }
+
+// const toggleOptionSelection = (option: SelectPropsOptionI, checked: boolean) => {
+//   const index = selectedValues.value.indexOf(option.value);
+//   if (checked && index === -1) {
+//     selectedValues.value.push(option.value); // Добавить значение, если оно еще не выбрано
+//   } else if (!checked && index > -1) {
+//     selectedValues.value.splice(index, 1); // Удалить значение, если оно уже выбрано
+//   }
+//   emit('update:modelValue', selectedValues.value);
+// }
+
+// const displayLabel = computed(() => {
+//   if (props.checkbox) {
+//     const selectedLabels = props.options
+//       .filter(option => selectedValues.value.includes(option.value))
+//       .map(option => option.label)
+//     return selectedLabels.join(', ') || props.placeholder
+//   } else {
+//     const option = props.options.find(option => option.value === modelValue.value)
+//     return option ? option.label : ''
+//   }
+// })
 
 const handleClickOutside = (event: MouseEvent) => {
   if (selectCustom.value && !selectCustom.value.contains(event.target as Node)) {
@@ -171,8 +230,16 @@ const stopScrolling = () => {
 
 watch(modelValue, (newValue) => {
   const option = props.options.find((option) => option.value === newValue)
-  selectedOption.value = option ? option.label : null
+  selectedOption.value = option ? option.label : ''
 })
+// watch(modelValue, (newValue) => {
+//   if (props.checkbox) {
+//     selectedValues.value = Array.isArray(newValue) ? newValue : [newValue]
+//   } else {
+//     selectedValues.value = typeof newValue === 'string' || typeof newValue === 'number' ? [newValue] : []
+//   }
+//   selectedOption.value = displayLabel.value
+// })
 watch(dropdownOpen, (newValue) => {
   if (newValue) {
     nextTick(() => {
@@ -184,7 +251,10 @@ watch(dropdownOpen, (newValue) => {
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
 })
-
+onMounted(() => {
+  const option = props.options.find((option) => option.value === props.modelValue)
+  selectedOption.value = option ? option.label : ''
+})
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside)
 })
@@ -192,7 +262,8 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .custom-select {
-  display: inline-block;
+  width: 100%;
+  display: block;
   position: relative;
 
   &__button {
@@ -221,7 +292,7 @@ onBeforeUnmount(() => {
   &__dropdown-container {
     position: absolute;
     width: 100%;
-    top: 80px;
+    top: 108%;
     left: 0;
     z-index: 2;
     background-color: $default-white;
@@ -236,11 +307,10 @@ onBeforeUnmount(() => {
   }
   &__dropdown {
     width: 100%;
-    top: 108%;
     list-style: none;
     margin: 0;
     padding: 20px 10px;
-    max-height: 250px;
+    max-height: 300px;
     overflow-y: hidden;
   }
   &__arrow {

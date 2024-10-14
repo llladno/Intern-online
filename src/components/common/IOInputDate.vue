@@ -1,6 +1,6 @@
 <template>
   <div class="date">
-    <IOSelect
+    <IOCustomSelect
       :options="days"
       v-model="day"
       @click="validateDate"
@@ -9,7 +9,7 @@
       id="day"
       :isLabel="false"
     />
-    <IOSelect
+    <IOCustomSelect
       id="month"
       :options="months"
       v-model="month"
@@ -17,7 +17,7 @@
       placeholder="Месяц"
       :isLabel="false"
     />
-    <IOSelect
+    <IOCustomSelect
       id="year"
       :options="years"
       v-model="year"
@@ -27,17 +27,17 @@
     />
 
     <p v-show="errorMessage" class="date__error">{{ errorMessage }}</p>
-    <!-- <div>
+    <div>
       <span>Day:{{ day }}</span>
       <span>Month:{{ month }}</span>
       <span>Year:{{ year }}</span>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import IOSelect from '@/components/common/IOSelect.vue'
+import IOCustomSelect from '@/components/common/IOCustomSelect.vue'
 import type { SelectPropsOptionI } from '@/types/componentsProps/commonProps'
 
 defineProps<{

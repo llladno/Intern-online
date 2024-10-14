@@ -15,24 +15,27 @@ const props = withDefaults(defineProps<SelectPropsI>(), {
   isLabel: true
 })
 
-const emit = defineEmits(['update:modelValue', 'click'])
-
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string | number): void
+  (e: 'cus-click', value: string | number): void
+}>()
 const { modelValue } = toRefs(props)
 const internalValue = ref(modelValue.value)
+
+const handleChange = (value: string | number): void => {
+  internalValue.value = value
+  emit('update:modelValue', value)
+  emit('cus-click', value)
+}
 
 watch(modelValue, (newValue) => {
   internalValue.value = newValue
 })
 
-const handleChange = (value: string | number): void => {
-  internalValue.value = value
-  emit('update:modelValue', value)
-}
-
-const handleClick = (event: MouseEvent, value: string) => {
-  internalValue.value = value
-  emit('click', event) // Эмитируем событие click
-}
+// const handleClick = (event: MouseEvent, value: string) => {
+//   internalValue.value = value
+//   emit('click', event)
+// }
 
 // const test = ref()
 
@@ -44,7 +47,7 @@ const handleClick = (event: MouseEvent, value: string) => {
     <label :for="String(id)" class="p-13-500" v-if="isLabel">
       <slot></slot>
     </label>
-    <SelectTrigger class="focus:ring-offset-0" @click="handleClick">
+    <SelectTrigger class="focus:ring-offset-0">
       <SelectValue :placeholder="placeholder" :value="internalValue" />
     </SelectTrigger>
     <SelectContent>
@@ -54,7 +57,7 @@ const handleClick = (event: MouseEvent, value: string) => {
           v-for="option in options"
           :value="String(option.value)"
           :key="option.id"
-          @change="handleChange(String(option.value))"
+          @click="(event) => handleChange(option.value, event)"
           class="select__option"
           >{{ option.label }}
         </SelectItem>

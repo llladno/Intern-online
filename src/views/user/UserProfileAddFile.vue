@@ -7,7 +7,7 @@
       :imageUrls="imageUrls"
       @edit-items="editItems"
     />
-    <IOModal
+    <IOModalDefault
       :label="modalLabel"
       @save="saveItem"
       @cansel="removeLastItem"
@@ -23,7 +23,7 @@
         @update:modelValue="handleFileChange"
         :error="v.fileValue.$errors"
       />
-    </IOModal>
+    </IOModalDefault>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ import { computed, ref } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers } from '@vuelidate/validators'
 import { maxFileSize, uniqueFileValidator } from '@/ts/validators'
-import IOModal from '@/components/common/IOModal.vue'
+import IOModalDefault from '@/components/common/IOModalDefault.vue'
 import IOInputFile from '@/components/common/IOInputFile.vue'
 import UserSelectedImages from '@/views/user/UserSelectedImages.vue'
 import type { UserFileUploadI } from '@/types/userProfile'

@@ -42,6 +42,7 @@ defineProps<SelectPropsI>()
 
 const selectedValues = ref<string[]>([])
 const isDropdownOpen = ref<boolean>(false)
+const multiselectFilterRef = ref<HTMLElement | null>(null)
 
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value
@@ -59,7 +60,6 @@ const isSelected = (value: string): boolean => {
   return selectedValues.value.includes(value)
 }
 
-const multiselectFilterRef = ref<HTMLElement | null>(null)
 const handleClickOutside = (event: MouseEvent) => {
   if (multiselectFilterRef.value && !multiselectFilterRef.value.contains(event.target as Node)) {
     isDropdownOpen.value = false
