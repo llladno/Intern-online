@@ -7,18 +7,18 @@ import { useOrganisationStore } from '@/stores/OrganistaionStore'
 import NoticeComponent from '@/components/common/NoticeComponent.vue'
 
 const route = useRoute()
-const isLogin = ref(false)
+const isLogin = ref<boolean>(false)
 const userStore = useUserStore()
 const organisationStore = useOrganisationStore()
 
 const disabledHeader = ['/login', '/develop', '/ui-kit', '/registration']
 
-onBeforeMount(async () => {
+onBeforeMount(async (): Promise<void> => {
   await userStore.session()
   if (!organisationStore.organisationProfile) await organisationStore.getOrganisationProfile()
 })
 
-onUpdated(async () => {
+onUpdated(async (): Promise<void> => {
   await organisationStore.getOrganisationProfile()
 })
 

@@ -35,7 +35,7 @@ watch(
         <select-item
           v-for="(option, index) in options"
           :key="index"
-          :value="option.value"
+          :value="option.value.toString()"
           class="select__option"
         >
           {{ option.label }}

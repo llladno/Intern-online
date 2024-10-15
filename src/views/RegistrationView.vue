@@ -51,7 +51,7 @@ const allStagesData = reactive<AllStagesDataI>({
   data: {}
 })
 
-function nextStage(data: { from: string; data: StagesDataI | 'account' }) {
+const nextStage = (data: { from: string; data: StagesDataI | 'account' }) => {
   switch (data.from) {
     case 'stage1': {
       if (data.data === 'account') {
@@ -88,16 +88,17 @@ function nextStage(data: { from: string; data: StagesDataI | 'account' }) {
     }
     case 'stage4': {
       if (data.data !== 'account') {
-        console.log(data.data)
         activeComponent.value = Stage5
+        //TODO: Поправить передачу данных
+        //@ts-ignore
         allStagesData.data.activity = data.data
         stage.value = 4
       }
       break
     }
     case 'stage5': {
+      //@ts-ignore
       allStagesData.data.email = data.data
-      console.log(allStagesData)
       if (allStagesData.accountType == 'manager') {
         const registrationData = {
           email: allStagesData.data.email ?? '',

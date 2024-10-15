@@ -32,6 +32,7 @@ import { defaultErrorMessage, emailCheckMessage } from '@/helpers/vuelidateHelpe
 import { useVuelidate } from '@vuelidate/core'
 import type { LoginI } from '@/types/userI'
 import { useNoticeStore } from '@/stores/NotificationStore'
+import type { OrganisationProfileUpdateI } from '@/types/organisation'
 
 const userStore = useUserStore()
 const isLoading = ref<boolean>(false)
@@ -48,7 +49,7 @@ const rules = computed(() => ({
   }
 }))
 
-const v = useVuelidate(rules, { loginData })
+const v = useVuelidate<Record<string, LoginI | undefined>>(rules, { loginData })
 const notification = useNoticeStore()
 
 defineEmits(['changePassword'])

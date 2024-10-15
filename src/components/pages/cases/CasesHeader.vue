@@ -22,7 +22,7 @@ import CasesHeaderFilter from '@/components/pages/cases/CasesHeaderFilter.vue'
 import type { SelectPropsOptionI } from '@/types/commonProps'
 
 const emits = defineEmits(['selectedEmit'])
-function onSelected(slot: string) {
+const onSelected = (slot: string) => {
   emits('selectedEmit', slot)
 }
 

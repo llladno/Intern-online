@@ -29,7 +29,7 @@ import { usePopupStore } from '@/stores/PopupStore'
 const userStore = useUserStore()
 const popupStore = usePopupStore()
 
-function testRequest() {
+const testRequest = () => {
   userStore.getTestUserList().then(() => {
     popupStore.$patch({
       isPopup: { status: true, text: 'Тестовые пользователи добавлены', type: 'success' }

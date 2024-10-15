@@ -4,7 +4,7 @@ import { nextTick, onMounted, ref } from 'vue'
 const slots = defineSlots()
 const selected = ref({ width: 0, left: 4, id: 0 })
 const slide = ref(null)
-const firsh = ref()
+const first = ref()
 
 const emit = defineEmits(['selectedValue'])
 
@@ -15,7 +15,7 @@ onMounted(() => {
   setTimeout(() => {}, 1000)
 })
 
-function handleSelect(event: Event, id: number, slot: string) {
+const handleSelect = (event: Event, id: number, slot: string) => {
   if (slide.value) {
     const element = slide.value as HTMLDivElement
     const target = event.target as HTMLSpanElement
@@ -35,7 +35,7 @@ function handleSelect(event: Event, id: number, slot: string) {
       <span
         v-for="(slot, index) in Object.keys(slots)"
         :key="index"
-        :ref="index == 0 ? firsh : null"
+        :ref="index == 0 ? first : null"
         class="p-13-500"
         :class="[selected.id == index ? 'simple__selected' : 'default']"
         @click="(event) => handleSelect(event, index, slot)"

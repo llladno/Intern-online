@@ -86,15 +86,15 @@ import ProfileImg from '@/assets/media/img/profile.png'
 import IconDropDown from '@/components/icons/IconDropDown.vue'
 import IconAllCase from '@/components/icons/IconAllCase.vue'
 import IconMyCase from '@/components/icons/IconMyCase.vue'
-import { useRouter } from 'vue-router'
+import { type RouteRecordName, useRouter } from 'vue-router'
 import { useOrganisationStore } from '@/stores/OrganistaionStore'
 import ButtonComponent from '@/components/shadcn/ui/button/ButtonComponent.vue'
 
 const actionDropDown = ref(false)
 const router = useRouter()
-const activeRouteName = ref()
+const activeRouteName = ref<RouteRecordName | null | undefined>()
 const organisationStore = useOrganisationStore()
-const organisationData = ref(null)
+const organisationData = ref()
 
 watch(router.currentRoute, () => {
   activeRouteName.value = router.currentRoute.value.name

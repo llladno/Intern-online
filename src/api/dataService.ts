@@ -10,7 +10,7 @@ import type { AxiosResponse } from 'axios'
 export default class DataService {
   private static readonly dataBaseUrl = '/data/v1'
 
-  static async fieldOfActivity(): Promise<AxiosResponse<OrganisationFieldOfActivityI>> {
+  static async fieldOfActivity(): Promise<AxiosResponse<OrganisationFieldOfActivityI[]>> {
     return $api.get(`${this.dataBaseUrl}/field-of-activity/`)
   }
 

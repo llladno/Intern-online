@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 import DataService from '@/api/dataService'
+import type { OrganisationFieldOfActivityI, OrganisationFormI } from '@/types/data'
 
 export const useDataStore = defineStore('useDataStore', () => {
-  const organisationForm = async () => {
+  const organisationForm = async (): Promise<OrganisationFormI[] | undefined> => {
     try {
       const response = await DataService.organisationForm()
       return response.data
@@ -20,7 +21,7 @@ export const useDataStore = defineStore('useDataStore', () => {
     }
   }
 
-  async function getFile() {
+  const getFile = async () => {
     try {
       const response = await DataService.getFile()
       return response.data

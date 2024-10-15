@@ -36,9 +36,7 @@ import { casesInfo } from '@/stores/mock'
 import { useOrganisationStore } from '@/stores/OrganistaionStore'
 
 const selected = ref('active')
-function selectedEmit(slot: string) {
-  selected.value = slot
-}
+const selectedEmit = (slot: string) => (selected.value = slot)
 
 const organisationStore = useOrganisationStore()
 </script>

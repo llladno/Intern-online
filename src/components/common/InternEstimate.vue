@@ -14,7 +14,7 @@
 import type { EstimateI } from '@/types/commonProps'
 import { ref } from 'vue'
 
-const selected = ref(0)
+const selected = ref<number>(0)
 
 defineProps<EstimateI>()
 </script>

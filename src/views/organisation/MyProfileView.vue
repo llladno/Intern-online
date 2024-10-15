@@ -86,12 +86,12 @@ const organisationStore = useOrganisationStore()
 const noticeStore = useNoticeStore()
 
 const selected = ref<string>('personal')
-const profileData = ref<OrganisationProfileUpdateI>({})
+const profileData = ref<OrganisationProfileUpdateI | undefined>({})
 const organisationForms = ref<OrganisationFormI[]>([])
 const organisationForm = ref<OrganisationFormI>()
 const file = ref<File | null>()
 const filePath = ref<string>('')
-const profileImageRef = ref<string>('')
+const profileImageRef = ref<HTMLImageElement | null>(null)
 const userId: number | undefined = getTokenId()
 const changePassword = ref<Omit<ResetPasswordI, 'password2'>>({
   old_password: '',
@@ -106,9 +106,11 @@ const rules = computed(() => ({
   }
 }))
 
-const v = useVuelidate<Record<string, OrganisationProfileUpdateI>>(rules, { profileData })
+const v = useVuelidate<Record<string, OrganisationProfileUpdateI | undefined>>(rules, {
+  profileData
+})
 
-onMounted(async () => {
+onMounted(async (): Promise<void> => {
   organisationForms.value = (await useDataStore().organisationForm()) ?? []
   if (!organisationStore.organisationProfile) await organisationStore.getOrganisationProfile()
 
@@ -117,13 +119,17 @@ onMounted(async () => {
     (form) => form.value == profileData.value?.organization_form
   )
   const tempPath = await useDataStore().getFile()
-  filePath.value = tempPath[tempPath.length - 1].label
+  if (Array.isArray(tempPath)) filePath.value = tempPath[tempPath.length - 1].label
 })
 
-const setFile = async (event): Promise<void> => {
-  file.value = event.target?.files[0]
+const setFile = async (event: Event): Promise<void> => {
+  const target = event.target as HTMLInputElement
+  file.value = target.files?.[0]
   const reader = new FileReader()
-  profileImageRef.value.src = await reader.readAsDataURL(file.value)
+  reader.onload = () => {
+    if (profileImageRef.value) profileImageRef.value.src = reader.result as string
+  }
+  reader.readAsDataURL(file.value as File)
 }
 
 const handleSave = (): void => {
@@ -136,7 +142,9 @@ const saveFile = async (): Promise<void> => {
     organisationStore.loadProfileFile({ file: file.value, account: userId }).then(async () => {
       noticeStore.noticeShow('Фото загружено', 'success')
       const tempPath = await useDataStore().getFile()
-      filePath.value = tempPath[tempPath.length - 1].label
+      if (Array.isArray(tempPath)) {
+        filePath.value = tempPath[tempPath.length - 1].label
+      }
     })
 }
 

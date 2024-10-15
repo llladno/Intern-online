@@ -24,7 +24,7 @@ export interface SelectPropsI {
 
 export interface SelectPropsOptionI {
   value: string | number
-  label: string
+  label?: string
   id?: number | string
 }
 

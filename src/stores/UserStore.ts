@@ -11,7 +11,7 @@ export const useUserStore = defineStore('userStore', () => {
   const popupStore = usePopupStore()
   const router = useRouter()
 
-  async function signUp(data: UserRegistrationI) {
+  const signUp = async (data: UserRegistrationI) => {
     try {
       return await UserService.registration(data)
     } catch (e) {
@@ -19,7 +19,7 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  async function signUpOrganisation(registrationData: RegistrationOrganisationI) {
+  const signUpOrganisation = async (registrationData: RegistrationOrganisationI) => {
     try {
       return OrganisationService.registrationOrganisation(registrationData)
     } catch (e) {
@@ -27,7 +27,7 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  async function signIn(data: LoginI) {
+  const signIn = async (data: LoginI) => {
     try {
       await UserService.login(data).then((response) => {
         $api.defaults.headers.common.Authorization = `Bearer ${response.data.access}`
@@ -40,12 +40,12 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  async function session() {
+  const session = async (): Promise<void> => {
     const access = localStorage.getItem('access')
     $api.defaults.headers.common.Authorization = `Bearer ${access}`
   }
 
-  async function getTestUserList() {
+  const getTestUserList = async () => {
     try {
       return await UserService.getTestUserList()
     } catch (e) {

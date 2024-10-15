@@ -32,6 +32,7 @@ import Stage3 from '@/assets/media/img/registration/Stage2-3.png'
 import { defaultErrorMessage } from '@/helpers/vuelidateHelper'
 import { useVuelidate } from '@vuelidate/core'
 import { useDataStore } from '@/stores/DataStore'
+import type { OrganisationFormI } from '@/types/data'
 
 const emit = defineEmits(['nextStage'])
 
@@ -41,13 +42,13 @@ const data = reactive({
   organization_form: 0
 })
 
-const companyForm = ref([])
+const companyForm = ref<OrganisationFormI[]>([])
 const dataStore = useDataStore()
 
 const isError = ref(false)
 
 onMounted(async () => {
-  organization_form.value = await dataStore.organisationForm()
+  companyForm.value = (await dataStore.organisationForm()) ?? []
 })
 
 const rules = computed(() => ({
@@ -59,7 +60,7 @@ const rules = computed(() => ({
 
 const v = useVuelidate(rules, { data })
 
-function handleSubmit() {
+const handleSubmit = () => {
   v.value.$touch()
   if (v.value.$errors.length == 0) {
     emit('nextStage', {

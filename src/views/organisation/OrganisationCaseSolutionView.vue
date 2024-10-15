@@ -64,7 +64,7 @@ const closeEstimateDialog = () => {
           <div class="organisation-case-solution-estimate__line" />
           <div
             class="organisation-case-solution-estimate__info"
-            v-for="(step, index) in stepsSlides[currentStep]"
+            v-for="(step, index) in stepsSlides[currentStep as keyof typeof stepsSlides]"
             :key="index"
           >
             <h4 class="p-13-500">{{ step }}</h4>

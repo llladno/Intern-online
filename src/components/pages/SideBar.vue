@@ -10,7 +10,7 @@ const values = [
   { text: 'Мои кейсы', icon: IconFolder, link: '/organisation/cases' }
 ]
 
-function selectLink(number: number) {
+const selectLink = (number: number) => {
   selectValue.value = number
 }
 </script>

@@ -11,7 +11,7 @@ export const useOrganisationStore = defineStore('organisationStore', () => {
   const organisationProfile = ref<OrganisationProfileI>()
   const organisationForm = ref()
 
-  function updateOrganisationProfile(updatedData: OrganisationProfileUpdateI) {
+  const updateOrganisationProfile = (updatedData: OrganisationProfileUpdateI) => {
     try {
       return OrganisationService.patchOrganisation(updatedData)
     } catch (e) {
@@ -19,7 +19,7 @@ export const useOrganisationStore = defineStore('organisationStore', () => {
     }
   }
 
-  async function getOrganisationProfile() {
+  const getOrganisationProfile = async (): Promise<void> => {
     try {
       const getOrganisation = await OrganisationService.getOrganisation()
       organisationProfile.value = getOrganisation.data
@@ -29,9 +29,9 @@ export const useOrganisationStore = defineStore('organisationStore', () => {
     }
   }
 
-  async function getOrganisationForm(): Promise<OrganisationFormI | undefined> {
+  const getOrganisationForm = async (): Promise<OrganisationFormI[] | undefined> => {
     try {
-      const response: OrganisationFormI | undefined = await useDataStore().organisationForm()
+      const response: OrganisationFormI[] | undefined = await useDataStore().organisationForm()
       organisationForm.value = response
       return response
     } catch (e) {
@@ -39,7 +39,7 @@ export const useOrganisationStore = defineStore('organisationStore', () => {
     }
   }
 
-  async function changePassword(data: ResetPasswordI, id: number) {
+  const changePassword = async (data: ResetPasswordI, id: number) => {
     try {
       const response = await OrganisationService.changePassword(data, id)
       return response.data
@@ -48,7 +48,7 @@ export const useOrganisationStore = defineStore('organisationStore', () => {
     }
   }
 
-  async function loadProfileFile(data: ProfileFileI) {
+  const loadProfileFile = async (data: ProfileFileI) => {
     try {
       const response = await DataService.loadProfileFile(data)
       return response.data
