@@ -57,7 +57,7 @@ watch(modelValue, (newValue) => {
           v-for="option in options"
           :value="String(option.value)"
           :key="option.id"
-          @click="(event) => handleChange(option.value, event)"
+          @click="() => handleChange(option.value)"
           class="select__option"
           >{{ option.label }}
         </SelectItem>

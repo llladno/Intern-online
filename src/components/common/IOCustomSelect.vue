@@ -148,33 +148,32 @@ const selectOption = (option: SelectPropsOptionI) => {
 }
 // const selectOption = (option: SelectPropsOptionI, checked?: boolean) => {
 //   if (props.checkbox) {
-//     // Логика для множественного выбора через checkbox
 //     const index = selectedValues.value.indexOf(option.value);
 //     if (checked) {
 //       if (index === -1) {
-//         selectedValues.value.push(option.value); // Добавить значение, если оно еще не выбрано
+//         selectedValues.value.push(option.value);
 //       }
 //     } else {
 //       if (index > -1) {
-//         selectedValues.value.splice(index, 1); // Удалить значение, если оно уже выбрано
+//         selectedValues.value.splice(index, 1);
 //       }
 //     }
 //     emit('update:modelValue', selectedValues.value);
 //   } else {
-//     // Логика для одиночного выбора
+//
 //     selectedValues.value = [option.value];
 //     selectedOption.value = option.label;
 //     emit('update:modelValue', option.value);
-//     dropdownOpen.value = false; // Закрываем дропдаун в режиме одиночного выбора
+//     dropdownOpen.value = false;
 //   }
 // }
 
 // const toggleOptionSelection = (option: SelectPropsOptionI, checked: boolean) => {
 //   const index = selectedValues.value.indexOf(option.value);
 //   if (checked && index === -1) {
-//     selectedValues.value.push(option.value); // Добавить значение, если оно еще не выбрано
+//     selectedValues.value.push(option.value);
 //   } else if (!checked && index > -1) {
-//     selectedValues.value.splice(index, 1); // Удалить значение, если оно уже выбрано
+//     selectedValues.value.splice(index, 1);
 //   }
 //   emit('update:modelValue', selectedValues.value);
 // }
