@@ -5,13 +5,14 @@
       <template #personal>Личный данные</template>
       <template #safty>Безопасность и вход</template>
     </IOSimpleSelect>
-    <form class="user-profile__info" v-if="selected == 'personal'">
+    <form class="user-profile__info" v-if="selected == 'personal'" @submit.prevent>
       <VerificationAccount />
       <div class="user-profile__info-form">
         <IOInput v-model="v.user.lastName.$model" :error="v.user.lastName.$errors">Фамилия</IOInput>
         <IOInput v-model="v.user.firstName.$model" :error="v.user.firstName.$errors">Имя</IOInput>
         <IOInput v-model="user.middleName">Отчество</IOInput>
-        <IOInputDate v-model="user.date" />
+        <!-- <IOInputDate v-model="user.date" /> -->
+        <IOInput v-model="user.date" type="date" name="calendar"></IOInput>
         <IOInput v-model="v.user.website.$model" :error="v.user.website.$errors"
           >Ваш веб-сайт
         </IOInput>
@@ -52,15 +53,16 @@
             <IOCustomSelect
               id="university"
               placeholder="например, «University of Cambridge»"
-              v-model="user.university"
+              v-model="tempUniversity"
               :options="universities"
               @update:modelValue="updateUniversity"
             />
           </IOModalWithSelect>
           <div v-if="user.university" class="flex flex-col gap-y-2 mt-3">
             <span class="p-14-500"
-              >Выбранное учебное заведение:
-              {{ selectedOptionLabel(universities, user.university) }}</span
+              >Выбранное учебное заведение:{{
+                selectedOptionLabel(universities, user.university)
+              }}</span
             >
           </div>
         </div>
@@ -164,7 +166,7 @@ import { useVuelidate } from '@vuelidate/core'
 import { required, helpers, minLength, maxLength } from '@vuelidate/validators'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import IOInput from '@/components/common/IOInput.vue'
-import IOInputDate from '@/components/common/IOInputDate.vue'
+// import IOInputDate from '@/components/common/IOInputDate.vue'
 import VerificationAccount from '@/components/pages/VerificationAccount.vue'
 import IOModalWithSelect from '@/components/common/IOModalWithSelect.vue'
 import IOButton from '@/components/common/IOButton.vue'
@@ -182,22 +184,6 @@ interface ModalState {
   program: Ref<boolean>
 }
 
-const selected = ref('personal')
-const images = ref<File[]>([])
-const documents = ref<File[]>([])
-const experiences = ref<UserExperienceI[]>([])
-const isModalVisibleUnversity = ref<boolean>(false)
-const isModalVisibleSkill = ref<boolean>(false)
-const isModalVisiblePropgram = ref<boolean>(false)
-
-const hasModalBeenOpened: ModalState = {
-  university: ref(false),
-  skill: ref(false),
-  program: ref(false)
-}
-const markModalAsOpened = (modal: keyof ModalState): void => {
-  hasModalBeenOpened[modal].value = true
-}
 const user = reactive<UserI>({
   lastName: '',
   firstName: '',
@@ -213,6 +199,25 @@ const user = reactive<UserI>({
   images: [],
   documents: []
 })
+
+const selected = ref('personal')
+const images = ref<File[]>([])
+const documents = ref<File[]>([])
+const experiences = ref<UserExperienceI[]>([])
+const isModalVisibleUnversity = ref<boolean>(false)
+const isModalVisibleSkill = ref<boolean>(false)
+const isModalVisiblePropgram = ref<boolean>(false)
+const tempUniversity = ref(user.university)
+
+const hasModalBeenOpened: ModalState = {
+  university: ref(false),
+  skill: ref(false),
+  program: ref(false)
+}
+const markModalAsOpened = (modal: keyof ModalState): void => {
+  hasModalBeenOpened[modal].value = true
+}
+
 const updateImages = (newImages: File[]) => (images.value = newImages)
 const updateDocuments = (newDocs: File[]) => (documents.value = newDocs)
 const handleExperienceUpdate = (updatedExperiences: UserExperienceI[]) =>
@@ -266,6 +271,7 @@ const setUserProperty = (key: keyof UserI, value: any) => {
   }
 }
 const updateUniversity = (value: string | number) => setUserProperty('university', value)
+
 const updateSkill = (value: string | number) => setUserProperty('skill', value)
 const updateProgram = (value: string | number) => setUserProperty('program', value)
 
@@ -277,15 +283,16 @@ const selectedOptionLabel = (options: UserTempalateI[], value: string | number) 
 }
 
 const handleCanselSkill = () => {
-  user.skill = ''
+  user.skill = 'не выбрано'
   isModalVisibleSkill.value = false
 }
 const handleCanselUniversity = () => {
-  user.university = ''
+  user.university = 'не выбрано'
   isModalVisibleUnversity.value = false
 }
+
 const handleCanselProgram = () => {
-  user.program = ''
+  user.program = 'не выбрано'
   isModalVisiblePropgram.value = false
 }
 

@@ -11,9 +11,11 @@
         <IOInput v-model.lazy="item.company" placeholder="Название компании" />
         <IOInput v-model.lazy="item.position" placeholder="Должность" />
         <div class="experience__date">
-          <IOInputDate v-model="item.startDate" isDays />
+          <!-- <IOInputDate v-model="item.startDate" isDays /> -->
+          <IOInput v-model.lazy="item.startDate" type="month" name="startDate"></IOInput>
           <div class="experience__label p-13-500">Окончание работы</div>
-          <IOInputDate v-model="item.endDate" isDays />
+          <!-- <IOInputDate v-model="item.endDate" isDays /> -->
+          <IOInput v-model.lazy="item.endDate" type="month" name="endDate"></IOInput>
         </div>
         <IOCheckbox
           value="date"
@@ -38,7 +40,6 @@ import { ref, watch } from 'vue'
 import IOButton from '@/components/common/IOButton.vue'
 import IOCheckbox from '@/components/common/IOCheckbox.vue'
 import IOInput from '@/components/common/IOInput.vue'
-import IOInputDate from '@/components/common/IOInputDate.vue'
 import IconDelete from '@/components/icons/IconDelete.vue'
 import type { UserExperienceI } from '@/types/userProfile'
 const props = defineProps<{

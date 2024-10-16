@@ -74,7 +74,11 @@ const model = defineModel<string | number | readonly string[] | null | undefined
     width: 15px;
     height: 15px;
   }
-
+  input[type='date'],
+  input[type='month'] {
+    color: $default-black;
+    font-family: Inter;
+  }
   &__textarea {
     border: $default-border;
     background: $default-light-grey;

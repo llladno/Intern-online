@@ -7,13 +7,6 @@
       width="211"
       >{{ label }}</IOButton
     >
-    <!-- <button
-      :style="{ background: buttonProperties.background }"
-      @click="toggleModal"
-    >
-      <i v-if="buttonProperties.icon" class="icon-class"></i>
-      {{ buttonProperties.label }}
-    </button> -->
     <transition name="modal">
       <div class="modal__overlay" v-if="isVisible" @click.self="emitCloseModal">
         <div class="modal__content" @click.stop>
