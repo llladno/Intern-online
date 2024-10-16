@@ -57,7 +57,7 @@ const testRequest = () => {
                 <select-group>
                   <select-label>Выберите вид пользователя</select-label>
                   <select-item value="default"> Обычный </select-item>
-                  <select-item value="organisation"> Организация </select-item>
+                  <select-item value="organization"> Организация </select-item>
                 </select-group>
               </select-content>
             </select-component>

@@ -9,14 +9,14 @@ export enum SolutionsStatus {
   'Ожидает оценки' = '190, 74, 74'
 }
 
-export interface OrganisationCasesI {
+export interface OrganizationCasesI {
   id: number
   title: string
-  tags: OrganisationCasesTagsI
+  tags: OrganizationCasesTagsI
   status: keyof CasesStatus
   solutions: {
     amount: number
-    info: OrganisationCaseSolutionsI[] | []
+    info: OrganizationCaseSolutionsI[] | []
   }
   published: string
   finished: string
@@ -24,14 +24,14 @@ export interface OrganisationCasesI {
   documents: string[]
 }
 
-interface OrganisationCaseSolutionsI {
+interface OrganizationCaseSolutionsI {
   id: number
   name: string
   lastUpdated: string
   status: keyof SolutionsStatus
 }
 
-export interface OrganisationCasesTagsI {
+export interface OrganizationCasesTagsI {
   category: string[]
   tarif: string
   date: string

@@ -69,7 +69,7 @@ const tarifs = [
             label: 'Обычный'
           },
           {
-            value: 'organisation',
+            value: 'organization',
             label: 'Организация'
           }
         ]"

@@ -107,12 +107,12 @@ const nextStage = (data: { from: string; data: StagesDataI | 'account' }) => {
           organization_form: allStagesData.data.organization_form ?? '',
           field_of_activity: allStagesData.data.activity ?? ''
         }
-        userStore.signUpOrganisation(registrationData)
+        userStore.signUpOrganization(registrationData)
       }
       // finalStage.value = true
       // userStore.signUp({
       //   email: allStagesData.data.email,
-      //   organisation: allStagesData.accountType === 'manager'
+      //   organization: allStagesData.accountType === 'manager'
       // })
       // setTimeout(() => {
       //   finalyRef.value.classList.add('register-finaly__animation')

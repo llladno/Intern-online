@@ -1,4 +1,4 @@
-export interface OrganisationFormI {
+export interface OrganizationFormI {
   value: number
   label: string
 }
@@ -12,7 +12,7 @@ export interface FileUploadI extends ProfileFileI {
   id: number
 }
 
-export interface OrganisationFieldOfActivityI {
+export interface OrganizationFieldOfActivityI {
   id: number
   value: number
 }

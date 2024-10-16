@@ -1,9 +1,9 @@
 <template>
-  <div class="organisation" v-if="organisationStore.organisationProfile">
-    <div class="organisation__cases main-container">
+  <div class="organization" v-if="organizationStore.organizationProfile">
+    <div class="organization__cases main-container">
       <cases-header @selected-emit="selectedEmit" />
     </div>
-    <div v-if="selected == 'active'" class="organisation__cases-content">
+    <div v-if="selected == 'active'" class="organization__cases-content">
       <case-card
         v-for="caseInfo in casesInfo"
         :key="caseInfo.id"
@@ -12,7 +12,7 @@
         @click.stop="
           (e) =>
             e.target.closest('.dropdown-button') ??
-            $router.push(`/organisation/case-${caseInfo.id}`)
+            $router.push(`/organization/case-${caseInfo.id}`)
         "
       />
     </div>
@@ -23,8 +23,8 @@
       <h2>Архив пуст</h2>
     </div>
   </div>
-  <div v-else class="organisation">
-    <h2 class="organisation__empty">Войдите в аккаунт, чтобы увидеть свои кейсы</h2>
+  <div v-else class="organization">
+    <h2 class="organization__empty">Войдите в аккаунт, чтобы увидеть свои кейсы</h2>
   </div>
 </template>
 
@@ -33,16 +33,16 @@ import { ref } from 'vue'
 import CaseCard from '@/components/pages/cases/CaseCard.vue'
 import CasesHeader from '@/components/pages/cases/CasesHeader.vue'
 import { casesInfo } from '@/stores/mock'
-import { useOrganisationStore } from '@/stores/OrganistaionStore'
+import { useOrganizationStore } from '@/stores/OrganistaionStore'
 
 const selected = ref('active')
 const selectedEmit = (slot: string) => (selected.value = slot)
 
-const organisationStore = useOrganisationStore()
+const organizationStore = useOrganizationStore()
 </script>
 
 <style scoped lang="scss">
-.organisation {
+.organization {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -60,7 +60,7 @@ const organisationStore = useOrganisationStore()
   }
 }
 
-.organisation__cases-content {
+.organization__cases-content {
   display: flex;
   flex-direction: column;
   gap: 10px;

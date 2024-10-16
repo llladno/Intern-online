@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import IOButton from '@/components/common/IOButton.vue'
 import IOInput from '@/components/common/IOInput.vue'
 import IconDocument from '@/components/icons/IconDocument.vue'
-import OrganisationCaseSolutionHeader from '@/components/pages/cases/organisationCase/OrganisationCaseSolutionHeader.vue'
+import OrganizationCaseSolutionHeader from '@/components/pages/cases/organizationCase/OrganizationCaseSolutionHeader.vue'
 import { AlertDialog, AlertDialogContent } from '@/components/shadcn/ui/alert-dialog'
 import InternEstimate from '@/components/common/InternEstimate.vue'
 
@@ -33,10 +33,10 @@ const stepsSlides = {
 
 const nextStep = () => {
   if (currentStep.value < 3) {
-    estimateRef.value?.classList.add('organisation-case-solution-estimate--animate')
+    estimateRef.value?.classList.add('organization-case-solution-estimate--animate')
     setTimeout(() => {
       currentStep.value++
-      estimateRef.value?.classList.remove('organisation-case-solution-estimate--animate')
+      estimateRef.value?.classList.remove('organization-case-solution-estimate--animate')
     }, 400)
   } else {
     showEstimateDialog.value = false
@@ -50,20 +50,20 @@ const closeEstimateDialog = () => {
 </script>
 
 <template>
-  <div class="organisation-case-solution">
-    <organisation-case-solution-header @estimate="showEstimateDialog = true" />
+  <div class="organization-case-solution">
+    <organization-case-solution-header @estimate="showEstimateDialog = true" />
     <alert-dialog :open="showEstimateDialog">
       <alert-dialog-content>
-        <div ref="estimateRef" class="organisation-case-solution-estimate">
-          <div class="organisation-case-solution-estimate__header">
+        <div ref="estimateRef" class="organization-case-solution-estimate">
+          <div class="organization-case-solution-estimate__header">
             <h4 class="p-16-500">{{ EstimateTitleEnum[currentStep] }}</h4>
-            <span class="organisation-case-solution-estimate__current-step">
+            <span class="organization-case-solution-estimate__current-step">
               Шаг {{ currentStep }}/3
             </span>
           </div>
-          <div class="organisation-case-solution-estimate__line" />
+          <div class="organization-case-solution-estimate__line" />
           <div
-            class="organisation-case-solution-estimate__info"
+            class="organization-case-solution-estimate__info"
             v-for="(step, index) in stepsSlides[currentStep as keyof typeof stepsSlides]"
             :key="index"
           >
@@ -71,7 +71,7 @@ const closeEstimateDialog = () => {
             <intern-estimate :estimate-counts="10" />
             <i-o-input full-width placeholder="Тут отзыв" big />
           </div>
-          <div class="organisation-case-solution-estimate__buttons">
+          <div class="organization-case-solution-estimate__buttons">
             <i-o-button full-width outlined @click="closeEstimateDialog" thin> Отмена </i-o-button>
             <i-o-button thin full-width @click="nextStep">{{
               currentStep == 3 ? 'Завершить' : 'Далее'
@@ -80,7 +80,7 @@ const closeEstimateDialog = () => {
         </div>
       </alert-dialog-content>
     </alert-dialog>
-    <div class="main-container organisation-case-solution-description">
+    <div class="main-container organization-case-solution-description">
       <h3 class="header-2">Описание</h3>
       <p class="p-13-400">
         Повседневная практика показывает, что новая модель организационной деятельности в
@@ -93,27 +93,27 @@ const closeEstimateDialog = () => {
         обуславливает создание модели развития.
       </p>
     </div>
-    <div class="main-container organisation-case-solution-documents">
+    <div class="main-container organization-case-solution-documents">
       <h3 class="header-2">Документы</h3>
-      <div class="organisation-case-solution-documents__items">
+      <div class="organization-case-solution-documents__items">
         <div
           v-for="(document, index) in documents"
           :key="index"
-          class="organisation-case-solution-documents__item"
+          class="organization-case-solution-documents__item"
         >
           <icon-document />
           <span class="p-12-500">{{ document }}</span>
         </div>
       </div>
     </div>
-    <div class="main-container organisation-case-solution-team">
+    <div class="main-container organization-case-solution-team">
       <h3 class="header-2">Состав команды</h3>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.organisation-case-solution {
+.organization-case-solution {
   width: 100%;
   display: flex;
   flex-direction: column;

@@ -1,6 +1,6 @@
-import { CasesStatus, type OrganisationCasesI, SolutionsStatus } from '@/types/organisationCasesI'
+import { CasesStatus, type OrganizationCasesI, SolutionsStatus } from '@/types/organizationCasesI'
 
-export const casesInfo: OrganisationCasesI[] = [
+export const casesInfo: OrganizationCasesI[] = [
   {
     id: 1,
     title: 'Кейс №1',

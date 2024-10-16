@@ -32,7 +32,7 @@ import { defaultErrorMessage, emailCheckMessage } from '@/helpers/vuelidateHelpe
 import { useVuelidate } from '@vuelidate/core'
 import type { LoginI } from '@/types/userI'
 import { useNoticeStore } from '@/stores/NotificationStore'
-import type { OrganisationProfileUpdateI } from '@/types/organisation'
+import type { OrganizationProfileUpdateI } from '@/types/organization'
 
 const userStore = useUserStore()
 const isLoading = ref<boolean>(false)

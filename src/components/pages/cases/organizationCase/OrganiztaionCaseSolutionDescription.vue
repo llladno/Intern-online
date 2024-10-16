@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="main-container organisation-case-solution-description">
+  <div class="main-container organization-case-solution-description">
     <h3>Описание</h3>
     <p>
       <slot />
@@ -10,7 +10,7 @@
 </template>
 
 <style scoped lang="scss">
-.organisation-case-solution-description {
+.organization-case-solution-description {
   display: flex;
   flex-direction: column;
   gap: 15px;

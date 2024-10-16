@@ -12,7 +12,7 @@ export interface RegistrationI {
 
 export interface RegistrationUpdateI extends Partial<RegistrationI> {}
 
-export interface RegistrationOrganisationI {
+export interface RegistrationOrganizationI {
   email: string
   name: string
   organization_form: number | string

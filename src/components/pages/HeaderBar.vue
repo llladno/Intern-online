@@ -6,11 +6,11 @@
     <div class="header__nav">
       <div class="header__nav-left">
         <router-link
-          to="/organisation/cases"
+          to="/organization/cases"
           :class="[
             'p-16-400',
             'header__nav-link',
-            activeRouteName === 'organisation-cases' && 'header__nav-link--active'
+            activeRouteName === 'organization-cases' && 'header__nav-link--active'
           ]"
         >
           <icon-my-case />
@@ -36,11 +36,11 @@
           <icon-search />
         </div>
         <icon-notification />
-        <dropdown-menu v-if="organisationData">
+        <dropdown-menu v-if="organizationData">
           <dropdown-menu-trigger @click="handleClick">
             <div class="header__profile">
               <img :src="ProfileImg" />
-              <span> {{ organisationData.name }} </span>
+              <span> {{ organizationData.name }} </span>
               <icon-drop-down
                 :class="[
                   'header__profile-dropdown',
@@ -87,36 +87,36 @@ import IconDropDown from '@/components/icons/IconDropDown.vue'
 import IconAllCase from '@/components/icons/IconAllCase.vue'
 import IconMyCase from '@/components/icons/IconMyCase.vue'
 import { type RouteRecordName, useRouter } from 'vue-router'
-import { useOrganisationStore } from '@/stores/OrganistaionStore'
+import { useOrganizationStore } from '@/stores/OrganistaionStore'
 import ButtonComponent from '@/components/shadcn/ui/button/ButtonComponent.vue'
 
 const actionDropDown = ref(false)
 const router = useRouter()
 const activeRouteName = ref<RouteRecordName | null | undefined>()
-const organisationStore = useOrganisationStore()
-const organisationData = ref()
+const organizationStore = useOrganizationStore()
+const organizationData = ref()
 
 watch(router.currentRoute, () => {
   activeRouteName.value = router.currentRoute.value.name
 })
 
 watch(
-  () => organisationStore.organisationProfile,
+  () => organizationStore.organizationProfile,
   () => {
     console.log('header bar Changed')
-    organisationData.value = organisationStore.organisationProfile
+    organizationData.value = organizationStore.organizationProfile
   }
 )
 
 onMounted(() => {
-  organisationData.value = organisationStore.organisationProfile
+  organizationData.value = organizationStore.organizationProfile
 })
 const actionsDropdownMenu: { id: string; title: string; icon: Component; action: () => void }[] = [
   {
     id: '1',
     title: 'Профиль компании',
     icon: IconProfile,
-    action: () => router.push({ name: 'organisation-profile' })
+    action: () => router.push({ name: 'organization-profile' })
   },
   {
     id: '2',

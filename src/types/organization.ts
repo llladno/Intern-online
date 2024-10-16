@@ -1,7 +1,7 @@
 /**
  * Interface representing an organization's profile.
  */
-export interface OrganisationProfileI {
+export interface OrganizationProfileI {
   id: number
   name: string
   phone_number: string
@@ -11,29 +11,29 @@ export interface OrganisationProfileI {
   address: string
   describe: string
   updated_at: string
-  logo?: OrganisationLogoI
+  logo?: OrganizationLogoI
   organization_form: number
   field_of_activity: number
 }
 
 /**
  * Interface for updating an organization's profile, allowing partial updates.
- * Extends the base `OrganisationProfileI` but makes all properties optional.
+ * Extends the base `OrganizationProfileI` but makes all properties optional.
  */
-export interface OrganisationProfileUpdateI extends Partial<OrganisationProfileI> {}
+export interface OrganizationProfileUpdateI extends Partial<OrganizationProfileI> {}
 
 /**
  * Interface for making requests to create or modify an organization's profile.
- * Omits the `updated_at` field from `OrganisationProfileI` as it's typically managed by the system.
+ * Omits the `updated_at` field from `OrganizationProfileI` as it's typically managed by the system.
  */
-export interface OrganisationProfileRequestI extends Omit<OrganisationProfileI, 'updated_at'> {}
+export interface OrganizationProfileRequestI extends Omit<OrganizationProfileI, 'updated_at'> {}
 
-export interface OrganisationLogoI {
+export interface OrganizationLogoI {
   file: string
   account: number
 }
 
-export interface AccountOrganisationRegistrationI {
+export interface AccountOrganizationRegistrationI {
   id: number
   email: string
 }

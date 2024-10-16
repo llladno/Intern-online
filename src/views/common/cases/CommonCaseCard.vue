@@ -30,11 +30,11 @@
 </template>
 
 <script setup lang="ts">
-import type { OrganisationCasesI } from '@/types/organisationCasesI'
+import type { OrganizationCasesI } from '@/types/organizationCasesI'
 import IOTags from '@/components/common/IOTags.vue'
 import IconSaveMark from '@/components/icons/IconSaveMark.vue'
 
-defineProps<{ caseInfo: OrganisationCasesI }>()
+defineProps<{ caseInfo: OrganizationCasesI }>()
 </script>
 
 <style scoped lang="scss">

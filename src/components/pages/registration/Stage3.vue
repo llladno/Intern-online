@@ -32,7 +32,7 @@ import Stage3 from '@/assets/media/img/registration/Stage2-3.png'
 import { defaultErrorMessage } from '@/helpers/vuelidateHelper'
 import { useVuelidate } from '@vuelidate/core'
 import { useDataStore } from '@/stores/DataStore'
-import type { OrganisationFormI } from '@/types/data'
+import type { OrganizationFormI } from '@/types/data'
 
 const emit = defineEmits(['nextStage'])
 
@@ -42,13 +42,13 @@ const data = reactive({
   organization_form: 0
 })
 
-const companyForm = ref<OrganisationFormI[]>([])
+const companyForm = ref<OrganizationFormI[]>([])
 const dataStore = useDataStore()
 
 const isError = ref(false)
 
 onMounted(async () => {
-  companyForm.value = (await dataStore.organisationForm()) ?? []
+  companyForm.value = (await dataStore.organizationForm()) ?? []
 })
 
 const rules = computed(() => ({

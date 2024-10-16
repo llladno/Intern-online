@@ -7,7 +7,7 @@ import IconProfile from '@/components/icons/IconProfile.vue'
 const selectValue = ref(1)
 const values = [
   { text: 'Мой профиль', icon: IconProfile, link: '/organization/profile' },
-  { text: 'Мои кейсы', icon: IconFolder, link: '/organisation/cases' }
+  { text: 'Мои кейсы', icon: IconFolder, link: '/organization/cases' }
 ]
 
 const selectLink = (number: number) => {

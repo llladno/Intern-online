@@ -3,8 +3,8 @@ import { $api } from '@/api'
 import UserService from '@/api/userService'
 import { usePopupStore } from '@/stores/PopupStore'
 import type { LoginI, UserRegistrationI } from '@/types/userI'
-import OrganisationService from '@/api/organisationService'
-import type { RegistrationOrganisationI } from '@/types/auth'
+import OrganizationService from '@/api/organizationService'
+import type { RegistrationOrganizationI } from '@/types/auth'
 import { useRouter } from 'vue-router'
 
 export const useUserStore = defineStore('userStore', () => {
@@ -19,9 +19,9 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  const signUpOrganisation = async (registrationData: RegistrationOrganisationI) => {
+  const signUpOrganization = async (registrationData: RegistrationOrganizationI) => {
     try {
-      return OrganisationService.registrationOrganisation(registrationData)
+      return OrganizationService.registrationOrganization(registrationData)
     } catch (e) {
       console.log(e)
     }
@@ -64,5 +64,5 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  return { signUp, signIn, getTestUserList, signUpOrganisation, session, changePassword }
+  return { signUp, signIn, getTestUserList, signUpOrganization, session, changePassword }
 })

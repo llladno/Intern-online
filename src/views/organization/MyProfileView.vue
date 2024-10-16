@@ -6,11 +6,11 @@
       <template #safty> Безопасность и вход </template>
     </i-o-simple-select>
     <div v-if="selected == 'personal'" class="my-profile__info">
-      <div class="my-profile__form" v-if="profileData && organisationForm">
+      <div class="my-profile__form" v-if="profileData && organizationForm">
         <i-o-select
-          :options="organisationForms"
+          :options="organizationForms"
           :model-value="profileData.organization_form"
-          :placeholder="organisationForm.label"
+          :placeholder="organizationForm.label"
           label="Выберите форму компании"
         />
         <i-o-input v-model="v.profileData.name.$model" :error="v.profileData.name.$errors">
@@ -72,23 +72,23 @@ import IOInput from '@/components/common/IOInput.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
 import IconLoadComponents from '@/components/icons/IconLoadComponents.vue'
-import type { OrganisationProfileUpdateI } from '@/types/organisation'
+import type { OrganizationProfileUpdateI } from '@/types/organization'
 import { useVuelidate } from '@vuelidate/core'
-import { useOrganisationStore } from '@/stores/OrganistaionStore'
+import { useOrganizationStore } from '@/stores/OrganistaionStore'
 import { defaultErrorMessage, emailCheckMessage } from '@/helpers/vuelidateHelper'
 import { useDataStore } from '@/stores/DataStore'
-import type { OrganisationFormI } from '@/types/data'
+import type { OrganizationFormI } from '@/types/data'
 import type { ResetPasswordI } from '@/types/auth'
 import { getTokenId } from '@/helpers/token'
 import { useNoticeStore } from '@/stores/NotificationStore'
 
-const organisationStore = useOrganisationStore()
+const organizationStore = useOrganizationStore()
 const noticeStore = useNoticeStore()
 
 const selected = ref<string>('personal')
-const profileData = ref<OrganisationProfileUpdateI | undefined>({})
-const organisationForms = ref<OrganisationFormI[]>([])
-const organisationForm = ref<OrganisationFormI>()
+const profileData = ref<OrganizationProfileUpdateI | undefined>({})
+const organizationForms = ref<OrganizationFormI[]>([])
+const organizationForm = ref<OrganizationFormI>()
 const file = ref<File | null>()
 const filePath = ref<string>('')
 const profileImageRef = ref<HTMLImageElement | null>(null)
@@ -106,16 +106,16 @@ const rules = computed(() => ({
   }
 }))
 
-const v = useVuelidate<Record<string, OrganisationProfileUpdateI | undefined>>(rules, {
+const v = useVuelidate<Record<string, OrganizationProfileUpdateI | undefined>>(rules, {
   profileData
 })
 
 onMounted(async (): Promise<void> => {
-  organisationForms.value = (await useDataStore().organisationForm()) ?? []
-  if (!organisationStore.organisationProfile) await organisationStore.getOrganisationProfile()
+  organizationForms.value = (await useDataStore().organizationForm()) ?? []
+  if (!organizationStore.organizationProfile) await organizationStore.getOrganizationProfile()
 
-  profileData.value = organisationStore.organisationProfile
-  organisationForm.value = organisationForms.value.find(
+  profileData.value = organizationStore.organizationProfile
+  organizationForm.value = organizationForms.value.find(
     (form) => form.value == profileData.value?.organization_form
   )
   const tempPath = await useDataStore().getFile()
@@ -134,12 +134,12 @@ const setFile = async (event: Event): Promise<void> => {
 
 const handleSave = (): void => {
   //   //TODO: исправить
-  // if (profileData.value && profileData.value.id) organisationStore.updateOrganisationProfile({ ...profileData.value, logo: null })
+  // if (profileData.value && profileData.value.id) organizationStore.updateOrganizationProfile({ ...profileData.value, logo: null })
 }
 
 const saveFile = async (): Promise<void> => {
   if (userId && file.value)
-    organisationStore.loadProfileFile({ file: file.value, account: userId }).then(async () => {
+    organizationStore.loadProfileFile({ file: file.value, account: userId }).then(async () => {
       noticeStore.noticeShow('Фото загружено', 'success')
       const tempPath = await useDataStore().getFile()
       if (Array.isArray(tempPath)) {
@@ -150,7 +150,7 @@ const saveFile = async (): Promise<void> => {
 
 const handleChangePassword = (): void => {
   if (userId) {
-    organisationStore
+    organizationStore
       .changePassword(
         {
           old_password: changePassword.value.old_password,

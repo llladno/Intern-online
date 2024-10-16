@@ -1,8 +1,8 @@
 import { $api } from '@/api/index'
 import type {
   FileUploadI,
-  OrganisationFieldOfActivityI,
-  OrganisationFormI,
+  OrganizationFieldOfActivityI,
+  OrganizationFormI,
   ProfileFileI
 } from '@/types/data'
 import type { AxiosResponse } from 'axios'
@@ -10,7 +10,7 @@ import type { AxiosResponse } from 'axios'
 export default class DataService {
   private static readonly dataBaseUrl = '/data/v1'
 
-  static async fieldOfActivity(): Promise<AxiosResponse<OrganisationFieldOfActivityI[]>> {
+  static async fieldOfActivity(): Promise<AxiosResponse<OrganizationFieldOfActivityI[]>> {
     return $api.get(`${this.dataBaseUrl}/field-of-activity/`)
   }
 
@@ -26,7 +26,7 @@ export default class DataService {
     })
   }
 
-  static async organisationForm(): Promise<AxiosResponse<OrganisationFormI[]>> {
+  static async organizationForm(): Promise<AxiosResponse<OrganizationFormI[]>> {
     return $api.get(`${this.dataBaseUrl}/org-form/`)
   }
 }

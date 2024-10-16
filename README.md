@@ -42,7 +42,7 @@ npm run lint
 ├── 📁 api/                               # Логика взаимодействия с внешними API
 │   ├── dataService.ts                    # Сервис для работы с данными
 │   ├── index.ts                          # Точка входа для API модулей
-│   ├── organisationService.ts            # Сервис для работы с организациями
+│   ├── organizationService.ts            # Сервис для работы с организациями
 │   └── userService.ts                    # Сервис для работы с пользователями
 ├── 📁 assets/                            # Статические ресурсы (стили, изображения)
 │   ├── 📁 base/                          # Базовые стили для проекта
@@ -86,7 +86,7 @@ npm run lint
 │   └── 📁 data/                          # Хранилище данных
 │       └── DataStore.ts                  # Управление данными
 ├── 📁 types/                             # Типизация (TypeScript)
-│   ├── organisationCasesI.ts             # Типы для кейсов организаций
+│   ├── organizationCasesI.ts             # Типы для кейсов организаций
 │   ├── 📁 account/                       # Типы для аккаунтов
 │   │   ├── account.ts                    # Типы для аккаунтов
 │   └── 📁 componentsProps/               # Типы для пропсов компонентов
@@ -95,7 +95,7 @@ npm run lint
 │   ├── HomeView.vue                      # Главная страница
 │   ├── 📁 common/                        # Общие страницы
 │   │   └── AuthorizationView.vue         # Страница авторизации
-│   └── 📁 organisation/                  # Страницы для организаций
+│   └── 📁 organization/                  # Страницы для организаций
 │       └── MyProfileView.vue             # Страница профиля организации
 ├── App.vue                               # Главный компонент приложения
 ├── main.ts                               # Точка входа, инициализация Vue

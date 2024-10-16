@@ -1,38 +1,38 @@
 import { defineStore } from 'pinia'
-import OrganisationService from '@/api/organisationService'
-import type { OrganisationProfileI, OrganisationProfileUpdateI } from '@/types/organisation'
+import OrganizationService from '@/api/organizationService'
+import type { OrganizationProfileI, OrganizationProfileUpdateI } from '@/types/organization'
 import { useDataStore } from '@/stores/DataStore'
 import { ref } from 'vue'
 import type { ResetPasswordI } from '@/types/auth'
 import DataService from '@/api/dataService'
-import type { OrganisationFormI, ProfileFileI } from '@/types/data'
+import type { OrganizationFormI, ProfileFileI } from '@/types/data'
 
-export const useOrganisationStore = defineStore('organisationStore', () => {
-  const organisationProfile = ref<OrganisationProfileI>()
-  const organisationForm = ref()
+export const useOrganizationStore = defineStore('organizationStore', () => {
+  const organizationProfile = ref<OrganizationProfileI>()
+  const organizationForm = ref<OrganizationFormI[]>()
 
-  const updateOrganisationProfile = (updatedData: OrganisationProfileUpdateI) => {
+  const updateOrganizationProfile = (updatedData: OrganizationProfileUpdateI) => {
     try {
-      return OrganisationService.patchOrganisation(updatedData)
+      return OrganizationService.patchOrganization(updatedData)
     } catch (e) {
       console.log(e)
     }
   }
 
-  const getOrganisationProfile = async (): Promise<void> => {
+  const getOrganizationProfile = async (): Promise<void> => {
     try {
-      const getOrganisation = await OrganisationService.getOrganisation()
-      organisationProfile.value = getOrganisation.data
-      organisationForm.value = await useDataStore().organisationForm()
+      const getOrganization = await OrganizationService.getOrganization()
+      organizationProfile.value = getOrganization.data
+      organizationForm.value = await useDataStore().organizationForm()
     } catch (e) {
       console.log(e)
     }
   }
 
-  const getOrganisationForm = async (): Promise<OrganisationFormI[] | undefined> => {
+  const getOrganizationForm = async (): Promise<OrganizationFormI[] | undefined> => {
     try {
-      const response: OrganisationFormI[] | undefined = await useDataStore().organisationForm()
-      organisationForm.value = response
+      const response: OrganizationFormI[] | undefined = await useDataStore().organizationForm()
+      organizationForm.value = response
       return response
     } catch (e) {
       console.log(e)
@@ -41,7 +41,7 @@ export const useOrganisationStore = defineStore('organisationStore', () => {
 
   const changePassword = async (data: ResetPasswordI, id: number) => {
     try {
-      const response = await OrganisationService.changePassword(data, id)
+      const response = await OrganizationService.changePassword(data, id)
       return response.data
     } catch (e) {
       throw new Error('error')
@@ -58,11 +58,11 @@ export const useOrganisationStore = defineStore('organisationStore', () => {
   }
 
   return {
-    organisationProfile,
-    organisationForm,
-    updateOrganisationProfile,
-    getOrganisationProfile,
-    getOrganisationForm,
+    organizationProfile,
+    organizationForm,
+    updateOrganizationProfile,
+    getOrganizationProfile,
+    getOrganizationForm,
     changePassword,
     loadProfileFile
   }

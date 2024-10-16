@@ -3,23 +3,23 @@ import { onBeforeMount, onUpdated, ref, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import HeaderBar from '@/components/pages/HeaderBar.vue'
 import { useUserStore } from '@/stores/UserStore'
-import { useOrganisationStore } from '@/stores/OrganistaionStore'
+import { useOrganizationStore } from '@/stores/OrganistaionStore'
 import NoticeComponent from '@/components/common/NoticeComponent.vue'
 
 const route = useRoute()
 const isLogin = ref<boolean>(false)
 const userStore = useUserStore()
-const organisationStore = useOrganisationStore()
+const organizationStore = useOrganizationStore()
 
 const disabledHeader = ['/login', '/develop', '/ui-kit', '/registration']
 
 onBeforeMount(async (): Promise<void> => {
   await userStore.session()
-  if (!organisationStore.organisationProfile) await organisationStore.getOrganisationProfile()
+  if (!organizationStore.organizationProfile) await organizationStore.getOrganizationProfile()
 })
 
 onUpdated(async (): Promise<void> => {
-  await organisationStore.getOrganisationProfile()
+  await organizationStore.getOrganizationProfile()
 })
 
 watch(

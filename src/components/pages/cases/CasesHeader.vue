@@ -1,14 +1,14 @@
 <template>
-  <div class="organisation-cases__header">
+  <div class="organization-cases__header">
     <h2 class="header-1">Мои кейсы</h2>
-    <div class="organisation-cases__footer-right">
+    <div class="organization-cases__footer-right">
       <i-o-simple-select class="auth__simpleselect" @selected-value="onSelected">
         <template #active> Активные </template>
         <template #draft> Черновики </template>
         <template #archive> Архив </template>
       </i-o-simple-select>
       <cases-header-filter :options="optionsFiltered" placeholder="Фильтр" />
-      <div class="organisation-cases__footer-sort">
+      <div class="organization-cases__footer-sort">
         <i-o-select class="p-13-500" placeholder="Новые" label="Новые" :options="selectOptions" />
       </div>
     </div>
@@ -43,12 +43,12 @@ const optionsFiltered: SelectPropsOptionI[] = [
 </script>
 
 <style lang="scss" scoped>
-.organisation-cases__header {
+.organization-cases__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.organisation-cases__footer {
+.organization-cases__footer {
   display: flex;
   align-items: center;
   justify-content: space-between;

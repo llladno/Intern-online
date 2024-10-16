@@ -7,16 +7,16 @@ defineEmits(['estimate'])
 </script>
 
 <template>
-  <header class="main-container organisation-case-solution-header">
-    <intern-back class="organisation-case-solution-header__back" />
-    <div class="organisation-case-solution-header__container">
-      <div class="organisation-case-solution-header__info">
-        <img src="@/assets/media/img/img.png" />
-        <div class="organisation-case-solution-header__title">
+  <header class="main-container organization-case-solution-header">
+    <intern-back class="organization-case-solution-header__back" />
+    <div class="organization-case-solution-header__container">
+      <div class="organization-case-solution-header__info">
+        <img src="../../../../assets/media/img/img.png" />
+        <div class="organization-case-solution-header__title">
           <h3 class="header-1">Название</h3>
           <span class="p-12-500">22.06.2022</span>
         </div>
-        <div class="organisation-case-solution-header__status" />
+        <div class="organization-case-solution-header__status" />
       </div>
       <i-o-button @click="$emit('estimate')"> Оценить </i-o-button>
     </div>
@@ -24,7 +24,7 @@ defineEmits(['estimate'])
 </template>
 
 <style scoped lang="scss">
-.organisation-case-solution-header {
+.organization-case-solution-header {
   width: 100%;
   display: flex;
   flex-direction: column;

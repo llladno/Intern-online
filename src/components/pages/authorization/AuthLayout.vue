@@ -1,6 +1,7 @@
 <template>
   <div class="auth">
     <div>
+      <!--      TODO: Кастомный роут -->
       <intern-back v-if="selected !== 'changePassword'" />
       <i-o-simple-select
         style="margin-top: 27px"
@@ -12,7 +13,6 @@
         <template #registration> Регистрация</template>
       </i-o-simple-select>
       <auth-login v-if="selected == 'login'" @change-password="selected = 'changePassword'" />
-      <!--      <auth-registration v-else-if="selected == 'registration'" />-->
       <auth-login v-else-if="selected == 'registration'" />
       <auth-reset-password
         v-else-if="selected == 'changePassword'"
@@ -30,8 +30,9 @@ import { useRouter } from 'vue-router'
 import AuthResetPassword from '@/components/pages/authorization/AuthResetPassword.vue'
 import InternBack from '@/components/common/InternBack.vue'
 
-const selected = ref('login')
 const router = useRouter()
+
+const selected = ref<string>('login')
 
 watch(selected, (value) => {
   if (value === 'registration') {
