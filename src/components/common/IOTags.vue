@@ -16,12 +16,12 @@
 </template>
 
 <script setup lang="ts">
-import type { OrganisationCasesTagsI } from '@/types/organisationCasesI'
+import type { OrganizationCasesTagsI } from '@/types/organizationCasesI'
 import IconStar from '@/components/icons/IconStar.vue'
 import IconBookMark from '@/components/icons/IconBookMark.vue'
 import IconClock from '@/components/icons/IconClock.vue'
 
-defineProps<{ tags: OrganisationCasesTagsI; organistaion?: boolean }>()
+defineProps<{ tags: OrganizationCasesTagsI; organistaion?: boolean }>()
 </script>
 
 <style scoped lang="scss">

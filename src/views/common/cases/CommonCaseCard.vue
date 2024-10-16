@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="common-case-card__side common-case-card__side--right">
-      <icon-save-mark :width="16" :height="21" class="common-case-card__save" />
+      <icon-save-mark @click.stop :width="16" :height="21" class="common-case-card__save" />
       <div class="common-case-card__solutions">
         <span class="common-case-card__solutions-title">Кол-во решений:</span>
         <p class="p-13-400 common-case-card__solutions-amount">
@@ -30,11 +30,11 @@
 </template>
 
 <script setup lang="ts">
-import type { OrganisationCasesI } from '@/types/organisationCasesI'
+import type { OrganizationCasesI } from '@/types/organizationCasesI'
 import IOTags from '@/components/common/IOTags.vue'
 import IconSaveMark from '@/components/icons/IconSaveMark.vue'
 
-defineProps<{ caseInfo: OrganisationCasesI }>()
+defineProps<{ caseInfo: OrganizationCasesI }>()
 </script>
 
 <style scoped lang="scss">

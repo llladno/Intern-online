@@ -24,12 +24,12 @@ import {
   SelectValue
 } from '@/components/shadcn/ui/select'
 import { useUserStore } from '@/stores/UserStore'
-import { usePopupStore } from '@/stores/popupStore'
+import { usePopupStore } from '@/stores/PopupStore'
 
 const userStore = useUserStore()
 const popupStore = usePopupStore()
 
-function testRequest() {
+const testRequest = () => {
   userStore.getTestUserList().then(() => {
     popupStore.$patch({
       isPopup: { status: true, text: 'Тестовые пользователи добавлены', type: 'success' }
@@ -57,7 +57,7 @@ function testRequest() {
                 <select-group>
                   <select-label>Выберите вид пользователя</select-label>
                   <select-item value="default"> Обычный </select-item>
-                  <select-item value="organisation"> Организация </select-item>
+                  <select-item value="organization"> Организация </select-item>
                 </select-group>
               </select-content>
             </select-component>

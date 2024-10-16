@@ -1,14 +1,28 @@
+<template>
+  <div class="organization-cases__header">
+    <h2 class="header-1">Мои кейсы</h2>
+    <div class="organization-cases__footer-right">
+      <i-o-simple-select class="auth__simpleselect" @selected-value="onSelected">
+        <template #active> Активные </template>
+        <template #draft> Черновики </template>
+        <template #archive> Архив </template>
+      </i-o-simple-select>
+      <cases-header-filter :options="optionsFiltered" placeholder="Фильтр" />
+      <div class="organization-cases__footer-sort">
+        <i-o-select class="p-13-500" placeholder="Новые" label="Новые" :options="selectOptions" />
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
-import IOButton from '@/components/common/IOButton.vue'
-import IOInput from '@/components/common/IOInput.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
-import IconSearch from '@/components/icons/IconSearch.vue'
 import CasesHeaderFilter from '@/components/pages/cases/CasesHeaderFilter.vue'
-import type { SelectPropsOptionI } from '@/types/componentsProps/commonProps'
+import type { SelectPropsOptionI } from '@/types/commonProps'
 
 const emits = defineEmits(['selectedEmit'])
-function onSelected(slot: string) {
+const onSelected = (slot: string) => {
   emits('selectedEmit', slot)
 }
 
@@ -28,40 +42,13 @@ const optionsFiltered: SelectPropsOptionI[] = [
 ]
 </script>
 
-<template>
-  <div class="organisation-cases__header">
-    <!--      TODO посмотреть как писать simple-selected или simple__selected -->
-    <h2 class="header-1">Мои кейсы</h2>
-    <router-link to="/organisation/new-case">
-      <i-o-button>+ Добавить новый кейс</i-o-button>
-    </router-link>
-  </div>
-  <div class="organisation-cases__footer">
-    <i-o-simple-select class="auth__simpleselect" @selected-value="onSelected">
-      <template #active> Активные </template>
-      <template #draft> Черновики </template>
-      <template #archive> Архив </template>
-    </i-o-simple-select>
-    <div class="organisation-cases__footer-right">
-      <div class="organisation-cases__footer-search">
-        <i-o-input type="text" placeholder="Поиск" background="#fff" padding="33" />
-        <icon-search />
-      </div>
-      <cases-header-filter :options="optionsFiltered" placeholder="Фильтр" />
-      <div class="organisation-cases__footer-sort">
-        <i-o-select class="p-13-500" placeholder="Новые" label="Новые" :options="selectOptions" />
-      </div>
-    </div>
-  </div>
-</template>
-
 <style lang="scss" scoped>
-.organisation-cases__header {
+.organization-cases__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.organisation-cases__footer {
+.organization-cases__footer {
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -9,12 +9,19 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/shadcn/ui/select'
-import type { SelectPropsI } from '@/types/componentsProps/commonProps'
+import type { SelectPropsI } from '@/types/commonProps'
 
 defineProps<SelectPropsI>()
+const emit = defineEmits(['update:modelValue'])
+
 const test = ref()
 
-watch(test, () => console.log(test.value))
+watch(
+  () => test.value,
+  (newVal) => {
+    emit('update:modelValue', newVal)
+  }
+)
 </script>
 
 <template>
@@ -28,7 +35,7 @@ watch(test, () => console.log(test.value))
         <select-item
           v-for="(option, index) in options"
           :key="index"
-          :value="option.value"
+          :value="option.value.toString()"
           class="select__option"
         >
           {{ option.label }}

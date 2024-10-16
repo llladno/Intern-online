@@ -6,14 +6,14 @@
         popupShow.type === 'error' ? 'popup__content--error' : 'popup__content--success'
       ]"
     >
-     <slot></slot>
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { usePopupStore } from '@/stores/popupStore'
+import { usePopupStore } from '@/stores/PopupStore'
 
 const popupShow = ref({ status: false, text: '', type: 'error' })
 const popupStore = usePopupStore()

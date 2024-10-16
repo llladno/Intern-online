@@ -6,7 +6,7 @@
         <div class="common-case-header__img" />
         <div class="common-case-header__title">
           <h2 class="header-1">Наименование кейса</h2>
-          <span class="common-case-header__title-organisation">ООО "ЗМС"</span>
+          <span class="common-case-header__title-organization">ООО "ЗМС"</span>
         </div>
       </div>
     </div>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import CasesDropdownMenu from './CasesDropdownMenu.vue'
-import { CasesStatus, type OrganisationCasesI } from '@/types/organisationCasesI'
+import { CasesStatus, type OrganizationCasesI } from '@/types/organizationCasesI'
 import IOTags from '@/components/common/IOTags.vue'
 
-defineProps<{ caseInfo: OrganisationCasesI }>()
+defineProps<{ caseInfo: OrganizationCasesI }>()
 </script>
 
 <template>

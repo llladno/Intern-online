@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CheckboxPropsI } from '@/types/componentsProps/commonProps'
+import type { CheckboxPropsI } from '@/types/commonProps'
 
 withDefaults(defineProps<CheckboxPropsI>(), {
   checked: false

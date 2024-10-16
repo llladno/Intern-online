@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 onMounted(() => {
-  router.push('/organisation/cases')
+  router.push('/organization/cases')
 })
 </script>
 
