@@ -54,8 +54,14 @@ const isShowFiles = ref<boolean>(false)
 const rules = computed(() => ({
   fileValue: {
     required: helpers.withMessage('Выберите изображение или файл', required),
-    maxFileSize: maxFileSize(5 * 1024 * 1024),
-    isUnique: uniqueFileValidator(selectedItems.value)
+    maxFileSize: helpers.withMessage(
+      `Размер файла не должен превышать ${5} МБ.`,
+      maxFileSize(5 * 1024 * 1024)
+    ),
+    isUnique: helpers.withMessage(
+      `Файл c таким именем и размером уже выбран`,
+      uniqueFileValidator(selectedItems.value)
+    )
   }
 }))
 
@@ -93,60 +99,20 @@ const removeLastItem = () => {
   }
 }
 
-// const saveItem = () => {
-//     isShowFiles.value = true
-//     console.log('Файл успешно сохранен.')
-//     emitUpdatedFiles()
-// }
-
 const saveItem = () => {
-  v.value.$validate()
-  if (v.value.fileValue.$pending || v.value.fileValue.$invalid) {
-    console.log('Валидация не пройдена, окно не закроется.')
-    return
-  } else {
-    isShowFiles.value = true
-    console.log('Файл успешно сохранен.')
-    emitUpdatedFiles()
-  }
+  isShowFiles.value = true
+  emitUpdatedFiles()
 }
 
-// const handleFileChange = (file: File | null) => {
-//   v.value.$touch()
-//   if (v.value.fileValue.$pending || v.value.fileValue.$invalid ) return
-
-//   if (file) {
-//     const isUnique = !selectedItems.value.some(item => item.name === file.name && item.size === file.size);
-
-//     if (isUnique) {
-//       selectedItems.value.push(file)
-//       updateImageUrls()
-//       emitUpdatedFiles()
-//     } else {
-//       console.warn('Файл уже добавлен:', file.name)
-//     }
-//   }
-// }
 const handleFileChange = (file: File | null) => {
   v.value.$touch()
   if (v.value.fileValue.$pending || v.value.fileValue.$invalid) return
-
   if (file) {
-    const isUnique = !selectedItems.value.some(
-      (item) => item.name === file.name && item.size === file.size
-    )
-
-    if (isUnique) {
-      selectedItems.value.push(file)
-      updateImageUrls()
-      emitUpdatedFiles()
-      v.value.fileValue.$reset()
-    } else {
-      // console.warn('Файл уже добавлен:', file.name)
-
-      alert(`Файл "${file.name}" уже добавлен.`)
-    }
+    selectedItems.value.push(file)
+    updateImageUrls()
+    emitUpdatedFiles()
   }
+  v.value.fileValue.$reset()
 }
 </script>
 
