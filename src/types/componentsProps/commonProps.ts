@@ -31,7 +31,7 @@ export interface CheckboxPropsI {
   value: string
   checked?: boolean
 }
-export interface ActionItem {
+export interface ComponentI {
   id: string
   title: string
   icon: any

@@ -16,9 +16,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { ActionItem } from '@/types/componentsProps/commonProps'
+import type { ComponentI } from '@/types/componentsProps/commonProps'
 import IconDotesTemp from '@/components/icons/IconDotesTemp.vue'
-import IconDelete from '../../../components/icons/IconDelete.vue'
+import IconDelete from '@/components/icons/IconDelete.vue'
 import IconDraft from '@/components/icons/IconDraft.vue'
 import IconArchive from '@/components/icons/IconArchive.vue'
 
@@ -27,9 +27,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
-} from '../../shadcn/ui/dropdown-menu'
+} from '../shadcn/ui/dropdown-menu'
 
-const actionsDropdownMenu = ref<ActionItem[]>([
+const actionsDropdownMenu = ref<ComponentI[]>([
   {
     id: '1',
     title: 'Удалить',
