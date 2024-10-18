@@ -4,6 +4,12 @@ export enum CasesStatus {
   'Ожидает оценки' = '190, 74, 74'
 }
 
+export enum CasesStatusEnum {
+  'Подаются решения' = 'pending',
+  'Решений нет' = 'empty',
+  'Ожидает оценки' = 'end'
+}
+
 export enum SolutionsStatus {
   'Взято в работу' = '218, 133, 44',
   'Ожидает оценки' = '190, 74, 74'

@@ -127,7 +127,7 @@ export const casesInfo: OrganizationCasesI[] = [
       tarif: 'Лайт',
       date: new Date(2024, 5, 20).toLocaleDateString()
     },
-    status: 'Подаются решения' as keyof CasesStatus,
+    status: 'Решений нет' as keyof CasesStatus,
     solutions: {
       amount: 0,
       info: []
