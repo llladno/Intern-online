@@ -1,25 +1,20 @@
-<script setup lang="ts">
-import CasesDropdownMenu from './CasesDropdownMenu.vue'
-import { CasesStatus, type OrganizationCasesI } from '@/types/organizationCasesI'
-import IOTags from '@/components/common/IOTags.vue'
-
-defineProps<{ caseInfo: OrganizationCasesI }>()
-</script>
-
 <template>
   <div v-if="caseInfo" class="case-card">
-    <div
-      class="case-card__line"
-      :style="{ background: `rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}, 1)` }"
-    />
     <div class="case-card__container">
       <div>
         <div
-          class="case-card__status"
-          :style="`color: rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}); background-color: rgb(${CasesStatus[caseInfo.status as keyof typeof CasesStatus]}, 0.2)`"
+          :class="[
+            'case-card__status',
+            `case-card__status--${CasesStatusEnum[caseInfo.status as keyof typeof CasesStatusEnum]}`
+          ]"
         >
           •
           {{ caseInfo.status }}
+          {{
+            caseInfo.status === 'Подаются решения' && caseInfo.solutions
+              ? `${caseInfo.solutions.amount} из 30`
+              : null
+          }}
         </div>
         <h3 class="case-card__title header-3">
           {{ caseInfo.title }}
@@ -33,16 +28,18 @@ defineProps<{ caseInfo: OrganizationCasesI }>()
       </div>
       <div class="case-card__right-side">
         <cases-dropdown-menu />
-        <div>
-          <p class="case-card__count p-13-400">Кол-во решений:</p>
-          <p class="case-card__solutions">
-            <span class="case-card__solutions-number">{{ caseInfo.solutions.amount }}</span> из 30
-          </p>
-        </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import CasesDropdownMenu from './CasesDropdownMenu.vue'
+import { CasesStatusEnum, type OrganizationCasesI } from '@/types/organizationCasesI'
+import IOTags from '@/components/common/IOTags.vue'
+
+defineProps<{ caseInfo: OrganizationCasesI }>()
+</script>
 
 <style scoped lang="scss">
 .case-card {
@@ -58,13 +55,30 @@ defineProps<{ caseInfo: OrganizationCasesI }>()
   }
 
   &__status {
-    padding: 5px 10px;
+    padding: 4px 8px;
     width: fit-content;
-    border-radius: 76px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 500;
+
+    &--pending {
+      color: $accent-orange-600;
+      background: $accent-orange-50;
+    }
+
+    &--empty {
+      color: $primary-purple-600;
+      background: $primary-purple-50;
+    }
+
+    &--end {
+      color: $secondary-red-700;
+      background: $secondary-red-50;
+    }
   }
 
   &__title {
-    margin: 5px 0 8px 0;
+    margin: 8px 0 8px;
     text-align: left;
   }
 
@@ -73,7 +87,6 @@ defineProps<{ caseInfo: OrganizationCasesI }>()
     flex-direction: column;
     align-items: flex-end;
     height: 100%;
-    width: 300px;
     justify-content: space-between;
   }
 

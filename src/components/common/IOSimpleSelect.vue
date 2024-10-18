@@ -2,7 +2,7 @@
 import { nextTick, onMounted, ref } from 'vue'
 
 const slots = defineSlots()
-const selected = ref({ width: 0, left: 4, id: 0 })
+const selected = ref({ width: 0, left: 8, id: 0 })
 const slide = ref(null)
 const first = ref()
 
@@ -20,7 +20,7 @@ const handleSelect = (event: Event, id: number, slot: string) => {
     const element = slide.value as HTMLDivElement
     const target = event.target as HTMLSpanElement
     element.style.width = target.offsetWidth + 32 + 'px'
-    element.style.left = target.offsetLeft - 16 + 20 + 'px'
+    element.style.left = target.offsetLeft - 16 + 24 + 'px'
   }
 
   selected.value.id = id
@@ -51,12 +51,12 @@ const handleSelect = (event: Event, id: number, slot: string) => {
 .switch {
   position: relative;
   display: flex;
-  gap: 35px;
+  gap: 40px;
   width: fit-content;
 }
 
 .switch {
-  height: 40px;
+  height: 48px;
   border: $default-border;
   // padding: 5px 0;
   align-items: center;
@@ -66,15 +66,16 @@ const handleSelect = (event: Event, id: number, slot: string) => {
   &__slide-container {
     position: absolute;
     left: 0;
-    height: 32px;
+    height: 36px;
     background-color: $primary-color;
     transition: 0.3s;
+    border: 1px solid #e1e4ea;
     border-radius: 7px;
   }
 
   &__slider-values {
     width: 100%;
-    margin: 0 20px;
+    margin: 0 24px;
 
     span {
       position: relative;
