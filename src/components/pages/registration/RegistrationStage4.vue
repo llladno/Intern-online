@@ -9,10 +9,11 @@
         label="Сфера деятельности"
         v-model="activity"
       />
-      <i-o-button class="registration-body__button"
-
-
-                  @click="$emit('nextStage', { from: 'stage4', data: activity })">Готово</i-o-button>
+      <i-o-button
+        class="registration-body__button"
+        @click="$emit('nextStage', { from: 'stage4', data: activity })"
+        >Готово</i-o-button
+      >
     </div>
   </div>
 </template>
