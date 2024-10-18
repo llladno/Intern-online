@@ -37,10 +37,6 @@ const companyActivity = ref<OrganizationFieldOfActivityI[]>([])
 onMounted(async () => {
   companyActivity.value = (await dataStore.organizationActivity()) ?? []
 })
-
-const handleSelect = (value: string) => {
-  console.log(value)
-}
 </script>
 
 <style scoped lang="scss">
