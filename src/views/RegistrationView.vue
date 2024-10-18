@@ -24,11 +24,11 @@
 
 <script setup lang="ts">
 import { reactive, ref, shallowRef, watch } from 'vue'
-import Stage1 from '@/components/pages/registration/Stage1.vue'
-import Stage2 from '@/components/pages/registration/Stage2.vue'
-import Stage5 from '@/components/pages/registration/Stage5.vue'
-import Stage3 from '@/components/pages/registration/Stage3.vue'
-import Stage4 from '@/components/pages/registration/Stage4.vue'
+import Stage1 from '@/components/pages/registration/RegistrationStage1.vue'
+import Stage2 from '@/components/pages/registration/RegistrationStage2.vue'
+import Stage5 from '@/components/pages/registration/RegistrationStage5.vue'
+import Stage3 from '@/components/pages/registration/RegistrationStage3.vue'
+import Stage4 from '@/components/pages/registration/RegistrationStage4.vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/UserStore'
 import type { AllStagesDataI, StagesDataI } from '@/types/auth'

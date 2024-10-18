@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import IOButton from '@/components/common/IOButton.vue'
-import router from '@/router'
 import InternBack from '@/components/common/InternBack.vue'
 
 defineEmits(['estimate'])

@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  build-test:
+  format:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,17 +20,27 @@ jobs:
         run: npm install
 
       - name: Test the Vue.js app
-        run: npm run format
+        run: npm run format-check
 
-      - name: Build the Vue.js app
-        run: npm run build
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install dependencies
+        run: npm install
 
       - name: Lint the Vue.js app
         run: npm run lint
 
-  deploy:
-    needs: build-test
-    if: github.ref == 'refs/heads/develop'
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -47,6 +57,23 @@ jobs:
 
       - name: Build the Vue.js app
         run: npm run build
+
+  deploy:
+    needs: [build]
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install dependencies
+        run: npm install
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

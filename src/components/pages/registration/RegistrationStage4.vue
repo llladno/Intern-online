@@ -12,9 +12,8 @@
       <i-o-button
         class="registration-body__button"
         @click="$emit('nextStage', { from: 'stage4', data: activity })"
+        >Готово</i-o-button
       >
-        Готово
-      </i-o-button>
     </div>
   </div>
 </template>
@@ -37,10 +36,6 @@ const companyActivity = ref<OrganizationFieldOfActivityI[]>([])
 onMounted(async () => {
   companyActivity.value = (await dataStore.organizationActivity()) ?? []
 })
-
-const handleSelect = (value: string) => {
-  console.log(value)
-}
 </script>
 
 <style scoped lang="scss">
