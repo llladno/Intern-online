@@ -1,4 +1,8 @@
-import { CasesStatus, type OrganizationCasesI, SolutionsStatus } from '@/types/organizationCasesI'
+import {
+  CasesStatusEnum,
+  type OrganizationCasesI,
+  SolutionsStatus
+} from '@/types/organizationCasesI'
 
 export const casesInfo: OrganizationCasesI[] = [
   {
@@ -9,7 +13,7 @@ export const casesInfo: OrganizationCasesI[] = [
       tarif: 'Лайт',
       date: new Date(2024, 5, 20).toLocaleDateString()
     },
-    status: 'Подаются решения' as keyof CasesStatus,
+    status: 'Подаются решения' as keyof typeof CasesStatusEnum,
     solutions: {
       amount: 20,
       info: [
@@ -101,7 +105,7 @@ export const casesInfo: OrganizationCasesI[] = [
       tarif: 'Лайт',
       date: new Date(2024, 5, 20).toLocaleDateString()
     },
-    status: 'Ожидает оценки' as keyof CasesStatus,
+    status: 'Ожидает оценки' as keyof typeof CasesStatusEnum,
     solutions: {
       amount: 20,
       info: [
@@ -127,7 +131,7 @@ export const casesInfo: OrganizationCasesI[] = [
       tarif: 'Лайт',
       date: new Date(2024, 5, 20).toLocaleDateString()
     },
-    status: 'Решений нет' as keyof CasesStatus,
+    status: 'Решений нет' as keyof typeof CasesStatusEnum,
     solutions: {
       amount: 0,
       info: []

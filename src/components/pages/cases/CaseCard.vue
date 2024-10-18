@@ -3,10 +3,18 @@
     <div class="case-card__container">
       <div>
         <div
-          :class="['case-card__status', `case-card__status--${CasesStatusEnum[caseInfo.status as keyof typeof CasesStatusEnum]}`]"
+          :class="[
+            'case-card__status',
+            `case-card__status--${CasesStatusEnum[caseInfo.status as keyof typeof CasesStatusEnum]}`
+          ]"
         >
           •
-          {{ caseInfo.status }} {{ caseInfo.status === 'Подаются решения' && caseInfo.solutions ? `${caseInfo.solutions.amount} из 30` : null }}
+          {{ caseInfo.status }}
+          {{
+            caseInfo.status === 'Подаются решения' && caseInfo.solutions
+              ? `${caseInfo.solutions.amount} из 30`
+              : null
+          }}
         </div>
         <h3 class="case-card__title header-3">
           {{ caseInfo.title }}
@@ -27,12 +35,11 @@
 
 <script setup lang="ts">
 import CasesDropdownMenu from './CasesDropdownMenu.vue'
-import { CasesStatus, CasesStatusEnum, type OrganizationCasesI } from '@/types/organizationCasesI'
+import { CasesStatusEnum, type OrganizationCasesI } from '@/types/organizationCasesI'
 import IOTags from '@/components/common/IOTags.vue'
 
 defineProps<{ caseInfo: OrganizationCasesI }>()
 </script>
-
 
 <style scoped lang="scss">
 .case-card {
@@ -64,7 +71,7 @@ defineProps<{ caseInfo: OrganizationCasesI }>()
       background: $primary-purple-50;
     }
 
-    &--end{
+    &--end {
       color: $secondary-red-700;
       background: $secondary-red-50;
     }

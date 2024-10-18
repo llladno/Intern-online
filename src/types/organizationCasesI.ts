@@ -19,7 +19,7 @@ export interface OrganizationCasesI {
   id: number
   title: string
   tags: OrganizationCasesTagsI
-  status: keyof CasesStatus
+  status: keyof typeof CasesStatusEnum
   solutions: {
     amount: number
     info: OrganizationCaseSolutionsI[] | []

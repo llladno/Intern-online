@@ -69,7 +69,7 @@ const handleSelect = (event: Event, id: number, slot: string) => {
     height: 36px;
     background-color: $primary-color;
     transition: 0.3s;
-    border: 1px solid #E1E4EA;
+    border: 1px solid #e1e4ea;
     border-radius: 7px;
   }
 
