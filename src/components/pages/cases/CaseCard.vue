@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import IconStar from '@/components/icons/IconStar.vue'
-import IconBookMark from '@/components/icons/IconBookMark.vue'
-import IconClock from '@/components/icons/IconClock.vue'
 import IODropdownMenu from '@/components/common/IODropdownMenu.vue'
-import { CasesStatus } from '@/types/organisationCasesI'
-import CasesDropdownMenu from './CasesDropdownMenu.vue'
 import { CasesStatus, type OrganizationCasesI } from '@/types/organizationCasesI'
 import IOTags from '@/components/common/IOTags.vue'
 
