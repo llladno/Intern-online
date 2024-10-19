@@ -1,5 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import AuthorizationView from '@/views/common/AuthorizationView.vue'
+import RegistrationView from '@/views/RegistrationView.vue'
+import InDevelopView from '@/views/InDevelopView.vue'
+import MyProfileView from '@/views/organization/MyProfileView.vue'
+import CaseView from '@/views/organization/CaseView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,37 +17,57 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/AuthorizationView.vue')
+      component: AuthorizationView
+    },
+    {
+      path: '/registration',
+      name: 'registration',
+      component: RegistrationView
     },
     {
       path: '/develop',
       name: 'develop',
-      component: () => import('../views/InDevelopView.vue')
+      component: InDevelopView
     },
     {
-      path: '/organization-profile',
-      name: 'profile',
-      component: () => import('../views/organisation/MyProfileView.vue')
+      path: '/organization/profile',
+      name: 'organization-profile',
+      component: MyProfileView
     },
     {
-      path: '/my-cases',
-      name: 'cases',
-      component: () => import('../views/organisation/CasesView.vue')
+      path: '/organization/cases',
+      name: 'organization-cases',
+      component: () => import('../views/organization/CasesView.vue')
     },
     {
-      path: '/my-cases/:id',
-      name: 'case',
-      component: () => import('../views/organisation/CaseView.vue')
+      path: '/organization/case-:id',
+      name: 'organization-case',
+      component: CaseView
     },
     {
-      path: '/my-cases/add',
+      path: '/organization/case-:id/solution-:id',
+      name: 'case-solution',
+      component: () => import('../views/organization/OrganizationCaseSolutionView.vue')
+    },
+    {
+      path: '/organization/new-case',
       name: 'add-case',
-      component: () => import('../views/organisation/AddCaseView.vue')
+      component: () => import('../views/organization/AddCaseView.vue')
     },
     {
       path: '/ui-kit',
       name: 'ui-kit',
       component: () => import('../views/UiKitView.vue')
+    },
+    {
+      path: '/cases',
+      name: 'cases',
+      component: () => import('../views/common/cases/CasesView.vue')
+    },
+    {
+      path: '/case-:id',
+      name: 'case',
+      component: () => import('../views/common/cases/CommonCaseView.vue')
     }
   ]
 })

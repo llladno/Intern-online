@@ -1,9 +1,17 @@
 import { defineStore } from 'pinia'
-import type { UserRegistrationI } from '@/types/userI'
+import { $api } from '@/api'
 import UserService from '@/api/userService'
+import { usePopupStore } from '@/stores/PopupStore'
+import type { LoginI, UserRegistrationI } from '@/types/userI'
+import OrganizationService from '@/api/organizationService'
+import type { RegistrationOrganizationI } from '@/types/auth'
+import { useRouter } from 'vue-router'
 
 export const useUserStore = defineStore('userStore', () => {
-  async function signUp(data: UserRegistrationI) {
+  const popupStore = usePopupStore()
+  const router = useRouter()
+
+  const signUp = async (data: UserRegistrationI) => {
     try {
       return await UserService.registration(data)
     } catch (e) {
@@ -11,26 +19,50 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  async function signIn(data: Omit<UserRegistrationI, 'organisation'>) {
+  const signUpOrganization = async (registrationData: RegistrationOrganizationI) => {
+    try {
+      return OrganizationService.registrationOrganization(registrationData)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const signIn = async (data: LoginI) => {
     try {
       await UserService.login(data).then((response) => {
-        console.log(response.data)
-        document.cookie = `refresh=${response.data.refresh}; path=/`
-        document.cookie = `access=${response.data.access}; path=/`
+        $api.defaults.headers.common.Authorization = `Bearer ${response.data.access}`
+        document.cookie = `refresh=${response.data.refresh}; path=/; secure; samesite=strict`
+        localStorage.setItem('access', response.data.access) //TODO: изменить
       })
+      await router.push('/')
     } catch (e) {
-      console.log(e)
+      throw new Error('error')
     }
   }
 
-  async function getTestUserList() {
+  const session = async (): Promise<void> => {
+    const access = localStorage.getItem('access')
+    $api.defaults.headers.common.Authorization = `Bearer ${access}`
+  }
+
+  const getTestUserList = async () => {
     try {
-      console.log(document.cookie)
       return await UserService.getTestUserList()
     } catch (e) {
-      console.log(e)
+      console.log('err')
+      popupStore.$patch({
+        isPopup: { status: true, text: 'Ошибка запроса', type: 'error' }
+      })
     }
   }
 
-  return { signUp, signIn, getTestUserList }
+  const changePassword = async (email: string) => {
+    try {
+      return await UserService.resetPassword(email)
+    } catch (e) {
+      throw new Error('error')
+    }
+  }
+
+  return { signUp, signIn, getTestUserList, signUpOrganization, session, changePassword }
 })

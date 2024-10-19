@@ -3,20 +3,19 @@ import { nextTick, onMounted, ref } from 'vue'
 
 const slots = defineSlots()
 const selected = ref({ width: 0, left: 4, id: 0 })
-let slide = ref(null)
-let firsh = ref()
+const slide = ref(null)
+const first = ref()
 
 const emit = defineEmits(['selectedValue'])
 
 onMounted(() => {
   nextTick(() => {
     ;(document.querySelector('.simple__selected') as HTMLSpanElement)?.click() //TODO посмотреть как писать simple-selected или simple__selected
-    // console.log(document.querySelector('.simple__selected'))
   })
   setTimeout(() => {}, 1000)
 })
 
-function handleSelect(event: Event, id: number, slot: string) {
+const handleSelect = (event: Event, id: number, slot: string) => {
   if (slide.value) {
     const element = slide.value as HTMLDivElement
     const target = event.target as HTMLSpanElement
@@ -31,17 +30,17 @@ function handleSelect(event: Event, id: number, slot: string) {
 
 <template>
   <div class="switch">
-    <div class="switch__slide-container" ref="slide"></div>
+    <div ref="slide" class="switch__slide-container" />
     <div class="switch__slider-values">
       <span
-        class="p-13-500"
         v-for="(slot, index) in Object.keys(slots)"
+        :key="index"
+        :ref="index == 0 ? first : null"
+        class="p-13-500"
         :class="[selected.id == index ? 'simple__selected' : 'default']"
         @click="(event) => handleSelect(event, index, slot)"
-        :key="index"
-        :ref="index == 0 ? firsh : null"
       >
-        <slot :name="slot"></slot>
+        <slot :name="slot" />
       </span>
     </div>
   </div>

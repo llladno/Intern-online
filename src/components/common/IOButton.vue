@@ -1,12 +1,20 @@
 <script setup lang="ts">
-import type { ButtonPropsI } from '@/types/componentsProps/commonProps'
+import type { ButtonPropsI } from '@/types/commonProps'
 
 defineProps<ButtonPropsI>()
 </script>
 
 <template>
-  <button :class="{ 'w-full': fullWidth, button: true, 'button--outlined': outlined }">
-    <slot></slot>
+  <button
+    :class="{
+      'w-full': fullWidth,
+      button: true,
+      'button--outlined': outlined,
+      'button--disabled': disable,
+      'button--thin': thin
+    }"
+  >
+    <slot />
   </button>
 </template>
 
@@ -21,11 +29,25 @@ defineProps<ButtonPropsI>()
   font-weight: 500;
   padding: 10px 20px;
   cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 
   &--outlined {
     background: none;
     border: 1px solid $primary-color;
     color: $primary-color;
+  }
+
+  &--disabled {
+    background: $default-grey;
+    color: $default-black;
+  }
+
+  &--thin {
+    padding: 7px 14px;
   }
 }
 </style>

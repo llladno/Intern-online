@@ -8,9 +8,11 @@ const model = defineModel()
 </script>
 
 <template>
-  <select class="options-select" v-model="model">
-    <option disabled selected>{{ defaultSelect }}</option>
-    <option class="options-select__option" v-for="(slot, index) in options" :key="index">
+  <select v-model="model" class="options-select">
+    <option disabled selected>
+      {{ defaultSelect }}
+    </option>
+    <option v-for="(slot, index) in options" :key="index" class="options-select__option">
       {{ slot }}
     </option>
   </select>

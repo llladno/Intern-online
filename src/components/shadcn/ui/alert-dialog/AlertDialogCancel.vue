@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
 import { AlertDialogCancel, type AlertDialogCancelProps } from 'radix-vue'
+import { type HTMLAttributes, computed } from 'vue'
 import { cn } from '@/components/shadcn/lib/utils'
 import { buttonVariants } from '@/components/shadcn/ui/button'
 
@@ -14,10 +14,10 @@ const delegatedProps = computed(() => {
 </script>
 
 <template>
-  <AlertDialogCancel
+  <alert-dialog-cancel
     v-bind="delegatedProps"
     :class="cn(buttonVariants({ variant: 'outline' }), 'mt-2 sm:mt-0', props.class)"
   >
     <slot />
-  </AlertDialogCancel>
+  </alert-dialog-cancel>
 </template>

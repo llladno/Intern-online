@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import IconProfile from '@/components/icons/IconProfile.vue'
 import IconFolder from '@/components/icons/IconFolder.vue'
 import IconLogout from '@/components/icons/IconLogout.vue'
+import IconProfile from '@/components/icons/IconProfile.vue'
 
 const selectValue = ref(1)
 const values = [
-  { text: 'Мой профиль', icon: IconProfile, link: '/organization-profile' },
-  { text: 'Мои кейсы', icon: IconFolder, link: '/my-cases' }
+  { text: 'Мой профиль', icon: IconProfile, link: '/organization/profile' },
+  { text: 'Мои кейсы', icon: IconFolder, link: '/organization/cases' }
 ]
 
-function selectLink(number: number) {
+const selectLink = (number: number) => {
   selectValue.value = number
 }
 </script>
@@ -18,14 +18,14 @@ function selectLink(number: number) {
 <template>
   <aside class="sidebar">
     <div class="sidebar__links">
-      <RouterLink
-        :to="value.link"
+      <router-link
         v-for="(value, index) of values"
-        @click="() => selectLink(index)"
-        :class="[selectValue == index ? 'selected' : 'default']"
         :key="index"
+        :to="value.link"
+        :class="[selectValue == index ? 'selected' : 'default']"
+        @click="() => selectLink(index)"
       >
-        <component :is="value.icon" :color="selectValue == index ? '#7862eb' : ''"></component>
+        <component :is="value.icon" :color="selectValue == index ? '#7862eb' : ''" />
         <span
           :class="{
             'sidebar__text p-14-500': true,
@@ -33,14 +33,14 @@ function selectLink(number: number) {
           }"
           >{{ value.text }}</span
         >
-      </RouterLink>
-      <div class="sidebar__links-slider" :style="{ top: 40 * selectValue + 6 + 'px' }"></div>
+      </router-link>
+      <div class="sidebar__links-slider" :style="{ top: 40 * selectValue + 6 + 'px' }" />
     </div>
     <div class="sidebar__logout">
-      <RouterLink to="/">
-        <IconLogout />
+      <router-link to="/">
+        <icon-logout />
         Выйти
-      </RouterLink>
+      </router-link>
     </div>
   </aside>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
+import { Check } from 'lucide-vue-next'
 import {
   SelectItem,
   SelectItemIndicator,
@@ -7,7 +7,7 @@ import {
   SelectItemText,
   useForwardProps
 } from 'radix-vue'
-import { Check } from 'lucide-vue-next'
+import { type HTMLAttributes, computed } from 'vue'
 import { cn } from '@/components/shadcn/lib/utils'
 
 const props = defineProps<SelectItemProps & { class?: HTMLAttributes['class'] }>()
@@ -22,7 +22,7 @@ const forwardedProps = useForwardProps(delegatedProps)
 </script>
 
 <template>
-  <SelectItem
+  <select-item
     v-bind="forwardedProps"
     :class="
       cn(
@@ -32,13 +32,13 @@ const forwardedProps = useForwardProps(delegatedProps)
     "
   >
     <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-      <SelectItemIndicator>
-        <Check class="h-4 w-4" />
-      </SelectItemIndicator>
+      <select-item-indicator>
+        <check class="h-4 w-4" />
+      </select-item-indicator>
     </span>
 
-    <SelectItemText>
+    <select-item-text>
       <slot />
-    </SelectItemText>
-  </SelectItem>
+    </select-item-text>
+  </select-item>
 </template>

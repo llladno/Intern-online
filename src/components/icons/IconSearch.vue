@@ -27,8 +27,8 @@
 <style scoped lang="scss">
 .search {
   position: absolute;
-  top: 50%;
+  top: 42%;
   left: 13px;
-  transform: translateY(-50%);
+  transform: translateY(-25%);
 }
 </style>

@@ -5,10 +5,10 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 onMounted(() => {
-  router.push('/my-cases')
+  router.push('/organization/cases')
 })
 </script>
 
 <template>
-  <main></main>
+  <main />
 </template>

@@ -1,10 +1,10 @@
 <template>
-  <div class="filter" ref="multiselectFilterRef">
+  <div ref="multiselectFilterRef" class="filter">
     <div
       class="filter__options"
       :placeholder="placeholder"
+      :class="{ 'filter__options--active': isDropdownOpen }"
       @click="toggleDropdown"
-      :class="{ active: isDropdownOpen }"
     >
       <template v-if="selectedValues.length > 2">
         <span class="filter__text"> Выбрано {{ selectedValues.length }} </span>
@@ -14,17 +14,17 @@
           {{ selectedValues.join(', ') || placeholder }}
         </span>
       </template>
-      <IconFilter v-if="!selectedValues.length" />
+      <icon-filter v-if="!selectedValues.length" />
     </div>
     <transition name="slide-fade">
       <div v-show="isDropdownOpen" class="filter__dropdown">
-        <div class="filter__dropdown-menu" v-for="option in options" :key="option.id">
-          <IOCheckbox
-            :checked="isSelected(option.value)"
-            :id="option.id ?? 'default-id'"
-            :value="option.value"
+        <div v-for="option in options" :key="option.id" class="filter__dropdown-menu">
+          <i-o-checkbox
+            :id="option.id ? String(option.id) : 'default-id'"
+            :checked="isSelected(String(option.value))"
+            :value="String(option.value)"
             :label="option.label"
-            @change="toggleOption(option.value)"
+            @change="toggleOption(String(option.value))"
           />
         </div>
       </div>
@@ -34,9 +34,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import IconFilter from '@/components/icons/IconFilter.vue'
 import IOCheckbox from '@/components/common/IOCheckbox.vue'
-import type { SelectPropsI } from '../../../types/componentsProps/commonProps'
+import IconFilter from '@/components/icons/IconFilter.vue'
+import type { SelectPropsI } from '@/types/commonProps'
 
 defineProps<SelectPropsI>()
 
@@ -49,7 +49,7 @@ const toggleDropdown = () => {
 
 const toggleOption = (value: string): void => {
   if (isSelected(value)) {
-    selectedValues.value = selectedValues.value.filter((v) => v !== value)
+    selectedValues.value = selectedValues.value.filter((v: string) => v !== value)
   } else {
     selectedValues.value.push(value)
   }
@@ -76,20 +76,19 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss">
-.slide-fade-enter-active {
-  transition: all 0.5s ease-out;
+.slide-fade {
+  &-enter-active {
+    transition: all 0.2s ease-out;
+  }
+  &-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+  }
+  &-enter-from,
+  &-leave-to {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
 }
-
-.slide-fade-leave-active {
-  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateY(-40px);
-  opacity: 0;
-}
-
 .filter {
   position: relative;
   width: 148px;
@@ -107,7 +106,7 @@ onUnmounted(() => {
     height: 40px;
     outline: none;
 
-    &.active {
+    &--active {
       border: 2px solid $primary-color;
     }
   }

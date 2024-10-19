@@ -3,7 +3,7 @@ import InDevelop from '@/components/pages/develop/InDevelop.vue'
 </script>
 
 <template>
-  <InDevelop />
+  <in-develop />
 </template>
 
 <style scoped></style>

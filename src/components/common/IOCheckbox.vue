@@ -1,10 +1,10 @@
 <template>
   <div class="checkbox">
     <input
+      :id="id"
       class="checkbox__rect"
       type="checkbox"
       :value="value"
-      :id="id"
       :checked="checked"
       @input="updateChecked($event)"
     />
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CheckboxPropsI } from '@/types/componentsProps/commonProps'
+import type { CheckboxPropsI } from '@/types/commonProps'
 
 withDefaults(defineProps<CheckboxPropsI>(), {
   checked: false

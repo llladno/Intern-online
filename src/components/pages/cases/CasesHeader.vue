@@ -1,35 +1,37 @@
+<template>
+  <div class="organization-cases__header">
+    <h2 class="header-1">Мои кейсы</h2>
+    <div class="organization-cases__footer-right">
+      <i-o-simple-select class="auth__simpleselect" @selected-value="onSelected">
+        <template #active> Активные </template>
+        <template #draft> Черновики </template>
+        <template #archive> Архив </template>
+      </i-o-simple-select>
+      <cases-header-filter :options="optionsFiltered" placeholder="Фильтр" />
+      <div class="organization-cases__footer-sort">
+        <i-o-select class="p-13-500" placeholder="Новые" label="Новые" :options="selectOptions" />
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
-import IOInput from '@/components/common/IOInput.vue'
 import IOSelect from '@/components/common/IOSelect.vue'
-import IconSearch from '@/components/icons/IconSearch.vue'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
-import IOButton from '@/components/common/IOButton.vue'
 import CasesHeaderFilter from '@/components/pages/cases/CasesHeaderFilter.vue'
+import type { SelectPropsOptionI } from '@/types/commonProps'
 
 const emits = defineEmits(['selectedEmit'])
-function onSelected(slot: string) {
+const onSelected = (slot: string) => {
   emits('selectedEmit', slot)
 }
 
-interface Option {
-  id: string
-  label: string
-  value: string
-}
-const selectOptions: Option[] = [
-  {
-    id: '1',
-    value: 'last',
-    label: 'Последние'
-  },
-  {
-    id: '2',
-    value: 'early',
-    label: 'Предыдущие'
-  }
+const selectOptions: SelectPropsOptionI[] = [
+  { id: '1', value: 'last', label: 'Последние' },
+  { id: '2', value: 'early', label: 'Предыдущие' }
 ]
 
-const optionsFiltered: Option[] = [
+const optionsFiltered: SelectPropsOptionI[] = [
   { id: '1', label: 'Vue', value: 'Vue' },
   { id: '2', label: 'React', value: 'React' },
   { id: '3', label: 'Angular', value: 'Angular' },
@@ -40,40 +42,13 @@ const optionsFiltered: Option[] = [
 ]
 </script>
 
-<template>
-  <div class="organisation-cases__header">
-    <!--      TODO посмотреть как писать simple-selected или simple__selected -->
-    <h2 class="header-1">Мои кейсы</h2>
-    <RouterLink to="/my-cases/add">
-      <IOButton>+ Добавить новый кейс</IOButton>
-    </RouterLink>
-  </div>
-  <div class="organisation-cases__footer">
-    <IOSimpleSelect @selectedValue="onSelected" class="auth__simpleselect">
-      <template #active>Активные</template>
-      <template #draft>Черновики</template>
-      <template #archive>Архив</template>
-    </IOSimpleSelect>
-    <div class="organisation-cases__footer-right">
-      <div class="organisation-cases__footer-search">
-        <IOInput type="text" placeholder="Поиск" background="#fff" padding="33" />
-        <IconSearch />
-      </div>
-      <CasesHeaderFilter :options="optionsFiltered" placeholder="Фильтр" />
-      <div class="organisation-cases__footer-sort">
-        <IOSelect class="p-13-500" placeholder="Новые" label="Новые" :options="selectOptions" />
-      </div>
-    </div>
-  </div>
-</template>
-
 <style lang="scss" scoped>
-.organisation-cases__header {
+.organization-cases__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.organisation-cases__footer {
+.organization-cases__footer {
   display: flex;
   align-items: center;
   justify-content: space-between;

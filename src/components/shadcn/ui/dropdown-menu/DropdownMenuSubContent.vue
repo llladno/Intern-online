@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
 import {
   DropdownMenuSubContent,
   type DropdownMenuSubContentEmits,
   type DropdownMenuSubContentProps,
   useForwardPropsEmits
 } from 'radix-vue'
+import { type HTMLAttributes, computed } from 'vue'
 import { cn } from '@/components/shadcn/lib/utils'
 
 const props = defineProps<DropdownMenuSubContentProps & { class?: HTMLAttributes['class'] }>()
@@ -21,7 +21,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <DropdownMenuSubContent
+  <dropdown-menu-sub-content
     v-bind="forwarded"
     :class="
       cn(
@@ -31,5 +31,5 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     "
   >
     <slot />
-  </DropdownMenuSubContent>
+  </dropdown-menu-sub-content>
 </template>

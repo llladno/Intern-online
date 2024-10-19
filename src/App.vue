@@ -1,28 +1,41 @@
 <script setup lang="ts">
+import { onBeforeMount, onUpdated, ref, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import HeaderBar from '@/components/pages/HeaderBar.vue'
-import { ref, watch } from 'vue'
-import SideBar from '@/components/pages/SideBar.vue'
+import { useUserStore } from '@/stores/UserStore'
+import { useOrganizationStore } from '@/stores/OrganistaionStore'
+import NoticeComponent from '@/components/common/NoticeComponent.vue'
 
 const route = useRoute()
-const isLogin = ref(false)
+const isLogin = ref<boolean>(false)
+const userStore = useUserStore()
+const organizationStore = useOrganizationStore()
+
+const disabledHeader = ['/login', '/develop', '/ui-kit', '/registration']
+
+onBeforeMount(async (): Promise<void> => {
+  await userStore.session()
+  if (!organizationStore.organizationProfile) await organizationStore.getOrganizationProfile()
+})
+
+onUpdated(async (): Promise<void> => {
+  await organizationStore.getOrganizationProfile()
+})
 
 watch(
   () => route.params,
   () => {
-    if (route.name == 'login' || route.name == 'develop' || route.name == 'ui-kit')
-      isLogin.value = true
-    else isLogin.value = false
+    isLogin.value = disabledHeader.includes(route.path as string)
   }
 )
 </script>
 
 <template>
-  <HeaderBar v-if="!isLogin" />
+  <header-bar v-if="!isLogin" />
   <div :class="!isLogin && 'main-router'">
-    <SideBar v-if="!isLogin" />
-    <RouterView />
+    <router-view />
   </div>
+  <notice-component />
 </template>
 
 <style scoped lang="scss">

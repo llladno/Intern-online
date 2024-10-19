@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
 import {
   DropdownMenuContent,
   type DropdownMenuContentEmits,
@@ -7,6 +6,7 @@ import {
   DropdownMenuPortal,
   useForwardPropsEmits
 } from 'radix-vue'
+import { type HTMLAttributes, computed } from 'vue'
 import { cn } from '@/components/shadcn/lib/utils'
 
 const props = withDefaults(
@@ -27,8 +27,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <DropdownMenuPortal>
-    <DropdownMenuContent
+  <dropdown-menu-portal>
+    <dropdown-menu-content
       v-bind="forwarded"
       :class="
         cn(
@@ -38,6 +38,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
       "
     >
       <slot />
-    </DropdownMenuContent>
-  </DropdownMenuPortal>
+    </dropdown-menu-content>
+  </dropdown-menu-portal>
 </template>
