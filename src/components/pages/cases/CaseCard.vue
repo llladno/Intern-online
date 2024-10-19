@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CasesDropdownMenu from './CasesDropdownMenu.vue'
+import IODropdownMenu from '@/components/common/IODropdownMenu.vue'
 import { CasesStatus, type OrganizationCasesI } from '@/types/organizationCasesI'
 import IOTags from '@/components/common/IOTags.vue'
 
@@ -32,7 +32,7 @@ defineProps<{ caseInfo: OrganizationCasesI }>()
         </p>
       </div>
       <div class="case-card__right-side">
-        <cases-dropdown-menu />
+        <IODropdownMenu />
         <div>
           <p class="case-card__count p-13-400">Кол-во решений:</p>
           <p class="case-card__solutions">
