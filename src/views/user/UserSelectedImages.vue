@@ -21,14 +21,10 @@ defineProps<{
   selectedItems: File[]
   imageUrls: string[]
 }>()
+const isFileType = (item: any): item is File => item instanceof File
+const isImage = (item: File): boolean => item.type.startsWith('image/')
 
-// const emit = defineEmits<{
-//   (e: 'edit-items'): void
-// }>()
-const isFileType = (item: any) => item instanceof File
-const isImage = (item: File) => item.type.startsWith('image/')
-
-const getPlaceholderImage = (item: File) => {
+const getPlaceholderImage = (item: File): string => {
   if (item.type.startsWith('application/pdf')) {
     return 'src/assets/media/img/docs/pdf.png'
   } else if (item.type.startsWith('application/msword')) {
@@ -47,7 +43,7 @@ const getPlaceholderImage = (item: File) => {
   return ''
 }
 
-const selectedItemNames = (item: File) => {
+const selectedItemNames = (item: File): string => {
   const trimmedName = item.name.length > 15 ? item.name.slice(0, 10) + '...' : item.name
 
   let fileType = ''

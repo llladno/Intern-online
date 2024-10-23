@@ -16,7 +16,7 @@
           <slot name="header"></slot>
           <slot></slot>
           <div class="modal__footer">
-            <IOButton outlined width="183" @click="handleCansel">Отмена</IOButton>
+            <IOButton outlined width="183" @click="handleCancel">Отмена</IOButton>
             <IOButton width="183" @click="handleSave" :disabled="disabled">Сохранить</IOButton>
           </div>
         </div>
@@ -40,29 +40,29 @@ defineProps<{
 const emits = defineEmits<{
   (e: 'update:isVisible', value: boolean): void
   (e: 'save'): void
-  (e: 'cansel'): void
+  (e: 'cancel'): void
   (e: 'opened'): void
 }>()
 
-const emitOpenModal = () => {
+const emitOpenModal = (): void => {
   emits('update:isVisible', true)
   document.body.classList.add('no-scroll')
   emits('opened')
 }
 
-const emitCloseModal = () => {
+const emitCloseModal = (): void => {
   emits('update:isVisible', false)
   document.body.classList.remove('no-scroll')
 }
 
-const handleSave = () => {
+const handleSave = (): void => {
   emitCloseModal()
   emits('save')
 }
 
-const handleCansel = () => {
+const handleCancel = (): void => {
   emitCloseModal()
-  emits('cansel')
+  emits('cancel')
 }
 </script>
 

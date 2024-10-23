@@ -34,3 +34,8 @@ export interface UserI {
   images: File[]
   documents: File[]
 }
+export interface UserButtonPropertiesI {
+  label: string
+  background: string
+  icon: boolean
+}

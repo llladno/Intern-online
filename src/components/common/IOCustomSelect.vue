@@ -113,7 +113,7 @@ const updateScrollArrows = (): void => {
   }
 }
 
-const handleDropdownToggle = () => {
+const handleDropdownToggle = (): void => {
   if (!dropdownOpen.value) {
     calculateDropdownDirection()
   }
@@ -125,7 +125,7 @@ const handleDropdownToggle = () => {
   }
 }
 
-const calculateDropdownDirection = () => {
+const calculateDropdownDirection = (): void => {
   if (selectButton.value) {
     const rect = selectButton.value.getBoundingClientRect()
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight
@@ -137,7 +137,7 @@ const calculateDropdownDirection = () => {
   }
 }
 
-const selectOption = (option: SelectPropsOptionI) => {
+const selectOption = (option: SelectPropsOptionI): void => {
   if (option) {
     selectedOption.value = option.label
     dropdownOpen.value = false
@@ -190,13 +190,13 @@ const selectOption = (option: SelectPropsOptionI) => {
 //   }
 // })
 
-const handleClickOutside = (event: MouseEvent) => {
+const handleClickOutside = (event: MouseEvent): void => {
   if (selectCustom.value && !selectCustom.value.contains(event.target as Node)) {
     dropdownOpen.value = false
   }
 }
 
-const startScrollingUp = () => {
+const startScrollingUp = (): void => {
   stopScrolling()
   scrollInterval.value = window.setInterval(() => {
     if (dropdownList.value) {
@@ -208,7 +208,7 @@ const startScrollingUp = () => {
   }, 10)
 }
 
-const startScrollingDown = () => {
+const startScrollingDown = (): void => {
   stopScrolling()
   scrollInterval.value = window.setInterval(() => {
     if (dropdownList.value) {
@@ -220,7 +220,7 @@ const startScrollingDown = () => {
   }, 10)
 }
 
-const stopScrolling = () => {
+const stopScrolling = (): void => {
   if (scrollInterval.value !== null) {
     clearInterval(scrollInterval.value)
     scrollInterval.value = null
@@ -249,8 +249,6 @@ watch(dropdownOpen, (newValue) => {
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
-})
-onMounted(() => {
   const option = props.options.find((option) => option.value === props.modelValue)
   selectedOption.value = option ? option.label : ''
 })

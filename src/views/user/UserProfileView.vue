@@ -43,7 +43,7 @@
             :isVisible="isModalVisibleUnversity"
             @update:isVisible="isModalVisibleUnversity = $event"
             @save="isModalVisibleUnversity = false"
-            @cansel="handleCanselUniversity"
+            @cancel="handleCancelUniversity"
             @opened="markModalAsOpened('university')"
           >
             <template #header>
@@ -80,7 +80,7 @@
             :isVisible="isModalVisibleSkill"
             @update:isVisible="isModalVisibleSkill = $event"
             @save="isModalVisibleSkill = false"
-            @cansel="handleCanselSkill"
+            @cancel="handleCancelSkill"
             @opened="markModalAsOpened('skill')"
           >
             <template #header>
@@ -111,7 +111,7 @@
             :isVisible="isModalVisiblePropgram"
             @update:isVisible="isModalVisiblePropgram = $event"
             @save="isModalVisiblePropgram = false"
-            @cansel="handleCanselProgram"
+            @cancel="handleCancelProgram"
             @opened="markModalAsOpened('program')"
           >
             <template #header>
@@ -161,7 +161,7 @@
 
 <script setup lang="ts">
 // import axios from 'axios'
-import { reactive, ref, computed, type Ref } from 'vue'
+import { reactive, ref, computed, type Ref, type ComputedRef } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers, minLength, maxLength } from '@vuelidate/validators'
 import IOSimpleSelect from '@/components/common/IOSimpleSelect.vue'
@@ -173,9 +173,12 @@ import IOButton from '@/components/common/IOButton.vue'
 import UserExperience from '@/views/user/UserExperience.vue'
 import UserProfileAddFile from '@/views/user/UserProfileAddFile.vue'
 import IOCustomSelect from '@/components/common/IOCustomSelect.vue'
-import type { UserTempalateI } from '@/types/userProfile'
-import type { UserExperienceI } from '@/types/userProfile'
-import type { UserI } from '@/types/userProfile'
+import type {
+  UserTempalateI,
+  UserExperienceI,
+  UserI,
+  UserButtonPropertiesI
+} from '@/types/userProfile'
 import { urlValidator } from '@/ts/validators'
 
 interface ModalState {
@@ -218,10 +221,15 @@ const markModalAsOpened = (modal: keyof ModalState): void => {
   hasModalBeenOpened[modal].value = true
 }
 
-const updateImages = (newImages: File[]) => (images.value = newImages)
-const updateDocuments = (newDocs: File[]) => (documents.value = newDocs)
-const handleExperienceUpdate = (updatedExperiences: UserExperienceI[]) =>
-  (experiences.value = updatedExperiences)
+const updateImages = (newImages: File[]): void => {
+  images.value = newImages
+}
+const updateDocuments = (newDocs: File[]): void => {
+  documents.value = newDocs
+}
+const handleExperienceUpdate = (updatedExperiences: UserExperienceI[]): void => {
+  experiences.value = updatedExperiences
+}
 
 const universities: UserTempalateI[] = [
   { id: 1, value: 'harvard', label: 'Harvard University' },
@@ -258,7 +266,8 @@ const programs: UserTempalateI[] = [
   { id: 4, value: 'docker', label: 'Docker' },
   { id: 5, value: 'git', label: 'Git' }
 ]
-const setUserProperty = (key: keyof UserI, value: any) => {
+
+const setUserProperty = (key: keyof UserI, value: any): void => {
   if (key === 'experiences' || key === 'images' || key === 'documents') {
     if (Array.isArray(value)) {
       user[key] = value
@@ -270,28 +279,31 @@ const setUserProperty = (key: keyof UserI, value: any) => {
     return
   }
 }
-const updateUniversity = (value: string | number) => setUserProperty('university', value)
+const updateUniversity = (value: string | number): void => setUserProperty('university', value)
 
-const updateSkill = (value: string | number) => setUserProperty('skill', value)
-const updateProgram = (value: string | number) => setUserProperty('program', value)
+const updateSkill = (value: string | number): void => setUserProperty('skill', value)
+const updateProgram = (value: string | number): void => setUserProperty('program', value)
 
-const selectedOptionLabel = (options: UserTempalateI[], value: string | number) => {
+const selectedOptionLabel = (
+  options: UserTempalateI[],
+  value: string | number
+): ComputedRef<string> => {
   return computed(() => {
     const selected = options.find((option) => option.value === value)
     return selected ? selected.label : 'Не выбрано'
   })
 }
 
-const handleCanselSkill = () => {
+const handleCancelSkill = (): void => {
   user.skill = 'не выбрано'
   isModalVisibleSkill.value = false
 }
-const handleCanselUniversity = () => {
+const handleCancelUniversity = (): void => {
   user.university = 'не выбрано'
   isModalVisibleUnversity.value = false
 }
 
-const handleCanselProgram = () => {
+const handleCancelProgram = (): void => {
   user.program = 'не выбрано'
   isModalVisiblePropgram.value = false
 }
@@ -299,20 +311,26 @@ const handleCanselProgram = () => {
 const getButtonProperties = (
   modal: keyof ModalState,
   defaultLabel: string
-): { label: string; background: string; icon: boolean } => {
+): UserButtonPropertiesI => {
   return {
     label: hasModalBeenOpened[modal].value ? 'Изменить' : defaultLabel,
     background: hasModalBeenOpened[modal].value ? '' : 'white',
     icon: !hasModalBeenOpened[modal].value
   }
 }
-const buttonProperties = computed(() => {
-  return {
-    university: getButtonProperties('university', 'Добавить место учебы'),
-    skill: getButtonProperties('skill', 'Добавить навыки'),
-    program: getButtonProperties('program', 'Добавить программы')
+const buttonProperties = computed(
+  (): {
+    university: UserButtonPropertiesI
+    skill: UserButtonPropertiesI
+    program: UserButtonPropertiesI
+  } => {
+    return {
+      university: getButtonProperties('university', 'Добавить место учебы'),
+      skill: getButtonProperties('skill', 'Добавить навыки'),
+      program: getButtonProperties('program', 'Добавить программы')
+    }
   }
-})
+)
 
 // const saveExperiences = () => {
 //   console.log('Сохраненные данные об опыте работы:', experiences.value)
@@ -344,7 +362,7 @@ const buttonProperties = computed(() => {
 //   }
 // }
 
-const clearForm = () => {
+const clearForm = (): void => {
   user.lastName = ''
   user.firstName = ''
   user.middleName = ''
@@ -359,36 +377,38 @@ const clearForm = () => {
   user.images = []
   user.documents = []
 }
-const cancelChanges = () => {
+const cancelChanges = (): void => {
   clearForm()
 }
 
-const rules = computed(() => ({
-  user: {
-    lastName: {
-      required: helpers.withMessage('Поле Фамилия обязательно', required)
-    },
-    firstName: {
-      required: helpers.withMessage('Поле Имя обязательно', required)
-    },
-    website: {
-      url: helpers.withMessage(
-        'Поле содержит название сайта, например: https://dzen.ru',
-        urlValidator
-      )
-    },
-    aboutUser: {
-      minLength: helpers.withMessage(
-        (value) => `Введите минимум ${value.$params.min} символов`,
-        minLength(20)
-      ),
-      maxLength: helpers.withMessage(
-        (value) => `Введено много символов, максимальное значение ${value.$params.max}`,
-        maxLength(50)
-      )
+const rules = computed(
+  (): { user: { lastName: any; firstName: any; website: any; aboutUser: any } } => ({
+    user: {
+      lastName: {
+        required: helpers.withMessage('Поле Фамилия обязательно', required)
+      },
+      firstName: {
+        required: helpers.withMessage('Поле Имя обязательно', required)
+      },
+      website: {
+        url: helpers.withMessage(
+          'Поле содержит название сайта, например: https://dzen.ru',
+          urlValidator
+        )
+      },
+      aboutUser: {
+        minLength: helpers.withMessage(
+          (value) => `Введите минимум ${value.$params.min} символов`,
+          minLength(20)
+        ),
+        maxLength: helpers.withMessage(
+          (value) => `Введено много символов, максимальное значение ${value.$params.max}`,
+          maxLength(50)
+        )
+      }
     }
-  }
-}))
+  })
+)
 
 const v = useVuelidate(rules, { user })
 </script>

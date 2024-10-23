@@ -10,7 +10,7 @@
     <IOModalDefault
       :label="modalLabel"
       @save="saveItem"
-      @cansel="removeLastItem"
+      @cancel="removeLastItem"
       :disabled="isButtonDisabled"
     >
       <template #header>
@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, type ComputedRef } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers } from '@vuelidate/validators'
 import { maxFileSize, uniqueFileValidator } from '@/ts/validators'
@@ -43,7 +43,7 @@ const emit = defineEmits<{
   (e: 'update:files', files: File[]): void
 }>()
 
-const emitUpdatedFiles = () => {
+const emitUpdatedFiles = (): void => {
   emit('update:files', selectedItems.value)
 }
 const fileValue = ref<File | null>(null)
@@ -51,7 +51,13 @@ const selectedItems = ref<File[]>([])
 const imageUrls = ref<string[]>([])
 const isShowFiles = ref<boolean>(false)
 
-const rules = computed(() => ({
+const rules: ComputedRef<{
+  fileValue: {
+    required: any
+    maxFileSize: any
+    isUnique: any
+  }
+}> = computed(() => ({
   fileValue: {
     required: helpers.withMessage('Выберите изображение или файл', required),
     maxFileSize: helpers.withMessage(
@@ -66,9 +72,9 @@ const rules = computed(() => ({
 }))
 
 const v = useVuelidate(rules, { fileValue })
-const isButtonDisabled = computed(() => v.value.fileValue.$error)
+const isButtonDisabled: ComputedRef<boolean> = computed(() => v.value.fileValue.$error)
 
-const updateImageUrls = () => {
+const updateImageUrls = (): void => {
   if (selectedItems.value.length === 0) {
     imageUrls.value = []
   }
@@ -84,13 +90,13 @@ const updateImageUrls = () => {
     .filter((url) => url !== null) as string[]
 }
 
-const editItems = () => {
+const editItems = (): void => {
   selectedItems.value = []
   imageUrls.value = []
   emitUpdatedFiles()
 }
 
-const removeLastItem = () => {
+const removeLastItem = (): void => {
   if (selectedItems.value.length > 0) {
     selectedItems.value.pop()
     fileValue.value = null
@@ -99,12 +105,12 @@ const removeLastItem = () => {
   }
 }
 
-const saveItem = () => {
+const saveItem = (): void => {
   isShowFiles.value = true
   emitUpdatedFiles()
 }
 
-const handleFileChange = (file: File | null) => {
+const handleFileChange = (file: File | null): void => {
   v.value.$touch()
   if (v.value.fileValue.$pending || v.value.fileValue.$invalid) return
   if (file) {
